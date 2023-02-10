@@ -1,5 +1,5 @@
 #pragma once
-#include "yaEngine.h"
+#include "jhEngine.h"
 
 
 
@@ -18,7 +18,7 @@
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 
-namespace ya::math
+namespace jh::math
 {
     struct Vector2;
     struct Vector4;

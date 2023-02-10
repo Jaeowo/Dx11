@@ -7,135 +7,147 @@
     <ClInclude Include="CommonInclude.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="yaGraphicDevice_DX11.h">
+    <ClInclude Include="jhGraphicDevice_DX11.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="yaApplication.h">
+    <ClInclude Include="jhApplication.h">
       <Filter>High Level Interface</Filter>
     </ClInclude>
-    <ClInclude Include="yaResource.h">
+    <ClInclude Include="jhResource.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="yaTime.h">
+    <ClInclude Include="jhTime.h">
       <Filter>Time</Filter>
     </ClInclude>
-    <ClInclude Include="yaEntity.h">
+    <ClInclude Include="jhEntity.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="yaInput.h">
+    <ClInclude Include="jhInput.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="yaGraphics.h">
+    <ClInclude Include="jhGraphics.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="yaEngine.h">
+    <ClInclude Include="jhEngine.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="yaEnums.h">
+    <ClInclude Include="jhEnums.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="yaRenderer.h">
+    <ClInclude Include="jhRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="yaComponent.h">
+    <ClInclude Include="jhComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="yaGameObject.h">
+    <ClInclude Include="jhGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="yaLayer.h">
+    <ClInclude Include="jhLayer.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="yaScene.h">
+    <ClInclude Include="jhScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="yaSceneManager.h">
+    <ClInclude Include="jhSceneManager.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="yaResources.h">
+    <ClInclude Include="jhResources.h">
       <Filter>Resource\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="yaMesh.h">
+    <ClInclude Include="jhMesh.h">
       <Filter>Resource\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="yaMaterial.h">
+    <ClInclude Include="jhMaterial.h">
       <Filter>Resource\Meterial</Filter>
     </ClInclude>
-    <ClInclude Include="yaShader.h">
+    <ClInclude Include="jhShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="yaMeshRenderer.h">
+    <ClInclude Include="jhMeshRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="yaTransform.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="yaConstantBuffer.h" />
-    <ClInclude Include="yaTexture.h">
+    <ClInclude Include="jhConstantBuffer.h" />
+    <ClInclude Include="jhTexture.h">
       <Filter>Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTransform.h">
+      <Filter>Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="jhScript.h">
+      <Filter>Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerScript.h">
+      <Filter>Component\Script\Contents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
       <Filter>Common\Math</Filter>
     </ClCompile>
-    <ClCompile Include="yaGraphicDevice_DX11.cpp">
+    <ClCompile Include="jhGraphicDevice_DX11.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="yaApplication.cpp">
+    <ClCompile Include="jhApplication.cpp">
       <Filter>High Level Interface</Filter>
     </ClCompile>
-    <ClCompile Include="yaResource.cpp">
+    <ClCompile Include="jhResource.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="yaTime.cpp">
+    <ClCompile Include="jhTime.cpp">
       <Filter>Time</Filter>
     </ClCompile>
-    <ClCompile Include="yaEntity.cpp">
+    <ClCompile Include="jhEntity.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="yaInput.cpp">
+    <ClCompile Include="jhInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="yaRenderer.cpp">
+    <ClCompile Include="jhRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="yaComponent.cpp">
+    <ClCompile Include="jhComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="yaGameObject.cpp">
+    <ClCompile Include="jhGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="yaLayer.cpp">
+    <ClCompile Include="jhLayer.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="yaScene.cpp">
+    <ClCompile Include="jhScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="yaSceneManager.cpp">
+    <ClCompile Include="jhSceneManager.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="yaResources.cpp">
+    <ClCompile Include="jhResources.cpp">
       <Filter>Resource\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="yaMesh.cpp">
+    <ClCompile Include="jhMesh.cpp">
       <Filter>Resource\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="yaMaterial.cpp">
+    <ClCompile Include="jhMaterial.cpp">
       <Filter>Resource\Meterial</Filter>
     </ClCompile>
-    <ClCompile Include="yaShader.cpp">
+    <ClCompile Include="jhShader.cpp">
       <Filter>Resource\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="yaMeshRenderer.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="yaTransform.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="yaConstantBuffer.cpp" />
-    <ClCompile Include="yaTexture.cpp">
+    <ClCompile Include="jhConstantBuffer.cpp" />
+    <ClCompile Include="jhTexture.cpp">
       <Filter>Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMeshRenderer.cpp">
+      <Filter>Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTransform.cpp">
+      <Filter>Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="jhScript.cpp">
+      <Filter>Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerScript.cpp">
+      <Filter>Component\Script\Contents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +198,18 @@
     </Filter>
     <Filter Include="Resource\Texture">
       <UniqueIdentifier>{57d7542d-b620-48c3-8efa-067633338790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Renderer">
+      <UniqueIdentifier>{20bdb534-7fb0-491b-a180-4dbb0db3bbbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script">
+      <UniqueIdentifier>{46e19c6a-4633-4e06-863e-2611068d1ef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Transform">
+      <UniqueIdentifier>{4813e334-2af2-481e-bdbe-f47999487211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Contents">
+      <UniqueIdentifier>{3fcd1949-8d6e-468c-bc2a-fe1bb37d22ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

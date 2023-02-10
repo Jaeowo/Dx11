@@ -7,11 +7,25 @@ struct VTX_OUT
     float2 vUV : TEXCOORD;
 };
 
+cbuffer Transform : register(b0)
+{
+    float4 cbPos;
+}
+
+cbuffer MaterialData : register(b1)
+{
+    int cbiData;
+    float cbfData;
+    float2 cbxy;
+    float3 cbxyz;
+    float4 cbxyzw;
+    matrix cbmat;
+}
+
 Texture2D defaultTexture : register(t0);
 
-
 SamplerState pointSampler : register(s0);
-SamplerState linerSampler : register(s1);
+SamplerState linearSampler : register(s1);
 SamplerState anisotropicSampler : register(s2);
 
 float4 PS_Test(VTX_OUT _in) : SV_Target
