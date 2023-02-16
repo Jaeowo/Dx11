@@ -36,6 +36,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
+    //float x = 1.0f;
+    //float y = 0.0f;
+
+    //float _x = x * cos(0.7853) - y * sin(0.7853);
+    //float _Y = x * sin(0.7853) + y * cos(0.7853);
+    //acos(_x);
+    //atan2();
+
+    // nan
+    // float g = 100.0f / 0.0f;
+
     // TODO: 여기에 코드를 입력합니다.
 
     // 전역 문자열을 초기화합니다.

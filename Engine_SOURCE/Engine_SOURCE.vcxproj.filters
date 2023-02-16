@@ -80,6 +80,9 @@
     <ClInclude Include="jhPlayerScript.h">
       <Filter>Component\Script\Contents</Filter>
     </ClInclude>
+    <ClInclude Include="jhCamera.h">
+      <Filter>Component\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -149,6 +152,9 @@
     <ClCompile Include="jhPlayerScript.cpp">
       <Filter>Component\Script\Contents</Filter>
     </ClCompile>
+    <ClCompile Include="jhCamera.cpp">
+      <Filter>Component\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -210,6 +216,9 @@
     </Filter>
     <Filter Include="Component\Script\Contents">
       <UniqueIdentifier>{3fcd1949-8d6e-468c-bc2a-fe1bb37d22ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Camera">
+      <UniqueIdentifier>{8eb3298a-0a11-46bc-830d-43983264e4da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

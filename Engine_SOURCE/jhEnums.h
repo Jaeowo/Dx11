@@ -6,15 +6,17 @@ namespace jh::enums
 	enum class eLayerType
 	{
 		None = 0,
+		Camera,
 		Monster,
 		Player,
+
 		End = 16,
 	};
 
 	enum class eComponentType
 	{
 		None,
-		Transform,
+		Transform, 
 		Camera,
 		Mesh,
 		Collider,

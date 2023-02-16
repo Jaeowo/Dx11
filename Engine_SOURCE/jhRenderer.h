@@ -21,7 +21,9 @@ namespace jh::renderer
 
 	CBUFFER(TransformCB, CBSLOT_TRANSFORM)
 	{
-		Vector4 pos;
+		Matrix world;
+		Matrix view;
+		Matrix projection;
 	};
 
 	CBUFFER(MaterialCB, CBSLOT_MATERIAL)
@@ -33,6 +35,7 @@ namespace jh::renderer
 		Vector4 xyzw;
 		Matrix matrix;
 	};
+
 
 	extern Vertex vertexes[4];
 	extern ConstantBuffer* constantBuffers[];
