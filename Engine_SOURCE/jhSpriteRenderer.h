@@ -6,11 +6,11 @@
 using namespace jh::graphics;
 namespace jh
 {
-	class MeshRenderer : public Component
+	class SpriteRenderer : public Component
 	{
 	public:
-		MeshRenderer();
-		virtual ~MeshRenderer();
+		SpriteRenderer();
+		virtual ~SpriteRenderer();
 
 		virtual void Initalize() override;
 		virtual void Update() override;
@@ -25,5 +25,4 @@ namespace jh
 		std::shared_ptr <Material> mMaterial;
 	};
 }
-
 

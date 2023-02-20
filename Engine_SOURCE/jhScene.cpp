@@ -8,6 +8,7 @@ namespace jh
 	}
 	Scene::~Scene()
 	{
+
 	}
 	void Scene::Initalize()
 	{

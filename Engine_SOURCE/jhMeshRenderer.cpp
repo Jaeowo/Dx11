@@ -5,21 +5,26 @@
 namespace jh
 {
 	MeshRenderer::MeshRenderer()
-		: Component(eComponentType::Mesh)
+		: Component(eComponentType::MeshRenderer)
 	{
 	}
+
 	MeshRenderer::~MeshRenderer()
 	{
 	}
+
 	void MeshRenderer::Initalize()
 	{
 	}
+
 	void MeshRenderer::Update()
 	{
 	}
+
 	void MeshRenderer::FixedUpdate()
 	{
 	}
+
 	void MeshRenderer::Render()
 	{
 		GetOwner()->GetComponent<Transform>()->SetConstantBuffer();
@@ -28,5 +33,7 @@ namespace jh
 		mMesh->BindBuffer();
 
 		mMesh->Render();
+
+		mMaterial->Clear();
 	}
 }

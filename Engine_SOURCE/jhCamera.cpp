@@ -7,8 +7,8 @@ extern jh::Application application;
 
 namespace jh
 {
-	Matrix Camera::mView = Matrix::Identity;
-	Matrix Camera::mProjection = Matrix::Identity;
+	Matrix Camera::View = Matrix::Identity;
+	Matrix Camera::Projection = Matrix::Identity;
 
 	Camera::Camera()
 		: Component(eComponentType::Camera)
@@ -49,8 +49,8 @@ namespace jh
 		Vector3 pos = tr->GetPosition();
 
 		// Crate Translate view matrix
-		mView = Matrix::Identity;
-		mView *= Matrix::CreateTranslation(-pos);
+		View = Matrix::Identity;
+		View *= Matrix::CreateTranslation(-pos);
 		//회전 정보
 
 		Vector3 up = tr->Up();
@@ -62,7 +62,7 @@ namespace jh
 		viewRotate._21 = right.y; viewRotate._22 = up.y; viewRotate._23 = foward.y;
 		viewRotate._31 = right.z; viewRotate._32 = up.z; viewRotate._33 = foward.z;
 
-		mView *= viewRotate;
+		View *= viewRotate;
 	}
 
 	void Camera::CreateProjectionMatrix()
@@ -76,7 +76,7 @@ namespace jh
 
 		if (mType == eProjectionType::Perspective)
 		{
-			mProjection = Matrix::CreatePerspectiveFieldOfViewLH
+			Projection = Matrix::CreatePerspectiveFieldOfViewLH
 			(
 				XM_2PI / 6.0f
 				, mAspectRatio
@@ -86,7 +86,7 @@ namespace jh
 		}
 		else
 		{
-			mProjection = Matrix::CreateOrthographicLH(width, height, mNear, mFar);
+			Projection = Matrix::CreateOrthographicLH(width / 100.0f, height / 100.0f, mNear, mFar);
 		}
 	}
 }

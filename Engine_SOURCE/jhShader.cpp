@@ -7,12 +7,14 @@ namespace jh
 {
 	Shader::Shader()
 		: Resource(eResourceType::GraphicShader)
-		,mTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+		, mTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 	{
+
 	}
 
 	Shader::~Shader()
 	{
+
 	}
 
 	HRESULT Shader::Load(const std::wstring& path)

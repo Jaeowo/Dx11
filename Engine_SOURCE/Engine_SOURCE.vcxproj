@@ -156,6 +156,7 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="jhApplication.h" />
     <ClInclude Include="jhCamera.h" />
+    <ClInclude Include="jhCameraScript.h" />
     <ClInclude Include="jhComponent.h" />
     <ClInclude Include="jhConstantBuffer.h" />
     <ClInclude Include="jhEngine.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="jhGraphics.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
+    <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="yaMath.h" />
     <ClInclude Include="jhMesh.h" />
     <ClInclude Include="jhMeshRenderer.h" />
@@ -185,6 +187,7 @@
   <ItemGroup>
     <ClCompile Include="jhApplication.cpp" />
     <ClCompile Include="jhCamera.cpp" />
+    <ClCompile Include="jhCameraScript.cpp" />
     <ClCompile Include="jhComponent.cpp" />
     <ClCompile Include="jhConstantBuffer.cpp" />
     <ClCompile Include="jhEntity.cpp" />
@@ -192,6 +195,7 @@
     <ClCompile Include="jhGraphicDevice_DX11.cpp" />
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
+    <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="yaMath.cpp" />
     <ClCompile Include="jhMesh.cpp" />
     <ClCompile Include="jhMeshRenderer.cpp" />

@@ -3,13 +3,32 @@
 namespace jh
 {
 	GameObject::GameObject()
-		:mState(eState::Active)
+		: mState(eState::Active)
 	{
 		mComponents.resize((UINT)eComponentType::End);
 	}
+
 	GameObject::~GameObject()
 	{
+		for (Component* comp : mComponents)
+		{
+			if (comp == nullptr)
+				continue;
+
+			delete comp;
+			comp = nullptr;
+		}
+
+		for (Component* scrComp : mScripts)
+		{
+			if (scrComp == nullptr)
+				continue;
+
+			delete scrComp;
+			scrComp = nullptr;
+		}
 	}
+
 	void GameObject::Initalize()
 	{
 		for (Component* comp : mComponents)
@@ -28,6 +47,7 @@ namespace jh
 			script->Initalize();
 		}
 	}
+
 	void GameObject::Update()
 	{
 		for (Component* comp : mComponents)
@@ -46,6 +66,7 @@ namespace jh
 			script->Update();
 		}
 	}
+
 	void GameObject::FixedUpdate()
 	{
 		for (Component* comp : mComponents)
@@ -64,6 +85,7 @@ namespace jh
 			script->FixedUpdate();
 		}
 	}
+
 	void GameObject::Render()
 	{
 		for (Component* comp : mComponents)
@@ -82,6 +104,7 @@ namespace jh
 			script->Render();
 		}
 	}
+
 	void GameObject::AddComponent(Component* comp)
 	{
 		eComponentType order = comp->GetOrder();

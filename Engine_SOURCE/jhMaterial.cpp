@@ -2,23 +2,27 @@
 
 namespace jh::graphics
 {
-	Material::Material()
-		: Resource(eResourceType::Material)
-	{
+    Material::Material()
+        : Resource(eResourceType::Material)
+    {
 
-	}
+    }
 
-	Material::~Material()
-	{
+    Material::~Material()
+    {
 
-	}
+    }
 
-	HRESULT Material::Load(const std::wstring& path)
-	{
-		return E_NOTIMPL;
-	}
-	void Material::SetData(eGPUParam param, void* data)
-	{
+    HRESULT Material::Load(const std::wstring& path)
+    {
+
+
+
+        return E_NOTIMPL;
+    }
+
+    void Material::SetData(eGPUParam param, void* data)
+    {
         switch (param)
         {
         case jh::graphics::eGPUParam::Int:
@@ -43,14 +47,22 @@ namespace jh::graphics
             break;
         }
 
-	}
-	void Material::Bind()
-	{
+    }
+
+    void Material::Bind()
+    {
+        mTexture->BindShader(eShaderStage::PS, 0);
+
         ConstantBuffer* pCB = renderer::constantBuffers[(UINT)eCBType::Material];
         pCB->Bind(&mCB);
         pCB->SetPipline(eShaderStage::VS);
         pCB->SetPipline(eShaderStage::PS);
 
         mShader->Binds();
-	}
+    }
+
+    void Material::Clear()
+    {
+        mTexture->Clear();
+    }
 }

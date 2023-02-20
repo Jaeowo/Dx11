@@ -2,18 +2,24 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="VS">
-      <UniqueIdentifier>{49bd7cf7-a7d0-46ec-8058-a118d9e604bd}</UniqueIdentifier>
+      <UniqueIdentifier>{e4ffc9a5-db97-4c55-9a0f-fe426ac30dab}</UniqueIdentifier>
     </Filter>
     <Filter Include="PS">
-      <UniqueIdentifier>{dd9e9afb-0611-422b-96f6-fa2a5ef74a96}</UniqueIdentifier>
+      <UniqueIdentifier>{05dfe299-0ec7-45a3-b6f2-b0f424c08f82}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="$(MSBuildThisFileDirectory)TriangleVS.hlsl">
+      <Filter>VS</Filter>
+    </FxCompile>
     <FxCompile Include="$(MSBuildThisFileDirectory)TrianglePS.hlsl">
       <Filter>PS</Filter>
     </FxCompile>
-    <FxCompile Include="$(MSBuildThisFileDirectory)TriangleVS.hlsl">
+    <FxCompile Include="$(MSBuildThisFileDirectory)SpriteVS.hlsl">
       <Filter>VS</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)SpritePS.hlsl">
+      <Filter>PS</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

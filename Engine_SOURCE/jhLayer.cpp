@@ -9,6 +9,14 @@ namespace jh
 
 	Layer::~Layer()
 	{
+		for (GameObject* obj : mGameObjects)
+		{
+			if (obj == nullptr)
+				continue;
+
+			delete obj;
+			obj = nullptr;
+		}
 	}
 
 	void Layer::Initalize()

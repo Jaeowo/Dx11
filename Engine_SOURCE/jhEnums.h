@@ -16,10 +16,13 @@ namespace jh::enums
 	enum class eComponentType
 	{
 		None,
-		Transform, 
+		Transform, // 위치 데이터 수정하는 컴포넌트
 		Camera,
 		Mesh,
 		Collider,
+		//Collider2,
+		MeshRenderer,
+		SpriteRenderer,
 		UI,
 		Script,
 		End,
@@ -31,6 +34,7 @@ namespace jh::enums
 		Texture,
 		Material,
 		Sound,
+		/*Font,*/
 		Prefab,
 		MeshData,
 		GraphicShader,
@@ -38,6 +42,7 @@ namespace jh::enums
 		Script,
 		End,
 	};
+
 
 }
 

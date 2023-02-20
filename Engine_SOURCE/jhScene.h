@@ -6,8 +6,7 @@
 namespace jh
 {
 	using namespace jh::enums;
-	class Scene
-		: public Entity
+	class Scene : public Entity
 	{
 	public:
 		Scene();
