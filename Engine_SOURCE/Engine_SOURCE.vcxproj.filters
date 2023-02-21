@@ -89,6 +89,7 @@
     <ClInclude Include="jhCameraScript.h">
       <Filter>Component\Script</Filter>
     </ClInclude>
+    <ClInclude Include="jhBaseRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -167,6 +168,7 @@
     <ClCompile Include="jhCameraScript.cpp">
       <Filter>Component\Script</Filter>
     </ClCompile>
+    <ClCompile Include="jhBaseRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

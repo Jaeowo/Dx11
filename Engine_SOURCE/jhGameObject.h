@@ -1,10 +1,12 @@
 #pragma once
 #include "jhComponent.h"
 #include "jhScript.h"
+#include "jhEntity.h"
 
 namespace jh
 {
 	class GameObject
+		:public Entity
 	{
 	public:
 		enum eState
