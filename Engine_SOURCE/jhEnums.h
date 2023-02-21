@@ -10,6 +10,7 @@ namespace jh::enums
 		Monster,
 		Player,
 
+		UI,
 		End = 16,
 	};
 

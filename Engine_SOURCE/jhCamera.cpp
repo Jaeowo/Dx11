@@ -23,7 +23,7 @@ namespace jh
 		, mFar(1000.0f)
 		, mScale(1.0f)
 	{
-
+		EnableLayerMasks();
 	}
 
 	Camera::~Camera()
@@ -32,7 +32,7 @@ namespace jh
 
 	void Camera::Initalize()
 	{
-		EnableLayerMasks();
+		
 		//RegisterCameraInRenderer();
 	}
 
