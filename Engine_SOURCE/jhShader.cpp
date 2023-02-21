@@ -1,5 +1,6 @@
 #include "jhShader.h"
 #include "jhGraphicDevice_DX11.h"
+#include "jhRenderer.h"
 
 using namespace jh::graphics;
 
@@ -8,6 +9,9 @@ namespace jh
 	Shader::Shader()
 		: Resource(eResourceType::GraphicShader)
 		, mTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+		, mRSType(eRSType::SolidBack)
+		, mDSType(eDSType::Less)
+		, mBSType(eBSType::AlphaBlend)
 	{
 
 	}
@@ -22,7 +26,7 @@ namespace jh
 		return E_NOTIMPL;
 	}
 
-	void Shader::Create(graphics::eShaderStage stage, const std::wstring& file, const std::string& funcName)
+	void Shader::Create(eShaderStage stage, const std::wstring& file, const std::string& funcName)
 	{
 		mErrorBlob = nullptr;
 
@@ -66,6 +70,15 @@ namespace jh
 
 		GetDevice()->BindVertexShader(mVS.Get(), nullptr, 0);
 		GetDevice()->BindPixelShader(mPS.Get(), nullptr, 0);
+
+		Microsoft::WRL::ComPtr<ID3D11RasterizerState> rs = renderer::rasterizerStates[(UINT)mRSType];
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> ds = renderer::depthstencilStates[(UINT)mDSType];
+		Microsoft::WRL::ComPtr<ID3D11BlendState> bs = renderer::blendStates[(UINT)mBSType];
+
+
+		GetDevice()->BindRasterizerState(rs.Get());
+		GetDevice()->BindDepthStencilState(ds.Get());
+		GetDevice()->BindBlendState(bs.Get());
 	}
 
 }
