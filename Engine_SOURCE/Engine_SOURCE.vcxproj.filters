@@ -90,6 +90,9 @@
       <Filter>Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="jhBaseRenderer.h" />
+    <ClInclude Include="jhGridScript.h">
+      <Filter>Component\Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -169,6 +172,9 @@
       <Filter>Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="jhBaseRenderer.cpp" />
+    <ClCompile Include="jhGridScript.cpp">
+      <Filter>Component\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

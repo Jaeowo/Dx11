@@ -166,6 +166,7 @@
     <ClInclude Include="jhGameObject.h" />
     <ClInclude Include="jhGraphicDevice_DX11.h" />
     <ClInclude Include="jhGraphics.h" />
+    <ClInclude Include="jhGridScript.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="jhEntity.cpp" />
     <ClCompile Include="jhGameObject.cpp" />
     <ClCompile Include="jhGraphicDevice_DX11.cpp" />
+    <ClCompile Include="jhGridScript.cpp" />
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />

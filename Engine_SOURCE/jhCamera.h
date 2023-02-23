@@ -35,6 +35,8 @@ namespace jh
 
 		void SetProjectionType(eProjectionType type) { mType = type; }
 
+		float GetScale() { return mScale; }
+
 	private:
 		void sortGameObjects();
 		void renderOpaque();

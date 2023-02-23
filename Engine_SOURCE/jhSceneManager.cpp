@@ -8,6 +8,7 @@
 #include "jhCamera.h"
 #include "jhCameraScript.h"
 #include "jhSpriteRenderer.h"
+#include "jhGridScript.h"
 
 namespace jh
 {
@@ -18,18 +19,32 @@ namespace jh
 		mActiveScene = new Scene();
 		mActiveScene->Initalize();
 
-		// Camera Game Object
+		// Grid Object
+		GameObject* gridObject = new GameObject();
+		Transform* gridTr = new Transform();
+		gridObject->AddComponent(gridTr);
+		MeshRenderer* gridMr = new MeshRenderer();
+		gridObject->AddComponent(gridMr);
+		gridObject->AddComponent(new GridScript());
+
+		gridMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		gridMr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
+
+		mActiveScene->AddGameObject(gridObject, eLayerType::None);
+
+		// Main Camera Game Object
 		GameObject* cameraObj = new GameObject();
 		Transform* cameraTr = new Transform();
 		cameraTr->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 		cameraObj->AddComponent(cameraTr);
 		Camera* cameraComp = new Camera();
+		cameraComp->RegisterCameraInRenderer();
 		cameraObj->AddComponent(cameraComp);
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
 		CameraScript* cameraScript = new CameraScript();
 		cameraObj->AddComponent(cameraScript);
-
 		mActiveScene->AddGameObject(cameraObj, eLayerType::Camera);
+
 
 		GameObject* cameraUIObj = new GameObject();
 		Transform* cameraUITr = new Transform();
@@ -88,7 +103,7 @@ namespace jh
 		obj->AddComponent(playerScript);
 		mActiveScene->AddGameObject(obj, eLayerType::Player);
 
-		//SMILE RECT CHILD
+		//SMILE RECT CHild
 		GameObject* child = new GameObject();
 		child->SetName(L"SMILE");
 		Transform* childTr = new Transform();
@@ -100,9 +115,12 @@ namespace jh
 		MeshRenderer* childMr = new MeshRenderer();
 		child->AddComponent(childMr);
 
-		std::shared_ptr<Material> childmaterial = Resources::Find<Material>(L"RectMaterial");
 
-		childMr->SetMaterial(childmaterial);
+
+
+		std::shared_ptr<Material> childmateiral = Resources::Find<Material>(L"RectMaterial");
+
+		childMr->SetMaterial(childmateiral);
 		childMr->SetMesh(mesh);
 
 		mActiveScene->AddGameObject(child, eLayerType::Player);
