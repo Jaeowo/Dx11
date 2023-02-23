@@ -169,6 +169,7 @@
     <ClInclude Include="jhGridScript.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
+    <ClInclude Include="jhObject.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="yaMath.h" />
     <ClInclude Include="jhMesh.h" />

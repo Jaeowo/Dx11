@@ -44,11 +44,11 @@ namespace jh
 				, mVSBlob.GetAddressOf()
 				, mErrorBlob.GetAddressOf());
 
-			if (mErrorBlob)
+			/*if (mErrorBlob)
 			{
 				OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
 				mErrorBlob->Release();
-			}
+			}*/
 
 			GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer()
 				, mVSBlob->GetBufferSize()
@@ -62,11 +62,11 @@ namespace jh
 				, mPSBlob.GetAddressOf()
 				, mErrorBlob.GetAddressOf());
 
-			if (mErrorBlob)
+			/*if (mErrorBlob)
 			{
 				OutputDebugStringA((char*)mErrorBlob->GetBufferPointer());
 				mErrorBlob->Release();
-			}
+			}*/
 
 			GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer()
 				, mPSBlob->GetBufferSize()

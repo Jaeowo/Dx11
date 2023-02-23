@@ -22,10 +22,11 @@ namespace jh::enums
 		Camera,
 		Mesh,
 		Collider,
-		//Collider2,
 		MeshRenderer,
 		SpriteRenderer,
 		UI,
+		FadeOut,
+		FadeIn,
 		Script,
 		End,
 	};
