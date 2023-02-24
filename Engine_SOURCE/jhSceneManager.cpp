@@ -11,6 +11,7 @@
 #include "jhGridScript.h"
 #include "jhObject.h"
 #include "jhFadeInScript.h"
+#include "jhFadeOutScript.h"
 
 namespace jh
 {
@@ -105,6 +106,7 @@ namespace jh
 		FadeInMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		FadeInMr->SetMaterial(Resources::Find<Material>(L"FadeInMaterial"));
 		FadeInObject->AddComponent<FadeInScript>();
+		//FadeInObject->AddComponent<FadeOutScript>();
 		Transform* fadetr = FadeInObject->GetComponent<Transform>();
 		fadetr->SetPosition(Vector3(0.0f, 0.0f, 5.0f));
 		fadetr->SetScale(Vector3(15.0f, 15.0f, 1.0f));

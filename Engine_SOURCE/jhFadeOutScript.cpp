@@ -1,4 +1,4 @@
-#include "jhFadeInScript.h"
+#include "jhFadeOutScript.h"
 #include "jhConstantBuffer.h"
 #include "jhApplication.h"
 #include "jhRenderer.h"
@@ -7,44 +7,43 @@
 
 namespace jh
 {
-	FadeInScript::FadeInScript()
+	FadeOutScript::FadeOutScript()
 		: Script()
-		, mAmount(0.0f)
+		, mAmount(1.0f)
 	{
 	}
-	FadeInScript::~FadeInScript()
+	FadeOutScript::~FadeOutScript()
 	{
 	}
-	void FadeInScript::Initalize()
+	void FadeOutScript::Initalize()
 	{
-		
 	}
-	void FadeInScript::Update()
+	void FadeOutScript::Update()
 	{
-
 		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Fade];
 		renderer::FadeCB data;
 
-		if (Input::GetKeyState(eKeyCode::F) == eKeyState::PRESSED)
+		data.FadeAmount = mAmount;
+
+		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::PRESSED)
 		{
-			mAmount += Time::DeltaTime();
+			mAmount -= Time::DeltaTime();
 			data.FadeAmount = mAmount;
 		}
-		if (mAmount >= 1.0f)
+		if (mAmount <= 0.0f)
 		{
-			mAmount = 1.0f;
+			mAmount = 0.0f;
 			data.FadeAmount = mAmount;
 		}
-	
+
 		cb->Bind(&data);
 		cb->SetPipline(eShaderStage::VS);
 		cb->SetPipline(eShaderStage::PS);
-
 	}
-	void FadeInScript::FixedUpdate()
+	void FadeOutScript::FixedUpdate()
 	{
 	}
-	void FadeInScript::Render()
+	void FadeOutScript::Render()
 	{
 	}
 }

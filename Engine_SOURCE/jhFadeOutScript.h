@@ -3,12 +3,12 @@
 
 namespace jh
 {
-	class FadeInScript
+	class FadeOutScript
 		: public Script
 	{
 	public:
-		FadeInScript();
-		virtual ~FadeInScript();
+		FadeOutScript();
+		virtual ~FadeOutScript();
 
 		virtual void Initalize();
 		virtual void Update();
@@ -20,5 +20,3 @@ namespace jh
 
 	};
 }
-
-
