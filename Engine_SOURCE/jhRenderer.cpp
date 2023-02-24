@@ -66,6 +66,12 @@ namespace jh::renderer
 			, gridShader->GetVSBlobBufferPointer()
 			, gridShader->GetVSBlobBufferSize()
 			, gridShader->GetInputLayoutAddressOf());
+
+		std::shared_ptr<Shader> FadeInShader = Resources::Find<Shader>(L"FadeInShader");
+		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
+			, FadeInShader->GetVSBlobBufferPointer()
+			, FadeInShader->GetVSBlobBufferSize()
+			, FadeInShader->GetInputLayoutAddressOf());
 #pragma endregion
 #pragma region sampler state
 		D3D11_SAMPLER_DESC samplerDesc = {};
@@ -228,6 +234,9 @@ namespace jh::renderer
 
 		constantBuffers[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
 		constantBuffers[(UINT)eCBType::Grid]->Create(sizeof(GridCB));
+
+		constantBuffers[(UINT)eCBType::Fade] = new ConstantBuffer(eCBType::Fade);
+		constantBuffers[(UINT)eCBType::Fade]->Create(sizeof(FadeCB));
 	}
 
 	void LoadShader()
@@ -262,6 +271,13 @@ namespace jh::renderer
 		gridShader->SetBSState(eBSType::AlphaBlend);
 
 		Resources::Insert<Shader>(L"GridShader", gridShader);
+
+		// Fade In
+		std::shared_ptr<Shader> fadeInShader = std::make_shared<Shader>();
+		fadeInShader->Create(eShaderStage::VS, L"FadeInVS.hlsl", "main");
+		fadeInShader->Create(eShaderStage::PS, L"FadeInPS.hlsl", "main");
+
+		Resources::Insert<Shader>(L"FadeInShader", fadeInShader);
 	}
 
 	void LoadTexture()
@@ -308,6 +324,12 @@ namespace jh::renderer
 		std::shared_ptr<Material> gridMaterial = std::make_shared<Material>();
 		gridMaterial->SetShader(gridShader);
 		Resources::Insert<Material>(L"GridMaterial", gridMaterial);
+
+		// Fade In
+		std::shared_ptr<Shader> fadeInShader = Resources::Find<Shader>(L"FadeInShader");
+		std::shared_ptr<Material> fadeInMaterial = std::make_shared<Material>();
+		fadeInMaterial->SetShader(fadeInShader);
+		Resources::Insert<Material>(L"FadeInMaterial", fadeInMaterial);
 	}
 
 	void Initialize()

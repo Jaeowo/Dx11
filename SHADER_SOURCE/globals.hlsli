@@ -23,6 +23,12 @@ cbuffer Grid : register(b2)
     float2 resolution;
 }
 
+cbuffer Fade : register(b3)
+{
+    float FadeAmount;
+    float3 Nothing;
+}
+
 SamplerState pointSampler : register(s0);
 SamplerState linearSampler : register(s1);
 SamplerState anisotropicSampler : register(s2);

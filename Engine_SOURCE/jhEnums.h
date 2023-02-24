@@ -10,6 +10,7 @@ namespace jh::enums
 		Grid,
 		Monster,
 		Player,
+		Effect,
 
 		UI,
 		End = 16,
@@ -18,7 +19,7 @@ namespace jh::enums
 	enum class eComponentType
 	{
 		None,
-		Transform, // 위치 데이터 수정하는 컴포넌트
+		Transform, 
 		Camera,
 		Mesh,
 		Collider,

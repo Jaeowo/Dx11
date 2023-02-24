@@ -44,6 +44,12 @@ namespace jh::renderer
 		Vector2 resolution;
 	};
 
+	CBUFFER(FadeCB, CBSLOT_FADE)
+	{
+		float FadeAmount;
+		Vector3 Nothing;
+	};
+
 	extern Vertex vertexes[4];
 	extern ConstantBuffer* constantBuffers[];
 	extern Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerStates[];

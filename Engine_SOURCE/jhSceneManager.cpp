@@ -10,6 +10,7 @@
 #include "jhSpriteRenderer.h"
 #include "jhGridScript.h"
 #include "jhObject.h"
+#include "jhFadeInScript.h"
 
 namespace jh
 {
@@ -19,6 +20,8 @@ namespace jh
 	{
 		mActiveScene = new Scene();
 		mActiveScene->Initalize();
+
+		
 
 		// Grid Object
 		GameObject* gridObject = object::Instantiate<GameObject>(eLayerType::None);
@@ -95,6 +98,16 @@ namespace jh
 		std::shared_ptr<Material> hpspriteMaterial = Resources::Find<Material>(L"UIMaterial");
 		hpsr->SetMesh(hpmesh);
 		hpsr->SetMaterial(hpspriteMaterial);
+
+		//Fade In
+		GameObject* FadeInObject = object::Instantiate<GameObject>(eLayerType::Effect);
+		MeshRenderer* FadeInMr = FadeInObject->AddComponent<MeshRenderer>();
+		FadeInMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		FadeInMr->SetMaterial(Resources::Find<Material>(L"FadeInMaterial"));
+		FadeInObject->AddComponent<FadeInScript>();
+		Transform* fadetr = FadeInObject->GetComponent<Transform>();
+		fadetr->SetPosition(Vector3(0.0f, 0.0f, 5.0f));
+		fadetr->SetScale(Vector3(15.0f, 15.0f, 1.0f));
 
 		//hpBar->Pause();
 

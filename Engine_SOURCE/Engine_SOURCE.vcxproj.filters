@@ -96,6 +96,9 @@
     <ClInclude Include="jhObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="jhFadeInScript.h">
+      <Filter>Component\Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -176,6 +179,9 @@
     </ClCompile>
     <ClCompile Include="jhBaseRenderer.cpp" />
     <ClCompile Include="jhGridScript.cpp">
+      <Filter>Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="jhFadeInScript.cpp">
       <Filter>Component\Script</Filter>
     </ClCompile>
   </ItemGroup>
