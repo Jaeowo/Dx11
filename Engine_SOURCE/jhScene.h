@@ -17,8 +17,12 @@ namespace jh
 		virtual void FixedUpdate();
 		virtual void Render();
 
+		virtual void OnEnter();
+		virtual void OnExit();
+
 		void AddGameObject(GameObject* gameObj, const eLayerType type);
 		Layer& GetLayer(eLayerType type) { return mLayers[(UINT)type]; }
+		std::vector<GameObject*> GetDontDestroyGameObjects();
 
 	private:
 		std::vector<Layer> mLayers;

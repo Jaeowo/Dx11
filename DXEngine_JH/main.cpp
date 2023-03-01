@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "DXEngine_JH.h"
 #include "jhApplication.h"
+#include "jhSceneManager.h"
 
 
 #ifdef _DEBUG
@@ -78,6 +79,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             application.Run();
         }
     }
+    jh::SceneManager::Release();
     application.Release();
     return (int) msg.wParam;
 }

@@ -172,7 +172,9 @@
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhObject.h" />
+    <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
+    <ClInclude Include="jhTitleScene.h" />
     <ClInclude Include="yaMath.h" />
     <ClInclude Include="jhMesh.h" />
     <ClInclude Include="jhMeshRenderer.h" />
@@ -204,7 +206,9 @@
     <ClCompile Include="jhGridScript.cpp" />
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
+    <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
+    <ClCompile Include="jhTitleScene.cpp" />
     <ClCompile Include="yaMath.cpp" />
     <ClCompile Include="jhMesh.cpp" />
     <ClCompile Include="jhMeshRenderer.cpp" />

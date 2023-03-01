@@ -16,7 +16,6 @@ namespace jh
 
 	Application::~Application()
 	{
-		SceneManager::Release();
 	}
 
 	void Application::Initalize()
