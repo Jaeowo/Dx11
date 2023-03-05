@@ -55,7 +55,6 @@
     <ClInclude Include="jhShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="jhConstantBuffer.h" />
     <ClInclude Include="jhTexture.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
@@ -80,7 +79,6 @@
     <ClInclude Include="jhCameraScript.h">
       <Filter>Component\Script</Filter>
     </ClInclude>
-    <ClInclude Include="jhBaseRenderer.h" />
     <ClInclude Include="jhGridScript.h">
       <Filter>Component\Script</Filter>
     </ClInclude>
@@ -107,6 +105,27 @@
     </ClInclude>
     <ClInclude Include="jhTitleScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCollider.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCollider2D.h">
+      <Filter>Component\Collider\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCollider3D.h">
+      <Filter>Component\Collider\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCollisionManager.h">
+      <Filter>Component\Collider\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBaseRenderer.h">
+      <Filter>Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="jhConstantBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPrefab.h">
+      <Filter>Resource\Prefab</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,7 +171,6 @@
     <ClCompile Include="jhShader.cpp">
       <Filter>Resource\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="jhConstantBuffer.cpp" />
     <ClCompile Include="jhTexture.cpp">
       <Filter>Resource\Texture</Filter>
     </ClCompile>
@@ -177,7 +195,6 @@
     <ClCompile Include="jhCameraScript.cpp">
       <Filter>Component\Script</Filter>
     </ClCompile>
-    <ClCompile Include="jhBaseRenderer.cpp" />
     <ClCompile Include="jhGridScript.cpp">
       <Filter>Component\Script</Filter>
     </ClCompile>
@@ -201,6 +218,27 @@
     </ClCompile>
     <ClCompile Include="jhTitleScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCollider.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCollider2D.cpp">
+      <Filter>Component\Collider\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCollider3D.cpp">
+      <Filter>Component\Collider\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCollisionManager.cpp">
+      <Filter>Component\Collider\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBaseRenderer.cpp">
+      <Filter>Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhConstantBuffer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPrefab.cpp">
+      <Filter>Resource\Prefab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,6 +313,21 @@
     </Filter>
     <Filter Include="Scene\Layer">
       <UniqueIdentifier>{4dafd444-165f-42c6-8c90-50553c4b88d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Prefab">
+      <UniqueIdentifier>{26b33c21-7313-4480-9c5e-e3be54938ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Collider">
+      <UniqueIdentifier>{b8f0d84b-7b4b-4403-8a06-1add0b8aae86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Collider\2D">
+      <UniqueIdentifier>{aa703ddf-f0c9-4afd-b56d-af3f685fb431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Collider\3D">
+      <UniqueIdentifier>{bf65136e-1633-43b6-90ff-23a830778ff3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Collider\Manager">
+      <UniqueIdentifier>{2cc4825f-64e5-4463-ac69-c1c8b364323b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

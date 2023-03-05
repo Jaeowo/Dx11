@@ -5,7 +5,7 @@
 #include "DXEngine_JH.h"
 #include "jhApplication.h"
 #include "jhSceneManager.h"
-
+#include "jhEditor.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\Lib\\Engine_SOURCE.lib") 
@@ -22,6 +22,7 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
 jh::Application application;
+jh::Editor editor;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -77,10 +78,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             //여기서 게임 실행 로직이 들어가야 한다.
 
             application.Run();
+            editor.Run();
+            application.Present();
         }
     }
     jh::SceneManager::Release();
     application.Release();
+    editor.Release();
     return (int) msg.wParam;
 }
 
@@ -136,6 +140,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    application.SetWindow(hWnd, 1600, 900);
    application.Initalize();
+   editor.Initalize();
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 

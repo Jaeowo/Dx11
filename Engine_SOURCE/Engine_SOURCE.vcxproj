@@ -158,6 +158,10 @@
     <ClInclude Include="jhBaseRenderer.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraScript.h" />
+    <ClInclude Include="jhCollider.h" />
+    <ClInclude Include="jhCollider2D.h" />
+    <ClInclude Include="jhCollider3D.h" />
+    <ClInclude Include="jhCollisionManager.h" />
     <ClInclude Include="jhComponent.h" />
     <ClInclude Include="jhConstantBuffer.h" />
     <ClInclude Include="jhEngine.h" />
@@ -173,6 +177,7 @@
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhObject.h" />
     <ClInclude Include="jhPlayScene.h" />
+    <ClInclude Include="jhPrefab.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhTitleScene.h" />
     <ClInclude Include="yaMath.h" />
@@ -196,6 +201,10 @@
     <ClCompile Include="jhBaseRenderer.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />
+    <ClCompile Include="jhCollider.cpp" />
+    <ClCompile Include="jhCollider2D.cpp" />
+    <ClCompile Include="jhCollider3D.cpp" />
+    <ClCompile Include="jhCollisionManager.cpp" />
     <ClCompile Include="jhComponent.cpp" />
     <ClCompile Include="jhConstantBuffer.cpp" />
     <ClCompile Include="jhEntity.cpp" />
@@ -207,6 +216,7 @@
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />
+    <ClCompile Include="jhPrefab.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhTitleScene.cpp" />
     <ClCompile Include="yaMath.cpp" />

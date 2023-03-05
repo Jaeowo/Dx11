@@ -54,6 +54,15 @@ namespace jh::enums
 		End,
 	};
 
+	enum class eColliderType
+	{
+		None,
+		Rect,
+		Circle,
+		Box,
+		Sphere,
+		End,
+	};
 
 }
 

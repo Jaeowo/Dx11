@@ -2,7 +2,8 @@
 
 namespace jh
 {
-	Scene::Scene()
+	Scene::Scene(eSceneType type)
+		: mType(type)
 	{
 		mLayers.resize((UINT)eLayerType::End);
 	}
@@ -43,6 +44,13 @@ namespace jh
 	}
 	void Scene::OnExit()
 	{
+	}
+	void Scene::Destroy()
+	{
+		for (Layer& layer : mLayers)
+		{
+			layer.Destroy();
+		}
 	}
 	void Scene::AddGameObject(GameObject* gameObj, const eLayerType type)
 	{

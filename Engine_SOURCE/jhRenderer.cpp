@@ -1,6 +1,7 @@
 #include "jhRenderer.h"
 #include "jhResources.h"
 #include "jhMaterial.h"
+#include "jhSceneManager.h"
 
 namespace jh::renderer
 {
@@ -12,8 +13,85 @@ namespace jh::renderer
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthstencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
-	std::vector<Camera*> cameras;
+	Camera* mainCamera = nullptr;
+	std::vector<Camera*> cameras[(UINT)eSceneType::End];
+	std::vector<DebugMesh> debugMeshes;
 
+	void LoadMesh()
+	{
+		//RECT
+		vertexes[0].pos = Vector4(-0.5f, 0.5f, 0.5f, 1.0f);
+		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
+		vertexes[0].uv = Vector2(0.f, 0.f);
+
+		vertexes[1].pos = Vector4(0.5f, 0.5f, 0.5f, 1.0f);
+		vertexes[1].color = Vector4(1.f, 1.f, 1.f, 1.f);
+		vertexes[1].uv = Vector2(1.0f, 0.0f);
+
+		vertexes[2].pos = Vector4(0.5f, -0.5f, 0.5f, 1.0f);
+		vertexes[2].color = Vector4(1.f, 0.f, 0.f, 1.f);
+		vertexes[2].uv = Vector2(1.0f, 1.0f);
+
+		vertexes[3].pos = Vector4(-0.5f, -0.5f, 0.5f, 1.0f);
+		vertexes[3].color = Vector4(0.f, 0.f, 1.f, 1.f);
+		vertexes[3].uv = Vector2(0.0f, 1.0f);
+
+		// Crate Mesh
+		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+		Resources::Insert<Mesh>(L"RectMesh", mesh);
+
+		mesh->CreateVertexBuffer(vertexes, 4);
+
+		std::vector<UINT> indexes;
+		indexes.push_back(0);
+		indexes.push_back(1);
+		indexes.push_back(2);
+
+		indexes.push_back(0);
+		indexes.push_back(2);
+		indexes.push_back(3);
+		indexes.push_back(0);
+		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
+
+		//Circle Mesh
+		std::vector<Vertex> circleVtxes;
+		Vertex center = {};
+		center.pos = Vector4{ 0.0f, 0.0f, 0.0f, 1.0f };
+		center.color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		center.uv = Vector2::Zero;
+
+		circleVtxes.push_back(center);
+
+		int iSlice = 80;
+		float fRadius = 0.5f;
+		float fTheta = XM_2PI / (float)iSlice;
+
+		for (size_t i = 0; i < iSlice; i++)
+		{
+			Vertex vtx = {};
+			vtx.pos = Vector4
+			(
+				fRadius * cosf(fTheta * (float)i)
+				, fRadius * sinf(fTheta * (float)i)
+				, 0.5f, 1.0f
+			);
+			vtx.color = center.color;
+
+			circleVtxes.push_back(vtx);
+		}
+		indexes.clear();
+		for (size_t i = 0; i < iSlice - 2; i++)
+		{
+			indexes.push_back(i + 1);
+		}
+		indexes.push_back(1);
+
+		// Crate Mesh
+		std::shared_ptr<Mesh> cirlceMesh = std::make_shared<Mesh>();
+		Resources::Insert<Mesh>(L"CircleMesh", cirlceMesh);
+		cirlceMesh->CreateVertexBuffer(circleVtxes.data(), circleVtxes.size());
+		cirlceMesh->CreateIndexBuffer(indexes.data(), indexes.size());
+	}
 
 	void SetUpState()
 	{
@@ -72,6 +150,12 @@ namespace jh::renderer
 			, FadeInShader->GetVSBlobBufferPointer()
 			, FadeInShader->GetVSBlobBufferSize()
 			, FadeInShader->GetInputLayoutAddressOf());
+
+		std::shared_ptr<Shader> debugShader = Resources::Find<Shader>(L"DebugShader");
+		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
+			, debugShader->GetVSBlobBufferPointer()
+			, debugShader->GetVSBlobBufferSize()
+			, debugShader->GetInputLayoutAddressOf());
 #pragma endregion
 #pragma region sampler state
 		D3D11_SAMPLER_DESC samplerDesc = {};
@@ -210,21 +294,6 @@ namespace jh::renderer
 
 	void LoadBuffer()
 	{
-		// Crate Mesh
-		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
-		Resources::Insert<Mesh>(L"RectMesh", mesh);
-
-		mesh->CreateVertexBuffer(vertexes, 4);
-
-		std::vector<UINT> indexes;
-		indexes.push_back(0);
-		indexes.push_back(1);
-		indexes.push_back(2);
-
-		indexes.push_back(0);
-		indexes.push_back(2);
-		indexes.push_back(3);
-		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
 
 		constantBuffers[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffers[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
@@ -278,6 +347,17 @@ namespace jh::renderer
 		fadeInShader->Create(eShaderStage::PS, L"FadeInPS.hlsl", "main");
 
 		Resources::Insert<Shader>(L"FadeInShader", fadeInShader);
+
+		// Debug Shader
+		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
+		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
+		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
+		debugShader->SetRSState(eRSType::SolidNone);
+		debugShader->SetDSState(eDSType::NoWrite);
+		debugShader->SetBSState(eBSType::AlphaBlend);
+		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+
+		Resources::Insert<Shader>(L"DebugShader", debugShader);
 	}
 
 	void LoadTexture()
@@ -330,27 +410,18 @@ namespace jh::renderer
 		std::shared_ptr<Material> fadeInMaterial = std::make_shared<Material>();
 		fadeInMaterial->SetShader(fadeInShader);
 		Resources::Insert<Material>(L"FadeInMaterial", fadeInMaterial);
+
+		// Debug
+		std::shared_ptr<Shader> debugShader = Resources::Find<Shader>(L"DebugShader");
+		std::shared_ptr<Material> debugMaterial = std::make_shared<Material>();
+		debugMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		debugMaterial->SetShader(debugShader);
+		Resources::Insert<Material>(L"DebugMaterial", debugMaterial);
 	}
 
 	void Initialize()
 	{
-		//RECT
-		vertexes[0].pos = Vector4(-0.5f, 0.5f, 0.5f, 1.0f);
-		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
-		vertexes[0].uv = Vector2(0.f, 0.f);
-
-		vertexes[1].pos = Vector4(0.5f, 0.5f, 0.5f, 1.0f);
-		vertexes[1].color = Vector4(1.f, 1.f, 1.f, 1.f);
-		vertexes[1].uv = Vector2(1.0f, 0.0f);
-
-		vertexes[2].pos = Vector4(0.5f, -0.5f, 0.5f, 1.0f);
-		vertexes[2].color = Vector4(1.f, 0.f, 0.f, 1.f);
-		vertexes[2].uv = Vector2(1.0f, 1.0f);
-
-		vertexes[3].pos = Vector4(-0.5f, -0.5f, 0.5f, 1.0f);
-		vertexes[3].color = Vector4(0.f, 0.f, 1.f, 1.f);
-		vertexes[3].uv = Vector2(0.0f, 1.0f);
-
+		LoadMesh();
 		LoadShader();
 		SetUpState();
 		LoadBuffer();
@@ -369,7 +440,9 @@ namespace jh::renderer
 
 	void Render()
 	{
-		for (Camera* cam : cameras)
+		//std::vector<Camera*> cameras[(UINT)eSceneType::End];
+		eSceneType type = SceneManager::GetActiveScene()->GetSceneType();
+		for (Camera* cam : cameras[(UINT)type])
 		{
 			if (cam == nullptr)
 				continue;
@@ -377,7 +450,7 @@ namespace jh::renderer
 			cam->Render();
 		}
 
-		cameras.clear();
+		cameras[(UINT)type].clear();
 	}
 
 }

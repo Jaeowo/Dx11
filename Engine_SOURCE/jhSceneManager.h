@@ -10,6 +10,7 @@ namespace jh
 		static void Update();
 		static void FixedUpdate();
 		static void Render();
+		static void Destroy();
 		static void Release();
 
 		static void LoadScene(eSceneType type);

@@ -15,9 +15,11 @@ namespace jh
 		virtual void Update();
 		virtual void FixedUpdate();
 		virtual void Render();
+		virtual void Destroy();
 
 		// Running main engine loop
 		void Run();
+		void Present();
 		void Release();
 
 		void SetWindow(HWND hwnd, UINT width, UINT height);

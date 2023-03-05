@@ -57,12 +57,22 @@ namespace jh
 		graphicDevice->Present();
 	}
 
+	void Application::Destroy()
+	{
+	}
+
 	// Running main engine loop
 	void Application::Run()
 	{
 		Update();
 		FixedUpdate();
 		Render();
+		Destroy();
+	}
+
+	void Application::Present()
+	{
+		graphicDevice->Present();
 	}
 
 	void Application::Release()
