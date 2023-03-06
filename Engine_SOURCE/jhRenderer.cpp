@@ -20,19 +20,19 @@ namespace jh::renderer
 	void LoadMesh()
 	{
 		//RECT
-		vertexes[0].pos = Vector4(-0.5f, 0.5f, 0.5f, 1.0f);
+		vertexes[0].pos = Vector4(-0.5f, 0.5f, 0.0f, 1.0f);
 		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
 		vertexes[0].uv = Vector2(0.f, 0.f);
 
-		vertexes[1].pos = Vector4(0.5f, 0.5f, 0.5f, 1.0f);
+		vertexes[1].pos = Vector4(0.5f, 0.5f, 0.0f, 1.0f);
 		vertexes[1].color = Vector4(1.f, 1.f, 1.f, 1.f);
 		vertexes[1].uv = Vector2(1.0f, 0.0f);
 
-		vertexes[2].pos = Vector4(0.5f, -0.5f, 0.5f, 1.0f);
+		vertexes[2].pos = Vector4(0.5f, -0.5f, 0.0f, 1.0f);
 		vertexes[2].color = Vector4(1.f, 0.f, 0.f, 1.f);
 		vertexes[2].uv = Vector2(1.0f, 1.0f);
 
-		vertexes[3].pos = Vector4(-0.5f, -0.5f, 0.5f, 1.0f);
+		vertexes[3].pos = Vector4(-0.5f, -0.5f, 0.0f, 1.0f);
 		vertexes[3].color = Vector4(0.f, 0.f, 1.f, 1.f);
 		vertexes[3].uv = Vector2(0.0f, 1.0f);
 
@@ -53,10 +53,32 @@ namespace jh::renderer
 		indexes.push_back(0);
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
 
+		// 
+		vertexes[0].pos = Vector4(-0.5f, 0.5f, -0.00001f, 1.0f);
+		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
+		vertexes[0].uv = Vector2(0.f, 0.f);
+
+		vertexes[1].pos = Vector4(0.5f, 0.5f, -0.00001f, 1.0f);
+		vertexes[1].color = Vector4(1.f, 1.f, 1.f, 1.f);
+		vertexes[1].uv = Vector2(1.0f, 0.0f);
+
+		vertexes[2].pos = Vector4(0.5f, -0.5f, -0.00001f, 1.0f);
+		vertexes[2].color = Vector4(1.f, 0.f, 0.f, 1.f);
+		vertexes[2].uv = Vector2(1.0f, 1.0f);
+
+		vertexes[3].pos = Vector4(-0.5f, -0.5f, -0.00001f, 1.0f);
+		vertexes[3].color = Vector4(0.f, 0.f, 1.f, 1.f);
+		vertexes[3].uv = Vector2(0.0f, 1.0f);
+
+		// Crate Mesh
+		std::shared_ptr<Mesh> debugmesh = std::make_shared<Mesh>();
+		Resources::Insert<Mesh>(L"DebugRectMesh", debugmesh);
+		debugmesh->CreateVertexBuffer(vertexes, 4);
+		debugmesh->CreateIndexBuffer(indexes.data(), indexes.size());
 		//Circle Mesh
 		std::vector<Vertex> circleVtxes;
 		Vertex center = {};
-		center.pos = Vector4{ 0.0f, 0.0f, 0.0f, 1.0f };
+		center.pos = Vector4{ 0.0f, 0.0f, -0.00001f, 1.0f };
 		center.color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
 		center.uv = Vector2::Zero;
 
@@ -73,7 +95,7 @@ namespace jh::renderer
 			(
 				fRadius * cosf(fTheta * (float)i)
 				, fRadius * sinf(fTheta * (float)i)
-				, 0.5f, 1.0f
+				, -0.00001f, 1.0f
 			);
 			vtx.color = center.color;
 

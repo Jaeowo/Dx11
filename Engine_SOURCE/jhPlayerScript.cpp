@@ -85,4 +85,13 @@ namespace jh
 	void PlayerScript::Render()
 	{
 	}
+	void PlayerScript::OnCollisionEnter(Collider2D* collider)
+	{
+	}
+	void PlayerScript::OnCollisionStay(Collider2D* collider)
+	{
+	}
+	void PlayerScript::OnCollisionExit(Collider2D* collider)
+	{
+	}
 }

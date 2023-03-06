@@ -12,6 +12,8 @@
 #include "jhObject.h"
 #include "jhInput.h"
 #include "jhCollider2D.h"
+#include "jhPlayer.h"
+#include "jhMonster.h"
 
 namespace jh
 {
@@ -70,7 +72,7 @@ namespace jh
 
 
 		//SMILE RECT
-		GameObject* obj = object::Instantiate<GameObject>(eLayerType::Player);
+		Player* obj = object::Instantiate<Player>(eLayerType::Player);
 		obj->SetName(L"SMILE");
 		Transform* tr = obj->GetComponent<Transform>();
 		tr->SetPosition(Vector3(0.0f, 0.0f, 5.0f));
@@ -78,6 +80,10 @@ namespace jh
 		//tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
 		Collider2D* collider = obj->AddComponent<Collider2D>();
 		collider->SetType(eColliderType::Rect);
+
+		//Center랑 Size위치 테스트
+		//collider->SetCenter(Vector2(0.2f, 0.2f));
+		//collider->SetSize(Vector2(1.5f, 1.5f));
 
 		MeshRenderer* mr = obj->AddComponent<MeshRenderer>();
 		std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"RectMaterial");

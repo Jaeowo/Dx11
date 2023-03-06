@@ -127,6 +127,12 @@
     <ClInclude Include="jhPrefab.h">
       <Filter>Resource\Prefab</Filter>
     </ClInclude>
+    <ClInclude Include="jhPlayer.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonster.h">
+      <Filter>GameObject\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -240,6 +246,12 @@
     <ClCompile Include="jhPrefab.cpp">
       <Filter>Resource\Prefab</Filter>
     </ClCompile>
+    <ClCompile Include="jhPlayer.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonster.cpp">
+      <Filter>GameObject\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -328,6 +340,12 @@
     </Filter>
     <Filter Include="Component\Collider\Manager">
       <UniqueIdentifier>{2cc4825f-64e5-4463-ac69-c1c8b364323b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{5a692f1b-e083-4645-ac5d-829979e1d2a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster">
+      <UniqueIdentifier>{f0cb512c-32e9-453e-8e44-c15c5f4a0202}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
