@@ -33,6 +33,7 @@ namespace jh::enums
 		Collider,
 		MeshRenderer,
 		SpriteRenderer,
+		Animator,
 		UI,
 		FadeOut,
 		FadeIn,

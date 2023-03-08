@@ -133,6 +133,12 @@
     <ClInclude Include="jhMonster.h">
       <Filter>GameObject\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="jhAnimation.h">
+      <Filter>Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAnimator.h">
+      <Filter>Component\Animator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -252,6 +258,12 @@
     <ClCompile Include="jhMonster.cpp">
       <Filter>GameObject\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="jhAnimation.cpp">
+      <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAnimator.cpp">
+      <Filter>Component\Animator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -346,6 +358,9 @@
     </Filter>
     <Filter Include="GameObject\Monster">
       <UniqueIdentifier>{f0cb512c-32e9-453e-8e44-c15c5f4a0202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animator">
+      <UniqueIdentifier>{208e2c34-124f-4919-81de-10cbaa7f4fcf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

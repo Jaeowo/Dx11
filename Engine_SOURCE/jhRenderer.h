@@ -50,6 +50,16 @@ namespace jh::renderer
 		Vector3 Nothing;
 	};
 
+	CBUFFER(AnimationCB, CBSLOT_ANIMATION)
+	{
+		Vector2 leftTop;
+		Vector2 size;
+		Vector2 offset;
+		Vector2 atlasSize;
+
+		UINT used;
+	};
+
 	extern Vertex vertexes[4];
 	extern Camera* mainCamera;
 	extern ConstantBuffer* constantBuffers[];
