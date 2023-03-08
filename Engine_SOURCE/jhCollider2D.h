@@ -30,6 +30,9 @@ namespace jh
 		bool IsTrigger() { return mbTrigger; }
 		UINT GetID() { return mID; }
 		Vector3 GetPosition() { return mPosition; }
+		eColliderType GetType() { return mType; }
+		Vector2 GetSize() { return mSize; }
+		Vector2 GetCenter() { return mCenter; }
 
 	private:
 		static UINT ColliderNumber;

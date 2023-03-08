@@ -387,6 +387,7 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"SmileTexture", L"Smile.png");
 		Resources::Load<Texture>(L"DefaultSprite", L"Light.png");
 		Resources::Load<Texture>(L"HPBarTexture", L"HPBar.png");
+		Resources::Load<Texture>(L"TitleSkyTexture", L"TitleSky.png");
 	}
 
 	void LoadMaterial()
@@ -399,8 +400,6 @@ namespace jh::renderer
 		material->SetShader(shader);
 		material->SetTexture(texture);
 		Resources::Insert<Material>(L"RectMaterial", material);
-
-
 		
 		// Sprite
 		std::shared_ptr <Texture> spriteTexture = Resources::Find<Texture>(L"DefaultSprite");

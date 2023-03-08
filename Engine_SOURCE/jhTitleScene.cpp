@@ -53,11 +53,8 @@ namespace jh
 		//GridScript* gridScript = gridObject->AddComponent<GridScript>();
 		//gridScript->SetCamera(cameraComp);
 
-
-
-
-		// Light Object
-		//GameObject* spriteObj = object::Instantiate<GameObject>(eLayerType::Player);
+		/*
+		GameObject* spriteObj = object::Instantiate<GameObject>(eLayerType::Player);
 		//spriteObj->SetName(L"LIGHT");
 		//Transform* spriteTr = spriteObj->GetComponent<Transform>();
 		//spriteTr->SetPosition(Vector3(0.0f, 0.0f, 10.0f));
@@ -68,9 +65,7 @@ namespace jh
 		//std::shared_ptr<Material> spriteMaterial = Resources::Find<Material>(L"SpriteMaterial");
 		//sr->SetMaterial(spriteMaterial);
 		//sr->SetMesh(mesh);
-
-
-
+		*/
 
 		//SMILE RECT
 		Player* obj = object::Instantiate<Player>(eLayerType::Player);
@@ -96,7 +91,7 @@ namespace jh
 			obj->SetName(L"SMILE");
 			Transform* tr = obj->GetComponent<Transform>();
 			tr->SetPosition(Vector3(2.0f, 0.0f, 5.0f));
-			tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2 / 2.0f));
+			//tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2 / 2.0f));
 			//tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
 			Collider2D* collider = obj->AddComponent<Collider2D>();
 			collider->SetType(eColliderType::Circle);
