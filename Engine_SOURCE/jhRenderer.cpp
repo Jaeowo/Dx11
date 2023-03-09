@@ -389,13 +389,102 @@ namespace jh::renderer
 	{
 		Resources::Load<Texture>(L"SmileTexture", L"Smile.png");
 		Resources::Load<Texture>(L"DefaultSprite", L"Light.png");
-		Resources::Load<Texture>(L"HPBarTexture", L"HPBar.png");
+		//Resources::Load<Texture>(L"HPBarTexture", L"HPBar.png");
+
+		//Title Scene
 		Resources::Load<Texture>(L"TitleSkyTexture", L"TitleSky.png");
+		Resources::Load<Texture>(L"OwlboyLogoTexture", L"OwlboyLogo.png");
+		Resources::Load<Texture>(L"TitleRightTexture", L"TitleRight.png");
+		Resources::Load<Texture>(L"TitleLeftTexture", L"TitleLeft.png");
+
+		//Play Scene
+		Resources::Load<Texture>(L"BackSkyTexture", L"BackSky.png");
+		Resources::Load<Texture>(L"StandTexture", L"sprOtusStand.png");
+		Resources::Load<Texture>(L"HpBarTexture", L"HpBar.png");
+		Resources::Load<Texture>(L"TileFloorTexture", L"tileFloor.png");
+		Resources::Load<Texture>(L"TopProp08Texture", L"top_prop08.png");
+
 	}
 
 	void LoadMaterial()
 	{
+		//TitleScene
+		std::shared_ptr <Texture> titleskytexture = Resources::Find<Texture>(L"TitleSkyTexture");
+		std::shared_ptr<Shader> titleskyshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> titleskymaterial = std::make_shared<Material>();
+		titleskymaterial->SetRenderingMode(eRenderingMode::Transparent);
+		titleskymaterial->SetShader(titleskyshader);
+		titleskymaterial->SetTexture(titleskytexture);
+		Resources::Insert<Material>(L"Titleskymaterial", titleskymaterial);
 
+		std::shared_ptr <Texture> owlboylogotexture = Resources::Find<Texture>(L"OwlboyLogoTexture");
+		std::shared_ptr<Shader> owlboylogoshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> owlboylogomaterial = std::make_shared<Material>();
+		owlboylogomaterial->SetRenderingMode(eRenderingMode::Transparent);
+		owlboylogomaterial->SetShader(owlboylogoshader);
+		owlboylogomaterial->SetTexture(owlboylogotexture);
+		Resources::Insert<Material>(L"OwlboyLogomaterial", owlboylogomaterial);
+
+		std::shared_ptr <Texture> titlerighttexture = Resources::Find<Texture>(L"TitleRightTexture");
+		std::shared_ptr<Shader> titlerightshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> titlerightmaterial = std::make_shared<Material>();
+		titlerightmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		titlerightmaterial->SetShader(titlerightshader);
+		titlerightmaterial->SetTexture(titlerighttexture);
+		Resources::Insert<Material>(L"TitleRightmaterial", titlerightmaterial);
+
+		std::shared_ptr <Texture> titlelefttexture = Resources::Find<Texture>(L"TitleLeftTexture");
+		std::shared_ptr<Shader> titleleftshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> titleleftmaterial = std::make_shared<Material>();
+		titleleftmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		titleleftmaterial->SetShader(titleleftshader);
+		titleleftmaterial->SetTexture(titlelefttexture);
+		Resources::Insert<Material>(L"TitleLeftmaterial", titleleftmaterial);
+
+		//==================================
+		
+		//PlayScene
+		std::shared_ptr <Texture> backskytexture = Resources::Find<Texture>(L"BackSkyTexture");
+		std::shared_ptr<Shader> backskyshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> backskymaterial = std::make_shared<Material>();
+		backskymaterial->SetRenderingMode(eRenderingMode::Transparent);
+		backskymaterial->SetShader(backskyshader);
+		backskymaterial->SetTexture(backskytexture);
+		Resources::Insert<Material>(L"Backskymaterial", backskymaterial);
+
+		std::shared_ptr <Texture> standtexture = Resources::Find<Texture>(L"StandTexture");
+		std::shared_ptr<Shader> standshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> standmaterial = std::make_shared<Material>();
+		standmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		standmaterial->SetShader(standshader);
+		standmaterial->SetTexture(standtexture);
+		Resources::Insert<Material>(L"Standmaterial", standmaterial);
+
+		std::shared_ptr <Texture> hpbartexture = Resources::Find<Texture>(L"HpBarTexture");
+		std::shared_ptr<Shader> hpbarshader = Resources::Find<Shader>(L"UIShader");
+		std::shared_ptr<Material> hpbarmaterial = std::make_shared<Material>();
+		hpbarmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		hpbarmaterial->SetShader(hpbarshader);
+		hpbarmaterial->SetTexture(hpbartexture);
+		Resources::Insert<Material>(L"Hpbarmaterial", hpbarmaterial);
+
+		std::shared_ptr <Texture> tilefloortexture = Resources::Find<Texture>(L"TileFloorTexture");
+		std::shared_ptr<Shader> tilefloorshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> tilefloormaterial = std::make_shared<Material>();
+		tilefloormaterial->SetRenderingMode(eRenderingMode::Transparent);
+		tilefloormaterial->SetShader(tilefloorshader);
+		tilefloormaterial->SetTexture(tilefloortexture);
+		Resources::Insert<Material>(L"Tilefloormaterial", tilefloormaterial);
+
+		std::shared_ptr <Texture> topprop08texture = Resources::Find<Texture>(L"TopProp08Texture");
+		std::shared_ptr<Shader> topprop08shader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> topprop08material = std::make_shared<Material>();
+		topprop08material->SetRenderingMode(eRenderingMode::Transparent);
+		topprop08material->SetShader(topprop08shader);
+		topprop08material->SetTexture(topprop08texture);
+		Resources::Insert<Material>(L"TopProp08material", topprop08material);
+
+		//==================================
 		// Default
 		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"SmileTexture");
 		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"RectShader");

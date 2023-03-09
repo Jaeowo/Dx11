@@ -139,6 +139,9 @@
     <ClInclude Include="jhAnimator.h">
       <Filter>Component\Animator</Filter>
     </ClInclude>
+    <ClInclude Include="jhCloudScript.h">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -264,6 +267,9 @@
     <ClCompile Include="jhAnimator.cpp">
       <Filter>Component\Animator</Filter>
     </ClCompile>
+    <ClCompile Include="jhCloudScript.cpp">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -361,6 +367,9 @@
     </Filter>
     <Filter Include="Component\Animator">
       <UniqueIdentifier>{208e2c34-124f-4919-81de-10cbaa7f4fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\BackGround">
+      <UniqueIdentifier>{759e5a98-f7df-4892-94cb-c1f876fa9281}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

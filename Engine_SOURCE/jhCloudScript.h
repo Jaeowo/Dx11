@@ -3,19 +3,13 @@
 
 namespace jh
 {
-	class PlayerScript
+	class CloudScript
 		: public Script
 	{
 	public:
-		enum ePlayerState
-		{
-			Idle,
-			Jump,
-			Fly,
-		};
 
-		PlayerScript();
-		~PlayerScript();
+		CloudScript();
+		~CloudScript();
 
 		virtual void Initalize() override;
 		virtual void Update() override;
@@ -26,9 +20,6 @@ namespace jh
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
 	private:
-		ePlayerState mPlayerState;
 
 	};
 }
-
-

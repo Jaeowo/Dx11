@@ -160,6 +160,7 @@
     <ClInclude Include="jhBaseRenderer.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraScript.h" />
+    <ClInclude Include="jhCloudScript.h" />
     <ClInclude Include="jhCollider.h" />
     <ClInclude Include="jhCollider2D.h" />
     <ClInclude Include="jhCollider3D.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="jhBaseRenderer.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />
+    <ClCompile Include="jhCloudScript.cpp" />
     <ClCompile Include="jhCollider.cpp" />
     <ClCompile Include="jhCollider2D.cpp" />
     <ClCompile Include="jhCollider3D.cpp" />
