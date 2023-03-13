@@ -1,6 +1,7 @@
 #include "jhSpriteRenderer.h"
 #include "jhGameObject.h"
 #include "jhTransform.h"
+#include "jhAnimator.h"
 
 namespace jh
 {
@@ -31,6 +32,12 @@ namespace jh
 
 		GetMaterial()->Bind();
 		GetMesh()->BindBuffer();
+
+		Animator* animator = GetOwner()->GetComponent<Animator>();
+		if (animator)
+		{
+			animator->Binds();
+		}
 
 		GetMesh()->Render();
 

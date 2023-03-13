@@ -142,6 +142,9 @@
     <ClInclude Include="jhCloudScript.h">
       <Filter>Component\Script\BackGround</Filter>
     </ClInclude>
+    <ClInclude Include="jhMovingHandScript.h">
+      <Filter>Component\Script\Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="jhCloudScript.cpp">
       <Filter>Component\Script\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMovingHandScript.cpp">
+      <Filter>Component\Script\Contents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

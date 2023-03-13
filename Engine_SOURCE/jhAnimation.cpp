@@ -1,5 +1,6 @@
 #include "jhAnimation.h"
 #include "jhTime.h"
+#include "jhRenderer.h"
 
 namespace jh
 {
@@ -44,11 +45,41 @@ namespace jh
 	void Animation::Create(const std::wstring& name
 		, std::shared_ptr<Texture> atlas
 		, Vector2 leftTop, Vector2 size, Vector2 offset
-		, UINT columnLength, UINT spriteLength, float duration)
+		, UINT spriteLength, float duration)
 	{
+		mAnimationName = name;
+
+		mAtlas = atlas;
+		float width = (float)atlas->GetWidth();
+		float height = (float)atlas->GetHeight();
+
+		for (size_t i = 0; i < spriteLength; i++)
+		{
+			Sprite sprite = {};
+			sprite.leftTop = Vector2((leftTop.x + (size.x * (float)i)) / width, (leftTop.y) / height);
+			sprite.size = Vector2(size.x / width, size.y / height);
+			sprite.offset = offset;
+			sprite.duration = duration;
+			sprite.atlasSize = Vector2(200.0f / width, 200.0f / height);
+
+			mSpriteSheet.push_back(sprite);
+		}
 	}
 	void Animation::BindShader()
 	{
+		mAtlas->BindShader(eShaderStage::PS, 12);
+
+		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Animation];
+
+		renderer::AnimationCB info = {};
+		info.type = (UINT)eAnimationType::SecondDimension;
+		info.leftTop = mSpriteSheet[mIndex].leftTop;
+		info.offset = mSpriteSheet[mIndex].offset;
+		info.size = mSpriteSheet[mIndex].size;
+		info.atlasSize = mSpriteSheet[mIndex].atlasSize;
+
+		cb->Bind(&info);
+		cb->SetPipline(eShaderStage::PS);
 	}
 	void Animation::Reset()
 	{

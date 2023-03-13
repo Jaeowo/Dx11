@@ -179,6 +179,7 @@
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhMonster.h" />
+    <ClInclude Include="jhMovingHandScript.h" />
     <ClInclude Include="jhObject.h" />
     <ClInclude Include="jhPlayer.h" />
     <ClInclude Include="jhPlayScene.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhMonster.cpp" />
+    <ClCompile Include="jhMovingHandScript.cpp" />
     <ClCompile Include="jhPlayer.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhPrefab.cpp" />

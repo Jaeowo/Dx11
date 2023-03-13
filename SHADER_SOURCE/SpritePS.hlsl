@@ -14,8 +14,26 @@ struct VSOut
 };
 float4 main(VSOut In) : SV_Target
 {
-    float4 color = (float) 0.0f;
-    color = defaultTexture.Sample(pointSampler, In.UV);
-    
-    return color;
+      float4 color = (float)0.0f;
+
+
+      if (animationType == 1) 
+      {
+          float2 diff = (atlasSize - spriteSize) / 2.0f;
+          float2 UV = (leftTop - diff - offset) + (atlasSize * In.UV);
+
+          if (UV.x < leftTop.x || UV.y < leftTop.y
+              || UV.x > leftTop.x + spriteSize.x
+              || UV.y > leftTop.y + spriteSize.y)
+              discard;
+
+          color = atlasTexture.Sample(pointSampler, UV);
+      }
+      else
+      {
+          color = defaultTexture.Sample(pointSampler, In.UV);
+      }
+
+      //color = defaultTexture.Sample(anisotropicSampler, In.UV);
+      return color;
 }

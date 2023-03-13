@@ -66,5 +66,13 @@ namespace jh::enums
 		End,
 	};
 
+	enum class eAnimationType
+	{
+		None,
+		SecondDimension,
+		ThirdDimension,
+		End,
+	};
+
 }
 
