@@ -32,16 +32,25 @@ namespace jh
 		if (mActiveAnimation == nullptr)
 			return;
 
-		if (mActiveAnimation->IsComplete() && mbLoop)
+		Events* events
+			= FindEvents(mActiveAnimation->AnimationName());
+		if (mActiveAnimation->IsComplete())
 		{
-			Events* events
-				= FindEvents(mActiveAnimation->AnimationName());
-
 			if (events)
 				events->mCompleteEvent();
 
-			mActiveAnimation->Reset();
+			if (mbLoop)
+				mActiveAnimation->Reset();
 		}
+
+		UINT spriteIndex = mActiveAnimation->Update();
+		if (spriteIndex != -1 &&
+			events->mEvents[spriteIndex].mEvent)
+		{
+			events->mEvents[spriteIndex].mEvent();
+		}
+
+
 
 		mActiveAnimation->Update();
 	}
@@ -68,6 +77,10 @@ namespace jh
 							, spriteLength, duration);
 
 		mAnimations.insert(std::make_pair(name, animation));
+
+		Events* events = new Events();
+		events->mEvents.resize(spriteLength);
+		mEvents.insert(std::make_pair(name, events));
 	}
 	Animation* Animator::FindAnimation(const std::wstring& name)
 	{
@@ -98,7 +111,9 @@ namespace jh
 	void Animator::Play(const std::wstring& name, bool loop)
 	{
 		Animation* prevAnimation = mActiveAnimation;
-		Events* events = FindEvents(prevAnimation->AnimationName());
+		Events* events = nullptr;
+		if (prevAnimation)
+			events = FindEvents(prevAnimation->AnimationName());
 
 		if (events)
 			events->mEndEvent();
@@ -143,5 +158,11 @@ namespace jh
 		Events* events = FindEvents(name);
 
 		return events->mEndEvent.mEvent;
+	}
+	std::function<void()>& Animator::GetEvent(const std::wstring& name, UINT index)
+	{
+		Events* events = FindEvents(name);
+
+		return events->mEvents[index].mEvent;
 	}
 }

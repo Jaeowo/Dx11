@@ -42,5 +42,10 @@ namespace jh
 		GetMesh()->Render();
 
 		GetMaterial()->Clear();
+
+		if (animator)
+		{
+			animator->Clear();
+		}
 	}
 }

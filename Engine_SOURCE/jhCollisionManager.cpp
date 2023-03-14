@@ -71,6 +71,9 @@ namespace jh
 
 				ColliderCollision(left->GetComponent<Collider2D>(), right->GetComponent<Collider2D>());
 			}
+
+			if ((UINT)left == (UINT)right)
+				break;
 		}
 	}
 	void CollisionManager::ColliderCollision(Collider2D* left, Collider2D* right)

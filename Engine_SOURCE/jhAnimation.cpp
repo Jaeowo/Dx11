@@ -16,10 +16,10 @@ namespace jh
 	Animation::~Animation()
 	{
 	}
-	void Animation::Update()
+	UINT Animation::Update()
 	{
 		if (mbComplete)
-			return;
+			return -1;
 
 		mTime += Time::DeltaTime();
 
@@ -33,9 +33,12 @@ namespace jh
 				mbComplete = true;
 				mIndex = mSpriteSheet.size() - 1;
 			}
-
+			return mIndex;
 		}
+
+		return -1;
 	}
+
 	void Animation::FixedUpdate()
 	{
 	}
@@ -89,5 +92,13 @@ namespace jh
 	}
 	void Animation::Clear()
 	{
+		Texture::Clear(12);
+
+		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Animation];
+		renderer::AnimationCB info = {};
+		info.type = (UINT)eAnimationType::None;
+
+		cb->Bind(&info);
+		cb->SetPipline(eShaderStage::PS);
 	}
 }

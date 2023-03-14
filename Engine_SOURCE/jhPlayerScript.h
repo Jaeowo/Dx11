@@ -25,6 +25,10 @@ namespace jh
 		virtual void OnCollisionStay(Collider2D* collider) override;
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
+		void Start();
+		void Action();
+		void End();
+
 	private:
 		ePlayerState mPlayerState;
 

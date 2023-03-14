@@ -3,6 +3,7 @@
 #include "jhGameObject.h"
 #include "jhInput.h"
 #include "jhTime.h"
+#include "jhAnimator.h"
 
 namespace jh
 {
@@ -16,6 +17,7 @@ namespace jh
 	}
 	void PlayerScript::Initalize()
 	{
+		Animator* animator = GetOwner()->GetComponent<Animator>();
 	}
 	void PlayerScript::Update()
 	{
@@ -80,7 +82,7 @@ namespace jh
 				pos.y += 0.5f * Time::DeltaTime();
 				tr->SetPosition(pos);
 			}
-
+			Animator* animator = GetOwner()->GetComponent<Animator>();
 		}
 		
 	}
