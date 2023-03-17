@@ -7,6 +7,7 @@
 #include "jhShader.h"
 #include "jhConstantBuffer.h"
 #include "jhCamera.h"
+#include "jhLight.h"
 
 using namespace jh::math;
 using namespace jh::graphics;
@@ -70,6 +71,7 @@ namespace jh::renderer
 	
 	extern std::vector<Camera*> cameras[];
 	extern std::vector<DebugMesh> debugMeshes;
+	extern std::vector<LightAttribute> lights;
 
 	void Initialize();
 	void Render();
