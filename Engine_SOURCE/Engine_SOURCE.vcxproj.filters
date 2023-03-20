@@ -145,6 +145,9 @@
     <ClInclude Include="jhMovingHandScript.h">
       <Filter>Component\Script\Contents</Filter>
     </ClInclude>
+    <ClInclude Include="jhPlayerManager.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -275,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="jhMovingHandScript.cpp">
       <Filter>Component\Script\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerManager.cpp">
+      <Filter>GameObject\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

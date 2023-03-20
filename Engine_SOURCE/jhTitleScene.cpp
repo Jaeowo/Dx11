@@ -15,6 +15,7 @@
 #include "jhPlayer.h"
 #include "jhMonster.h"
 #include "jhCollisionManager.h"
+#include "jhAnimator.h"
 
 namespace jh
 {
@@ -58,7 +59,6 @@ namespace jh
 		sr->SetMesh(mesh);
 
 		//Logo
-		//나중에 애니메이션으로 바꿔줘야함 / Title Screen 폴더 안에 있음
 		GameObject* logoObj = object::Instantiate<GameObject>(eLayerType::BackGround);
 		logoObj->SetName(L"TitleLogo");
 		Transform* logoTr = logoObj->GetComponent<Transform>();
@@ -70,6 +70,30 @@ namespace jh
 		std::shared_ptr<Material> owlboylogomaterial = Resources::Find<Material>(L"OwlboyLogomaterial");
 		logosr->SetMaterial(owlboylogomaterial);
 		logosr->SetMesh(logomesh);
+
+		Animator* animator = logoObj->AddComponent<Animator>();
+		std::shared_ptr<Texture> logotexture = Resources::Load<Texture>(L"logo", L"Title Screen\\owlboyLogoDemo_201x103_strip5.png");
+		animator->Create(L"logo", logotexture, Vector2(0.0f, 0.0f), Vector2(201.0f, 103.0f), Vector2::Zero, 13, 0.25f);
+		animator->Play(L"logo", true);
+
+		//LeftOtus
+		/*GameObject* LeftOtusObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		LeftOtusObj->SetName(L"LeftOtus");
+		Transform* LeftOtusTr = LeftOtusObj->GetComponent<Transform>();
+		LeftOtusTr->SetPosition(Vector3(1.0f, 1.2f, 1.7f));
+		LeftOtusTr->SetScale(Vector3(0.3f, 0.3f, 1.0f));
+
+		SpriteRenderer* LeftOtussr = LeftOtusObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> LeftOtusmesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> LeftOtumaterial = Resources::Find<Material>(L"LeftOtumaterial");
+		logosr->SetMaterial(LeftOtumaterial);
+		logosr->SetMesh(LeftOtusmesh);
+
+		Animator* animator2 = LeftOtusObj->AddComponent<Animator>();
+		std::shared_ptr<Texture> LeftOtustexture = Resources::Load<Texture>(L"LeftOtust", L"Title Screen\\sprOtus_245x137_strip6.png");
+		animator2->Create(L"LeftOtust", LeftOtustexture, Vector2(0.0f, 0.0f), Vector2(245.0f, 137.0f), Vector2::Zero, 13, 0.25f);
+		animator2->Play(L"LeftOtust", true);*/
+
 
 		//Right
 		GameObject* rightObj = object::Instantiate<GameObject>(eLayerType::BackGround);

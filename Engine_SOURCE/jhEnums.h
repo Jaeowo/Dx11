@@ -32,6 +32,7 @@ namespace jh::enums
 		Mesh,
 		Collider,
 		MeshRenderer,
+		Rigidbody,
 		SpriteRenderer,
 		Animator,
 		Light,
@@ -81,6 +82,30 @@ namespace jh::enums
 		Point,
 		Spot,
 		End,
+	};
+
+	enum class ePlayerState
+	{
+		Idle,
+		LeftRun,
+		RightRun,
+		Jump,
+
+		EnterDoor,
+
+		StartAttack,
+		Attacking,
+
+		StartFly, //SpreadWings
+		Fly,
+		FlyGrab,
+		FlyCarry,
+		FlyHurt,
+		Eat,
+
+		Hurt,
+		Die,
+
 	};
 }
 

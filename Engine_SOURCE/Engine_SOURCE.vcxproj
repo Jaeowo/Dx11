@@ -183,6 +183,7 @@
     <ClInclude Include="jhMovingHandScript.h" />
     <ClInclude Include="jhObject.h" />
     <ClInclude Include="jhPlayer.h" />
+    <ClInclude Include="jhPlayerManager.h" />
     <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhPrefab.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="jhMonster.cpp" />
     <ClCompile Include="jhMovingHandScript.cpp" />
     <ClCompile Include="jhPlayer.cpp" />
+    <ClCompile Include="jhPlayerManager.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhPrefab.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />

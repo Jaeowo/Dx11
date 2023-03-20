@@ -37,6 +37,10 @@ namespace jh
 		rotation *= Matrix::CreateRotationY(mRotation.y);
 		rotation *= Matrix::CreateRotationZ(mRotation.z);
 
+		//이미지 반전
+		Matrix AxisRotation;
+		//AxisRotation = Matrix::CreateFromAxisAngle();
+
 		// 이동 변환 행렬
 		Matrix position;
 		position.Translation(mPosition);

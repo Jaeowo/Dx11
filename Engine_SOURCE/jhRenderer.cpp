@@ -442,6 +442,13 @@ namespace jh::renderer
 		titleleftmaterial->SetTexture(titlelefttexture);
 		Resources::Insert<Material>(L"TitleLeftmaterial", titleleftmaterial);
 
+		//std::shared_ptr <Texture> titlelefttexture = Resources::Find<Texture>(L"TitleLeftTexture");
+		std::shared_ptr<Shader> LeftOtusshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> LeftOtumaterial = std::make_shared<Material>();
+		LeftOtumaterial->SetRenderingMode(eRenderingMode::Transparent);
+		LeftOtumaterial->SetShader(LeftOtusshader);
+		Resources::Insert<Material>(L"LeftOtumaterial", LeftOtumaterial);
+
 		//==================================
 		
 		//PlayScene

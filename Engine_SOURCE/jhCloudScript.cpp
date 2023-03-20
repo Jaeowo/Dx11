@@ -4,11 +4,14 @@
 #include "jhInput.h"
 #include "jhTime.h"
 
+
+
 namespace jh
 {
 	CloudScript::CloudScript()
 		:Script()
 	{
+		
 	}
 	CloudScript::~CloudScript()
 	{
@@ -28,6 +31,7 @@ namespace jh
 	}
 	void CloudScript::OnCollisionEnter(Collider2D* collider)
 	{
+
 	}
 	void CloudScript::OnCollisionStay(Collider2D* collider)
 	{

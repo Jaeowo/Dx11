@@ -3,16 +3,13 @@
 
 namespace jh
 {
+	class Player;
+
 	class PlayerScript
 		: public Script
 	{
 	public:
-		enum ePlayerState
-		{
-			Idle,
-			Jump,
-			Fly,
-		};
+
 
 		PlayerScript();
 		~PlayerScript();
@@ -25,12 +22,22 @@ namespace jh
 		virtual void OnCollisionStay(Collider2D* collider) override;
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
+		//ePlayerState GetPlayerState() { return mPlayerState; }
+
 		void Start();
 		void Action();
 		void End();
 
 	private:
 		ePlayerState mPlayerState;
+
+		//Animator* mAnimator;
+
+		float mGravity;
+
+		bool mbGround;
+		bool mbCarrying;
+
 
 	};
 }

@@ -4,12 +4,17 @@
 #include "jhInput.h"
 #include "jhTime.h"
 #include "jhAnimator.h"
+#include "jhPlayerManager.h"
+#include "jhPlayer.h"
 
 namespace jh
 {
 	PlayerScript::PlayerScript()
 		:Script()
 		, mPlayerState(ePlayerState::Idle)
+		, mbGround(false)
+		, mbCarrying(false)
+		, mGravity(0.2f)
 	{
 	}
 	PlayerScript::~PlayerScript()
@@ -17,11 +22,19 @@ namespace jh
 	}
 	void PlayerScript::Initalize()
 	{
-		Animator* animator = GetOwner()->GetComponent<Animator>();
+
+
 	}
 	void PlayerScript::Update()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
+
+		if (mbGround == true && mPlayerState != ePlayerState::Fly)
+		{
+			Vector3 pos = tr->GetPosition();
+			pos.y -= mGravity * Time::DeltaTime();
+			tr->SetPosition(pos);
+		}
 
 		if (mPlayerState == ePlayerState::Idle)
 		{
@@ -41,16 +54,33 @@ namespace jh
 
 			if (Input::GetKeyDown(eKeyCode::UP))
 			{
-				Vector3 pos = tr->GetPosition();
-				pos.y += 0.1f;
-				tr->SetPosition(pos);
+				
 				mPlayerState = ePlayerState::Jump;
 			}
 		}
 
 		if (mPlayerState == ePlayerState::Jump)
 		{
-			if (Input::GetKeyDown(eKeyCode::UP))
+			if (Input::GetKey(eKeyCode::UP))
+			{
+			/*	float MaxHeight = 0.3f;
+				float JumpPower = 1.0f;
+				Vector3 pos = tr->GetPosition();
+				pos.y += JumpPower * 0.3f * Time::DeltaTime();
+				if (pos.y >= MaxHeight)
+				{
+					pos.y -= mGravity * Time::DeltaTime();
+					JumpPower = 0.0f;
+				}
+				tr->SetPosition(pos);*/
+
+				Vector3 pos = tr->GetPosition();
+				pos.y +=  0.3f * Time::DeltaTime();
+				tr->SetPosition(pos);
+			}
+
+
+			if (Input::GetKeyUp(eKeyCode::UP))
 			{
 				mPlayerState = ePlayerState::Fly;
 			}
@@ -82,7 +112,7 @@ namespace jh
 				pos.y += 0.5f * Time::DeltaTime();
 				tr->SetPosition(pos);
 			}
-			Animator* animator = GetOwner()->GetComponent<Animator>();
+			//Animator* animator = GetOwner()->GetComponent<Animator>();
 		}
 		
 	}

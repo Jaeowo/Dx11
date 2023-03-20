@@ -1,11 +1,11 @@
 #include "jhScene.h"
-
 namespace jh
 {
 	Scene::Scene(eSceneType type)
 		: mType(type)
 	{
 		mLayers.resize((UINT)eLayerType::End);
+		
 	}
 	Scene::~Scene()
 	{
