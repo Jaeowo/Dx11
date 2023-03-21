@@ -3,6 +3,7 @@
 #include "jhRenderer.h"
 #include "jhConstantBuffer.h"
 #include "jhMesh.h"
+#include "jhTexture.h"
 
 extern jh::Application application;
 
@@ -10,7 +11,7 @@ namespace jh::graphics
 {
 	GraphicDevice_DX11::GraphicDevice_DX11(ValidationMode validationMode)
 	{
-
+		graphics::GetDevice() = this;
 		HWND hwnd = application.GetHwnd();
 
 		// Device, Device Context
@@ -47,6 +48,7 @@ namespace jh::graphics
 		if (!CreateSwapChain(&swapChainDesc))
 			return;
 
+		//mRenderTarget = std::make_shared<Texture>();
 		// Get rendertarget for swapchain
 		hr = mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)mRenderTarget.GetAddressOf());
 
@@ -71,19 +73,23 @@ namespace jh::graphics
 		depthBuffer.MipLevels = 0;
 		depthBuffer.MiscFlags = 0;
 
+		mDepthStencilBuffer = std::make_shared<Texture>();
+		mDepthStencilBuffer->Create(1600, 900, DXGI_FORMAT_D24_UNORM_S8_UINT, D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL);
+
 		// Depth Stencil Buffer
-		if (!CreateTexture(&depthBuffer, mDepthStencilBuffer.GetAddressOf()))
+		if (!CreateTexture(&depthBuffer, mDepthStencilBuffer->GetTexture().GetAddressOf()))
 			return;
 
 		// Depth Stencil Buffer View
-		if (FAILED(mDevice->CreateDepthStencilView(mDepthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf())))
+		if (FAILED(mDevice->CreateDepthStencilView
+		(mDepthStencilBuffer->GetTexture().Get(), nullptr, mDepthStencilBuffer->GetDSV().GetAddressOf())))
 			return;
 
 		RECT winRect;
 		GetClientRect(application.GetHwnd(), &winRect);
 		mViewPort = { 0.0f, 0.0f, FLOAT(winRect.right - winRect.left), FLOAT(winRect.bottom - winRect.top), 0.0f, 1.0f };
 		BindViewports(&mViewPort);
-		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
+		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilBuffer->GetDSV().Get());
 	}
 
 	GraphicDevice_DX11::~GraphicDevice_DX11()
@@ -137,6 +143,22 @@ namespace jh::graphics
 		return true;
 	}
 
+	bool GraphicDevice_DX11::CreateUnorderedAccessView(ID3D11Resource* pResource, const D3D11_UNORDERED_ACCESS_VIEW_DESC* pDesc, ID3D11UnorderedAccessView** ppUAView)
+	{
+		if (FAILED(mDevice->CreateUnorderedAccessView(pResource, pDesc, ppUAView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_DX11::CreateDepthStencilView(ID3D11Resource* pResource, const D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc, ID3D11DepthStencilView** ppDepthStencilView)
+	{
+		if (FAILED(mDevice->CreateDepthStencilView(pResource, pDesc, ppDepthStencilView)))
+			return false;
+
+		return true;
+	}
+
 	bool GraphicDevice_DX11::CreateShaderResourceView(ID3D11Resource* pResource, const D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc, ID3D11ShaderResourceView** ppSRView)
 	{
 		if (FAILED(mDevice->CreateShaderResourceView(pResource, pDesc, ppSRView)))
@@ -156,6 +178,14 @@ namespace jh::graphics
 	bool GraphicDevice_DX11::CreatePixelShader(const void* pShaderBytecode, SIZE_T BytecodeLength, ID3D11ClassLinkage* pClassLinkage, ID3D11PixelShader** ppPixelShader)
 	{
 		if (FAILED(mDevice->CreatePixelShader(pShaderBytecode, BytecodeLength, pClassLinkage, ppPixelShader)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_DX11::CreateComputeShader(const void* pShaderBytecode, SIZE_T BytecodeLength, ID3D11ClassLinkage* pClassLinkage, ID3D11ComputeShader** ppComputeShader)
+	{
+		if (FAILED(mDevice->CreateComputeShader(pShaderBytecode, BytecodeLength, pClassLinkage, ppComputeShader)))
 			return false;
 
 		return true;
@@ -352,7 +382,7 @@ namespace jh::graphics
 		// 화면 지워주기
 		FLOAT backgroundColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
 		mContext->ClearRenderTargetView(mRenderTargetView.Get(), backgroundColor);
-		mContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+		mContext->ClearDepthStencilView(mDepthStencilBuffer->GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 	}
 
 	void GraphicDevice_DX11::AdjustViewPorts()
@@ -362,8 +392,9 @@ namespace jh::graphics
 		GetClientRect(application.GetHwnd(), &winRect);
 		mViewPort = { 0.0f, 0.0f, FLOAT(winRect.right - winRect.left), FLOAT(winRect.bottom - winRect.top), 0.0f, 1.0f };
 		BindViewports(&mViewPort);
-		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
+		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilBuffer->GetDSV().Get());
 	}
+
 
 	void GraphicDevice_DX11::Draw()
 	{
@@ -379,6 +410,6 @@ namespace jh::graphics
 	{
 		mSwapChain->Present(0, 0);
 	}
-
-
 }
+
+
