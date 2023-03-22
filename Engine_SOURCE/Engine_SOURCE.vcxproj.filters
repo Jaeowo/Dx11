@@ -150,6 +150,8 @@
     </ClInclude>
     <ClInclude Include="jhLight.h" />
     <ClInclude Include="jhStructedBuffer.h" />
+    <ClInclude Include="jhPaintShader.h" />
+    <ClInclude Include="jhComputeShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -286,6 +288,8 @@
     </ClCompile>
     <ClCompile Include="jhLight.cpp" />
     <ClCompile Include="jhStructedBuffer.cpp" />
+    <ClCompile Include="jhPaintShader.cpp" />
+    <ClCompile Include="jhComputeShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

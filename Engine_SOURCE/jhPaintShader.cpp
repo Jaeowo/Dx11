@@ -1,0 +1,25 @@
+#include "jhPaintShader.h"
+
+namespace jh::graphics
+{
+	PaintShader::PaintShader()
+		: ComputeShader()
+		, mTarget(nullptr)
+	{
+	}
+	PaintShader::~PaintShader()
+	{
+	}
+	void PaintShader::Binds()
+	{
+		mTarget->BindUnorderedAccessView(0);
+
+		mGroupX = mTarget->GetWidth() / mThreadGroupCountX + 1;
+		mGroupY = mTarget->GetHeight() / mThreadGroupCountY + 1;
+		mGroupX = 1;
+	}
+	void PaintShader::Clear()
+	{
+		mTarget->ClearUnorderedAccessView(0);
+	}
+}
