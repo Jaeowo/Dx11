@@ -148,6 +148,8 @@
     <ClInclude Include="jhPlayerManager.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
+    <ClInclude Include="jhLight.h" />
+    <ClInclude Include="jhStructedBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -282,6 +284,8 @@
     <ClCompile Include="jhPlayerManager.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
+    <ClCompile Include="jhLight.cpp" />
+    <ClCompile Include="jhStructedBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

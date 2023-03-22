@@ -9,31 +9,46 @@ struct VSIn
 struct VSOut
 {
     float4 Pos : SV_Position;
+    float3 WorldPos : POSITION;
     float4 Color : COLOR;
     float2 UV : TEXCOORD;
 };
 float4 main(VSOut In) : SV_Target
 {
-      float4 color = (float)0.0f;
+    float4 color = (float)0.0f;
+
+    //color.a += time;
+
+    if (animationType == 1) // 2D
+    {
+        float2 diff = (atlasSize - spriteSize) / 2.0f;
+        float2 UV = (leftTop - diff - offset) + (atlasSize * In.UV);
+
+        if (UV.x < leftTop.x || UV.y < leftTop.y
+            || UV.x > leftTop.x + spriteSize.x
+            || UV.y > leftTop.y + spriteSize.y)
+            discard;
+
+        color = atlasTexture.Sample(pointSampler, UV);
+    }
+    else
+    {
+        color = defaultTexture.Sample(pointSampler, In.UV);
+    }
+
+    LightColor lightColor = (LightColor)0.0f;
+    for (int i = 0; i < numberOfLight; i++)
+    {
+        CalculateLight(lightColor, In.WorldPos.xyz, i);
+    }
+
+    //if (numberOfLight <= 0)
+    //{
+    //    lightColor = (LightColor) 1.0f;
+    //}
 
 
-      if (animationType == 1) 
-      {
-          float2 diff = (atlasSize - spriteSize) / 2.0f;
-          float2 UV = (leftTop - diff - offset) + (atlasSize * In.UV);
-
-          if (UV.x < leftTop.x || UV.y < leftTop.y
-              || UV.x > leftTop.x + spriteSize.x
-              || UV.y > leftTop.y + spriteSize.y)
-              discard;
-
-          color = atlasTexture.Sample(pointSampler, UV);
-      }
-      else
-      {
-          color = defaultTexture.Sample(pointSampler, In.UV);
-      }
-
-      //color = defaultTexture.Sample(anisotropicSampler, In.UV);
-      return color;
+    color *= lightColor.diffuse;
+    //color = defaultTexture.Sample(anisotropicSampler, In.UV);
+    return color; 
 }

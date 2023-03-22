@@ -15,6 +15,8 @@
 #include "jhCloudScript.h"
 #include "jhAnimator.h"
 #include "jhPlayerManager.h"
+#include "jhLight.h"
+
 namespace jh
 {
 	PlayScene::PlayScene()
@@ -67,6 +69,23 @@ namespace jh
 
 	void PlayScene::OnEnter()
 	{
+
+		{
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
+			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
+			Light* lightComp = directionalLight->AddComponent<Light>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+
+		{
+			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
+			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(3.0f, 0.0f, 0.0f));
+			Light* lightComp = directionalLight->AddComponent<Light>();
+			lightComp->SetType(eLightType::Point);
+			lightComp->SetRadius(10.0f);
+			lightComp->SetDiffuse(Vector4(0.0f, 0.0f, 0.0f, 0.0f));
+		}
 
 		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
 		Camera* cameraComp = cameraObj->AddComponent<Camera>();

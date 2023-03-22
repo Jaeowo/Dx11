@@ -39,6 +39,10 @@ cbuffer Animation : register(b4)
     uint animationType;
 }
 
+cbuffer NumberOfLight : register(b5)
+{
+    uint numberOfLight;
+}
 
 SamplerState pointSampler : register(s0);
 SamplerState linearSampler : register(s1);

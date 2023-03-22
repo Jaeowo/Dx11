@@ -179,6 +179,7 @@
     <ClInclude Include="jhGridScript.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
+    <ClInclude Include="jhLight.h" />
     <ClInclude Include="jhMonster.h" />
     <ClInclude Include="jhMovingHandScript.h" />
     <ClInclude Include="jhObject.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhPrefab.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
+    <ClInclude Include="jhStructedBuffer.h" />
     <ClInclude Include="jhTitleScene.h" />
     <ClInclude Include="yaMath.h" />
     <ClInclude Include="jhMesh.h" />
@@ -226,6 +228,7 @@
     <ClCompile Include="jhGridScript.cpp" />
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
+    <ClCompile Include="jhLight.cpp" />
     <ClCompile Include="jhMonster.cpp" />
     <ClCompile Include="jhMovingHandScript.cpp" />
     <ClCompile Include="jhPlayer.cpp" />
@@ -233,6 +236,7 @@
     <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhPrefab.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
+    <ClCompile Include="jhStructedBuffer.cpp" />
     <ClCompile Include="jhTitleScene.cpp" />
     <ClCompile Include="yaMath.cpp" />
     <ClCompile Include="jhMesh.cpp" />
