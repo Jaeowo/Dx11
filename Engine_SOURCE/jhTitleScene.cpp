@@ -17,6 +17,7 @@
 #include "jhCollisionManager.h"
 #include "jhAnimator.h"
 #include "jhLight.h"
+#include "jhPaintShader.h"
 
 namespace jh
 {
@@ -29,6 +30,36 @@ namespace jh
 	}
 	void TitleScene::Initalize()
 	{
+		//Paint Shader 
+		std::shared_ptr<PaintShader> paintShader = Resources::Find<PaintShader>(L"PaintShader");
+		//L"SmileTexture"
+		std::shared_ptr<Texture> paintTex = Resources::Find<Texture>(L"PaintTexture");
+		paintShader->SetTarget(paintTex);
+		paintShader->OnExcute();
+
+		//SMILE RECT
+		{
+			Player* obj = object::Instantiate<Player>(eLayerType::Player);
+			obj->SetName(L"SMILE");
+			Transform* tr = obj->GetComponent<Transform>();
+			tr->SetPosition(Vector3(2.0f, 0.0f, 5.0f));
+			//tr->SetScale(Vector3(2.0f, 1.0f, 1.0f));
+			//tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2 / 2.0f));
+			//tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+			Collider2D* collider = obj->AddComponent<Collider2D>();
+			collider->SetSize(Vector2(2.0f, 2.0f));
+			collider->SetType(eColliderType::Rect);
+			//collider->SetCenter(Vector2(0.2f, 0.2f));
+			//collider->SetSize(Vector2(1.5f, 1.5f));
+
+			SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
+			std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"RectMaterial");
+			mr->SetMaterial(mateiral);
+			std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			mr->SetMesh(mesh);
+			object::DontDestroyOnLoad(obj);
+		}
+
 		{
 			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
 			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
@@ -62,81 +93,81 @@ namespace jh
 		//cameraUIComp->DisableLayerMasks();
 		//cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 
-		// Sky
-		GameObject* titleskyObj = object::Instantiate<GameObject>(eLayerType::BackGround);
-		titleskyObj->SetName(L"TitleSky");
-		Transform* skyTr = titleskyObj->GetComponent<Transform>();
-		skyTr->SetPosition(Vector3(1.0f, 0.9f, 1.7f));
-		skyTr->SetScale(Vector3(1.5f, 1.1f, 1.0f));
+		//// Sky
+		//GameObject* titleskyObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		//titleskyObj->SetName(L"TitleSky");
+		//Transform* skyTr = titleskyObj->GetComponent<Transform>();
+		//skyTr->SetPosition(Vector3(1.0f, 0.9f, 1.7f));
+		//skyTr->SetScale(Vector3(1.5f, 1.1f, 1.0f));
 
-		SpriteRenderer* sr = titleskyObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> titleskymaterial = Resources::Find<Material>(L"Titleskymaterial");
-		sr->SetMaterial(titleskymaterial);
-		sr->SetMesh(mesh);
+		//SpriteRenderer* sr = titleskyObj->AddComponent<SpriteRenderer>();
+		//std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+		//std::shared_ptr<Material> titleskymaterial = Resources::Find<Material>(L"Titleskymaterial");
+		//sr->SetMaterial(titleskymaterial);
+		//sr->SetMesh(mesh);
 
-		//Logo
-		GameObject* logoObj = object::Instantiate<GameObject>(eLayerType::BackGround);
-		logoObj->SetName(L"TitleLogo");
-		Transform* logoTr = logoObj->GetComponent<Transform>();
-		logoTr->SetPosition(Vector3(1.0f, 1.2f, 1.7f));
-		logoTr->SetScale(Vector3(0.3f, 0.3f, 1.0f));
+		////Logo
+		//GameObject* logoObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		//logoObj->SetName(L"TitleLogo");
+		//Transform* logoTr = logoObj->GetComponent<Transform>();
+		//logoTr->SetPosition(Vector3(1.0f, 1.2f, 1.7f));
+		//logoTr->SetScale(Vector3(0.3f, 0.3f, 1.0f));
 
-		SpriteRenderer* logosr = logoObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> logomesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> owlboylogomaterial = Resources::Find<Material>(L"OwlboyLogomaterial");
-		logosr->SetMaterial(owlboylogomaterial);
-		logosr->SetMesh(logomesh);
+		//SpriteRenderer* logosr = logoObj->AddComponent<SpriteRenderer>();
+		//std::shared_ptr<Mesh> logomesh = Resources::Find<Mesh>(L"RectMesh");
+		//std::shared_ptr<Material> owlboylogomaterial = Resources::Find<Material>(L"OwlboyLogomaterial");
+		//logosr->SetMaterial(owlboylogomaterial);
+		//logosr->SetMesh(logomesh);
 
-		Animator* animator = logoObj->AddComponent<Animator>();
-		std::shared_ptr<Texture> logotexture = Resources::Load<Texture>(L"logo", L"Title Screen\\owlboyLogoDemo_201x103_strip5.png");
-		animator->Create(L"logo", logotexture, Vector2(0.0f, 0.0f), Vector2(201.0f, 103.0f), Vector2::Zero, 13, 0.25f);
-		animator->Play(L"logo", true);
+		//Animator* animator = logoObj->AddComponent<Animator>();
+		//std::shared_ptr<Texture> logotexture = Resources::Load<Texture>(L"logo", L"Title Screen\\owlboyLogoDemo_201x103_strip5.png");
+		//animator->Create(L"logo", logotexture, Vector2(0.0f, 0.0f), Vector2(201.0f, 103.0f), Vector2::Zero, 13, 0.25f);
+		//animator->Play(L"logo", true);
 
-		//LeftOtus
-		/*GameObject* LeftOtusObj = object::Instantiate<GameObject>(eLayerType::BackGround);
-		LeftOtusObj->SetName(L"LeftOtus");
-		Transform* LeftOtusTr = LeftOtusObj->GetComponent<Transform>();
-		LeftOtusTr->SetPosition(Vector3(1.0f, 1.2f, 1.7f));
-		LeftOtusTr->SetScale(Vector3(0.3f, 0.3f, 1.0f));
+		////LeftOtus
+		///*GameObject* LeftOtusObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		//LeftOtusObj->SetName(L"LeftOtus");
+		//Transform* LeftOtusTr = LeftOtusObj->GetComponent<Transform>();
+		//LeftOtusTr->SetPosition(Vector3(1.0f, 1.2f, 1.7f));
+		//LeftOtusTr->SetScale(Vector3(0.3f, 0.3f, 1.0f));
 
-		SpriteRenderer* LeftOtussr = LeftOtusObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> LeftOtusmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> LeftOtumaterial = Resources::Find<Material>(L"LeftOtumaterial");
-		logosr->SetMaterial(LeftOtumaterial);
-		logosr->SetMesh(LeftOtusmesh);
+		//SpriteRenderer* LeftOtussr = LeftOtusObj->AddComponent<SpriteRenderer>();
+		//std::shared_ptr<Mesh> LeftOtusmesh = Resources::Find<Mesh>(L"RectMesh");
+		//std::shared_ptr<Material> LeftOtumaterial = Resources::Find<Material>(L"LeftOtumaterial");
+		//logosr->SetMaterial(LeftOtumaterial);
+		//logosr->SetMesh(LeftOtusmesh);
 
-		Animator* animator2 = LeftOtusObj->AddComponent<Animator>();
-		std::shared_ptr<Texture> LeftOtustexture = Resources::Load<Texture>(L"LeftOtust", L"Title Screen\\sprOtus_245x137_strip6.png");
-		animator2->Create(L"LeftOtust", LeftOtustexture, Vector2(0.0f, 0.0f), Vector2(245.0f, 137.0f), Vector2::Zero, 13, 0.25f);
-		animator2->Play(L"LeftOtust", true);*/
+		//Animator* animator2 = LeftOtusObj->AddComponent<Animator>();
+		//std::shared_ptr<Texture> LeftOtustexture = Resources::Load<Texture>(L"LeftOtust", L"Title Screen\\sprOtus_245x137_strip6.png");
+		//animator2->Create(L"LeftOtust", LeftOtustexture, Vector2(0.0f, 0.0f), Vector2(245.0f, 137.0f), Vector2::Zero, 13, 0.25f);
+		//animator2->Play(L"LeftOtust", true);*/
 
 
-		//Right
-		GameObject* rightObj = object::Instantiate<GameObject>(eLayerType::BackGround);
-		rightObj->SetName(L"TitleRight");
-		Transform* rightObjTr = rightObj->GetComponent<Transform>();
-		rightObjTr->SetPosition(Vector3(1.45f, 0.8f, 1.7f));
-		rightObjTr->SetScale(Vector3(0.45f, 0.45f, 1.0f));
+		////Right
+		//GameObject* rightObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		//rightObj->SetName(L"TitleRight");
+		//Transform* rightObjTr = rightObj->GetComponent<Transform>();
+		//rightObjTr->SetPosition(Vector3(1.45f, 0.8f, 1.7f));
+		//rightObjTr->SetScale(Vector3(0.45f, 0.45f, 1.0f));
 
-		SpriteRenderer* rightsr = rightObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> rightmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> titlerightmaterial = Resources::Find<Material>(L"TitleRightmaterial");
-		rightsr->SetMaterial(titlerightmaterial);
-		rightsr->SetMesh(rightmesh);
-		
-		//Left
-		GameObject* leftObj = object::Instantiate<GameObject>(eLayerType::BackGround);
-		leftObj->SetName(L"TitleLeft");
-		Transform* leftTr = leftObj->GetComponent<Transform>();
-		leftTr->SetPosition(Vector3(0.5f, 0.7f, 1.7f));
-		leftTr->SetScale(Vector3(0.6f, 0.6f, 1.0f));
+		//SpriteRenderer* rightsr = rightObj->AddComponent<SpriteRenderer>();
+		//std::shared_ptr<Mesh> rightmesh = Resources::Find<Mesh>(L"RectMesh");
+		//std::shared_ptr<Material> titlerightmaterial = Resources::Find<Material>(L"TitleRightmaterial");
+		//rightsr->SetMaterial(titlerightmaterial);
+		//rightsr->SetMesh(rightmesh);
+		//
+		////Left
+		//GameObject* leftObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		//leftObj->SetName(L"TitleLeft");
+		//Transform* leftTr = leftObj->GetComponent<Transform>();
+		//leftTr->SetPosition(Vector3(0.5f, 0.7f, 1.7f));
+		//leftTr->SetScale(Vector3(0.6f, 0.6f, 1.0f));
 
-		SpriteRenderer* leftsr = leftObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> leftmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> titleleftmaterial = Resources::Find<Material>(L"TitleLeftmaterial");
-		leftsr->SetMaterial(titleleftmaterial);
-		leftsr->SetMesh(leftmesh);
+		//SpriteRenderer* leftsr = leftObj->AddComponent<SpriteRenderer>();
+		//std::shared_ptr<Mesh> leftmesh = Resources::Find<Mesh>(L"RectMesh");
+		//std::shared_ptr<Material> titleleftmaterial = Resources::Find<Material>(L"TitleLeftmaterial");
+		//leftsr->SetMaterial(titleleftmaterial);
+		//leftsr->SetMesh(leftmesh);
 
 		Scene::Initalize();
 	}

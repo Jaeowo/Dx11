@@ -1,9 +1,11 @@
 #pragma once
 #include "jhScript.h"
+#include "jhAnimator.h"
 
 namespace jh
 {
-	class Player;
+
+	//class Animator;
 
 	class PlayerScript
 		: public Script
@@ -31,7 +33,7 @@ namespace jh
 	private:
 		ePlayerState mPlayerState;
 
-		//Animator* mAnimator;
+		Animator* mAnimator;
 
 		float mGravity;
 

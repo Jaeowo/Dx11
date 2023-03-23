@@ -2,6 +2,7 @@
 #include "jhResources.h"
 #include "jhMaterial.h"
 #include "jhSceneManager.h"
+#include "jhPaintShader.h"
 
 namespace jh::renderer
 {
@@ -392,6 +393,11 @@ namespace jh::renderer
 		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
 		Resources::Insert<Shader>(L"DebugShader", debugShader);
+
+		// PaintShader
+		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
+		paintShader->Create(L"PaintCS.hlsl", "main");
+		Resources::Insert<PaintShader>(L"PaintShader", paintShader);
 	}
 
 	void LoadTexture()
@@ -413,10 +419,17 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"TileFloorTexture", L"tileFloor.png");
 		Resources::Load<Texture>(L"TopProp08Texture", L"top_prop08.png");
 
+		//PaintTexture
+		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
+		uavTexture->Create(1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE
+			| D3D11_BIND_UNORDERED_ACCESS);
+		Resources::Insert<Texture>(L"PaintTexture", uavTexture);
+
 	}
 
 	void LoadMaterial()
 	{
+
 		//TitleScene
 		std::shared_ptr <Texture> titleskytexture = Resources::Find<Texture>(L"TitleSkyTexture");
 		std::shared_ptr<Shader> titleskyshader = Resources::Find<Shader>(L"SpriteShader");
@@ -502,7 +515,7 @@ namespace jh::renderer
 
 		//==================================
 		// Default
-		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"SmileTexture");
+		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"PaintTexture");
 		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"RectShader");
 		std::shared_ptr<Material> material = std::make_shared<Material>();
 		material->SetShader(shader);

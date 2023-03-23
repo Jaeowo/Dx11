@@ -1,7 +1,7 @@
 #pragma once
 #include "jhGameObject.h"
 
-class PlayerScript;
+
 
 namespace jh
 {
@@ -21,9 +21,9 @@ namespace jh
 		void SetPlayerState(ePlayerState playerstate) { mPlayerState = playerstate; }
 
 	private:
-		friend class PlayerScript;
 		ePlayerState mPlayerState;
 	};
+
 }
 
 

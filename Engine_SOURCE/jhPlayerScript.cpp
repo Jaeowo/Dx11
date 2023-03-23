@@ -6,6 +6,7 @@
 #include "jhAnimator.h"
 #include "jhPlayerManager.h"
 #include "jhPlayer.h"
+#include "jhResources.h"
 
 namespace jh
 {
@@ -16,18 +17,46 @@ namespace jh
 		, mbCarrying(false)
 		, mGravity(0.2f)
 	{
+		Animator* mAnimator = PlayerManager::GetPlayer()->AddComponent<Animator>();
+		std::shared_ptr<Texture> herotexture = Resources::Load<Texture>(L"hero", L"Otus\\hero.png");
+		std::shared_ptr<Texture> hero2texture = Resources::Load<Texture>(L"hero2", L"Otus\\hero2.png");
+		std::shared_ptr<Texture> flyUpStartCarrytexture = Resources::Load<Texture>(L"FlyUpStartCarry", L"Otus\\flyUpStartCarry_strip8.png");
+		std::shared_ptr<Texture> FlyGrabtexture = Resources::Load<Texture>(L"FlyGrab", L"Otus\\sprFlyGrab_strip11.png");
+		std::shared_ptr<Texture> SpreadWingstexture = Resources::Load<Texture>(L"SpreadWings", L"Otus\\sprOtusSpreadWings_112x96_strip9.png");
+		std::shared_ptr<Texture> EnterDoortexture = Resources::Load<Texture>(L"EnterDoor", L"Otus\\sprOtusEnterDoor_112x96_strip13.png");
+		std::shared_ptr<Texture> Dietexture = Resources::Load<Texture>(L"Die", L"Otus\\sprOtusDie_112x96_strip12.png");
+		std::shared_ptr<Texture> Eattexture = Resources::Load<Texture>(L"Eat", L"Otus\\eat_strip14.png");
+
+		mAnimator->Create(L"Idle", herotexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 13, 0.25f);
+		mAnimator->Create(L"MoveRight", herotexture, Vector2(0.0f, 96.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 12, 0.2f);
+		mAnimator->Create(L"Flying", herotexture, Vector2(0.0f, 192.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 11, 0.2f);
+		mAnimator->Create(L"Jump", herotexture, Vector2(0.0f, 384.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 3, 0.2f);
+		mAnimator->Create(L"JumpDown", herotexture, Vector2(0.0f, 480.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 5, 0.2f);
+		mAnimator->Create(L"hurt", hero2texture, Vector2(0.0f, 288.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 1, 0.2f);
+		mAnimator->Create(L"flyinghurt", hero2texture, Vector2(0.0f, 384.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 1, 0.2f);
+		mAnimator->Create(L"StartAttack", hero2texture, Vector2(0.0f, 1056.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 6, 0.12f);
+		mAnimator->Create(L"Attacking", hero2texture, Vector2(0.0f, 1152.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 9, 0.12f);
+		mAnimator->Create(L"FlyUpStartCarry", flyUpStartCarrytexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 8, 0.12f);
+		mAnimator->Create(L"FlyGrab", FlyGrabtexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 11, 0.12f);
+		mAnimator->Create(L"SpreadWings", SpreadWingstexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 9, 0.15f);
+		mAnimator->Create(L"EnterDoor", EnterDoortexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 13, 0.15f);
+		mAnimator->Create(L"Die", Dietexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 12, 0.15f);
+		mAnimator->Create(L"Eat", Eattexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 14, 0.15f);
+
+		mAnimator->Play(L"Idle", true);
 	}
 	PlayerScript::~PlayerScript()
 	{
 	}
 	void PlayerScript::Initalize()
 	{
-
-
+		
+	
 	}
 	void PlayerScript::Update()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
+		mAnimator = GetOwner()->GetComponent<Animator>();
 
 		if (mbGround == true && mPlayerState != ePlayerState::Fly)
 		{
@@ -44,6 +73,7 @@ namespace jh
 				Vector3 pos = tr->GetPosition();
 				pos.x += 0.5f * Time::DeltaTime();
 				tr->SetPosition(pos);
+				mAnimator->Play(L"MoveRight", true);
 			}
 			if (Input::GetKey(eKeyCode::LEFT))
 			{
@@ -112,7 +142,7 @@ namespace jh
 				pos.y += 0.5f * Time::DeltaTime();
 				tr->SetPosition(pos);
 			}
-			//Animator* animator = GetOwner()->GetComponent<Animator>();
+			
 		}
 		
 	}
