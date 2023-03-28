@@ -1,11 +1,11 @@
 #pragma once
 #include "jhScript.h"
-#include "jhAnimator.h"
 
 namespace jh
 {
 
-	//class Animator;
+	class Animator;
+	class Transform;
 
 	class PlayerScript
 		: public Script
@@ -30,16 +30,34 @@ namespace jh
 		void Action();
 		void End();
 
+		//Status
+		void Idle();
+		void Run();
+		void Jump();
+		void Hurt();
+		void Die();
+
+		void StartAttack();
+		void Attacking();
+
+		void StartFly();
+		void Fly();
+		void FlyGrab();
+		void FlyCarry();
+	
+
 	private:
 		ePlayerState mPlayerState;
 
 		Animator* mAnimator;
+		Transform* mTransform;
 
 		float mGravity;
 
 		bool mbGround;
 		bool mbCarrying;
 
+		UINT mAniCount;
 
 	};
 }

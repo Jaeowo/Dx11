@@ -20,6 +20,7 @@ namespace jh::enums
 		Player,
 		Effect,
 
+		Particle,
 		UI,
 		End = 16,
 	};
@@ -35,6 +36,7 @@ namespace jh::enums
 		Rigidbody,
 		SpriteRenderer,
 		Animator,
+		ParticleSystem,
 		Light,
 		UI,
 		FadeOut,
