@@ -63,4 +63,8 @@ namespace jh
 	{
 		GetDevice()->DrawIndexed(mIndexCount, 0, 0);
 	}
+	void Mesh::RenderInstanced(UINT count)
+	{
+		GetDevice()->DrawIndexedInstanced(mIndexCount, count, 0, 0, 0);
+	}
 }

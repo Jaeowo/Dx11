@@ -30,14 +30,16 @@ namespace jh::graphics
 
 		void Clear();
 
-		size_t GetHeight() { return mImage.GetMetadata().height; }
-		size_t GetWidth() { return mImage.GetMetadata().width; }
+		size_t GetHeight() { return mDesc.Height; }
+		size_t GetWidth() { return mDesc.Width; }
 
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> GetTexture() { return mTexture; }
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> GetDSV() { return mDSV; }
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> GetRTV() { return mRTV; }
 		Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView> GetUAV() { return mUAV; }
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetSRV() { return mSRV; }
+
+		void SetTexture(Microsoft::WRL::ComPtr<ID3D11Texture2D> texture) { mTexture = texture; }
 
 	private:
 		ScratchImage mImage;

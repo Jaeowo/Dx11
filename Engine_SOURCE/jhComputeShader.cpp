@@ -50,7 +50,7 @@ namespace jh::graphics
 		Binds();
 
 		GetDevice()->BindComputeShader(mCS.Get(), nullptr, 0);
-		GetDevice()->Dispatch(mThreadGroupCountX, mThreadGroupCountY, mThreadGroupCountZ);
+		GetDevice()->Dispatch(mGroupX, mGroupY, mGroupZ);
 
 		Clear();
 	}

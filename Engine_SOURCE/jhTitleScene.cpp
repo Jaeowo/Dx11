@@ -17,6 +17,7 @@
 #include "jhCollisionManager.h"
 #include "jhAnimator.h"
 #include "jhLight.h"
+#include "jhPaintShader.h"
 
 namespace jh
 {
@@ -29,6 +30,36 @@ namespace jh
 	}
 	void TitleScene::Initalize()
 	{
+		//Paint Shader 
+		std::shared_ptr<PaintShader> paintShader = Resources::Find<PaintShader>(L"PaintShader");
+		//L"SmileTexture"
+		std::shared_ptr<Texture> paintTex = Resources::Find<Texture>(L"PaintTexture");
+		paintShader->SetTarget(paintTex);
+		paintShader->OnExcute();
+
+		//SMILE RECT
+		{
+			//Player* obj = object::Instantiate<Player>(eLayerType::Player);
+			//obj->SetName(L"SMILE");
+			//Transform* tr = obj->GetComponent<Transform>();
+			//tr->SetPosition(Vector3(2.0f, 0.0f, 5.0f));
+			////tr->SetScale(Vector3(2.0f, 1.0f, 1.0f));
+			////tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2 / 2.0f));
+			////tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
+			//Collider2D* collider = obj->AddComponent<Collider2D>();
+			//collider->SetSize(Vector2(2.0f, 2.0f));
+			//collider->SetType(eColliderType::Rect);
+			////collider->SetCenter(Vector2(0.2f, 0.2f));
+			////collider->SetSize(Vector2(1.5f, 1.5f));
+
+			//SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
+			//std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"RectMaterial");
+			//mr->SetMaterial(mateiral);
+			//std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
+			//mr->SetMesh(mesh);
+			//object::DontDestroyOnLoad(obj);
+		}
+
 		{
 			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
 			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
@@ -56,11 +87,11 @@ namespace jh
 		//renderer::cameras[0] = cameraComp;
 
 		// UI Camera
-		//GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
-		//Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
-		//cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
-		//cameraUIComp->DisableLayerMasks();
-		//cameraUIComp->TurnLayerMask(eLayerType::UI, true);
+		GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
+		Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
+		cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
+		cameraUIComp->DisableLayerMasks();
+		cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 
 		// Sky
 		GameObject* titleskyObj = object::Instantiate<GameObject>(eLayerType::BackGround);

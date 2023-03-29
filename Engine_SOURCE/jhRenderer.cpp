@@ -2,6 +2,7 @@
 #include "jhResources.h"
 #include "jhMaterial.h"
 #include "jhSceneManager.h"
+#include "jhPaintShader.h"
 
 namespace jh::renderer
 {
@@ -21,6 +22,14 @@ namespace jh::renderer
 
 	void LoadMesh()
 	{
+		//Point mesh
+		Vertex v = {};
+		std::shared_ptr<Mesh> pointMesh = std::make_shared<Mesh>();
+		Resources::Insert<Mesh>(L"PointMesh", pointMesh);
+		pointMesh->CreateVertexBuffer(&v, 1);
+		UINT pointIndex = 0;
+		pointMesh->CreateIndexBuffer(&pointIndex, 1);
+
 		//RECT
 		vertexes[0].pos = Vector4(-0.5f, 0.5f, 0.0f, 1.0f);
 		vertexes[0].color = Vector4(0.f, 1.f, 0.f, 1.f);
@@ -180,6 +189,12 @@ namespace jh::renderer
 			, debugShader->GetVSBlobBufferPointer()
 			, debugShader->GetVSBlobBufferSize()
 			, debugShader->GetInputLayoutAddressOf());
+
+		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");
+		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
+			, particleShader->GetVSBlobBufferPointer()
+			, particleShader->GetVSBlobBufferSize()
+			, particleShader->GetInputLayoutAddressOf());
 #pragma endregion
 #pragma region sampler state
 		D3D11_SAMPLER_DESC samplerDesc = {};
@@ -337,6 +352,9 @@ namespace jh::renderer
 		constantBuffers[(UINT)eCBType::Light] = new ConstantBuffer(eCBType::Light);
 		constantBuffers[(UINT)eCBType::Light]->Create(sizeof(LightCB));
 
+		constantBuffers[(UINT)eCBType::ParticleSystem] = new ConstantBuffer(eCBType::ParticleSystem);
+		constantBuffers[(UINT)eCBType::ParticleSystem]->Create(sizeof(ParticleSystemCB));
+
 		//Structed buffer
 		lightsBuffer = new StructedBuffer();
 		lightsBuffer->Create(sizeof(LightAttribute), 128, eSRVType::None, nullptr);
@@ -392,6 +410,21 @@ namespace jh::renderer
 		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
 		Resources::Insert<Shader>(L"DebugShader", debugShader);
+
+		// PaintShader
+		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
+		paintShader->Create(L"PaintCS.hlsl", "main");
+		Resources::Insert<PaintShader>(L"PaintShader", paintShader);
+
+		// Debug Shader
+		std::shared_ptr<Shader> particleShader = std::make_shared<Shader>();
+		particleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
+		particleShader->Create(eShaderStage::PS, L"ParticlePS.hlsl", "main");
+		particleShader->SetRSState(eRSType::SolidNone);
+		particleShader->SetDSState(eDSType::NoWrite);
+		particleShader->SetBSState(eBSType::AlphaBlend);
+
+		Resources::Insert<Shader>(L"ParticleShader", particleShader);
 	}
 
 	void LoadTexture()
@@ -413,10 +446,17 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"TileFloorTexture", L"tileFloor.png");
 		Resources::Load<Texture>(L"TopProp08Texture", L"top_prop08.png");
 
+		//PaintTexture
+		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
+		uavTexture->Create(1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE
+			| D3D11_BIND_UNORDERED_ACCESS);
+		Resources::Insert<Texture>(L"PaintTexture", uavTexture);
+
 	}
 
 	void LoadMaterial()
 	{
+
 		//TitleScene
 		std::shared_ptr <Texture> titleskytexture = Resources::Find<Texture>(L"TitleSkyTexture");
 		std::shared_ptr<Shader> titleskyshader = Resources::Find<Shader>(L"SpriteShader");
@@ -502,7 +542,7 @@ namespace jh::renderer
 
 		//==================================
 		// Default
-		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"SmileTexture");
+		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"PaintTexture");
 		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"RectShader");
 		std::shared_ptr<Material> material = std::make_shared<Material>();
 		material->SetShader(shader);
@@ -546,6 +586,13 @@ namespace jh::renderer
 		debugMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		debugMaterial->SetShader(debugShader);
 		Resources::Insert<Material>(L"DebugMaterial", debugMaterial);
+
+		// Debug
+		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");
+		std::shared_ptr<Material> particleMaterial = std::make_shared<Material>();
+		particleMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		particleMaterial->SetShader(particleShader);
+		Resources::Insert<Material>(L"ParticleMaterial", particleMaterial);
 	}
 
 	void Initialize()
@@ -576,17 +623,17 @@ namespace jh::renderer
 
 	void BindLights()
 	{
-		lightsBuffer->Bind(lights.data(), lights.size());
-		lightsBuffer->SetPipeline(eShaderStage::VS, 13);
-		lightsBuffer->SetPipeline(eShaderStage::PS, 13);
+		lightsBuffer->SetData(lights.data(), lights.size());
+		lightsBuffer->Bind(eShaderStage::VS, 13);
+		lightsBuffer->Bind(eShaderStage::PS, 13);
 
 		renderer::LightCB trCb = {};
 		trCb.numberOfLight = lights.size();
 
 		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Light];
-		cb->Bind(&trCb);
-		cb->SetPipline(eShaderStage::VS);
-		cb->SetPipline(eShaderStage::PS);
+		cb->SetData(&trCb);
+		cb->Bind(eShaderStage::VS);
+		cb->Bind(eShaderStage::PS);
 	}
 
 	void Render()

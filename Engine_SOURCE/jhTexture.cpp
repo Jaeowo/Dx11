@@ -159,6 +159,7 @@ namespace jh::graphics
 		);
 
 		mSRV->GetResource((ID3D11Resource**)mTexture.GetAddressOf());
+		mTexture->GetDesc(&mDesc);
 
 		return S_OK;
 	}
