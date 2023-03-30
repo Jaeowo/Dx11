@@ -3,6 +3,7 @@
 #include "jhMaterial.h"
 #include "jhSceneManager.h"
 #include "jhPaintShader.h"
+#include "jhParticleShader.h"
 
 namespace jh::renderer
 {
@@ -194,6 +195,10 @@ namespace jh::renderer
 		particleShader->SetBSState(eBSType::AlphaBlend);
 		particleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 		Resources::Insert<Shader>(L"ParticleShader", particleShader);
+
+		std::shared_ptr<ParticleShader> particleCS = std::make_shared<ParticleShader>();
+		Resources::Insert<ParticleShader>(L"ParticleCS", particleCS);
+		particleCS->Create(L"ParticleCS.hlsl", "main");
 #pragma endregion
 	}
 

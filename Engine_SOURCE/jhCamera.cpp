@@ -104,6 +104,7 @@ namespace jh
 		}
 		else
 		{
+			//mProjection = Matrix::CreateOrthographicLH(width /*/ 100.0f*/, height /*/ 100.0f*/, mNear, mFar);
 			mProjection = Matrix::CreateOrthographicLH(width / 100.0f, height / 100.0f, mNear, mFar);
 		}
 	}

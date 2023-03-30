@@ -1,5 +1,6 @@
 #pragma once
 #include "jhBaseRenderer.h"
+#include "jhParticleShader.h"
 
 namespace jh
 {
