@@ -4,19 +4,6 @@
 
 namespace jh
 {
-	//static bool CompareGameObjectByZAxis(GameObject* a, GameObject* b)
-	//{
-	//	Transform* aTr = a->GetComponent<Transform>();
-	//	Transform* bTr = b->GetComponent<Transform>();
-
-	//	if (aTr->GetPosition().z <= bTr->GetPosition().z)
-	//	{
-	//		return true;
-	//	}
-
-	//	return false;
-	//}
-
 
 	Layer::Layer()
 	{
@@ -36,13 +23,7 @@ namespace jh
 
 	void Layer::Initalize()
 	{
-		for (GameObject* obj : mGameObjects)
-		{
-			if (obj == nullptr)
-				continue;
 
-			obj->Initalize();
-		}
 	}
 
 	void Layer::Update()

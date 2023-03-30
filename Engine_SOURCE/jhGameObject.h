@@ -41,6 +41,8 @@ namespace jh
 				comp->SetOwner(this);
 			}
 
+			comp->Initalize();
+
 			return comp;
 		}
 
