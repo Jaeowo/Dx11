@@ -8,6 +8,7 @@ namespace jh::graphics
 		: public Resource
 	{
 	public:
+		ComputeShader(UINT threadGroupX, UINT threadGroupY, UINT threadGroupZ);
 		ComputeShader();
 		~ComputeShader();
 

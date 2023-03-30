@@ -44,6 +44,10 @@ namespace jh
 		mAnimator->Create(L"Die", Dietexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 12, 0.15f);
 		mAnimator->Create(L"Eat", Eattexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 14, 0.15f);
 
+		/*
+		tr->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+		좌우 반전 하고싶으면 이것처럼 y축만 180도 돌려주면 된다 
+		*/
 		
 	}
 	PlayerScript::~PlayerScript()

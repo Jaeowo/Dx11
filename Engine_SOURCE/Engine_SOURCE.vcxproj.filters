@@ -153,6 +153,7 @@
     <ClInclude Include="jhPaintShader.h" />
     <ClInclude Include="jhComputeShader.h" />
     <ClInclude Include="jhParticleSystem.h" />
+    <ClInclude Include="jhParticleShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -292,6 +293,7 @@
     <ClCompile Include="jhPaintShader.cpp" />
     <ClCompile Include="jhComputeShader.cpp" />
     <ClCompile Include="jhParticleSystem.cpp" />
+    <ClCompile Include="jhParticleShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

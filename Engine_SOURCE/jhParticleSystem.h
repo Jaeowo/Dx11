@@ -17,6 +17,7 @@ namespace jh
 
 	private:
 		class StructedBuffer* mBuffer;
+		std::shared_ptr<graphics::ParticleShader> mCS;
 
 		UINT mCount;
 		Vector4 mStartSize;
