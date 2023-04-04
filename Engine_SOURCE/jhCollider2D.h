@@ -31,6 +31,7 @@ namespace jh
 		bool IsTrigger() { return mbTrigger; }
 		UINT GetID() { return mID; }
 		Vector3 GetPosition() { return mPosition; }
+		void SetPosition(Vector3 pos) { mPosition = pos; }
 		eColliderType GetType() { return mType; }
 		Vector2 GetSize() { return mSize; }
 		Vector2 GetCenter() { return mCenter; }

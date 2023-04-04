@@ -162,7 +162,6 @@
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraScript.h" />
     <ClInclude Include="jhCloudScript.h" />
-    <ClInclude Include="jhCollider.h" />
     <ClInclude Include="jhCollider2D.h" />
     <ClInclude Include="jhCollider3D.h" />
     <ClInclude Include="jhCollisionManager.h" />
@@ -175,9 +174,13 @@
     <ClInclude Include="jhFadeInScript.h" />
     <ClInclude Include="jhFadeOutScript.h" />
     <ClInclude Include="jhGameObject.h" />
+    <ClInclude Include="jhGeddy.h" />
+    <ClInclude Include="jhGeddyScript.h" />
     <ClInclude Include="jhGraphicDevice_DX11.h" />
     <ClInclude Include="jhGraphics.h" />
     <ClInclude Include="jhGridScript.h" />
+    <ClInclude Include="jhGround.h" />
+    <ClInclude Include="jhGroundScript.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhLight.h" />
@@ -191,6 +194,7 @@
     <ClInclude Include="jhPlayerManager.h" />
     <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhPrefab.h" />
+    <ClInclude Include="jhRigidbody.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhStructedBuffer.h" />
     <ClInclude Include="jhTitleScene.h" />
@@ -218,7 +222,6 @@
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />
     <ClCompile Include="jhCloudScript.cpp" />
-    <ClCompile Include="jhCollider.cpp" />
     <ClCompile Include="jhCollider2D.cpp" />
     <ClCompile Include="jhCollider3D.cpp" />
     <ClCompile Include="jhCollisionManager.cpp" />
@@ -229,8 +232,12 @@
     <ClCompile Include="jhFadeInScript.cpp" />
     <ClCompile Include="jhFadeOutScript.cpp" />
     <ClCompile Include="jhGameObject.cpp" />
+    <ClCompile Include="jhGeddy.cpp" />
+    <ClCompile Include="jhGeddyScript.cpp" />
     <ClCompile Include="jhGraphicDevice_DX11.cpp" />
     <ClCompile Include="jhGridScript.cpp" />
+    <ClCompile Include="jhGround.cpp" />
+    <ClCompile Include="jhGroundScript.cpp" />
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhLight.cpp" />
@@ -243,6 +250,7 @@
     <ClCompile Include="jhPlayerManager.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhPrefab.cpp" />
+    <ClCompile Include="jhRigidbody.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhStructedBuffer.cpp" />
     <ClCompile Include="jhTitleScene.cpp" />

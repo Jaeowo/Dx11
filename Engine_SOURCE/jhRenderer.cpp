@@ -135,14 +135,13 @@ namespace jh::renderer
 		std::shared_ptr<Shader> shader = std::make_shared<Shader>();
 		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
 		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
-
 		Resources::Insert<Shader>(L"RectShader", shader);
 #pragma endregion
 #pragma region SPRITE SHADER
 		std::shared_ptr<Shader> spriteShader = std::make_shared<Shader>();
 		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
-
+		spriteShader->SetRSState(eRSType::SolidNone);
 		Resources::Insert<Shader>(L"SpriteShader", spriteShader);
 #pragma endregion
 #pragma region UI SHADER
@@ -451,13 +450,16 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"OwlboyLogoTexture", L"OwlboyLogo.png");
 		Resources::Load<Texture>(L"TitleRightTexture", L"TitleRight.png");
 		Resources::Load<Texture>(L"TitleLeftTexture", L"TitleLeft.png");
+		Resources::Load<Texture>(L"LeftOtusTexture", L"Title Screen\\sprOtus_245x137_strip6.png");
 #pragma endregion
 #pragma region PLAYSCENE TEXTURE
 		Resources::Load<Texture>(L"BackSkyTexture", L"BackSky.png");
 		Resources::Load<Texture>(L"StandTexture", L"sprOtusStand.png");
 		Resources::Load<Texture>(L"HpBarTexture", L"HpBar.png");
-		Resources::Load<Texture>(L"TileFloorTexture", L"tileFloor.png");
+		Resources::Load<Texture>(L"TileFloorTexture", L"Vellie-Tropos-Owl Temple assets\\island01.png");
 		Resources::Load<Texture>(L"TopProp08Texture", L"top_prop08.png");
+		Resources::Load<Texture>(L"GeddyTexture", L"Geddy\\sadIdle.png");
+
 #pragma endregion
 #pragma region DYNAMIC TEXTURE
 		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
@@ -470,6 +472,15 @@ namespace jh::renderer
 	void LoadMaterial()
 	{
 #pragma region TITLESCENE MATERIAL
+		std::shared_ptr <Texture> leftotusTexture = Resources::Find<Texture>(L"LeftOtusTexture");
+		std::shared_ptr<Shader> leftotusshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> leftotusmaterial = std::make_shared<Material>();
+		leftotusmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		leftotusmaterial->SetShader(leftotusshader);
+		leftotusmaterial->SetTexture(eTextureSlot::T0, leftotusTexture);
+		Resources::Insert<Material>(L"LeftOtusmaterial", leftotusmaterial);
+
+
 		std::shared_ptr <Texture> titleskytexture = Resources::Find<Texture>(L"TitleSkyTexture");
 		std::shared_ptr<Shader> titleskyshader = Resources::Find<Shader>(L"SpriteShader");
 		std::shared_ptr<Material> titleskymaterial = std::make_shared<Material>();
@@ -502,15 +513,20 @@ namespace jh::renderer
 		titleleftmaterial->SetTexture(eTextureSlot::T0, titlelefttexture);
 		Resources::Insert<Material>(L"TitleLeftmaterial", titleleftmaterial);
 
-		//std::shared_ptr <Texture> titlelefttexture = Resources::Find<Texture>(L"TitleLeftTexture");
-		std::shared_ptr<Shader> LeftOtusshader = Resources::Find<Shader>(L"SpriteShader");
-		std::shared_ptr<Material> LeftOtumaterial = std::make_shared<Material>();
-		LeftOtumaterial->SetRenderingMode(eRenderingMode::Transparent);
-		LeftOtumaterial->SetShader(LeftOtusshader);
-		Resources::Insert<Material>(L"LeftOtumaterial", LeftOtumaterial);
+	
 #pragma endregion
 #pragma region PLAYSCENE MATERIAL
 		//PlayScene
+
+		std::shared_ptr <Texture> geddytexture = Resources::Find<Texture>(L"GeddyTexture");
+		std::shared_ptr<Shader> geddyshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> geddymaterial = std::make_shared<Material>();
+		geddymaterial->SetRenderingMode(eRenderingMode::Transparent);
+		geddymaterial->SetShader(geddyshader);
+		geddymaterial->SetTexture(eTextureSlot::T0, geddytexture);
+		Resources::Insert<Material>(L"Geddymaterial", geddymaterial);
+
+
 		std::shared_ptr <Texture> backskytexture = Resources::Find<Texture>(L"BackSkyTexture");
 		std::shared_ptr<Shader> backskyshader = Resources::Find<Shader>(L"SpriteShader");
 		std::shared_ptr<Material> backskymaterial = std::make_shared<Material>();
@@ -596,7 +612,7 @@ namespace jh::renderer
 		debugMaterial->SetShader(debugShader);
 		Resources::Insert<Material>(L"DebugMaterial", debugMaterial);
 #pragma endregion
-#pragma endregion PARTICLE
+#pragma region PARTICLE
 		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");
 		std::shared_ptr<Material> particleMaterial = std::make_shared<Material>();
 		particleMaterial->SetRenderingMode(eRenderingMode::Transparent);

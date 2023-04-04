@@ -14,9 +14,11 @@ namespace jh::enums
 	{
 		None = 0,
 		Camera,
+		BackGround2,
 		BackGround,
 		Grid,
 		Monster,
+		Friends,
 		Player,
 		Effect,
 
@@ -108,6 +110,13 @@ namespace jh::enums
 		Hurt,
 		Die,
 
+	};
+
+	enum class eGeddyState
+	{
+		Idle,
+		Hanging,
+		Shooting,
 	};
 }
 

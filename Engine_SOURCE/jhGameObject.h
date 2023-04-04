@@ -92,7 +92,8 @@ namespace jh
 		void Pause() { mState = eState::Paused; }
 		void Death() { mState = eState::Dead; }
 		eState GetState() { return mState; }
-
+		Vector3 GetPos() { return mPos; }
+		void SetPos(Vector3 pos){mPos = pos;}
 		bool IsDontDestroy() { return mbDontDestroy; }
 		void DontDestroy(bool enable) { mbDontDestroy = enable; }
 		eLayerType GetLayerType() { return mType; }
@@ -106,6 +107,7 @@ namespace jh
 		eLayerType mType;
 		std::vector<Script*> mScripts;
 		bool mbDontDestroy;
+		Vector3 mPos;
 	};
 }
 

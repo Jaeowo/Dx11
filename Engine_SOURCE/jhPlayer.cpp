@@ -3,6 +3,7 @@
 namespace jh
 {
 	Player::Player()
+		: mbGround(false)
 	{
 	}
 	Player::~Player()
@@ -14,6 +15,7 @@ namespace jh
 	}
 	void Player::Update()
 	{
+		
 		GameObject::Update();
 	}
 	void Player::FixedUpdate()

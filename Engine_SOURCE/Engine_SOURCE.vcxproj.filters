@@ -7,9 +7,6 @@
     <ClInclude Include="CommonInclude.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="jhGraphicDevice_DX11.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="jhApplication.h">
       <Filter>High Level Interface</Filter>
     </ClInclude>
@@ -65,7 +62,7 @@
       <Filter>Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="jhPlayerScript.h">
-      <Filter>Component\Script\Contents</Filter>
+      <Filter>Component\Script\PlayerScript</Filter>
     </ClInclude>
     <ClInclude Include="jhCamera.h">
       <Filter>Component\Camera</Filter>
@@ -106,9 +103,6 @@
     <ClInclude Include="jhTitleScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="jhCollider.h">
-      <Filter>Component\Collider</Filter>
-    </ClInclude>
     <ClInclude Include="jhCollider2D.h">
       <Filter>Component\Collider\2D</Filter>
     </ClInclude>
@@ -120,9 +114,6 @@
     </ClInclude>
     <ClInclude Include="jhBaseRenderer.h">
       <Filter>Component\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="jhConstantBuffer.h">
-      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="jhPrefab.h">
       <Filter>Resource\Prefab</Filter>
@@ -143,24 +134,50 @@
       <Filter>Component\Script\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="jhMovingHandScript.h">
-      <Filter>Component\Script\Contents</Filter>
+      <Filter>Component\Script\PlayerScript</Filter>
     </ClInclude>
     <ClInclude Include="jhPlayerManager.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="jhLight.h" />
-    <ClInclude Include="jhStructedBuffer.h" />
-    <ClInclude Include="jhPaintShader.h" />
-    <ClInclude Include="jhComputeShader.h" />
     <ClInclude Include="jhParticleSystem.h" />
     <ClInclude Include="jhParticleShader.h" />
+    <ClInclude Include="jhComputeShader.h">
+      <Filter>Resource\Shader\CS\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPaintShader.h">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClInclude>
+    <ClInclude Include="jhConstantBuffer.h">
+      <Filter>Graphics\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="jhStructedBuffer.h">
+      <Filter>Graphics\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGraphicDevice_DX11.h">
+      <Filter>Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="jhLight.h">
+      <Filter>Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGround.h">
+      <Filter>GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGroundScript.h">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="jhRigidbody.h">
+      <Filter>Component\Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGeddy.h">
+      <Filter>GameObject\Friends</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGeddyScript.h">
+      <Filter>Component\Script\FriendsScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
       <Filter>Common\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="jhGraphicDevice_DX11.cpp">
-      <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="jhApplication.cpp">
       <Filter>High Level Interface</Filter>
@@ -211,7 +228,7 @@
       <Filter>Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="jhPlayerScript.cpp">
-      <Filter>Component\Script\Contents</Filter>
+      <Filter>Component\Script\PlayerScript</Filter>
     </ClCompile>
     <ClCompile Include="jhCamera.cpp">
       <Filter>Component\Camera</Filter>
@@ -246,9 +263,6 @@
     <ClCompile Include="jhTitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="jhCollider.cpp">
-      <Filter>Component\Collider</Filter>
-    </ClCompile>
     <ClCompile Include="jhCollider2D.cpp">
       <Filter>Component\Collider\2D</Filter>
     </ClCompile>
@@ -260,9 +274,6 @@
     </ClCompile>
     <ClCompile Include="jhBaseRenderer.cpp">
       <Filter>Component\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="jhConstantBuffer.cpp">
-      <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="jhPrefab.cpp">
       <Filter>Resource\Prefab</Filter>
@@ -283,17 +294,46 @@
       <Filter>Component\Script\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="jhMovingHandScript.cpp">
-      <Filter>Component\Script\Contents</Filter>
+      <Filter>Component\Script\PlayerScript</Filter>
     </ClCompile>
     <ClCompile Include="jhPlayerManager.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="jhLight.cpp" />
-    <ClCompile Include="jhStructedBuffer.cpp" />
-    <ClCompile Include="jhPaintShader.cpp" />
-    <ClCompile Include="jhComputeShader.cpp" />
     <ClCompile Include="jhParticleSystem.cpp" />
     <ClCompile Include="jhParticleShader.cpp" />
+    <ClCompile Include="jhComputeShader.cpp">
+      <Filter>Resource\Shader\CS\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPaintShader.cpp">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClCompile>
+    <ClCompile Include="jhConstantBuffer.cpp">
+      <Filter>Graphics\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhStructedBuffer.cpp">
+      <Filter>Graphics\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGraphicDevice_DX11.cpp">
+      <Filter>Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="jhLight.cpp">
+      <Filter>Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGround.cpp">
+      <Filter>GameObject\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGroundScript.cpp">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="jhRigidbody.cpp">
+      <Filter>Component\Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGeddy.cpp">
+      <Filter>GameObject\Friends</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGeddyScript.cpp">
+      <Filter>Component\Script\FriendsScript</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -353,9 +393,6 @@
     <Filter Include="Component\Transform">
       <UniqueIdentifier>{4813e334-2af2-481e-bdbe-f47999487211}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component\Script\Contents">
-      <UniqueIdentifier>{3fcd1949-8d6e-468c-bc2a-fe1bb37d22ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\Camera">
       <UniqueIdentifier>{8eb3298a-0a11-46bc-830d-43983264e4da}</UniqueIdentifier>
     </Filter>
@@ -394,6 +431,36 @@
     </Filter>
     <Filter Include="Component\Script\BackGround">
       <UniqueIdentifier>{759e5a98-f7df-4892-94cb-c1f876fa9281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader\CS">
+      <UniqueIdentifier>{246078ac-b699-449d-b1ad-ec8217126b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader\CS\Base">
+      <UniqueIdentifier>{50ea2b0a-e8aa-43bd-aa6c-126e11f4b7ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\API">
+      <UniqueIdentifier>{2989ed4d-5416-46d5-ad8a-042e667cf219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Buffer">
+      <UniqueIdentifier>{7fea0469-236a-46e4-af8a-a0bb125bc67c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Light">
+      <UniqueIdentifier>{0bd02516-fc99-4fc2-89bd-1ab6002e0149}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Ground">
+      <UniqueIdentifier>{f683cac4-956e-45de-b3c8-14a20b0a6544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\PlayerScript">
+      <UniqueIdentifier>{3fcd1949-8d6e-468c-bc2a-fe1bb37d22ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Rigidbody">
+      <UniqueIdentifier>{9d4d6908-3206-4419-bf67-1cd7a38e151c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\FriendsScript">
+      <UniqueIdentifier>{2b21f828-8c33-4a5d-bed6-d681b63dae8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Friends">
+      <UniqueIdentifier>{59fd6f28-0c2e-4a75-b5cc-7bb29f4e5204}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

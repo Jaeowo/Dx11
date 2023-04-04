@@ -6,6 +6,7 @@ namespace jh
 
 	class Animator;
 	class Transform;
+	class Rigidbody;
 
 	class PlayerScript
 		: public Script
@@ -32,7 +33,8 @@ namespace jh
 
 		//Status
 		void Idle();
-		void Run();
+		void LeftRun();
+		void RightRun();
 		void Jump();
 		void Hurt();
 		void Die();
@@ -44,20 +46,29 @@ namespace jh
 		void Fly();
 		void FlyGrab();
 		void FlyCarry();
-	
 
+		//
+		void JumpComplete();
+	
 	private:
 		ePlayerState mPlayerState;
 
 		Animator* mAnimator;
 		Transform* mTransform;
-
-		float mGravity;
-
-		bool mbGround;
+	
 		bool mbCarrying;
 
-		UINT mAniCount;
+		UINT mCount;
+
+		float mTime;
+		float mSpeed;
+
+		Vector3 mPlayerPosition;
+		bool mbGround;
+
+		Vector2 mVelocity; //속도
+		float mMass; //질량
+		float mGravity;
 
 	};
 }

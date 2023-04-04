@@ -56,7 +56,7 @@ namespace jh
 		renderer::Render();
 		CollisionManager::Render();
 		//graphicDevice->Render();
-		graphicDevice->Present();
+		//graphicDevice->Present();
 	}
 
 	void Application::Destroy()

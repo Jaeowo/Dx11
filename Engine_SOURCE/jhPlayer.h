@@ -20,8 +20,16 @@ namespace jh
 		ePlayerState GetPlayerState() { return mPlayerState; }
 		void SetPlayerState(ePlayerState playerstate) { mPlayerState = playerstate; }
 
+		Vector3 GetPlayerPos() { return mPlayerPos; }
+		void SetPlayerPos(Vector3 playerpos) { mPlayerPos = playerpos; }
+
+		bool GetIsGround() { return mbGround; }
+		void SetIsGround(bool bGround) { mbGround = bGround; }
+
 	private:
 		ePlayerState mPlayerState;
+		Vector3 mPlayerPos;
+		bool mbGround;
 	};
 
 }

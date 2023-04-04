@@ -28,11 +28,12 @@ namespace jh
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Title];
-
-		for (Scene* scene : mScenes)
+		//SceneManager::LoadScene(eSceneType::Play);
+		mActiveScene->Initalize();
+	/*	for (Scene* scene : mScenes)
 		{
 			scene->Initalize();
-		}
+		}*/
 	}
 
 	void SceneManager::Update()
@@ -78,5 +79,6 @@ namespace jh
 		}
 
 		mActiveScene->OnEnter();
+		mActiveScene->Initalize();
 	}
 }

@@ -11,14 +11,18 @@ namespace jh
 	}
 	void EditorObject::Initalize()
 	{
+		GameObject::Initalize();
 	}
 	void EditorObject::Update()
 	{
+		GameObject::Update();
 	}
 	void EditorObject::FixedUpdate()
 	{
+		GameObject::FixedUpdate();
 	}
 	void EditorObject::Render()
 	{
+		GameObject::Render();
 	}
 }

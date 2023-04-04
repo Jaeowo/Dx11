@@ -7,18 +7,28 @@
 #include "jhPlayerManager.h"
 #include "jhPlayer.h"
 #include "jhResources.h"
+#include "jhRigidbody.h"
 
 namespace jh
 {
 	PlayerScript::PlayerScript()
 		:Script()
 		, mPlayerState(ePlayerState::Idle)
-		, mbGround(false)
+		, mbGround(true)
 		, mbCarrying(false)
-		, mGravity(0.2f)
-		, mAniCount(0)
+		, mCount(0)
+		, mTime(0.0f)
+		, mSpeed(0.5f)
+	
 	{
+		mVelocity = (Vector2(0.0f, 0.0f));
+		mMass = 10.0f;
+		mGravity = 0.000001f;
+		
+	
 		Animator* mAnimator = PlayerManager::GetPlayer()->AddComponent<Animator>();
+
+
 		std::shared_ptr<Texture> herotexture = Resources::Load<Texture>(L"hero", L"Otus\\hero.png");
 		std::shared_ptr<Texture> hero2texture = Resources::Load<Texture>(L"hero2", L"Otus\\hero2.png");
 		std::shared_ptr<Texture> flyUpStartCarrytexture = Resources::Load<Texture>(L"FlyUpStartCarry", L"Otus\\flyUpStartCarry_strip8.png");
@@ -27,6 +37,11 @@ namespace jh
 		std::shared_ptr<Texture> EnterDoortexture = Resources::Load<Texture>(L"EnterDoor", L"Otus\\sprOtusEnterDoor_112x96_strip13.png");
 		std::shared_ptr<Texture> Dietexture = Resources::Load<Texture>(L"Die", L"Otus\\sprOtusDie_112x96_strip12.png");
 		std::shared_ptr<Texture> Eattexture = Resources::Load<Texture>(L"Eat", L"Otus\\eat_strip14.png");
+		std::shared_ptr<Texture> Flystarttexture = Resources::Load<Texture>(L"FlyStart", L"Otus\\flyUpStart_strip8.png");
+		std::shared_ptr<Texture> FlyStartRolltexture = Resources::Load<Texture>(L"FlyStart", L"Otus\\roll_strip8.png");
+		std::shared_ptr<Texture> FlyRolltexture = Resources::Load<Texture>(L"FlyStart", L"Otus\\roll_strip9.png");
+		std::shared_ptr<Texture> GroundRolltexture = Resources::Load<Texture>(L"FlyStart", L"Otus\\rollGround_strip6.png");
+
 
 		mAnimator->Create(L"Idle", herotexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 13, 0.25f);
 		mAnimator->Create(L"MoveRight", herotexture, Vector2(0.0f, 96.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 12, 0.2f);
@@ -43,12 +58,9 @@ namespace jh
 		mAnimator->Create(L"EnterDoor", EnterDoortexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 13, 0.15f);
 		mAnimator->Create(L"Die", Dietexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 12, 0.15f);
 		mAnimator->Create(L"Eat", Eattexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 14, 0.15f);
+		mAnimator->Create(L"FlyStart", Flystarttexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 8, 0.15f);
 
-		/*
-		tr->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
-		좌우 반전 하고싶으면 이것처럼 y축만 180도 돌려주면 된다 
-		*/
-		
+	
 	}
 	PlayerScript::~PlayerScript()
 	{
@@ -64,7 +76,27 @@ namespace jh
 		mTransform = GetOwner()->GetComponent<Transform>();
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
-		//mPlayerState = PlayerManager::GetPlayer()->SetPlayerState(mPlayerState);
+		mPlayerPosition = mTransform->GetPosition();
+
+		if (mPlayerState != ePlayerState::Fly)
+		{
+			mPlayerPosition.x += mVelocity.x * (float)Time::DeltaTime();
+			mPlayerPosition.y += mVelocity.y + 0.5f * mGravity * (float)Time::DeltaTime() * (float)Time::DeltaTime();
+			mVelocity.y -= mGravity * (float)Time::DeltaTime();
+			mTransform->SetPosition(mPlayerPosition);
+
+		}
+
+
+	
+		if (PlayerManager::GetPlayer()->GetIsGround() == true)
+		{
+
+		}
+		else if (PlayerManager::GetPlayer()->GetIsGround() == false)
+		{
+
+		}
 
 		switch (mPlayerState)
 		{
@@ -72,10 +104,13 @@ namespace jh
 			Idle();
 			break;
 		case jh::enums::ePlayerState::LeftRun:
+			LeftRun();
 			break;
 		case jh::enums::ePlayerState::RightRun:
+			RightRun();
 			break;
 		case jh::enums::ePlayerState::Jump:
+			Jump();
 			break;
 		case jh::enums::ePlayerState::EnterDoor:
 			break;
@@ -84,8 +119,10 @@ namespace jh
 		case jh::enums::ePlayerState::Attacking:
 			break;
 		case jh::enums::ePlayerState::StartFly:
+			StartFly();
 			break;
 		case jh::enums::ePlayerState::Fly:
+			Fly();
 			break;
 		case jh::enums::ePlayerState::FlyGrab:
 			break;
@@ -103,87 +140,6 @@ namespace jh
 			break;
 		}
 
-		//if (mbGround == true && mPlayerState != ePlayerState::Fly)
-		//{
-		//	Vector3 pos = tr->GetPosition();
-		//	pos.y -= mGravity * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-
-		//if (mPlayerState == ePlayerState::Idle)
-		//{
-
-		//	if (Input::GetKey(eKeyCode::RIGHT))
-		//	{
-		//		Vector3 pos = tr->GetPosition();
-		//		pos.x += 0.5f * Time::DeltaTime();
-		//		tr->SetPosition(pos);
-		//		mAnimator->Play(L"MoveRight", true);
-		//	}
-		//	if (Input::GetKey(eKeyCode::LEFT))
-		//	{
-		//		Vector3 pos = tr->GetPosition();
-		//		pos.x -= 0.5f * Time::DeltaTime();
-		//		tr->SetPosition(pos);
-		//	}
-
-		//	if (Input::GetKeyDown(eKeyCode::UP))
-		//	{
-		//		
-		//		mPlayerState = ePlayerState::Jump;
-		//	}
-		//}
-
-		//if (mPlayerState == ePlayerState::Jump)
-		//{
-		//	if (Input::GetKey(eKeyCode::UP))
-		//	{
-		//	/*	float MaxHeight = 0.3f;
-		//		float JumpPower = 1.0f;
-		//		Vector3 pos = tr->GetPosition();
-		//		pos.y += JumpPower * 0.3f * Time::DeltaTime();
-		//		if (pos.y >= MaxHeight)
-		//		{
-		//			pos.y -= mGravity * Time::DeltaTime();
-		//			JumpPower = 0.0f;
-		//		}
-		//		tr->SetPosition(pos);*/
-
-		//		Vector3 pos = tr->GetPosition();
-		//		pos.y +=  0.3f * Time::DeltaTime();
-		//		tr->SetPosition(pos);
-		//	}
-
-
-		//	if (Input::GetKeyUp(eKeyCode::UP))
-		//	{
-		//		mPlayerState = ePlayerState::Fly;
-		//	}
-		//}
-
-		//if (mPlayerState == ePlayerState::Fly)
-		//{
-		//	
-		//	if (Input::GetKey(eKeyCode::LEFT))
-		//	{
-		//		Vector3 pos = tr->GetPosition();
-		//		pos.x -= 0.5f * Time::DeltaTime();
-		//		tr->SetPosition(pos);
-		//	}
-		//	if (Input::GetKey(eKeyCode::DOWN))
-		//	{
-		//		Vector3 pos = tr->GetPosition();
-		//		pos.y -= 0.5f * Time::DeltaTime();
-		//		tr->SetPosition(pos);
-		//	}
-		//	if (Input::GetKey(eKeyCode::UP))
-		//	{
-		//		Vector3 pos = tr->GetPosition();
-		//		pos.y += 0.5f * Time::DeltaTime();
-		//		tr->SetPosition(pos);
-		//	}
-		//	
-		//}
 		
 	}
 	void PlayerScript::Render()
@@ -200,26 +156,107 @@ namespace jh
 	}
 	void PlayerScript::Idle()
 	{
-		if (mAniCount == 0)
+		if (mCount == 0)
 		{
 			mAnimator->Play(L"Idle", true);
-			mAniCount = 1;
+			mCount = 1;
 		}
 
-		if (Input::GetKey(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::D))
 		{
-			Vector3 pos = mTransform->GetPosition();
-			pos.x += 0.5f * Time::DeltaTime();
-			mTransform->SetPosition(pos);
+			Vector3 CheckRotation = mTransform->GetRotation();
+			if (CheckRotation.y == 180.0f)
+			{
+				mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+			}
+			mPlayerState = ePlayerState::RightRun;
+			mCount = 0;
+	
 		}
+		if (Input::GetKeyDown(eKeyCode::A))
+		{
+			mPlayerState = ePlayerState::LeftRun;
+			mCount = 0;
+		}
+		if (Input::GetKeyDown(eKeyCode::W))
+		{
+			mPlayerState = ePlayerState::Jump;
+			mCount = 0;
+		}
+
 
 		
 	}
-	void PlayerScript::Run()
+	void PlayerScript::LeftRun()
 	{
+		if (Input::GetKey(eKeyCode::A))
+		{
+			Vector3 pos = mTransform->GetPosition();
+			pos.x -= 0.5f * Time::DeltaTime();
+			mTransform->SetPosition(pos);
+		
+			
+			if (mCount == 0)
+			{
+				mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+				mAnimator->Play(L"MoveRight", true);
+				mCount = 1;
+			}
+		}
+
+		if (Input::GetKeyUp(eKeyCode::A))
+		{
+			mPlayerState = ePlayerState::Idle;
+			mCount = 0;
+
+			//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+		}
+	}
+	void PlayerScript::RightRun()
+	{
+		if (Input::GetKey(eKeyCode::D))
+		{
+
+			Vector3 pos = mTransform->GetPosition();
+			pos.x += 0.5f * Time::DeltaTime();
+			mTransform->SetPosition(pos);
+
+			if (mCount == 0)
+			{
+				mAnimator->Play(L"MoveRight", true);
+				mCount = 1;
+			}
+
+		}
+
+		if (Input::GetKeyUp(eKeyCode::D))
+		{
+			mPlayerState = ePlayerState::Idle;
+			mCount = 0;
+		}
+
 	}
 	void PlayerScript::Jump()
 	{
+
+		if (mCount == 0)
+		{
+			
+			mAnimator->Play(L"Jump", false);
+
+			float JumpForce = 0.00003f;
+			mVelocity.y += JumpForce / mMass;
+			
+			mCount = 1;
+
+		}
+
+		if (Input::GetKey(eKeyCode::SPACE))
+		{
+			mPlayerState = ePlayerState::Fly;
+			mCount = 0;
+		}
+
 	}
 	void PlayerScript::Hurt()
 	{
@@ -238,6 +275,51 @@ namespace jh
 	}
 	void PlayerScript::Fly()
 	{
+	/*	float dx, dy;
+		Vector2 Direction;
+		Direction.x = static_cast<float>(dx);
+		Direction.y = static_cast<float>(dy);
+		Vector2 movement = Direction.Normalize() * mSpeed;*/
+
+		if (mCount == 0)
+		{
+			mGravity = 0.0f;
+			mAnimator->Play(L"Flying", true);
+			mCount = 1;
+		}
+		
+		if (Input::GetKey(eKeyCode::A))
+		{
+			Vector3 pos = mTransform->GetPosition();
+			pos.x -= mSpeed * Time::DeltaTime();
+			mTransform->SetPosition(pos);
+			mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+		}
+		if (Input::GetKey(eKeyCode::D))
+		{
+			Vector3 pos = mTransform->GetPosition();
+			pos.x += mSpeed * Time::DeltaTime();
+			mTransform->SetPosition(pos);
+
+			Vector3 CheckRotation = mTransform->GetRotation();
+			if (CheckRotation.y == 180.0f)
+			{
+				mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+			}
+		}
+		if (Input::GetKey(eKeyCode::S))
+		{
+			Vector3 pos = mTransform->GetPosition();
+			pos.y -= mSpeed * Time::DeltaTime();
+			mTransform->SetPosition(pos);
+			
+		}
+		if (Input::GetKey(eKeyCode::W))
+		{
+			Vector3 pos = mTransform->GetPosition();
+			pos.y += mSpeed * Time::DeltaTime();
+			mTransform->SetPosition(pos);
+		}
 	}
 	void PlayerScript::FlyGrab()
 	{
@@ -245,4 +327,10 @@ namespace jh
 	void PlayerScript::FlyCarry()
 	{
 	}
+
+	void PlayerScript::JumpComplete()
+	{
+		mAnimator->Play(L"JumpDown", false);
+	}
+
 }

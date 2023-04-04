@@ -86,12 +86,12 @@ namespace jh
 		mainCamera = cameraComp;
 		//renderer::cameras[0] = cameraComp;
 
-		// UI Camera
+		// Ground2 Camera
 		GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
 		Camera* cameraUIComp = cameraUIObj->AddComponent<Camera>();
 		cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 		cameraUIComp->DisableLayerMasks();
-		cameraUIComp->TurnLayerMask(eLayerType::UI, true);
+		cameraUIComp->TurnLayerMask(eLayerType::BackGround2, true);
 
 		// Sky
 		GameObject* titleskyObj = object::Instantiate<GameObject>(eLayerType::BackGround);
@@ -125,23 +125,22 @@ namespace jh
 		animator->Play(L"logo", true);
 
 		//LeftOtus
-		/*GameObject* LeftOtusObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		GameObject* LeftOtusObj = object::Instantiate<GameObject>(eLayerType::BackGround);
 		LeftOtusObj->SetName(L"LeftOtus");
 		Transform* LeftOtusTr = LeftOtusObj->GetComponent<Transform>();
-		LeftOtusTr->SetPosition(Vector3(1.0f, 1.2f, 1.7f));
-		LeftOtusTr->SetScale(Vector3(0.3f, 0.3f, 1.0f));
+		LeftOtusTr->SetPosition(Vector3(0.465f, 1.13f, 1.7f));
+		LeftOtusTr->SetScale(Vector3(0.4f, 0.4f, 1.0f));
 
 		SpriteRenderer* LeftOtussr = LeftOtusObj->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> LeftOtusmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> LeftOtumaterial = Resources::Find<Material>(L"LeftOtumaterial");
-		logosr->SetMaterial(LeftOtumaterial);
-		logosr->SetMesh(LeftOtusmesh);
+		std::shared_ptr<Material> leftotusmaterial = Resources::Find<Material>(L"LeftOtusmaterial");
+		LeftOtussr->SetMaterial(leftotusmaterial);
+		LeftOtussr->SetMesh(LeftOtusmesh);
 
-		Animator* animator2 = LeftOtusObj->AddComponent<Animator>();
-		std::shared_ptr<Texture> LeftOtustexture = Resources::Load<Texture>(L"LeftOtust", L"Title Screen\\sprOtus_245x137_strip6.png");
-		animator2->Create(L"LeftOtust", LeftOtustexture, Vector2(0.0f, 0.0f), Vector2(245.0f, 137.0f), Vector2::Zero, 13, 0.25f);
-		animator2->Play(L"LeftOtust", true);*/
-
+		Animator* Lanimator = LeftOtusObj->AddComponent<Animator>();
+		std::shared_ptr<Texture> leftotustexture = Resources::Load<Texture>(L"LOtus", L"Title Screen\\sprOtus_245x137_strip6.png");
+		Lanimator->Create(L"LOtus", leftotustexture, Vector2(0.0f, 0.0f), Vector2(245.0f, 137.0f), Vector2::Zero, 6, 0.25f);
+		Lanimator->Play(L"LOtus", true);
 
 		//Right
 		GameObject* rightObj = object::Instantiate<GameObject>(eLayerType::BackGround);
@@ -169,7 +168,7 @@ namespace jh
 		leftsr->SetMaterial(titleleftmaterial);
 		leftsr->SetMesh(leftmesh);
 
-		Scene::Initalize();
+		//Scene::Initalize();
 	}
 	void TitleScene::Update()
 	{
