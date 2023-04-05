@@ -99,7 +99,7 @@ namespace jh
 			if (mPlayerState == ePlayerState::Jump)
 			{
 				mPlayerPosition.x += mVelocity.x * (float)Time::DeltaTime();
-				mPlayerPosition.y += mVelocity.y + 3.5f * mGravity * (float)Time::DeltaTime() * (float)Time::DeltaTime();
+				mPlayerPosition.y += mVelocity.y + 0.5f * mGravity * (float)Time::DeltaTime() * (float)Time::DeltaTime();
 				mVelocity.y -= mGravity * (float)Time::DeltaTime();
 				mTransform->SetPosition(mPlayerPosition);
 			}
@@ -112,7 +112,7 @@ namespace jh
 		}
 		else if (PlayerManager::GetPlayer()->GetIsGround() == false)
 		{
-			mGravity = 0.000001f;
+			mGravity = 0.00005f;
 		}
 	
 		switch (mPlayerState)
@@ -281,7 +281,7 @@ namespace jh
 
 			PlayerManager::GetPlayer()->SetIsGround(false);
 
-			float JumpForce = 0.0005f;
+			float JumpForce = 0.006f;
 			mVelocity.y += JumpForce / mMass ;
 			
 			mCount = 1;
