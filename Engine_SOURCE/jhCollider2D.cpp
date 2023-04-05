@@ -8,7 +8,7 @@ namespace jh
 	UINT Collider2D::ColliderNumber = 0;
 	Collider2D::Collider2D()
 		: Component(eComponentType::Collider)
-		, mType (eColliderType::None)
+		, mType(eColliderType::None)
 		, mTransform(nullptr)
 		, mSize(Vector2::One)
 		, mCenter(Vector2::Zero)
@@ -18,16 +18,20 @@ namespace jh
 	{
 		mID = ColliderNumber++;
 	}
+
 	Collider2D::~Collider2D()
 	{
 	}
+
 	void Collider2D::Initalize()
 	{
 		mTransform = GetOwner()->GetComponent<Transform>();
 	}
+
 	void Collider2D::Update()
 	{
 	}
+
 	void Collider2D::FixedUpdate()
 	{
 		Vector3 scale = mTransform->GetScale();
@@ -58,11 +62,12 @@ namespace jh
 		meshAttribute.type = mType;
 
 		renderer::debugMeshes.push_back(meshAttribute);
-
 	}
+
 	void Collider2D::Render()
 	{
 	}
+
 	void Collider2D::OnCollisionEnter(Collider2D* collider)
 	{
 		const std::vector<Script*>& scripts = GetOwner()->GetScripts();
@@ -71,6 +76,7 @@ namespace jh
 			script->OnCollisionEnter(collider);
 		}
 	}
+
 	void Collider2D::OnCollisionStay(Collider2D* collider)
 	{
 		const std::vector<Script*>& scripts = GetOwner()->GetScripts();
@@ -79,6 +85,7 @@ namespace jh
 			script->OnCollisionStay(collider);
 		}
 	}
+
 	void Collider2D::OnCollisionExit(Collider2D* collider)
 	{
 		const std::vector<Script*>& scripts = GetOwner()->GetScripts();
@@ -87,6 +94,7 @@ namespace jh
 			script->OnCollisionExit(collider);
 		}
 	}
+
 	void Collider2D::OnTriggerEnter(Collider2D* collider)
 	{
 		const std::vector<Script*>& scripts = GetOwner()->GetScripts();
@@ -95,6 +103,7 @@ namespace jh
 			script->OnTriggerEnter(collider);
 		}
 	}
+
 	void Collider2D::OnTriggerStay(Collider2D* collider)
 	{
 		const std::vector<Script*>& scripts = GetOwner()->GetScripts();
@@ -103,6 +112,7 @@ namespace jh
 			script->OnTriggerStay(collider);
 		}
 	}
+
 	void Collider2D::OnTriggerExit(Collider2D* collider)
 	{
 		const std::vector<Script*>& scripts = GetOwner()->GetScripts();

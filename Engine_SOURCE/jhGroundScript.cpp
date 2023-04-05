@@ -2,6 +2,8 @@
 #include "jhCollider2D.h"
 #include "jhPlayer.h"
 #include "jhPlayerManager.h"
+#include "jhComponent.h"
+#include "jhPlayerManager.h"
 
 namespace jh
 {
@@ -25,7 +27,21 @@ namespace jh
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
 		playerObj->SetIsGround(true);
-	
+
+		if (playerObj->GetPlayerState() == ePlayerState::Jump)
+		{
+			playerObj->SetPlayerState(ePlayerState::Idle);
+		}
+		float fLen = fabs(collider->GetPosition().y - GetOwner()->GetComponent<Collider2D>()->GetPosition().y);
+		float fScale = collider->GetSize().y / 2.0f + GetOwner()->GetComponent<Collider2D>()->GetSize().y / 2.0f;
+
+
+		if (fLen < fScale)
+		{
+			Vector3 playerPos = playerObj->GetPlayerPos();
+			playerPos.y -= (fScale - fLen) - 1.0f;
+			playerObj->SetPos(playerPos);
+		}
 	
 	}
 	void GroundScript::OnCollisionStay(Collider2D* collider)
@@ -33,5 +49,8 @@ namespace jh
 	}
 	void GroundScript::OnCollisionExit(Collider2D* collider)
 	{
+		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
+
+		playerObj->SetIsGround(false);
 	}
 }

@@ -5,7 +5,7 @@ namespace jh
 {
 	Ground::Ground()
 	{
-		mCollider2D = this->AddComponent<Collider2D>();
+	
 
 	}
 	Ground::~Ground()
@@ -13,14 +13,20 @@ namespace jh
 	}
 	void Ground::Initalize()
 	{
+		GameObject::Initalize();
+	
 	}
 	void Ground::Update()
 	{
+		GameObject::Update();
+
 	}
 	void Ground::FixedUpdate()
 	{
+		GameObject::FixedUpdate();
 	}
 	void Ground::Render()
 	{
+		GameObject::Render();
 	}
 }

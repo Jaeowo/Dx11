@@ -75,25 +75,30 @@ namespace jh
 			if ((UINT)left == (UINT)right)
 				break;
 		}
+
 	}
+
 	void CollisionManager::ColliderCollision(Collider2D* left, Collider2D* right)
 	{
-		//두 충돌체 레이어로 구성된 ID확인
+		// 두 충돌체 레이어로 구성된 ID 확인
 		ColliderID colliderID;
 		colliderID.left = (UINT)left->GetID();
 		colliderID.right = (UINT)right->GetID();
 
-		//이전 충돌 정보 검색후 충돌정보가 없는 상태라면 충돌정보를 생성해준다.
+		// 이전 충돌 정보를 검색한다.
+		// 만약에 충돌정보가 없는 상태라면
+		// 충돌정보를 생성해준다.
 		std::map<UINT64, bool>::iterator iter = mCollisionMap.find(colliderID.id);
 		if (iter == mCollisionMap.end())
 		{
 			mCollisionMap.insert(std::make_pair(colliderID.id, false));
 			iter = mCollisionMap.find(colliderID.id);
 		}
-		//충돌체크를 해준다
-		if (Intersect(left, right)) //충돌을 한 상태
+
+		// 충돌체크를 해준다.
+		if (Intersect(left, right)) // 충돌을 한 상태
 		{
-			//최초 충돌중 Enter
+			// 최초 충돌중 Enter
 			if (iter->second == false)
 			{
 				if (left->IsTrigger())
@@ -108,7 +113,7 @@ namespace jh
 
 				iter->second = true;
 			}
-			else //충돌 중이지 않은 상태 Enter
+			else // 충돌 중이지 않은 상태 Enter
 			{
 				if (left->IsTrigger())
 					left->OnTriggerStay(right);
@@ -120,11 +125,10 @@ namespace jh
 				else
 					right->OnCollisionStay(left);
 			}
-
 		}
 		else // 충돌하지 않은상태
 		{
-			//충돌 중인상태 Exit
+			// 충돌 중인상태 Exit
 			if (iter->second == true)
 			{
 				if (left->IsTrigger())
@@ -135,18 +139,19 @@ namespace jh
 				if (right->IsTrigger())
 					right->OnTriggerExit(left);
 				else
-					right->OnCollisionEnter(left);
+					right->OnCollisionExit(left);
 
 				iter->second = false;
 			}
 		}
-
 	}
+
 	bool CollisionManager::Intersect(Collider2D* left, Collider2D* right)
 	{
-		//사각형 충돌
-
-
+		// Rect vs Rect 
+		// 0 --- 1
+		// |     |
+		// 3 --- 2
 		Vector3 arrLocalPos[4] =
 		{
 			Vector3{-0.5f, 0.5f, 0.0f}
@@ -161,30 +166,32 @@ namespace jh
 		Matrix leftMat = leftTr->GetWorldMatrix();
 		Matrix rightMat = rightTr->GetWorldMatrix();
 
-		// 분리축 벡터
-		Vector3 Axis[4] = {};
-		Axis[0] = Vector3::Transform(arrLocalPos[1], leftMat);
-		Axis[1] = Vector3::Transform(arrLocalPos[3], leftMat);
-		Axis[2] = Vector3::Transform(arrLocalPos[1], rightMat);
-		Axis[3] = Vector3::Transform(arrLocalPos[3], rightMat);
 
-		Axis[0] -= Vector3::Transform(arrLocalPos[0], leftMat);
-		Axis[1] -= Vector3::Transform(arrLocalPos[0], leftMat);
-		Axis[2] -= Vector3::Transform(arrLocalPos[0], rightMat);
-		Axis[3] -= Vector3::Transform(arrLocalPos[0], rightMat);
+
+		// 분리축 벡터 4개 구하기
+		Vector3 Axis[4] = {};
 
 		Vector3 leftScale = Vector3(left->GetSize().x, left->GetSize().y, 1.0f);
-		Axis[0] = Axis[0] * leftScale;
-		Axis[1] = Axis[1] * leftScale;
+
+		Matrix finalLeft = Matrix::CreateScale(leftScale);
+		finalLeft *= leftMat;
 
 		Vector3 rightScale = Vector3(right->GetSize().x, right->GetSize().y, 1.0f);
-		Axis[2] = Axis[2] * rightScale;
-		Axis[3] = Axis[3] * rightScale;
+		Matrix finalRight = Matrix::CreateScale(rightScale);
+		finalRight *= rightMat;
+
+		Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
+		Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
+		Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
+		Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
+
+		Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+		Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+		Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
+		Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
 
 		for (size_t i = 0; i < 4; i++)
-		{
 			Axis[i].z = 0.0f;
-		}
 
 		Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
 		vc.z = 0.0f;
@@ -198,7 +205,7 @@ namespace jh
 			float projDist = 0.0f;
 			for (size_t j = 0; j < 4; j++)
 			{
-				projDist += fabsf(Axis[i].Dot(vA) / 2.0f);
+				projDist += fabsf(Axis[j].Dot(vA) / 2.0f);
 			}
 
 			if (projDist < fabsf(centerDir.Dot(vA)))
@@ -208,42 +215,5 @@ namespace jh
 		}
 
 		return true;
-
-		/*if (left->GetType() == eColliderType::Rect && right->GetType() == eColliderType::Rect)
-		{
-		
-		}*/
-
-		////원충돌
-		//if (left->GetType() == eColliderType::Circle && right->GetType() == eColliderType::Circle)
-		//{
-		//	Vector2 LeftSize = left->GetSize();
-		//	Vector2 RightSize = right->GetSize();
-
-		//	float LeftRadius = (LeftSize.x / 2.0f);
-		//	float RightRadius = (RightSize.x / 2.0f);
-
-		//	float TotalRadius = LeftRadius + RightRadius;
-
-		//	Vector3 vc = left->GetPosition() - right->GetPosition();
-		//	vc.z = 0.0f;
-
-		//	Vector3 CenterDir = vc;
-
-		//	if (CenterDir.x >= TotalRadius
-		//		|| CenterDir.y >= TotalRadius)
-		//	{
-		//		return false;
-		//	}
-		//	else if (CenterDir.x < TotalRadius
-		//		|| CenterDir.y < TotalRadius)
-		//	{
-		//		return true;
-		//	}
-		//	else
-		//		return false;
-
-		//}
-
 	}
 }

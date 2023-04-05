@@ -94,6 +94,7 @@ namespace jh::enums
 		LeftRun,
 		RightRun,
 		Jump,
+		GroundRoll,
 
 		EnterDoor,
 
@@ -105,6 +106,9 @@ namespace jh::enums
 		FlyGrab,
 		FlyCarry,
 		FlyHurt,
+		FlyAttack,
+		StartFlyRoll,
+		FlyRoll,
 		Eat,
 
 		Hurt,

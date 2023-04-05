@@ -1,4 +1,5 @@
 #include "jhPlayer.h"
+#include "jhPlayerScript.h"
 
 namespace jh
 {
@@ -15,7 +16,6 @@ namespace jh
 	}
 	void Player::Update()
 	{
-		
 		GameObject::Update();
 	}
 	void Player::FixedUpdate()

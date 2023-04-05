@@ -22,9 +22,9 @@ namespace jh
 	
 	{
 		mVelocity = (Vector2(0.0f, 0.0f));
-		mMass = 10.0f;
-		mGravity = 0.000001f;
-		
+		mMass = 150.0f;
+
+		mGravity = 0.001f;
 	
 		Animator* mAnimator = PlayerManager::GetPlayer()->AddComponent<Animator>();
 
@@ -38,9 +38,9 @@ namespace jh
 		std::shared_ptr<Texture> Dietexture = Resources::Load<Texture>(L"Die", L"Otus\\sprOtusDie_112x96_strip12.png");
 		std::shared_ptr<Texture> Eattexture = Resources::Load<Texture>(L"Eat", L"Otus\\eat_strip14.png");
 		std::shared_ptr<Texture> Flystarttexture = Resources::Load<Texture>(L"FlyStart", L"Otus\\flyUpStart_strip8.png");
-		std::shared_ptr<Texture> FlyStartRolltexture = Resources::Load<Texture>(L"FlyStart", L"Otus\\roll_strip8.png");
-		std::shared_ptr<Texture> FlyRolltexture = Resources::Load<Texture>(L"FlyStart", L"Otus\\roll_strip9.png");
-		std::shared_ptr<Texture> GroundRolltexture = Resources::Load<Texture>(L"FlyStart", L"Otus\\rollGround_strip6.png");
+		std::shared_ptr<Texture> FlyStartRolltexture = Resources::Load<Texture>(L"FlyStartRoll", L"Otus\\roll_strip8.png");
+		std::shared_ptr<Texture> FlyRolltexture = Resources::Load<Texture>(L"FlyRoll", L"Otus\\roll_strip9.png");
+		std::shared_ptr<Texture> GroundRolltexture = Resources::Load<Texture>(L"GroundRoll", L"Otus\\rollGround_strip6.png");
 
 
 		mAnimator->Create(L"Idle", herotexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 13, 0.25f);
@@ -51,7 +51,7 @@ namespace jh
 		mAnimator->Create(L"hurt", hero2texture, Vector2(0.0f, 288.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 1, 0.2f);
 		mAnimator->Create(L"flyinghurt", hero2texture, Vector2(0.0f, 384.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 1, 0.2f);
 		mAnimator->Create(L"StartAttack", hero2texture, Vector2(0.0f, 1056.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 6, 0.12f);
-		mAnimator->Create(L"Attacking", hero2texture, Vector2(0.0f, 1152.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 9, 0.12f);
+		mAnimator->Create(L"Attacking", hero2texture, Vector2(0.0f, 1152.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 9, 0.1f);
 		mAnimator->Create(L"FlyUpStartCarry", flyUpStartCarrytexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 8, 0.12f);
 		mAnimator->Create(L"FlyGrab", FlyGrabtexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 11, 0.12f);
 		mAnimator->Create(L"SpreadWings", SpreadWingstexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 9, 0.15f);
@@ -59,6 +59,9 @@ namespace jh
 		mAnimator->Create(L"Die", Dietexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 12, 0.15f);
 		mAnimator->Create(L"Eat", Eattexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 14, 0.15f);
 		mAnimator->Create(L"FlyStart", Flystarttexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 8, 0.15f);
+		mAnimator->Create(L"FlyStartRoll", FlyStartRolltexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 8, 0.15f);
+		mAnimator->Create(L"FlyRoll", FlyRolltexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 9, 0.15f);
+		mAnimator->Create(L"GroundRoll", GroundRolltexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 6, 0.15f);
 
 	
 	}
@@ -77,27 +80,41 @@ namespace jh
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
 		mPlayerPosition = mTransform->GetPosition();
+		mTime += Time::DeltaTime();
+		PlayerManager::GetPlayer()->SetPlayerState(mPlayerState);
 
-		if (mPlayerState != ePlayerState::Fly)
+		if (mPlayerState == ePlayerState::Fly
+		|| mPlayerState == ePlayerState::FlyRoll
+		|| mPlayerState == ePlayerState::FlyAttack)
+		{
+	
+		}
+		else
 		{
 			mPlayerPosition.x += mVelocity.x * (float)Time::DeltaTime();
 			mPlayerPosition.y += mVelocity.y + 0.5f * mGravity * (float)Time::DeltaTime() * (float)Time::DeltaTime();
 			mVelocity.y -= mGravity * (float)Time::DeltaTime();
 			mTransform->SetPosition(mPlayerPosition);
 
+			if (mPlayerState == ePlayerState::Jump)
+			{
+				mPlayerPosition.x += mVelocity.x * (float)Time::DeltaTime();
+				mPlayerPosition.y += mVelocity.y + 3.5f * mGravity * (float)Time::DeltaTime() * (float)Time::DeltaTime();
+				mVelocity.y -= mGravity * (float)Time::DeltaTime();
+				mTransform->SetPosition(mPlayerPosition);
+			}
 		}
 
-
-	
 		if (PlayerManager::GetPlayer()->GetIsGround() == true)
 		{
-
+			mGravity = 0.0f;
+			mVelocity.y = 0.0f;
 		}
 		else if (PlayerManager::GetPlayer()->GetIsGround() == false)
 		{
-
+			mGravity = 0.000001f;
 		}
-
+	
 		switch (mPlayerState)
 		{
 		case jh::enums::ePlayerState::Idle:
@@ -112,11 +129,15 @@ namespace jh
 		case jh::enums::ePlayerState::Jump:
 			Jump();
 			break;
+		case jh::enums::ePlayerState::GroundRoll:
+			GroundRoll();
+			break;
 		case jh::enums::ePlayerState::EnterDoor:
 			break;
 		case jh::enums::ePlayerState::StartAttack:
 			break;
 		case jh::enums::ePlayerState::Attacking:
+			Attacking();
 			break;
 		case jh::enums::ePlayerState::StartFly:
 			StartFly();
@@ -124,11 +145,17 @@ namespace jh
 		case jh::enums::ePlayerState::Fly:
 			Fly();
 			break;
+		case jh::enums::ePlayerState::FlyRoll:
+			FlyRoll();
+			break;
 		case jh::enums::ePlayerState::FlyGrab:
 			break;
 		case jh::enums::ePlayerState::FlyCarry:
 			break;
 		case jh::enums::ePlayerState::FlyHurt:
+			break;
+		case jh::enums::ePlayerState::FlyAttack:
+			FlyAttack();
 			break;
 		case jh::enums::ePlayerState::Eat:
 			break;
@@ -183,8 +210,16 @@ namespace jh
 			mPlayerState = ePlayerState::Jump;
 			mCount = 0;
 		}
-
-
+		if (Input::GetKeyDown(eKeyCode::SPACE))
+		{
+			mPlayerState = ePlayerState::GroundRoll;
+			mCount = 0;
+		}
+		if (Input::GetKeyDown(eKeyCode::LBTN))
+		{
+			mPlayerState = ePlayerState::Attacking;
+			mCount = 0;
+		}
 		
 	}
 	void PlayerScript::LeftRun()
@@ -244,18 +279,27 @@ namespace jh
 			
 			mAnimator->Play(L"Jump", false);
 
-			float JumpForce = 0.00003f;
-			mVelocity.y += JumpForce / mMass;
+			PlayerManager::GetPlayer()->SetIsGround(false);
+
+			float JumpForce = 0.0005f;
+			mVelocity.y += JumpForce / mMass ;
 			
 			mCount = 1;
 
 		}
 
-		if (Input::GetKey(eKeyCode::SPACE))
+		if (Input::GetKey(eKeyCode::E))
 		{
 			mPlayerState = ePlayerState::Fly;
 			mCount = 0;
 		}
+
+		if (Input::GetKeyDown(eKeyCode::I))
+		{
+			mPlayerState = ePlayerState::Idle;
+			mCount = 0;
+		}
+	
 
 	}
 	void PlayerScript::Hurt()
@@ -264,11 +308,53 @@ namespace jh
 	void PlayerScript::Die()
 	{
 	}
+	void PlayerScript::GroundRoll()
+	{
+		if (mCount == 0)
+		{
+			mTime = 0.0f;
+			mAnimator->Play(L"GroundRoll", false);
+			
+			mCount = 1;
+		}
+		Vector3 CheckRotation = mTransform->GetRotation();
+		if (CheckRotation.y == 180.0f)
+		{
+			float rollSpeed = 0.2f;
+			mPlayerPosition.x -= rollSpeed * (float)Time::DeltaTime();
+			mTransform->SetPosition(mPlayerPosition);
+		}
+		else
+		{
+			float rollSpeed = 0.2f;
+			mPlayerPosition.x += rollSpeed * (float)Time::DeltaTime();
+			mTransform->SetPosition(mPlayerPosition);
+		}
+
+		if (mTime >= 0.5f)
+		{
+			mPlayerState = ePlayerState::Idle;
+			mCount = 0;
+		}
+	
+		
+	}
 	void PlayerScript::StartAttack()
 	{
 	}
 	void PlayerScript::Attacking()
 	{
+		if (mCount == 0)
+		{
+			mTime = 0.0f;
+			mAnimator->Play(L"Attacking", false);
+			mCount = 1;
+		}
+		if (mTime >= 0.5f)
+		{
+			mPlayerState = ePlayerState::Idle;
+			mCount = 0;
+		}
 	}
 	void PlayerScript::StartFly()
 	{
@@ -320,6 +406,21 @@ namespace jh
 			pos.y += mSpeed * Time::DeltaTime();
 			mTransform->SetPosition(pos);
 		}
+		if (Input::GetKeyDown(eKeyCode::LBTN))
+		{
+			mPlayerState = ePlayerState::FlyAttack;
+			mCount = 0;
+		}
+		if (Input::GetKeyDown(eKeyCode::SPACE))
+		{
+			mPlayerState = ePlayerState::FlyRoll;
+			mCount = 0;
+		}
+		if (Input::GetKeyDown(eKeyCode::I))
+		{
+			mPlayerState = ePlayerState::Idle;
+			mCount = 0;
+		}
 	}
 	void PlayerScript::FlyGrab()
 	{
@@ -328,9 +429,58 @@ namespace jh
 	{
 	}
 
+	void PlayerScript::FlyAttack()
+	{
+		if (mCount == 0)
+		{
+			mTime = 0.0f;
+			mAnimator->Play(L"Attacking", false);
+			mCount = 1;
+		}
+		if (mTime >= 0.5f)
+		{
+			mPlayerState = ePlayerState::Fly;
+			mCount = 0;
+		}
+	}
+
+	void PlayerScript::StartFlyRoll()
+	{
+	}
+
+	void PlayerScript::FlyRoll()
+	{
+		if (mCount == 0)
+		{
+			mTime = 0.0f;
+			mAnimator->Play(L"FlyRoll", false);
+			mCount = 1;
+		}
+		if (mTime >= 0.5f)
+		{
+			mPlayerState = ePlayerState::Fly;
+			mCount = 0;
+		}
+		Vector3 CheckRotation = mTransform->GetRotation();
+		if (CheckRotation.y == 180.0f)
+		{
+			float rollSpeed = 0.2f;
+			mPlayerPosition.x -= rollSpeed * (float)Time::DeltaTime();
+			mTransform->SetPosition(mPlayerPosition);
+		}
+		else
+		{
+			float rollSpeed = 0.2f;
+			mPlayerPosition.x += rollSpeed * (float)Time::DeltaTime();
+			mTransform->SetPosition(mPlayerPosition);
+		}
+	}
+
 	void PlayerScript::JumpComplete()
 	{
+
 		mAnimator->Play(L"JumpDown", false);
+
 	}
 
 }

@@ -22,6 +22,8 @@
 #include "jhCollisionManager.h"
 #include "jhGeddy.h"
 #include "jhGeddyScript.h"
+#include "jhGround.h"
+#include "jhGroundScript.h"
 
 namespace jh
 {
@@ -79,7 +81,7 @@ namespace jh
 
 		Collider2D* collider = playerObj->AddComponent<Collider2D>();
 		collider->SetType(eColliderType::Rect);
-		collider->SetSize(Vector2(0.5f, 0.5f));
+		collider->SetSize(Vector2(0.3f, 0.3f));
 		
 		playerObj->AddComponent<PlayerScript>();
 		
@@ -103,6 +105,16 @@ namespace jh
 		std::shared_ptr<Material> geddymaterial = Resources::Find<Material>(L"Geddymaterial");
 		geddysr->SetMaterial(geddymaterial);
 		geddysr->SetMesh(geddymesh);
+
+		//Ground
+		Ground* groundObj = object::Instantiate<Ground>(eLayerType::BackGround);
+		Transform* groundTr = groundObj->GetComponent<Transform>();
+		groundTr->SetPosition(Vector3(0.9f, 0.734f, 1.7f));
+		groundTr->SetScale(Vector3(0.35f, 0.35f, 1.0f));
+		groundObj->AddComponent<GroundScript>();
+		Collider2D* groundcollider = groundObj->AddComponent<Collider2D>();
+		groundcollider->SetType(eColliderType::Rect);
+		groundcollider->SetSize(Vector2(1.5f, 0.3f));
 
 		// Sky
 		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround);
@@ -160,7 +172,7 @@ namespace jh
 		tilefloorsr->SetMaterial(tilefloormaterial);
 		tilefloorsr->SetMesh(tilefloormesh);
 
-	
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround, true);
 
 		Scene::Initalize();
 	}
@@ -188,7 +200,6 @@ namespace jh
 	void PlayScene::OnEnter()
 	{
 
-		
 	}
 
 	void PlayScene::OnExit()

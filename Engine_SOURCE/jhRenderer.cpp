@@ -451,6 +451,8 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"TitleRightTexture", L"TitleRight.png");
 		Resources::Load<Texture>(L"TitleLeftTexture", L"TitleLeft.png");
 		Resources::Load<Texture>(L"LeftOtusTexture", L"Title Screen\\sprOtus_245x137_strip6.png");
+		Resources::Load<Texture>(L"GrassHillTexture", L"Title Screen\\sprGrasshillBottom_400x600.png");
+		Resources::Load<Texture>(L"GrassPathwayTexture", L"Title Screen\\sprGrassPathway_340x170.png");
 #pragma endregion
 #pragma region PLAYSCENE TEXTURE
 		Resources::Load<Texture>(L"BackSkyTexture", L"BackSky.png");
@@ -472,6 +474,23 @@ namespace jh::renderer
 	void LoadMaterial()
 	{
 #pragma region TITLESCENE MATERIAL
+
+		std::shared_ptr <Texture> grasshillTexture = Resources::Find<Texture>(L"LeftOtusTexture");
+		std::shared_ptr<Shader> grasshillsshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> grasshillmaterial = std::make_shared<Material>();
+		grasshillmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		grasshillmaterial->SetShader(grasshillsshader);
+		grasshillmaterial->SetTexture(eTextureSlot::T0, grasshillTexture);
+		Resources::Insert<Material>(L"GrassHillmaterial", grasshillmaterial);
+
+		std::shared_ptr <Texture> grasspathwayTexture = Resources::Find<Texture>(L"LeftOtusTexture");
+		std::shared_ptr<Shader> grasspathwayshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> grasspathwaymaterial = std::make_shared<Material>();
+		grasspathwaymaterial->SetRenderingMode(eRenderingMode::Transparent);
+		grasspathwaymaterial->SetShader(grasspathwayshader);
+		grasspathwaymaterial->SetTexture(eTextureSlot::T0, grasspathwayTexture);
+		Resources::Insert<Material>(L"GrassPathwaymaterial", grasspathwaymaterial);
+
 		std::shared_ptr <Texture> leftotusTexture = Resources::Find<Texture>(L"LeftOtusTexture");
 		std::shared_ptr<Shader> leftotusshader = Resources::Find<Shader>(L"SpriteShader");
 		std::shared_ptr<Material> leftotusmaterial = std::make_shared<Material>();

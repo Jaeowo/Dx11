@@ -25,7 +25,7 @@ namespace jh
 		virtual void OnCollisionStay(Collider2D* collider) override;
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
-		//ePlayerState GetPlayerState() { return mPlayerState; }
+		ePlayerState GetPlayerState() { return mPlayerState; }
 
 		void Start();
 		void Action();
@@ -38,6 +38,7 @@ namespace jh
 		void Jump();
 		void Hurt();
 		void Die();
+		void GroundRoll();
 
 		void StartAttack();
 		void Attacking();
@@ -46,7 +47,9 @@ namespace jh
 		void Fly();
 		void FlyGrab();
 		void FlyCarry();
-
+		void FlyAttack();
+		void StartFlyRoll();
+		void FlyRoll();
 		//
 		void JumpComplete();
 	
