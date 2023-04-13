@@ -5,6 +5,8 @@
 #include "jhGameObject.h"
 #include "jhAnimator.h"
 
+#include "jhInput.h"
+
 namespace jh
 {
 	GeddyScript::GeddyScript()
@@ -42,6 +44,13 @@ namespace jh
 		default:
 			break;
 		}
+
+		if (Input::GetKeyDown(eKeyCode::G))
+		{
+			mGeddyState = eGeddyState::Hanging;
+			mCount = 0;
+		}
+
 	}
 	void GeddyScript::Render()
 	{

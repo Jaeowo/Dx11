@@ -1,6 +1,7 @@
 #pragma once
 #include "jhScript.h"
 
+
 namespace jh
 {
 	class Animator;

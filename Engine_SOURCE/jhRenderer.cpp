@@ -454,14 +454,20 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"GrassHillTexture", L"Title Screen\\sprGrasshillBottom_400x600.png");
 		Resources::Load<Texture>(L"GrassPathwayTexture", L"Title Screen\\sprGrassPathway_340x170.png");
 #pragma endregion
-#pragma region PLAYSCENE TEXTURE
+#pragma region BACKGROUND TEXTURE
 		Resources::Load<Texture>(L"BackSkyTexture", L"BackSky.png");
-		Resources::Load<Texture>(L"StandTexture", L"sprOtusStand.png");
 		Resources::Load<Texture>(L"HpBarTexture", L"HpBar.png");
 		Resources::Load<Texture>(L"TileFloorTexture", L"Vellie-Tropos-Owl Temple assets\\island01.png");
 		Resources::Load<Texture>(L"TopProp08Texture", L"top_prop08.png");
+#pragma endregion
+#pragma region PLAYER TEXTURE
+		Resources::Load<Texture>(L"StandTexture", L"sprOtusStand.png");
 		Resources::Load<Texture>(L"GeddyTexture", L"Geddy\\sadIdle.png");
-
+		Resources::Load<Texture>(L"GeddyArmTexture", L"Geddy\\arm_48x32.png");
+		Resources::Load<Texture>(L"MechanicBulletTexture", L"Bullets\\sprMechanicBullet_38x31.png");
+#pragma endregion
+#pragma region MONSTER TEXTURE
+		Resources::Load<Texture>(L"GawkTexture", L"Gawk\\sprGawkHurt_81x70.png");
 #pragma endregion
 #pragma region DYNAMIC TEXTURE
 		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
@@ -534,17 +540,7 @@ namespace jh::renderer
 
 	
 #pragma endregion
-#pragma region PLAYSCENE MATERIAL
-		//PlayScene
-
-		std::shared_ptr <Texture> geddytexture = Resources::Find<Texture>(L"GeddyTexture");
-		std::shared_ptr<Shader> geddyshader = Resources::Find<Shader>(L"SpriteShader");
-		std::shared_ptr<Material> geddymaterial = std::make_shared<Material>();
-		geddymaterial->SetRenderingMode(eRenderingMode::Transparent);
-		geddymaterial->SetShader(geddyshader);
-		geddymaterial->SetTexture(eTextureSlot::T0, geddytexture);
-		Resources::Insert<Material>(L"Geddymaterial", geddymaterial);
-
+#pragma region BACKGROUND MATERIAL
 
 		std::shared_ptr <Texture> backskytexture = Resources::Find<Texture>(L"BackSkyTexture");
 		std::shared_ptr<Shader> backskyshader = Resources::Find<Shader>(L"SpriteShader");
@@ -553,14 +549,6 @@ namespace jh::renderer
 		backskymaterial->SetShader(backskyshader);
 		backskymaterial->SetTexture(eTextureSlot::T0, backskytexture);
 		Resources::Insert<Material>(L"Backskymaterial", backskymaterial);
-
-		std::shared_ptr <Texture> standtexture = Resources::Find<Texture>(L"StandTexture");
-		std::shared_ptr<Shader> standshader = Resources::Find<Shader>(L"SpriteShader");
-		std::shared_ptr<Material> standmaterial = std::make_shared<Material>();
-		standmaterial->SetRenderingMode(eRenderingMode::Transparent);
-		standmaterial->SetShader(standshader);
-		standmaterial->SetTexture(eTextureSlot::T0, standtexture);
-		Resources::Insert<Material>(L"Standmaterial", standmaterial);
 
 		std::shared_ptr <Texture> hpbartexture = Resources::Find<Texture>(L"HpBarTexture");
 		std::shared_ptr<Shader> hpbarshader = Resources::Find<Shader>(L"UIShader");
@@ -585,6 +573,48 @@ namespace jh::renderer
 		topprop08material->SetShader(topprop08shader);
 		topprop08material->SetTexture(eTextureSlot::T0, topprop08texture);
 		Resources::Insert<Material>(L"TopProp08material", topprop08material);
+#pragma endregion
+#pragma region PLAYER MATERIAL
+		std::shared_ptr <Texture> mechanicbullettexture = Resources::Find<Texture>(L"MechanicBulletTexture");
+		std::shared_ptr<Shader> mechanicbulletshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> mechanicbulletmaterial = std::make_shared<Material>();
+		mechanicbulletmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		mechanicbulletmaterial->SetShader(mechanicbulletshader);
+		mechanicbulletmaterial->SetTexture(eTextureSlot::T0, mechanicbullettexture);
+		Resources::Insert<Material>(L"Mechanicbulletmaterial", mechanicbulletmaterial);
+
+		std::shared_ptr <Texture> geddyarmtexture = Resources::Find<Texture>(L"GeddyArmTexture");
+		std::shared_ptr<Shader> geddarmshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> geddyarmmaterial = std::make_shared<Material>();
+		geddyarmmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		geddyarmmaterial->SetShader(geddarmshader);
+		geddyarmmaterial->SetTexture(eTextureSlot::T0, geddyarmtexture);
+		Resources::Insert<Material>(L"GeddyArmmaterial", geddyarmmaterial);
+
+		std::shared_ptr <Texture> geddytexture = Resources::Find<Texture>(L"GeddyTexture");
+		std::shared_ptr<Shader> geddyshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> geddymaterial = std::make_shared<Material>();
+		geddymaterial->SetRenderingMode(eRenderingMode::Transparent);
+		geddymaterial->SetShader(geddyshader);
+		geddymaterial->SetTexture(eTextureSlot::T0, geddytexture);
+		Resources::Insert<Material>(L"Geddymaterial", geddymaterial);
+
+		std::shared_ptr <Texture> standtexture = Resources::Find<Texture>(L"StandTexture");
+		std::shared_ptr<Shader> standshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> standmaterial = std::make_shared<Material>();
+		standmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		standmaterial->SetShader(standshader);
+		standmaterial->SetTexture(eTextureSlot::T0, standtexture);
+		Resources::Insert<Material>(L"Standmaterial", standmaterial);
+#pragma endregion
+#pragma region MONSTER MATERIAL
+		std::shared_ptr <Texture> gawktexture = Resources::Find<Texture>(L"GawkTexture");
+		std::shared_ptr<Shader> gawkshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> gawkmaterial = std::make_shared<Material>();
+		gawkmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		gawkmaterial->SetShader(gawkshader);
+		gawkmaterial->SetTexture(eTextureSlot::T0, gawktexture);
+		Resources::Insert<Material>(L"GawkMaterial", gawkmaterial);
 #pragma endregion
 #pragma region DEFAULT
 		std::shared_ptr <Texture> texture = Resources::Find<Texture>(L"PaintTexture");

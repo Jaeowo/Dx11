@@ -174,7 +174,10 @@
     <ClInclude Include="jhFadeInScript.h" />
     <ClInclude Include="jhFadeOutScript.h" />
     <ClInclude Include="jhGameObject.h" />
+    <ClInclude Include="jhGawk.h" />
     <ClInclude Include="jhGeddy.h" />
+    <ClInclude Include="jhGeddyBullet.h" />
+    <ClInclude Include="jhGeddyhands.h" />
     <ClInclude Include="jhGeddyScript.h" />
     <ClInclude Include="jhGraphicDevice_DX11.h" />
     <ClInclude Include="jhGraphics.h" />
@@ -184,7 +187,6 @@
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhLight.h" />
-    <ClInclude Include="jhMonster.h" />
     <ClInclude Include="jhMovingHandScript.h" />
     <ClInclude Include="jhObject.h" />
     <ClInclude Include="jhPaintShader.h" />
@@ -232,7 +234,10 @@
     <ClCompile Include="jhFadeInScript.cpp" />
     <ClCompile Include="jhFadeOutScript.cpp" />
     <ClCompile Include="jhGameObject.cpp" />
+    <ClCompile Include="jhGawk.cpp" />
     <ClCompile Include="jhGeddy.cpp" />
+    <ClCompile Include="jhGeddyBullet.cpp" />
+    <ClCompile Include="jhGeddyhands.cpp" />
     <ClCompile Include="jhGeddyScript.cpp" />
     <ClCompile Include="jhGraphicDevice_DX11.cpp" />
     <ClCompile Include="jhGridScript.cpp" />
@@ -241,7 +246,6 @@
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhLight.cpp" />
-    <ClCompile Include="jhMonster.cpp" />
     <ClCompile Include="jhMovingHandScript.cpp" />
     <ClCompile Include="jhPaintShader.cpp" />
     <ClCompile Include="jhParticleShader.cpp" />

@@ -5,6 +5,8 @@
 
 namespace jh
 {
+	class Transform;
+
 	class Player
 		: public GameObject
 	{
@@ -27,6 +29,8 @@ namespace jh
 		void SetIsGround(bool bGround) { mbGround = bGround; }
 
 	private:
+		Transform* mTransform;
+
 		ePlayerState mPlayerState;
 		Vector3 mPlayerPos;
 		bool mbGround;

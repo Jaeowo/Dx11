@@ -5,6 +5,7 @@ namespace jh
 {
 	DebugObject::DebugObject()
 	{
+
 	}
 	DebugObject::~DebugObject()
 	{

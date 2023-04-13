@@ -79,9 +79,11 @@ namespace jh
 		mTransform = GetOwner()->GetComponent<Transform>();
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
+		
 		mPlayerPosition = mTransform->GetPosition();
 		mTime += Time::DeltaTime();
 		PlayerManager::GetPlayer()->SetPlayerState(mPlayerState);
+		PlayerManager::GetPlayer()->SetPlayerPos(mPlayerPosition);
 
 		if (mPlayerState == ePlayerState::Fly
 		|| mPlayerState == ePlayerState::FlyRoll

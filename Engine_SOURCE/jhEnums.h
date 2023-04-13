@@ -19,6 +19,7 @@ namespace jh::enums
 		Grid,
 		Monster,
 		Friends,
+		FriendsObject,
 		Player,
 		Effect,
 

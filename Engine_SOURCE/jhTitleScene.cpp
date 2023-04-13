@@ -13,7 +13,6 @@
 #include "jhInput.h"
 #include "jhCollider2D.h"
 #include "jhPlayer.h"
-#include "jhMonster.h"
 #include "jhCollisionManager.h"
 #include "jhAnimator.h"
 #include "jhLight.h"

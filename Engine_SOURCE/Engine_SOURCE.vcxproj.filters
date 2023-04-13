@@ -121,9 +121,6 @@
     <ClInclude Include="jhPlayer.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="jhMonster.h">
-      <Filter>GameObject\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="jhAnimation.h">
       <Filter>Component\Animator</Filter>
     </ClInclude>
@@ -132,9 +129,6 @@
     </ClInclude>
     <ClInclude Include="jhCloudScript.h">
       <Filter>Component\Script\BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="jhMovingHandScript.h">
-      <Filter>Component\Script\PlayerScript</Filter>
     </ClInclude>
     <ClInclude Include="jhPlayerManager.h">
       <Filter>GameObject\Player</Filter>
@@ -169,10 +163,22 @@
       <Filter>Component\Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="jhGeddy.h">
-      <Filter>GameObject\Friends</Filter>
+      <Filter>GameObject\Geddy</Filter>
     </ClInclude>
     <ClInclude Include="jhGeddyScript.h">
       <Filter>Component\Script\FriendsScript</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGeddyhands.h">
+      <Filter>GameObject\Geddy</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMovingHandScript.h">
+      <Filter>Component\Script\FriendsScript</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGawk.h">
+      <Filter>GameObject\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGeddyBullet.h">
+      <Filter>GameObject\Geddy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -281,9 +287,6 @@
     <ClCompile Include="jhPlayer.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="jhMonster.cpp">
-      <Filter>GameObject\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="jhAnimation.cpp">
       <Filter>Component\Animator</Filter>
     </ClCompile>
@@ -292,9 +295,6 @@
     </ClCompile>
     <ClCompile Include="jhCloudScript.cpp">
       <Filter>Component\Script\BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="jhMovingHandScript.cpp">
-      <Filter>Component\Script\PlayerScript</Filter>
     </ClCompile>
     <ClCompile Include="jhPlayerManager.cpp">
       <Filter>GameObject\Player</Filter>
@@ -329,10 +329,22 @@
       <Filter>Component\Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="jhGeddy.cpp">
-      <Filter>GameObject\Friends</Filter>
+      <Filter>GameObject\Geddy</Filter>
     </ClCompile>
     <ClCompile Include="jhGeddyScript.cpp">
       <Filter>Component\Script\FriendsScript</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGeddyhands.cpp">
+      <Filter>GameObject\Geddy</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMovingHandScript.cpp">
+      <Filter>Component\Script\FriendsScript</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGeddyBullet.cpp">
+      <Filter>GameObject\Geddy</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGawk.cpp">
+      <Filter>GameObject\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -459,7 +471,7 @@
     <Filter Include="Component\Script\FriendsScript">
       <UniqueIdentifier>{2b21f828-8c33-4a5d-bed6-d681b63dae8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Friends">
+    <Filter Include="GameObject\Geddy">
       <UniqueIdentifier>{59fd6f28-0c2e-4a75-b5cc-7bb29f4e5204}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

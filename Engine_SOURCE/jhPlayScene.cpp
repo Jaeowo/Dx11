@@ -24,6 +24,9 @@
 #include "jhGeddyScript.h"
 #include "jhGround.h"
 #include "jhGroundScript.h"
+#include "jhGeddyhands.h"
+#include "jhMovingHandScript.h"
+#include "jhGawk.h"
 
 namespace jh
 {
@@ -75,22 +78,24 @@ namespace jh
 		Player* playerObj = object::Instantiate<Player>(eLayerType::Player);
 		PlayerManager::SetPlayer(playerObj);
 		playerObj->SetName(L"Player");
-		Transform* PlayerTr = playerObj->GetComponent<Transform>();
-		PlayerTr->SetPosition(Vector3(1.0f, 0.84f, 1.7f));
-		PlayerTr->SetScale(Vector3(0.35f, 0.35f, 1.0f));
-
-		Collider2D* collider = playerObj->AddComponent<Collider2D>();
-		collider->SetType(eColliderType::Rect);
-		collider->SetSize(Vector2(0.3f, 0.3f));
-		
 		playerObj->AddComponent<PlayerScript>();
-		
 
-		SpriteRenderer* standsr = playerObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");                  
-		std::shared_ptr<Material> standmaterial = Resources::Find<Material>(L"Standmaterial");
-		standsr->SetMaterial(standmaterial);
-		standsr->SetMesh(standmesh);
+		//Gawk
+		Gawk* gawkObj = object::Instantiate<Gawk>(eLayerType::Monster);
+		SpriteRenderer* gawksr = gawkObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> gawkmesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> gawkmaterial = Resources::Find<Material>(L"GawkMaterial");
+		gawksr->SetMaterial(gawkmaterial);
+		gawksr->SetMesh(gawkmesh);
+
+		//GeddyHands
+		Geddyhands* geddyhandsObj = object::Instantiate<Geddyhands>(eLayerType::FriendsObject);
+		SpriteRenderer* geddyhandssr = geddyhandsObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> geddyhandsmesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> geddyhandsmaterial = Resources::Find<Material>(L"GeddyArmmaterial");
+		geddyhandssr->SetMaterial(geddyhandsmaterial);
+		geddyhandssr->SetMesh(geddyhandsmesh);
+
 
 		//Geddy
 		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
@@ -105,6 +110,7 @@ namespace jh
 		std::shared_ptr<Material> geddymaterial = Resources::Find<Material>(L"Geddymaterial");
 		geddysr->SetMaterial(geddymaterial);
 		geddysr->SetMesh(geddymesh);
+
 
 		//Ground
 		Ground* groundObj = object::Instantiate<Ground>(eLayerType::BackGround);

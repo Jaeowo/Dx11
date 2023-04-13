@@ -3,6 +3,9 @@
 
 namespace jh
 {
+	class Animator;
+	class Transform;
+
 	class MovingHandScript
 		: public Script
 	{
@@ -19,6 +22,9 @@ namespace jh
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
 	private:
+		Animator* mAnimator;
+		Transform* mTransform;
+		Vector3 mAngle;
 
 	};
 }
