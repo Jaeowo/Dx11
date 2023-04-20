@@ -121,4 +121,5 @@ namespace jh
 			script->OnTriggerExit(collider);
 		}
 	}
+
 }

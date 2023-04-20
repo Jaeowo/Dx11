@@ -21,6 +21,7 @@ namespace jh::enums
 		Friends,
 		FriendsObject,
 		Player,
+		BackGrouncObj,
 		Effect,
 
 		Particle,

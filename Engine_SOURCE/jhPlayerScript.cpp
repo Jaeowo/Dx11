@@ -9,6 +9,7 @@
 #include "jhResources.h"
 #include "jhRigidbody.h"
 
+
 namespace jh
 {
 	PlayerScript::PlayerScript()
@@ -21,6 +22,7 @@ namespace jh
 		, mSpeed(0.5f)
 	
 	{
+
 		mVelocity = (Vector2(0.0f, 0.0f));
 		mMass = 150.0f;
 

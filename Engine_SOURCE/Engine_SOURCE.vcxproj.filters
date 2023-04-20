@@ -180,6 +180,54 @@
     <ClInclude Include="jhGeddyBullet.h">
       <Filter>GameObject\Geddy</Filter>
     </ClInclude>
+    <ClInclude Include="jhHorizontal.h">
+      <Filter>GameObject\BackGround\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSloped.h">
+      <Filter>GameObject\BackGround\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="jhVertical.h">
+      <Filter>GameObject\BackGround\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBackRock.h">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBackRock2.h">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBackRock2Shadow.h">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBackRock3.h">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBackRock3Shadow.h">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBackRockShadow.h">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClInclude>
+    <ClInclude Include="jhRingScript.h">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTile01.h">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTile02.h">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTile03.h">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTile04.h">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGrassFloor.h">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGrassSlope.h">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -346,6 +394,54 @@
     <ClCompile Include="jhGawk.cpp">
       <Filter>GameObject\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="jhHorizontal.cpp">
+      <Filter>GameObject\BackGround\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSloped.cpp">
+      <Filter>GameObject\BackGround\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="jhVertical.cpp">
+      <Filter>GameObject\BackGround\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBackRock.cpp">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBackRock2.cpp">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBackRock2Shadow.cpp">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBackRock3.cpp">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBackRock3Shadow.cpp">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBackRockShadow.cpp">
+      <Filter>GameObject\BackGround\BackRock</Filter>
+    </ClCompile>
+    <ClCompile Include="jhRingScript.cpp">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTile01.cpp">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTile02.cpp">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTile03.cpp">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTile04.cpp">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGrassFloor.cpp">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGrassSlope.cpp">
+      <Filter>GameObject\BackGround\Platform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -473,6 +569,18 @@
     </Filter>
     <Filter Include="GameObject\Geddy">
       <UniqueIdentifier>{59fd6f28-0c2e-4a75-b5cc-7bb29f4e5204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround">
+      <UniqueIdentifier>{7c6d12d9-a65c-4196-984b-d93c61ad51be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\Ring">
+      <UniqueIdentifier>{63fe17d5-bba3-461a-aad9-ac23bdfad6d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\BackRock">
+      <UniqueIdentifier>{a580c01f-d483-4b5a-88f9-cedd40271a08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\Platform">
+      <UniqueIdentifier>{8afb4a11-1149-4567-b470-0a1203c6373e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

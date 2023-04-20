@@ -1,9 +1,13 @@
 #include "jhGeddy.h"
+#include "jhCollider2D.h"
 
 namespace jh
 {
 	Geddy::Geddy()
 	{
+		Collider2D* collider = AddComponent<Collider2D>();
+		collider->SetType(eColliderType::Rect);
+		collider->SetSize(Vector2(0.3f, 0.3f));
 	}
 	Geddy::~Geddy()
 	{

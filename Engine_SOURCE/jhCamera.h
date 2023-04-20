@@ -4,6 +4,7 @@
 
 namespace jh
 {
+	class GameObject;
 	using namespace math;
 	class Camera : public Component
 	{
@@ -41,6 +42,9 @@ namespace jh
 		Matrix& GetViewMatrix() { return mView; }
 		Matrix& GetProjectionMatrix() { return mProjection; }
 
+		static void SetTarget(GameObject* gameObj) { mTarget = gameObj; }
+		GameObject* GetTarget() { return mTarget; }
+
 	private:
 		void sortGameObjects();
 		void renderOpaque();
@@ -51,6 +55,8 @@ namespace jh
 	private:
 		static Matrix View;
 		static Matrix Projection;
+		static GameObject* mTarget;
+
 
 		Matrix mView;
 		Matrix mProjection;

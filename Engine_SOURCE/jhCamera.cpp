@@ -8,6 +8,7 @@
 #include "jhMaterial.h"
 #include "jhBaseRenderer.h"
 #include "jhSceneManager.h"
+#include "jhCameraScript.h"
 
 extern jh::Application application;
 
@@ -15,6 +16,7 @@ namespace jh
 {
 	Matrix Camera::View = Matrix::Identity;
 	Matrix Camera::Projection = Matrix::Identity;
+	GameObject* Camera::mTarget = nullptr;
 
 	Camera::Camera()
 		: Component(eComponentType::Camera)
@@ -39,6 +41,7 @@ namespace jh
 
 	void Camera::Update()
 	{
+
 	}
 
 	void Camera::FixedUpdate()
@@ -104,7 +107,6 @@ namespace jh
 		}
 		else
 		{
-			//mProjection = Matrix::CreateOrthographicLH(width /*/ 100.0f*/, height /*/ 100.0f*/, mNear, mFar);
 			mProjection = Matrix::CreateOrthographicLH(width / 100.0f, height / 100.0f, mNear, mFar);
 		}
 	}

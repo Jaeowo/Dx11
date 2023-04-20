@@ -1,17 +1,14 @@
 #pragma once
 #include "jhGameObject.h"
-
 namespace jh
 {
-	class Animator;
 	class Transform;
-
-	class GeddyBullet
+	class Sloped
 		: public GameObject
 	{
 	public:
-		GeddyBullet();
-		virtual ~GeddyBullet();
+		Sloped();
+		virtual ~Sloped();
 
 		virtual void Initalize();
 		virtual void Update();
@@ -19,10 +16,11 @@ namespace jh
 		virtual void Render();
 
 	private:
-		Animator* mAnimator;
 		Transform* mTransform;
-		float mSpeed;
 	};
 }
+
+
+
 
 

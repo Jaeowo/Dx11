@@ -3,15 +3,13 @@
 
 namespace jh
 {
-	class Animator;
 	class Transform;
-
-	class GeddyBullet
+	class Horizontal
 		: public GameObject
 	{
 	public:
-		GeddyBullet();
-		virtual ~GeddyBullet();
+		Horizontal();
+		virtual ~Horizontal();
 
 		virtual void Initalize();
 		virtual void Update();
@@ -19,9 +17,7 @@ namespace jh
 		virtual void Render();
 
 	private:
-		Animator* mAnimator;
 		Transform* mTransform;
-		float mSpeed;
 	};
 }
 

@@ -15,7 +15,8 @@ namespace jh
 
 		Collider2D* collider = AddComponent<Collider2D>();
 		collider->SetType(eColliderType::Rect);
-		collider->SetSize(Vector2(0.3f, 0.3f));
+		collider->SetSize(Vector2(0.1f, 0.28f));
+		//collider->SetCenter(Vector2(-0.015f, -0.02f));
 
 		SpriteRenderer* standsr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");

@@ -32,16 +32,16 @@ namespace jh
 		{
 			playerObj->SetPlayerState(ePlayerState::Idle);
 		}
-		float fLen = fabs(collider->GetPosition().y - GetOwner()->GetComponent<Collider2D>()->GetPosition().y);
-		float fScale = collider->GetSize().y / 2.0f + GetOwner()->GetComponent<Collider2D>()->GetSize().y / 2.0f;
+		//float fLen = fabs(collider->GetPosition().y - GetOwner()->GetComponent<Collider2D>()->GetPosition().y);
+		//float fScale = collider->GetSize().y / 2.0f + GetOwner()->GetComponent<Collider2D>()->GetSize().y / 2.0f;
 
 
-		if (fLen < fScale)
-		{
-			Vector3 playerPos = playerObj->GetPlayerPos();
-			playerPos.y -= (fScale - fLen) - 1.0f;
-			playerObj->SetPos(playerPos);
-		}
+		//if (fLen < fScale)
+		//{
+		//	Vector3 playerPos = playerObj->GetPlayerPos();
+		//	playerPos.y -= (fScale - fLen) - 1.0f;
+		//	playerObj->SetPos(playerPos);
+		//}
 	
 	}
 	void GroundScript::OnCollisionStay(Collider2D* collider)

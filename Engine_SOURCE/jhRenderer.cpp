@@ -459,6 +459,9 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"HpBarTexture", L"HpBar.png");
 		Resources::Load<Texture>(L"TileFloorTexture", L"Vellie-Tropos-Owl Temple assets\\island01.png");
 		Resources::Load<Texture>(L"TopProp08Texture", L"top_prop08.png");
+		Resources::Load<Texture>(L"HorizontalTexture", L"Rings\\horizontal.png");
+		Resources::Load<Texture>(L"SlopedTexture", L"Rings\\sloped.png");
+		Resources::Load<Texture>(L"VerticalTexture", L"Rings\\vertical.png");
 #pragma endregion
 #pragma region PLAYER TEXTURE
 		Resources::Load<Texture>(L"StandTexture", L"sprOtusStand.png");
@@ -475,10 +478,127 @@ namespace jh::renderer
 			| D3D11_BIND_UNORDERED_ACCESS);
 		Resources::Insert<Texture>(L"PaintTexture", uavTexture);
 #pragma endregion
+#pragma region BACKROCK TEXTURE
+		Resources::Load<Texture>(L"BackRockTexture", L"Vellie Cave\\backRock.png");
+		Resources::Load<Texture>(L"BackRockShadowTexture", L"Vellie Cave\\backRockShadow.png");
+		Resources::Load<Texture>(L"BackRock2Texture", L"Vellie Cave\\backRock2.png");
+		Resources::Load<Texture>(L"BackRock2ShadowTexture", L"Vellie Cave\\backRock2Shadow.png");
+		Resources::Load<Texture>(L"BackRock3Texture", L"Vellie Cave\\backRock3.png");
+		Resources::Load<Texture>(L"BackRock3ShadowTexture", L"Vellie Cave\\backRock3Shadow.png");
+#pragma endregion
+#pragma region PLATFORM TEXTURE
+		Resources::Load<Texture>(L"GrassFloorTexture", L"Vellie-Tropos-Owl Temple assets\\grassFloor1.png");
+		Resources::Load<Texture>(L"GrassSlopeTexture", L"Vellie-Tropos-Owl Temple assets\\grassSlope.png");
+		Resources::Load<Texture>(L"Tile01Texture", L"Vellie-Tropos-Owl Temple assets\\tile01.png");
+		Resources::Load<Texture>(L"Tile02Texture", L"Vellie-Tropos-Owl Temple assets\\tile02.png");
+		Resources::Load<Texture>(L"Tile03Texture", L"Vellie-Tropos-Owl Temple assets\\tile03.png");
+		Resources::Load<Texture>(L"Tile04Texture", L"Vellie-Tropos-Owl Temple assets\\tile04.png");
+
+#pragma endregion
 	}
 
 	void LoadMaterial()
 	{
+#pragma region PLATFORM MATERIAL
+
+		std::shared_ptr <Texture> grassfloortexture = Resources::Find<Texture>(L"GrassFloorTexture");
+		std::shared_ptr<Shader> grassfloorshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> grassfloormaterial = std::make_shared<Material>();
+		grassfloormaterial->SetRenderingMode(eRenderingMode::Transparent);
+		grassfloormaterial->SetShader(grassfloorshader);
+		grassfloormaterial->SetTexture(eTextureSlot::T0, grassfloortexture);
+		Resources::Insert<Material>(L"GrassFloorMaterial", grassfloormaterial);
+
+		std::shared_ptr <Texture> grassslopetexture = Resources::Find<Texture>(L"GrassSlopeTexture");
+		std::shared_ptr<Shader> grassslopeshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> grassslopematerial = std::make_shared<Material>();
+		grassslopematerial->SetRenderingMode(eRenderingMode::Transparent);
+		grassslopematerial->SetShader(grassslopeshader);
+		grassslopematerial->SetTexture(eTextureSlot::T0, grassslopetexture);
+		Resources::Insert<Material>(L"GrassSlopeMaterial", grassslopematerial);
+
+		std::shared_ptr <Texture> tile01texture = Resources::Find<Texture>(L"Tile01Texture");
+		std::shared_ptr<Shader> tile01shader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> tile01material = std::make_shared<Material>();
+		tile01material->SetRenderingMode(eRenderingMode::Transparent);
+		tile01material->SetShader(tile01shader);
+		tile01material->SetTexture(eTextureSlot::T0, tile01texture);
+		Resources::Insert<Material>(L"Tile01Material", tile01material);
+
+		std::shared_ptr <Texture> tile02texture = Resources::Find<Texture>(L"Tile02Texture");
+		std::shared_ptr<Shader> tile02shader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> tile02material = std::make_shared<Material>();
+		tile02material->SetRenderingMode(eRenderingMode::Transparent);
+		tile02material->SetShader(tile02shader);
+		tile02material->SetTexture(eTextureSlot::T0, tile02texture);
+		Resources::Insert<Material>(L"Tile02Material", tile02material);
+
+		std::shared_ptr <Texture> tile03texture = Resources::Find<Texture>(L"Tile03Texture");
+		std::shared_ptr<Shader> tile03shader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> tile03material = std::make_shared<Material>();
+		tile03material->SetRenderingMode(eRenderingMode::Transparent);
+		tile03material->SetShader(tile03shader);
+		tile03material->SetTexture(eTextureSlot::T0, tile03texture);
+		Resources::Insert<Material>(L"Tile03Material", tile03material);
+
+		std::shared_ptr <Texture> tile04texture = Resources::Find<Texture>(L"Tile04Texture");
+		std::shared_ptr<Shader> tile04shader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> tile04material = std::make_shared<Material>();
+		tile04material->SetRenderingMode(eRenderingMode::Transparent);
+		tile04material->SetShader(tile04shader);
+		tile04material->SetTexture(eTextureSlot::T0, tile04texture);
+		Resources::Insert<Material>(L"Tile04Material", tile04material);
+
+#pragma endregion
+#pragma region BACKROCK MATERIAL
+		std::shared_ptr <Texture> backrockTexture = Resources::Find<Texture>(L"BackRockTexture");
+		std::shared_ptr<Shader> backrockshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> backrockmaterial = std::make_shared<Material>();
+		backrockmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		backrockmaterial->SetShader(backrockshader);
+		backrockmaterial->SetTexture(eTextureSlot::T0, backrockTexture);
+		Resources::Insert<Material>(L"BackRockMaterial", backrockmaterial);
+
+		std::shared_ptr <Texture> backrockshadowTexture = Resources::Find<Texture>(L"BackRockShadowTexture");
+		std::shared_ptr<Shader> backrockshadowshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> backrockshadowmaterial = std::make_shared<Material>();
+		backrockshadowmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		backrockshadowmaterial->SetShader(backrockshadowshader);
+		backrockshadowmaterial->SetTexture(eTextureSlot::T0, backrockshadowTexture);
+		Resources::Insert<Material>(L"BackRockShadowMaterial", backrockshadowmaterial);
+
+		std::shared_ptr <Texture> backrock2Texture = Resources::Find<Texture>(L"BackRock2Texture");
+		std::shared_ptr<Shader> backrock2shader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> backrock2material = std::make_shared<Material>();
+		backrock2material->SetRenderingMode(eRenderingMode::Transparent);
+		backrock2material->SetShader(backrock2shader);
+		backrock2material->SetTexture(eTextureSlot::T0, backrock2Texture);
+		Resources::Insert<Material>(L"BackRock2Material", backrock2material);
+
+		std::shared_ptr <Texture> backrock2shadowTexture = Resources::Find<Texture>(L"BackRock2ShadowTexture");
+		std::shared_ptr<Shader> backrock2shadowshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> backrock2shadowmaterial = std::make_shared<Material>();
+		backrock2shadowmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		backrock2shadowmaterial->SetShader(backrock2shadowshader);
+		backrock2shadowmaterial->SetTexture(eTextureSlot::T0, backrock2shadowTexture);
+		Resources::Insert<Material>(L"BackRock2ShadowMaterial", backrock2shadowmaterial);
+
+		std::shared_ptr <Texture> backrock3Texture = Resources::Find<Texture>(L"BackRock3Texture");
+		std::shared_ptr<Shader> backrock3shader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> backrock3material = std::make_shared<Material>();
+		backrock3material->SetRenderingMode(eRenderingMode::Transparent);
+		backrock3material->SetShader(backrock3shader);
+		backrock3material->SetTexture(eTextureSlot::T0, backrock3Texture);
+		Resources::Insert<Material>(L"BackRock3Material", backrock3material);
+
+		std::shared_ptr <Texture> backrock3shadowTexture = Resources::Find<Texture>(L"BackRock3ShadowTexture");
+		std::shared_ptr<Shader> backrock3shadowshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> backrock3shadowmaterial = std::make_shared<Material>();
+		backrock3shadowmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		backrock3shadowmaterial->SetShader(backrock3shadowshader);
+		backrock3shadowmaterial->SetTexture(eTextureSlot::T0, backrock3shadowTexture);
+		Resources::Insert<Material>(L"BackRock3ShadowMaterial", backrock3shadowmaterial);
+#pragma endregion
 #pragma region TITLESCENE MATERIAL
 
 		std::shared_ptr <Texture> grasshillTexture = Resources::Find<Texture>(L"LeftOtusTexture");
@@ -541,6 +661,29 @@ namespace jh::renderer
 	
 #pragma endregion
 #pragma region BACKGROUND MATERIAL
+		std::shared_ptr <Texture> verticaltexture = Resources::Find<Texture>(L"VerticalTexture");
+		std::shared_ptr<Shader> verticalshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> verticalmaterial = std::make_shared<Material>();
+		verticalmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		verticalmaterial->SetShader(verticalshader);
+		verticalmaterial->SetTexture(eTextureSlot::T0, verticaltexture);
+		Resources::Insert<Material>(L"Verticalmaterial", verticalmaterial);
+
+		std::shared_ptr <Texture> Slopedtexture = Resources::Find<Texture>(L"SlopedTexture");
+		std::shared_ptr<Shader> Slopedshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> Slopedmaterial = std::make_shared<Material>();
+		Slopedmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Slopedmaterial->SetShader(Slopedshader);
+		Slopedmaterial->SetTexture(eTextureSlot::T0, Slopedtexture);
+		Resources::Insert<Material>(L"Slopedmaterial", Slopedmaterial);
+
+		std::shared_ptr <Texture> horizontaltexture = Resources::Find<Texture>(L"HorizontalTexture");
+		std::shared_ptr<Shader> horizontalshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> horizontalmaterial = std::make_shared<Material>();
+		horizontalmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		horizontalmaterial->SetShader(horizontalshader);
+		horizontalmaterial->SetTexture(eTextureSlot::T0, horizontaltexture);
+		Resources::Insert<Material>(L"Horizontalmaterial", horizontalmaterial);
 
 		std::shared_ptr <Texture> backskytexture = Resources::Find<Texture>(L"BackSkyTexture");
 		std::shared_ptr<Shader> backskyshader = Resources::Find<Shader>(L"SpriteShader");

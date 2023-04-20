@@ -7,6 +7,8 @@ namespace jh
 	class Animator;
 	class Transform;
 
+
+
 	class GeddyScript
 		: public Script
 	{

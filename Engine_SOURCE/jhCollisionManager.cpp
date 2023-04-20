@@ -213,6 +213,7 @@ namespace jh
 				return false;
 			}
 		}
+		// ¼÷Á¦ Circle vs Cirlce
 
 		return true;
 	}

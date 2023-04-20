@@ -3,6 +3,8 @@
 
 namespace jh
 {
+
+
 	class CameraScript
 		:public Script
 	{
@@ -14,6 +16,7 @@ namespace jh
 		virtual void Update() override;
 		virtual void Render() override;
 	private:
+		bool mEditorMode;
 	};
 }
 

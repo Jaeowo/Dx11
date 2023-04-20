@@ -27,6 +27,9 @@
 #include "jhGeddyhands.h"
 #include "jhMovingHandScript.h"
 #include "jhGawk.h"
+#include "jhHorizontal.h"
+#include "jhSloped.h"
+#include "jhVertical.h"
 
 namespace jh
 {
@@ -51,18 +54,10 @@ namespace jh
 			lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 
-		{
-			//GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
-			//directionalLight->GetComponent<Transform>()->SetPosition(Vector3(3.0f, 0.0f, 0.0f));
-			//Light* lightComp = directionalLight->AddComponent<Light>();
-			//lightComp->SetType(eLightType::Point);
-			//lightComp->SetRadius(10.0f);
-			//lightComp->SetDiffuse(Vector4(0.0f, 0.0f, 0.0f, 0.0f));
-		}
 
+		//Main Camera
 		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
 		Camera* cameraComp = cameraObj->AddComponent<Camera>();
-		//cameraComp->RegisterCameraInRenderer();
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
 		cameraObj->AddComponent<CameraScript>();
 		mainCamera = cameraComp;
@@ -74,11 +69,53 @@ namespace jh
 		cameraUIComp->DisableLayerMasks();
 		cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 
+
+		//!!!!!!! 코드 너무 길어졌으니 객체들 클래스로 옮겨서 정리하기 !!!!!!
+		
+		// Horizontal
+		Horizontal* horizontalObj = object::Instantiate<Horizontal>(eLayerType::BackGrouncObj);
+		Transform* horizontalTr = horizontalObj->GetComponent<Transform>();
+		horizontalTr->SetPosition(Vector3(1.5f, 1.0f, 1.7f));
+		horizontalTr->SetScale(Vector3(0.16, 0.08f, 1.0f));
+
+		SpriteRenderer* horizontalsr = horizontalObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> horizontalmesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> horizontalmaterial = Resources::Find<Material>(L"Horizontalmaterial");
+		horizontalsr->SetMaterial(horizontalmaterial);
+		horizontalsr->SetMesh(horizontalmesh);
+
+		// Sloped
+		Sloped* slopedObj = object::Instantiate<Sloped>(eLayerType::BackGrouncObj);
+		Transform* slopedTr = slopedObj->GetComponent<Transform>();
+		slopedTr->SetPosition(Vector3(1.5f, 0.9f, 1.7f));
+		slopedTr->SetScale(Vector3(0.14f, 0.1f, 1.0f));
+
+		SpriteRenderer* slopedsr = slopedObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> slopedmesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> slopedmaterial = Resources::Find<Material>(L"Slopedmaterial");
+		slopedsr->SetMaterial(slopedmaterial);
+		slopedsr->SetMesh(slopedmesh);
+
+		// Vertical
+		Vertical* verticalObj = object::Instantiate<Vertical>(eLayerType::BackGrouncObj);
+		Transform* VerticalTr = verticalObj->GetComponent<Transform>();
+		VerticalTr->SetPosition(Vector3(1.5f, 0.8f, 1.7f));
+		VerticalTr->SetScale(Vector3(0.1f, 0.13f, 1.0f));
+
+		SpriteRenderer* verticalsr = verticalObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> verticalymesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> verticalmaterial = Resources::Find<Material>(L"Verticalmaterial");
+		verticalsr->SetMaterial(verticalmaterial);
+		verticalsr->SetMesh(verticalymesh);
+
 		// Player
 		Player* playerObj = object::Instantiate<Player>(eLayerType::Player);
 		PlayerManager::SetPlayer(playerObj);
 		playerObj->SetName(L"Player");
 		playerObj->AddComponent<PlayerScript>();
+
+		cameraComp->SetTarget(playerObj);
+	
 
 		//Gawk
 		Gawk* gawkObj = object::Instantiate<Gawk>(eLayerType::Monster);
@@ -121,10 +158,43 @@ namespace jh
 		Collider2D* groundcollider = groundObj->AddComponent<Collider2D>();
 		groundcollider->SetType(eColliderType::Rect);
 		groundcollider->SetSize(Vector2(1.5f, 0.3f));
+		//groundcollider->SetCenter(Vector2(1.0f, 1.0f));
+
+		//BackRock3
+		GameObject* backrock3Obj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		Transform* backrock3Tr = backrock3Obj->GetComponent<Transform>();
+		backrock3Tr->SetPosition(Vector3(0.5f, 0.9f, 1.7f));
+		backrock3Tr->SetScale(Vector3(0.15f, 0.15f, 1.0f));
+		SpriteRenderer* backroc3sr = backrock3Obj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> backrock3mesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> backrock3material = Resources::Find<Material>(L"BackRock3Material");
+		backroc3sr->SetMaterial(backrock3material);
+		backroc3sr->SetMesh(backrock3mesh);
+
+		//BackRock
+		GameObject* backrockObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		Transform* backrockTr = backrockObj->GetComponent<Transform>();
+		backrockTr->SetPosition(Vector3(0.5f, 0.8f, 1.7f));
+		backrockTr->SetScale(Vector3(0.15f, 0.15f, 1.0f));
+		SpriteRenderer* backrocksr = backrockObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> backrockmesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> backrockmaterial = Resources::Find<Material>(L"BackRockMaterial");
+		backrocksr->SetMaterial(backrockmaterial);
+		backrocksr->SetMesh(backrockmesh);
+
+		//BackRock2
+		GameObject* backrock2Obj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		Transform* backrock2Tr = backrock2Obj->GetComponent<Transform>();
+		backrock2Tr->SetPosition(Vector3(0.5f, 0.6f, 1.7f));
+		backrock2Tr->SetScale(Vector3(0.15f, 0.15f, 1.0f));
+		SpriteRenderer* backrock2sr = backrock2Obj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> backrock2mesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> backrock2material = Resources::Find<Material>(L"BackRock2Material");
+		backrock2sr->SetMaterial(backrock2material);
+		backrock2sr->SetMesh(backrock2mesh);
 
 		// Sky
-		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround);
-		backskyObj->SetName(L"BackSky");
+		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround2);
 		Transform* backskyTr = backskyObj->GetComponent<Transform>();
 		backskyTr->SetPosition(Vector3(1.0f, 1.1f, 1.7f));
 		backskyTr->SetScale(Vector3(1.5f, 1.5f, 1.0f));

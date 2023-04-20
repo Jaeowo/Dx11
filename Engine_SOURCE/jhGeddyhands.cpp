@@ -17,15 +17,15 @@ namespace jh
 		Animator* mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 
-		std::shared_ptr<Texture> geddyhandstexture = Resources::Load<Texture>(L"GeddyArm", L"Geddy\\arm_48x32.png");
-		mAnimator->Create(L"Stop", geddyhandstexture, Vector2(0.0f, 0.0f), Vector2(48.0f, 32.0f), Vector2::Zero, 1, 0.25f);
-		mAnimator->Create(L"Shoot1", geddyhandstexture, Vector2(0.0f, 0.0f), Vector2(48.0f, 32.0f), Vector2::Zero, 5, 0.25f);
-		mAnimator->Create(L"Shoot2", geddyhandstexture, Vector2(48.0f, 32.0f), Vector2(48.0f, 32.0f), Vector2::Zero, 5, 0.25f);
+		std::shared_ptr<Texture> geddyhandstexture = Resources::Load<Texture>(L"GeddyArm", L"Geddy\\arm96x32.png");
+		mAnimator->Create(L"Stop", geddyhandstexture, Vector2(0.0f, 0.0f), Vector2(96.0f, 32.0f), Vector2::Zero, 1, 0.25f);
+		mAnimator->Create(L"Shoot1", geddyhandstexture, Vector2(0.0f, 0.0f), Vector2(96.0f, 32.0f), Vector2::Zero, 5, 0.25f);
+		mAnimator->Create(L"Shoot2", geddyhandstexture, Vector2(96.0f, 32.0f), Vector2(96.0f, 32.0f), Vector2::Zero, 5, 0.25f);
 
-		mAnimator->Play(L"Stop", true);
+		mAnimator->Play(L"Shoot1", true);
 
-		mTransform->SetPosition(Vector3(0.92f, 0.823f, 1.7f));
-		mTransform->SetScale(Vector3(0.29f, 0.29f, 1.0f));
+		mTransform->SetPosition(Vector3(0.887f, 0.823f, 1.7f));
+		mTransform->SetScale(Vector3(0.32f, 0.32f, 1.0f));
 
 		mAngle = mTransform->GetRotation();
 		
@@ -38,9 +38,9 @@ namespace jh
 	void Geddyhands::Initalize()
 	{
 
-
 		GameObject::Initalize();
 	}
+
 	void Geddyhands::Update()
 	{
 		mTransform = GetComponent<Transform>();
@@ -57,7 +57,6 @@ namespace jh
 		//vew matrix 역행렬 구하기
 		Matrix viewMatrix = Camera::GetGpuViewMatrix();
 		Matrix inverseViewMatrix = viewMatrix.Invert();
-		//Matrix inverseViewMatrix = Matrix::Invert(viewMatrix);
 
 		//NDC 좌표를 view matrix 좌표계로 변환
 
@@ -67,18 +66,11 @@ namespace jh
 
 		float dx = mMousePos.x - mPos.x;
 		float dy = mMousePos.y - mPos.y;
-		float angle = atan2(dy, dx);
+		float angle = atan2(dy, dx) * 180.0f / XM_PI;
 
-		mAngle.z = angle * 10.0f;
+		mAngle.z = angle;
 
 		mTransform->SetRotation(mAngle);
-
-		//임시
-		if (Input::GetKey(eKeyCode::F))
-		{
-			mAngle.z += 50.0f * Time::DeltaTime();
-			mTransform->SetRotation(mAngle);
-		}
 
 		GameObject::Update();
 	}

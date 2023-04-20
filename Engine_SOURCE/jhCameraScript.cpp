@@ -3,11 +3,14 @@
 #include "jhGameObject.h"
 #include "jhInput.h"
 #include "jhTime.h"
+#include "jhCamera.h"
+#include "jhObject.h"
 
 namespace jh
 {
 	CameraScript::CameraScript()
 		: Script()
+		, mEditorMode(false)
 	{
 	}
 	CameraScript::~CameraScript()
@@ -18,36 +21,40 @@ namespace jh
 	}
 	void CameraScript::Update()
 	{
-		/*Transform* tr = GetOwner()->GetComponent<Transform>();
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Camera* cameraobj = GetOwner()->GetComponent<Camera>();
 
-		Vector3 pos = tr->GetPosition();
+		
+		Transform* cameraTransform = GetOwner()->GetComponent<Transform>();
+		Vector3 cameraposition;
 
-		if (Input::GetKeyState(eKeyCode::D) == eKeyState::PRESSED)
+		if(cameraobj->GetTarget() != nullptr && mEditorMode == false)
 		{
-			pos += 10.0f * tr->Right() * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::A) == eKeyState::PRESSED)
-		{
-			pos += 10.0f * -tr->Right() * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::W) == eKeyState::PRESSED)
-		{
-			pos += 10.0f * tr->Forward() * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::S) == eKeyState::PRESSED)
-		{
-			pos += 10.0f * -tr->Forward() * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::Q) == eKeyState::PRESSED)
-		{
-			pos += 10.0f * tr->Up() * Time::DeltaTime();
-		}
-		else if (Input::GetKeyState(eKeyCode::E) == eKeyState::PRESSED)
-		{
-			pos += 10.0f * -tr->Up() * Time::DeltaTime();
+			Transform* targetTransform = cameraobj->GetTarget()->GetComponent<Transform>();
+			Vector3 targetposition = targetTransform->GetPosition();
+		
+			targetposition.y += 0.1f;
+			targetposition.z -= 0.7f;
+			cameraposition = targetTransform->Right();
+			cameraTransform->SetPosition(targetposition);
 		}
 
-		tr->SetPosition(pos);*/
+		if (mEditorMode == true)
+		{
+			cameraposition.x = 1.0f;
+			cameraposition.y = 1.2f;
+			cameraposition.z = 0.2f;
+			
+			cameraTransform->SetPosition(cameraposition);
+
+		}
+
+		
+
+	
+
+
+	
 	}
 	void CameraScript::Render()
 	{

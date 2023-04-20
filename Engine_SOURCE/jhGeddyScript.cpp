@@ -68,7 +68,7 @@ namespace jh
 	{
 		if (mCount == 0)
 		{
-			mAnimator->Play(L"IdleG", true);
+			mAnimator->Play(L"HaingingG", true);
 			mCount = 1;
 		}
 	}
