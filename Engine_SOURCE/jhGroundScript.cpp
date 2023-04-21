@@ -31,15 +31,12 @@ namespace jh
 
 		playerObj->SetIsGround(true);
 
-
-		if (mCount == 0)
+		if (playerObj->GetPlayerState() == ePlayerState::Jump)
 		{
-			mCount = 1;
-			if (playerObj->GetPlayerState() == ePlayerState::Jump)
-			{
-				playerObj->SetPlayerState(ePlayerState::Idle);
-			}
+			playerObj->SetPlayerState(ePlayerState::Idle);
+			playerObj->SetCount(0);
 		}
+	
 
 	
 		//float fLen = fabs(collider->GetPosition().y - GetOwner()->GetComponent<Collider2D>()->GetPosition().y);
@@ -61,7 +58,6 @@ namespace jh
 	{
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
-		mCount = 0;
 		playerObj->SetIsGround(false);
 	}
 }

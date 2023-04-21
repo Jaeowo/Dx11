@@ -51,10 +51,8 @@ namespace jh
 		//
 		void JumpComplete();
 	
-		ePlayerState GetPlayerState() { return mPlayerState; }
-		void SetPlayerState(ePlayerState PlayerState) { PlayerState = mPlayerState; }
-
 	private:
+
 		ePlayerState mPlayerState;
 
 		Animator* mAnimator;

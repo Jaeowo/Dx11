@@ -84,9 +84,10 @@ namespace jh
 		
 		mPlayerPosition = mTransform->GetPosition();
 		mTime += Time::DeltaTime();
-		//PlayerManager::GetPlayer()->SetPlayerState(mPlayerState);
 		mPlayerState = PlayerManager::GetPlayer()->GetPlayerState();
 		PlayerManager::GetPlayer()->SetPlayerPos(mPlayerPosition);
+
+		mCount = PlayerManager::GetPlayer()->GetCount();
 
 		if (mPlayerState == ePlayerState::Fly
 		|| mPlayerState == ePlayerState::FlyRoll
@@ -191,7 +192,7 @@ namespace jh
 		if (mCount == 0)
 		{
 			mAnimator->Play(L"Idle", true);
-			mCount = 1;
+			PlayerManager::GetPlayer()->SetCount(1);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::D))
@@ -201,31 +202,29 @@ namespace jh
 			{
 				mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
 			}
-			mPlayerState = ePlayerState::RightRun;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::RightRun);
+			PlayerManager::GetPlayer()->SetCount(0);
 	
 		}
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::LeftRun);
-			//mPlayerState = ePlayerState::LeftRun;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::W))
 		{
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Jump);
-			//mPlayerState = ePlayerState::Jump;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			mPlayerState = ePlayerState::GroundRoll;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::GroundRoll);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::LBTN))
 		{
-			mPlayerState = ePlayerState::Attacking;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Attacking);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 		
 	}
@@ -242,14 +241,14 @@ namespace jh
 			{
 				mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
 				mAnimator->Play(L"MoveRight", true);
-				mCount = 1;
+				PlayerManager::GetPlayer()->SetCount(1);
 			}
 		}
 
 		if (Input::GetKeyUp(eKeyCode::A))
 		{
-			mPlayerState = ePlayerState::Idle;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
+			PlayerManager::GetPlayer()->SetCount(0);
 
 			//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
 		}
@@ -266,15 +265,15 @@ namespace jh
 			if (mCount == 0)
 			{
 				mAnimator->Play(L"MoveRight", true);
-				mCount = 1;
+				PlayerManager::GetPlayer()->SetCount(1);
 			}
 
 		}
 
 		if (Input::GetKeyUp(eKeyCode::D))
 		{
-			mPlayerState = ePlayerState::Idle;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 
 	}
@@ -291,20 +290,20 @@ namespace jh
 			float JumpForce = 0.006f;
 			mVelocity.y += JumpForce / mMass ;
 			
-			mCount = 1;
+			PlayerManager::GetPlayer()->SetCount(1);
 
 		}
 
 		if (Input::GetKey(eKeyCode::E))
 		{
-			mPlayerState = ePlayerState::Fly;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fly);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::I))
 		{
-			mPlayerState = ePlayerState::Idle;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 	
 
@@ -322,7 +321,7 @@ namespace jh
 			mTime = 0.0f;
 			mAnimator->Play(L"GroundRoll", false);
 			
-			mCount = 1;
+			PlayerManager::GetPlayer()->SetCount(1);
 		}
 		Vector3 CheckRotation = mTransform->GetRotation();
 		if (CheckRotation.y == 180.0f)
@@ -340,8 +339,8 @@ namespace jh
 
 		if (mTime >= 0.5f)
 		{
-			mPlayerState = ePlayerState::Idle;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 	
 		
@@ -355,12 +354,12 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"Attacking", false);
-			mCount = 1;
+			PlayerManager::GetPlayer()->SetCount(1);
 		}
 		if (mTime >= 0.5f)
 		{
-			mPlayerState = ePlayerState::Idle;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 	}
 	void PlayerScript::StartFly()
@@ -378,7 +377,7 @@ namespace jh
 		{
 			mGravity = 0.0f;
 			mAnimator->Play(L"Flying", true);
-			mCount = 1;
+			PlayerManager::GetPlayer()->SetCount(1);
 		}
 		
 		if (Input::GetKey(eKeyCode::A))
@@ -415,18 +414,18 @@ namespace jh
 		}
 		if (Input::GetKeyDown(eKeyCode::LBTN))
 		{
-			mPlayerState = ePlayerState::FlyAttack;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::FlyAttack);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			mPlayerState = ePlayerState::FlyRoll;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::FlyRoll);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::I))
 		{
-			mPlayerState = ePlayerState::Idle;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 	}
 	void PlayerScript::FlyGrab()
@@ -442,12 +441,12 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"Attacking", false);
-			mCount = 1;
+			PlayerManager::GetPlayer()->SetCount(1);
 		}
 		if (mTime >= 0.5f)
 		{
-			mPlayerState = ePlayerState::Fly;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fly);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 	}
 
@@ -461,12 +460,12 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"FlyRoll", false);
-			mCount = 1;
+			PlayerManager::GetPlayer()->SetCount(1);
 		}
 		if (mTime >= 0.5f)
 		{
-			mPlayerState = ePlayerState::Fly;
-			mCount = 0;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fly);
+			PlayerManager::GetPlayer()->SetCount(0);
 		}
 		Vector3 CheckRotation = mTransform->GetRotation();
 		if (CheckRotation.y == 180.0f)

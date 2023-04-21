@@ -30,6 +30,9 @@ namespace jh
 		bool GetIsGround() { return mbGround; }
 		void SetIsGround(bool bGround) { mbGround = bGround; }
 
+		UINT GetCount() { return mCount; }
+		void SetCount(UINT count) { mCount = count; }
+
 	private:
 		Transform* mTransform;
 		Collider2D* mCollider;
@@ -38,6 +41,7 @@ namespace jh
 		ePlayerState mPlayerState;
 		Vector3 mPlayerPos;
 		bool mbGround;
+		UINT mCount;
 	};
 
 }
