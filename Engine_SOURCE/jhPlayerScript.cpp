@@ -84,7 +84,8 @@ namespace jh
 		
 		mPlayerPosition = mTransform->GetPosition();
 		mTime += Time::DeltaTime();
-		PlayerManager::GetPlayer()->SetPlayerState(mPlayerState);
+		//PlayerManager::GetPlayer()->SetPlayerState(mPlayerState);
+		mPlayerState = PlayerManager::GetPlayer()->GetPlayerState();
 		PlayerManager::GetPlayer()->SetPlayerPos(mPlayerPosition);
 
 		if (mPlayerState == ePlayerState::Fly
@@ -206,12 +207,14 @@ namespace jh
 		}
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
-			mPlayerState = ePlayerState::LeftRun;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::LeftRun);
+			//mPlayerState = ePlayerState::LeftRun;
 			mCount = 0;
 		}
 		if (Input::GetKeyDown(eKeyCode::W))
 		{
-			mPlayerState = ePlayerState::Jump;
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Jump);
+			//mPlayerState = ePlayerState::Jump;
 			mCount = 0;
 		}
 		if (Input::GetKeyDown(eKeyCode::SPACE))

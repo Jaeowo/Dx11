@@ -4,10 +4,12 @@
 #include "jhPlayerManager.h"
 #include "jhComponent.h"
 #include "jhPlayerManager.h"
+#include "jhPlayerScript.h"
 
 namespace jh
 {
 	GroundScript::GroundScript()
+		:mCount(0)
 	{
 	}
 	GroundScript::~GroundScript()
@@ -24,14 +26,22 @@ namespace jh
 	}
 	void GroundScript::OnCollisionEnter(Collider2D* collider)
 	{
+
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
 		playerObj->SetIsGround(true);
 
-		if (playerObj->GetPlayerState() == ePlayerState::Jump)
+
+		if (mCount == 0)
 		{
-			playerObj->SetPlayerState(ePlayerState::Idle);
+			mCount = 1;
+			if (playerObj->GetPlayerState() == ePlayerState::Jump)
+			{
+				playerObj->SetPlayerState(ePlayerState::Idle);
+			}
 		}
+
+	
 		//float fLen = fabs(collider->GetPosition().y - GetOwner()->GetComponent<Collider2D>()->GetPosition().y);
 		//float fScale = collider->GetSize().y / 2.0f + GetOwner()->GetComponent<Collider2D>()->GetSize().y / 2.0f;
 
@@ -51,6 +61,7 @@ namespace jh
 	{
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
+		mCount = 0;
 		playerObj->SetIsGround(false);
 	}
 }

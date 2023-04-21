@@ -36,6 +36,12 @@ namespace jh
 
 		eGeddyState mGeddyState;
 		int mCount;
+		Vector2 mVelocity;
+		float mMass;
+		float mGravity;
+
+		Vector3 mGeddyPosition;
+		bool mbGround;
 	};
 }
 

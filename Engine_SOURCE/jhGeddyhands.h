@@ -27,6 +27,8 @@ namespace jh
 		eGeddyhandsState GetPlayerState() { return mGeddyhandsState; }
 		void SetPlayerState(eGeddyhandsState geddyhandsstate) { mGeddyhandsState = geddyhandsstate; }
 
+		Vector3 GetGeddyHandsPos() { return mPos; }
+
 	private:
 		eGeddyhandsState mGeddyhandsState;
 		Animator* mAnimator;

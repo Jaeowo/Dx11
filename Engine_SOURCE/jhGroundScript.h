@@ -24,6 +24,7 @@ namespace jh
 	private:
 		Collider2D* mCollider;
 		Vector3 mColPos;
+		int mCount;
 	};
 }
 

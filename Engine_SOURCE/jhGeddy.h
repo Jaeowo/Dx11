@@ -3,6 +3,10 @@
 
 namespace jh
 {
+
+	class Transform;
+	class Collider2D;
+
 	class Geddy
 		: public GameObject
 	{
@@ -25,9 +29,14 @@ namespace jh
 		void SetIsGround(bool bGround) { mbGround = bGround; }
 
 	private:
+		Transform* mTransform;
+		Collider2D* mCollider;
+
 		eGeddyState mGeddyState;
 		Vector3 mPlayerPos;
 		bool mbGround;
+
+
 	};
 }
 

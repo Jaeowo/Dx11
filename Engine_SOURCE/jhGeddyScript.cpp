@@ -4,6 +4,8 @@
 #include "jhResources.h"
 #include "jhGameObject.h"
 #include "jhAnimator.h"
+#include "jhGeddyBullet.h"
+#include "jhObject.h"
 
 #include "jhInput.h"
 
@@ -16,9 +18,20 @@ namespace jh
 		
 		Animator* mAnimator = PlayerManager::GetGeddy()->AddComponent<Animator>();
 
+		
+
 		std::shared_ptr<Texture> geddytexture = Resources::Load<Texture>(L"geddy", L"Geddy\\spr_mechanic_96x96.png");
 		mAnimator->Create(L"IdleG", geddytexture, Vector2(0.0f, 0.0f), Vector2(96.0f, 96.0f), Vector2::Zero, 11, 0.25f);
 		mAnimator->Create(L"HaingingG", geddytexture, Vector2(0.0f, 96.0f), Vector2(96.0f, 96.0f), Vector2::Zero, 5, 0.25f);
+
+		/*
+		mVelocity = (Vector2(0.0f, 0.0f));
+		mMass = 150.0f;
+
+		mGravity = 0.001f;
+	
+		Animator* mAnimator = PlayerManager::GetPlayer()->AddComponent<Animator>();
+		*/
 	}
 	GeddyScript::~GeddyScript()
 	{
@@ -30,6 +43,21 @@ namespace jh
 	{
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mTransform = GetOwner()->GetComponent<Transform>();
+
+		mGeddyPosition = mTransform->GetPosition();
+		PlayerManager::GetGeddy()->SetPlayerState(mGeddyState);
+		PlayerManager::GetGeddy()->SetPlayerPos(mGeddyPosition);
+
+		/*
+
+		
+		mPlayerPosition = mTransform->GetPosition();
+		mTime += Time::DeltaTime();
+		PlayerManager::GetPlayer()->SetPlayerState(mPlayerState);
+		PlayerManager::GetPlayer()->SetPlayerPos(mPlayerPosition);
+		
+		*/
+
 
 		switch (mGeddyState)
 		{
@@ -50,6 +78,8 @@ namespace jh
 			mGeddyState = eGeddyState::Hanging;
 			mCount = 0;
 		}
+
+	
 
 	}
 	void GeddyScript::Render()

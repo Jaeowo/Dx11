@@ -18,10 +18,19 @@ namespace jh
 		virtual void FixedUpdate();
 		virtual void Render();
 
+		bool getIsAttack() { return mIsAttack; }
+		void SetIsAttack(bool IsAttack) { IsAttack = mIsAttack; }
+
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;
 		float mSpeed;
+		Vector3 mAngle;
+		Vector2 mMousePos;
+		Vector3 mGeddyPos;
+		Vector3 mBulletPos;
+
+		bool mIsAttack;
 	};
 }
 

@@ -6,6 +6,8 @@
 namespace jh
 {
 	class Transform;
+	class Collider2D;
+	class PlayerScript;
 
 	class Player
 		: public GameObject
@@ -30,6 +32,8 @@ namespace jh
 
 	private:
 		Transform* mTransform;
+		Collider2D* mCollider;
+		PlayerScript* mPlayerScript;
 
 		ePlayerState mPlayerState;
 		Vector3 mPlayerPos;

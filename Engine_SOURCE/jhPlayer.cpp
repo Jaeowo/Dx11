@@ -23,6 +23,8 @@ namespace jh
 		std::shared_ptr<Material> standmaterial = Resources::Find<Material>(L"Standmaterial");
 		standsr->SetMaterial(standmaterial);
 		standsr->SetMesh(standmesh);
+
+		
 	}
 	Player::~Player()
 	{
@@ -33,6 +35,7 @@ namespace jh
 	}
 	void Player::Update()
 	{
+
 		GameObject::Update();
 	}
 	void Player::FixedUpdate()

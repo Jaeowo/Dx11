@@ -6,6 +6,8 @@
 #include "jhInput.h"
 #include "jhCamera.h"
 #include "jhApplication.h"
+#include "jhGeddyBullet.h"
+#include "jhObject.h"
 
 extern jh::Application application;
 
@@ -20,9 +22,8 @@ namespace jh
 		std::shared_ptr<Texture> geddyhandstexture = Resources::Load<Texture>(L"GeddyArm", L"Geddy\\arm96x32.png");
 		mAnimator->Create(L"Stop", geddyhandstexture, Vector2(0.0f, 0.0f), Vector2(96.0f, 32.0f), Vector2::Zero, 1, 0.25f);
 		mAnimator->Create(L"Shoot1", geddyhandstexture, Vector2(0.0f, 0.0f), Vector2(96.0f, 32.0f), Vector2::Zero, 5, 0.25f);
-		mAnimator->Create(L"Shoot2", geddyhandstexture, Vector2(96.0f, 32.0f), Vector2(96.0f, 32.0f), Vector2::Zero, 5, 0.25f);
 
-		mAnimator->Play(L"Shoot1", true);
+		mAnimator->Play(L"Stop", true);
 
 		mTransform->SetPosition(Vector3(0.887f, 0.823f, 1.7f));
 		mTransform->SetScale(Vector3(0.32f, 0.32f, 1.0f));
@@ -71,6 +72,7 @@ namespace jh
 		mAngle.z = angle;
 
 		mTransform->SetRotation(mAngle);
+
 
 		GameObject::Update();
 	}

@@ -25,8 +25,6 @@ namespace jh
 		virtual void OnCollisionStay(Collider2D* collider) override;
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
-		ePlayerState GetPlayerState() { return mPlayerState; }
-
 		void Start();
 		void Action();
 		void End();
@@ -53,6 +51,9 @@ namespace jh
 		//
 		void JumpComplete();
 	
+		ePlayerState GetPlayerState() { return mPlayerState; }
+		void SetPlayerState(ePlayerState PlayerState) { PlayerState = mPlayerState; }
+
 	private:
 		ePlayerState mPlayerState;
 
@@ -68,6 +69,7 @@ namespace jh
 
 		Vector3 mPlayerPosition;
 		bool mbGround;
+		bool mIsFlying; //Flying상태일때 중력 안받도록 예외처리 하기
 
 		Vector2 mVelocity; //속도
 		float mMass; //질량

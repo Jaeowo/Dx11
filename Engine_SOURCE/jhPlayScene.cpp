@@ -30,6 +30,7 @@
 #include "jhHorizontal.h"
 #include "jhSloped.h"
 #include "jhVertical.h"
+#include "jhGeddyBullet.h"
 
 namespace jh
 {
@@ -68,6 +69,7 @@ namespace jh
 		cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 		cameraUIComp->DisableLayerMasks();
 		cameraUIComp->TurnLayerMask(eLayerType::UI, true);
+
 
 
 		//!!!!!!! 코드 너무 길어졌으니 객체들 클래스로 옮겨서 정리하기 !!!!!!
@@ -137,17 +139,19 @@ namespace jh
 		//Geddy
 		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
 		PlayerManager::SetGeddy(geddyObj);
-		Transform* geddyTr = geddyObj->GetComponent<Transform>();
-		geddyTr->SetPosition(Vector3(0.9f, 0.86f, 1.7f));
-		geddyTr->SetScale(Vector3(0.35f, 0.35f, 1.0f));
 		geddyObj->AddComponent<GeddyScript>();
 
-		SpriteRenderer* geddysr = geddyObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> geddymesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> geddymaterial = Resources::Find<Material>(L"Geddymaterial");
-		geddysr->SetMaterial(geddymaterial);
-		geddysr->SetMesh(geddymesh);
 
+		////GeddyBullet
+		//GeddyBullet* geddybulletobj = object::Instantiate<GeddyBullet>(eLayerType::PlayerObject);
+		//Transform* geddybulletTr = geddybulletobj->GetComponent<Transform>();
+		//geddybulletTr->SetPosition(Vector3(0.5f, 0.9f, 1.7f));
+		//geddybulletTr->SetScale(Vector3(0.3f, 0.3f, 1.0f));
+		//SpriteRenderer* bulletsr = geddybulletobj->AddComponent<SpriteRenderer>();
+		//std::shared_ptr<Mesh> bulletmesh = Resources::Find<Mesh>(L"RectMesh");
+		//std::shared_ptr<Material> geddybulletmaterial = Resources::Find<Material>(L"Mechanicbulletmaterial");
+		//bulletsr->SetMaterial(geddybulletmaterial);
+		//bulletsr->SetMesh(bulletmesh);
 
 		//Ground
 		Ground* groundObj = object::Instantiate<Ground>(eLayerType::BackGround);
