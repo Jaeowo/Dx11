@@ -171,9 +171,6 @@
     <ClInclude Include="jhGeddyhands.h">
       <Filter>GameObject\Geddy</Filter>
     </ClInclude>
-    <ClInclude Include="jhMovingHandScript.h">
-      <Filter>Component\Script\FriendsScript</Filter>
-    </ClInclude>
     <ClInclude Include="jhGawk.h">
       <Filter>GameObject\Monster</Filter>
     </ClInclude>
@@ -227,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="jhGrassSlope.h">
       <Filter>GameObject\BackGround\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBackSkyScript.h">
+      <Filter>Component\Script\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -385,9 +385,6 @@
     <ClCompile Include="jhGeddyhands.cpp">
       <Filter>GameObject\Geddy</Filter>
     </ClCompile>
-    <ClCompile Include="jhMovingHandScript.cpp">
-      <Filter>Component\Script\FriendsScript</Filter>
-    </ClCompile>
     <ClCompile Include="jhGeddyBullet.cpp">
       <Filter>GameObject\Geddy</Filter>
     </ClCompile>
@@ -441,6 +438,9 @@
     </ClCompile>
     <ClCompile Include="jhGrassSlope.cpp">
       <Filter>GameObject\BackGround\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBackSkyScript.cpp">
+      <Filter>Component\Script\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

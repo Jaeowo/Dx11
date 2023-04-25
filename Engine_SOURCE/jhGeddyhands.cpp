@@ -8,6 +8,9 @@
 #include "jhApplication.h"
 #include "jhGeddyBullet.h"
 #include "jhObject.h"
+#include "jhSpriteRenderer.h"
+#include "jhPlayerManager.h"
+#include "jhGeddy.h"
 
 extern jh::Application application;
 
@@ -25,6 +28,12 @@ namespace jh
 
 		mAnimator->Play(L"Stop", true);
 
+		SpriteRenderer* geddyhandssr = AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> geddyhandsmesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> geddyhandsmaterial = Resources::Find<Material>(L"GeddyArmmaterial");
+		geddyhandssr->SetMaterial(geddyhandsmaterial);
+		geddyhandssr->SetMesh(geddyhandsmesh);
+
 		mTransform->SetPosition(Vector3(0.887f, 0.823f, 1.7f));
 		mTransform->SetScale(Vector3(0.32f, 0.32f, 1.0f));
 
@@ -32,6 +41,8 @@ namespace jh
 		
 		mPos = mTransform->GetPosition();
 		
+		mGeddyTransform = PlayerManager::GetGeddy()->getTransform();
+
 	}
 	Geddyhands::~Geddyhands()
 	{
@@ -60,7 +71,6 @@ namespace jh
 		Matrix inverseViewMatrix = viewMatrix.Invert();
 
 		//NDC ÁÂÇ¥¸¦ view matrix ÁÂÇ¥°è·Î º¯È¯
-
 		Vector4 viewPos = Vector4::Transform(ndcPos, inverseViewMatrix);
 
 		mMousePos = Vector2(viewPos.x, viewPos.y);
@@ -73,6 +83,9 @@ namespace jh
 
 		mTransform->SetRotation(mAngle);
 
+		mTransform->SetParent(mGeddyTransform);
+		mTransform->SetPosition(Vector3(-0.05f, -0.105f, 0.0f));
+		mTransform->SetScale(Vector3(0.9f, 0.9f, 1.0f));
 
 		GameObject::Update();
 	}

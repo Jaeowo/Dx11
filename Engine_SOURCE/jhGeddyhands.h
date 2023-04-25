@@ -5,7 +5,7 @@ namespace jh
 {
 	class Animator;
 	class Transform;
-	
+
 	enum class eGeddyhandsState
 	{
 		Stop,
@@ -33,6 +33,7 @@ namespace jh
 		eGeddyhandsState mGeddyhandsState;
 		Animator* mAnimator;
 		Transform* mTransform;
+		Transform* mGeddyTransform;
 		Vector3 mAngle;
 		Vector2 mMousePos;
 		Vector3 mPos;

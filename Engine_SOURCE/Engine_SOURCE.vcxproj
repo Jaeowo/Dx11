@@ -164,6 +164,7 @@
     <ClInclude Include="jhBackRock3.h" />
     <ClInclude Include="jhBackRock3Shadow.h" />
     <ClInclude Include="jhBackRockShadow.h" />
+    <ClInclude Include="jhBackSkyScript.h" />
     <ClInclude Include="jhBaseRenderer.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraScript.h" />
@@ -196,7 +197,6 @@
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhLight.h" />
-    <ClInclude Include="jhMovingHandScript.h" />
     <ClInclude Include="jhObject.h" />
     <ClInclude Include="jhPaintShader.h" />
     <ClInclude Include="jhParticleShader.h" />
@@ -242,6 +242,7 @@
     <ClCompile Include="jhBackRock3.cpp" />
     <ClCompile Include="jhBackRock3Shadow.cpp" />
     <ClCompile Include="jhBackRockShadow.cpp" />
+    <ClCompile Include="jhBackSkyScript.cpp" />
     <ClCompile Include="jhBaseRenderer.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />
@@ -271,7 +272,6 @@
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhLight.cpp" />
-    <ClCompile Include="jhMovingHandScript.cpp" />
     <ClCompile Include="jhPaintShader.cpp" />
     <ClCompile Include="jhParticleShader.cpp" />
     <ClCompile Include="jhParticleSystem.cpp" />

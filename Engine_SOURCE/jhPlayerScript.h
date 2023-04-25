@@ -34,6 +34,7 @@ namespace jh
 		void LeftRun();
 		void RightRun();
 		void Jump();
+		void Fall();
 		void Hurt();
 		void Die();
 		void GroundRoll();
@@ -48,6 +49,7 @@ namespace jh
 		void FlyAttack();
 		void StartFlyRoll();
 		void FlyRoll();
+		void FlyDown();
 		//
 		void JumpComplete();
 	
@@ -62,16 +64,23 @@ namespace jh
 
 		UINT mCount;
 
+		float mFallingTime;
 		float mTime;
 		float mSpeed;
 
+		Vector3 mBeforePos;
 		Vector3 mPlayerPosition;
 		bool mbGround;
 		bool mIsFlying; //Flying상태일때 중력 안받도록 예외처리 하기
+	
+
 
 		Vector2 mVelocity; //속도
 		float mMass; //질량
 		float mGravity;
+
+		
+	
 
 	};
 }

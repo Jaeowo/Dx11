@@ -487,7 +487,7 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"BackRock3ShadowTexture", L"Vellie Cave\\backRock3Shadow.png");
 #pragma endregion
 #pragma region PLATFORM TEXTURE
-		Resources::Load<Texture>(L"GrassFloorTexture", L"Vellie-Tropos-Owl Temple assets\\grassFloor1.png");
+		Resources::Load<Texture>(L"GrassFloorTexture", L"tileFloor.png");
 		Resources::Load<Texture>(L"GrassSlopeTexture", L"Vellie-Tropos-Owl Temple assets\\grassSlope.png");
 		Resources::Load<Texture>(L"Tile01Texture", L"Vellie-Tropos-Owl Temple assets\\tile01.png");
 		Resources::Load<Texture>(L"Tile02Texture", L"Vellie-Tropos-Owl Temple assets\\tile02.png");

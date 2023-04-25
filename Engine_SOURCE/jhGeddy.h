@@ -7,6 +7,7 @@ namespace jh
 	class Transform;
 	class Collider2D;
 
+
 	class Geddy
 		: public GameObject
 	{
@@ -19,8 +20,8 @@ namespace jh
 		virtual void FixedUpdate();
 		virtual void Render();
 
-		eGeddyState GetPlayerState() { return mGeddyState; }
-		void SetPlayerState(eGeddyState geddystate) { mGeddyState = geddystate; }
+		eGeddyState GetGeddyState() { return mGeddyState; }
+		void SetGeddyState(eGeddyState geddystate) { mGeddyState = geddystate; }
 
 		Vector3 GetPlayerPos() { return mPlayerPos; }
 		void SetPlayerPos(Vector3 playerpos) { mPlayerPos = playerpos; }
@@ -28,14 +29,21 @@ namespace jh
 		bool GetIsGround() { return mbGround; }
 		void SetIsGround(bool bGround) { mbGround = bGround; }
 
+		Transform* getTransform() { return mTransform; }
+
+		int GetCount() { return mCount; }
+		void SetCount(int Count) { mCount = Count; }
+
 	private:
 		Transform* mTransform;
+		Transform* mPlayerTransform;
 		Collider2D* mCollider;
+
 
 		eGeddyState mGeddyState;
 		Vector3 mPlayerPos;
 		bool mbGround;
-
+		int mCount;
 
 	};
 }

@@ -3,15 +3,13 @@
 
 namespace jh
 {
-	class Animator;
-	class Transform;
-
-	class MovingHandScript
+	class BackSkyScript
 		: public Script
 	{
 	public:
-		MovingHandScript();
-		~MovingHandScript();
+
+		BackSkyScript();
+		~BackSkyScript();
 
 		virtual void Initalize() override;
 		virtual void Update() override;
@@ -22,11 +20,7 @@ namespace jh
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
 	private:
-		Animator* mAnimator;
-		Transform* mTransform;
-		Vector3 mAngle;
-
+		Vector3 mLastPlayerPos;
+		float mParallax;
 	};
 }
-
-

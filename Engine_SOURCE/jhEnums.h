@@ -97,6 +97,7 @@ namespace jh::enums
 		LeftRun,
 		RightRun,
 		Jump,
+		Fall,
 		GroundRoll,
 
 		EnterDoor,
@@ -112,6 +113,7 @@ namespace jh::enums
 		FlyAttack,
 		StartFlyRoll,
 		FlyRoll,
+		FlyDown,
 		Eat,
 
 		Hurt,
@@ -123,6 +125,7 @@ namespace jh::enums
 	{
 		Idle,
 		Hanging,
+		Falling,
 		Shooting,
 	};
 }

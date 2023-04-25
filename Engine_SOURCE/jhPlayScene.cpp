@@ -25,12 +25,12 @@
 #include "jhGround.h"
 #include "jhGroundScript.h"
 #include "jhGeddyhands.h"
-#include "jhMovingHandScript.h"
 #include "jhGawk.h"
 #include "jhHorizontal.h"
 #include "jhSloped.h"
 #include "jhVertical.h"
 #include "jhGeddyBullet.h"
+#include "jhBackSkyScript.h"
 
 namespace jh
 {
@@ -69,9 +69,7 @@ namespace jh
 		cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 		cameraUIComp->DisableLayerMasks();
 		cameraUIComp->TurnLayerMask(eLayerType::UI, true);
-
-
-
+		
 		//!!!!!!! 코드 너무 길어졌으니 객체들 클래스로 옮겨서 정리하기 !!!!!!
 		
 		// Horizontal
@@ -128,18 +126,15 @@ namespace jh
 		gawksr->SetMesh(gawkmesh);
 
 		//GeddyHands
-		Geddyhands* geddyhandsObj = object::Instantiate<Geddyhands>(eLayerType::FriendsObject);
-		SpriteRenderer* geddyhandssr = geddyhandsObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> geddyhandsmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> geddyhandsmaterial = Resources::Find<Material>(L"GeddyArmmaterial");
-		geddyhandssr->SetMaterial(geddyhandsmaterial);
-		geddyhandssr->SetMesh(geddyhandsmesh);
+		//Geddyhands* geddyhandsObj = object::Instantiate<Geddyhands>(eLayerType::FriendsObject);
+		
 
 
 		//Geddy
 		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
 		PlayerManager::SetGeddy(geddyObj);
 		geddyObj->AddComponent<GeddyScript>();
+		geddyObj->SetName(L"Geddy");
 
 
 		////GeddyBullet
@@ -153,16 +148,65 @@ namespace jh
 		//bulletsr->SetMaterial(geddybulletmaterial);
 		//bulletsr->SetMesh(bulletmesh);
 
+
+		//!!!Ground 클래스에 세부정보 들어가도록 수정하기 !!!
+	
 		//Ground
 		Ground* groundObj = object::Instantiate<Ground>(eLayerType::BackGround);
 		Transform* groundTr = groundObj->GetComponent<Transform>();
-		groundTr->SetPosition(Vector3(0.9f, 0.734f, 1.7f));
-		groundTr->SetScale(Vector3(0.35f, 0.35f, 1.0f));
+		groundTr->SetPosition(Vector3(0.99f, 0.734f, 1.7f));
+		groundTr->SetScale(Vector3(0.27f, 0.35f, 1.0f));
 		groundObj->AddComponent<GroundScript>();
 		Collider2D* groundcollider = groundObj->AddComponent<Collider2D>();
 		groundcollider->SetType(eColliderType::Rect);
 		groundcollider->SetSize(Vector2(1.5f, 0.3f));
 		//groundcollider->SetCenter(Vector2(1.0f, 1.0f));
+
+		Ground* groundObj2 = object::Instantiate<Ground>(eLayerType::BackGround);
+		Transform* groundTr2 = groundObj2->GetComponent<Transform>();
+		groundTr2->SetPosition(Vector3(0.958f, 1.09f, 1.7f));
+		groundTr2->SetScale(Vector3(0.159f, 0.1f, 1.0f));
+		groundObj2->AddComponent<GroundScript>();
+		Collider2D* groundcollider2 = groundObj2->AddComponent<Collider2D>();
+		groundcollider2->SetType(eColliderType::Rect);
+		groundcollider2->SetSize(Vector2(1.5f, 0.3f));
+
+		Ground* groundObj3 = object::Instantiate<Ground>(eLayerType::BackGround);
+		Transform* groundTr3 = groundObj3->GetComponent<Transform>();
+		groundTr3->SetPosition(Vector3(0.635f, 0.33f, 1.7f));
+		groundTr3->SetScale(Vector3(0.68f, 0.1f, 1.0f));
+		groundObj3->AddComponent<GroundScript>();
+		Collider2D* groundcollider3 = groundObj3->AddComponent<Collider2D>();
+		groundcollider3->SetType(eColliderType::Rect);
+		groundcollider3->SetSize(Vector2(1.5f, 0.3f));
+
+		//Flatform
+		GameObject* grassfloorObj = object::Instantiate<GameObject>(eLayerType::BackGround);
+		Transform* grassfloorTr = grassfloorObj->GetComponent<Transform>();
+		grassfloorTr->SetPosition(Vector3(0.3f, 0.3f, 1.7f));
+		grassfloorTr->SetScale(Vector3(0.35f, 0.1f, 1.0f));
+		SpriteRenderer* grassfloorsr = grassfloorObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> grassfloormesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> grassfloormaterial = Resources::Find<Material>(L"GrassFloorMaterial");
+		grassfloorsr->SetMaterial(grassfloormaterial);
+		grassfloorsr->SetMesh(grassfloormesh);
+
+		GameObject* grassfloorObj2 = object::Instantiate<GameObject>(eLayerType::BackGround);
+		Transform* grassfloorTr2 = grassfloorObj2->GetComponent<Transform>();
+		grassfloorTr2->SetPosition(Vector3(0.64f, 0.3f, 1.7f));
+		grassfloorTr2->SetScale(Vector3(0.35f, 0.1f, 1.0f));
+		SpriteRenderer* grassfloorsr2 = grassfloorObj2->AddComponent<SpriteRenderer>();
+		grassfloorsr2->SetMaterial(grassfloormaterial);
+		grassfloorsr2->SetMesh(grassfloormesh);
+
+		GameObject* grassfloorObj3 = object::Instantiate<GameObject>(eLayerType::BackGround);
+		Transform* grassfloorTr3 = grassfloorObj3->GetComponent<Transform>();
+		grassfloorTr3->SetPosition(Vector3(0.98f, 0.3f, 1.7f));
+		grassfloorTr3->SetScale(Vector3(0.35f, 0.1f, 1.0f));
+		SpriteRenderer* grassfloorsr3 = grassfloorObj3->AddComponent<SpriteRenderer>();
+		grassfloorsr3->SetMaterial(grassfloormaterial);
+		grassfloorsr3->SetMesh(grassfloormesh);
+
 
 		//BackRock3
 		GameObject* backrock3Obj = object::Instantiate<GameObject>(eLayerType::BackGround);
@@ -201,14 +245,14 @@ namespace jh
 		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround2);
 		Transform* backskyTr = backskyObj->GetComponent<Transform>();
 		backskyTr->SetPosition(Vector3(1.0f, 1.1f, 1.7f));
-		backskyTr->SetScale(Vector3(1.5f, 1.5f, 1.0f));
+		backskyTr->SetScale(Vector3(2.1f, 2.1f, 1.0f));
 
 		SpriteRenderer* backskysr = backskyObj->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> backskymesh = Resources::Find<Mesh>(L"RectMesh");
 		std::shared_ptr<Material> backskymaterial = Resources::Find<Material>(L"Backskymaterial");
 		backskysr->SetMaterial(backskymaterial);
 		backskysr->SetMesh(backskymesh);
-
+		backskyObj->AddComponent<BackSkyScript>();
 
 		// hpbar
 		GameObject* hpBar = object::Instantiate<GameObject>(eLayerType::UI);
@@ -253,6 +297,8 @@ namespace jh
 		tilefloorsr->SetMesh(tilefloormesh);
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Friends, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Friends, eLayerType::BackGround, true);
 
 		Scene::Initalize();
 	}

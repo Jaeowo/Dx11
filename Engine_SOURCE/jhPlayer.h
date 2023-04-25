@@ -30,17 +30,27 @@ namespace jh
 		bool GetIsGround() { return mbGround; }
 		void SetIsGround(bool bGround) { mbGround = bGround; }
 
+		bool GetIsFlyDown() { return mIsFlyingDown; }
+		void SetIsFlyDown(bool flyingdown) { mIsFlyingDown = flyingdown; }
+
+		bool GetIsFly() { return mIsFly; }
+		void SetIsFly(bool isfly) { mIsFly = isfly; }
+
 		UINT GetCount() { return mCount; }
 		void SetCount(UINT count) { mCount = count; }
+
+		Transform* getTransform() { return mTransform; }
 
 	private:
 		Transform* mTransform;
 		Collider2D* mCollider;
-		PlayerScript* mPlayerScript;
+
+		bool mIsFlyingDown;
+		bool mIsFly;
+		bool mbGround;
 
 		ePlayerState mPlayerState;
 		Vector3 mPlayerPos;
-		bool mbGround;
 		UINT mCount;
 	};
 

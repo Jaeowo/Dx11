@@ -3,8 +3,10 @@
 #include "jhPlayer.h"
 #include "jhPlayerManager.h"
 #include "jhComponent.h"
-#include "jhPlayerManager.h"
 #include "jhPlayerScript.h"
+#include "jhGeddy.h"
+#include "jhGeddyScript.h"
+#include "jhGawk.h"
 
 namespace jh
 {
@@ -31,24 +33,36 @@ namespace jh
 
 		playerObj->SetIsGround(true);
 
-		if (playerObj->GetPlayerState() == ePlayerState::Jump)
+		if (playerObj->GetPlayerState() == ePlayerState::Fall)
 		{
 			playerObj->SetPlayerState(ePlayerState::Idle);
 			playerObj->SetCount(0);
 		}
-	
 
-	
-		//float fLen = fabs(collider->GetPosition().y - GetOwner()->GetComponent<Collider2D>()->GetPosition().y);
-		//float fScale = collider->GetSize().y / 2.0f + GetOwner()->GetComponent<Collider2D>()->GetSize().y / 2.0f;
+		if(playerObj->GetIsFlyDown() == true)
+		{ 
+			playerObj->SetPlayerState(ePlayerState::Idle);
+			playerObj->SetCount(0);
+		}
 
-
-		//if (fLen < fScale)
+		//if (playerObj->GetPlayerState() == ePlayerState::FlyDown)
 		//{
-		//	Vector3 playerPos = playerObj->GetPlayerPos();
-		//	playerPos.y -= (fScale - fLen) - 1.0f;
-		//	playerObj->SetPos(playerPos);
+		//	playerObj->SetPlayerState(ePlayerState::Idle);
+		//	playerObj->SetCount(0);
 		//}
+
+		//Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
+
+	/*	geddyObj->SetIsGround(true);
+
+		if (geddyObj->GetGeddyState() == eGeddyState::Falling)
+		{
+			geddyObj->SetGeddyState(eGeddyState::Idle);
+			geddyObj->SetCount(0);
+		}*/
+
+
+	
 	
 	}
 	void GroundScript::OnCollisionStay(Collider2D* collider)
@@ -56,8 +70,14 @@ namespace jh
 	}
 	void GroundScript::OnCollisionExit(Collider2D* collider)
 	{
+
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
-		playerObj->SetIsGround(false);
+		if (playerObj->GetIsFly() == false)
+		{
+			playerObj->SetIsGround(false);
+		}
+
+	
 	}
 }

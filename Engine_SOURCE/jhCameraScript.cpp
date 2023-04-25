@@ -42,15 +42,15 @@ namespace jh
 		if (mEditorMode == true)
 		{
 			cameraposition.x = 1.0f;
-			cameraposition.y = 1.2f;
-			cameraposition.z = 0.2f;
+			cameraposition.y = 0.7f;
+			cameraposition.z = 0.1f;
 			
 			cameraTransform->SetPosition(cameraposition);
 
 		}
 
 		
-
+		
 	
 
 

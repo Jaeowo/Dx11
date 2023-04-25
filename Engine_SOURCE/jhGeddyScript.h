@@ -6,7 +6,7 @@ namespace jh
 {
 	class Animator;
 	class Transform;
-
+	class Geddyhands;
 
 
 	class GeddyScript
@@ -28,20 +28,26 @@ namespace jh
 		//status
 		void Idle();
 		void Hanging();
+		void Falling();
 
 
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;
+		Transform* mPlayerTransform;
+		Geddyhands* mGeddyhands;
 
 		eGeddyState mGeddyState;
 		int mCount;
+		Vector3 mGeddyPosition;
+		Vector3 mBeforePos;
+
+		float mFallingTime;
+		bool mbGround;
+
 		Vector2 mVelocity;
 		float mMass;
 		float mGravity;
-
-		Vector3 mGeddyPosition;
-		bool mbGround;
 	};
 }
 

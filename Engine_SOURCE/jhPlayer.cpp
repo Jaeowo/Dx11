@@ -9,6 +9,8 @@ namespace jh
 	Player::Player()
 		: mbGround(false)
 		, mCount(0)
+		, mIsFlyingDown(false)
+		, mIsFly(false)
 	{
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(Vector3(1.0f, 0.84f, 1.7f));
