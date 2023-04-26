@@ -191,7 +191,7 @@ namespace jh
 			
 			Vector3 PlayerRotation = mPlayerTransform->GetRotation();
 
-			mTransform->SetPosition(Vector3(-0.05f, -0.15f, 0.0f));
+			mTransform->SetPosition(Vector3(-0.03f, -0.1f, 0.0f));
 			mTransform->SetScale(Vector3(0.95f, 0.95f, 1.0f));
 			
 			PlayerManager::GetGeddy()->SetCount(1);

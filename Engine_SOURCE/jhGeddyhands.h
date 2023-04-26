@@ -38,6 +38,11 @@ namespace jh
 		Vector2 mMousePos;
 		Vector3 mPos;
 
+
+		Transform* mArmTransform;
+		float mArmLength = 0.1f;
+		Vector3 mRestPosition = Vector3(-0.05f, -0.105f, 0.0f);
+
 	};
 }
 
