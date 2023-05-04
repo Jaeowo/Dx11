@@ -1,7 +1,9 @@
-// Material Default Texture
 Texture2D defaultTexture : register(t0);
+//Texture2D noiseTexture : register(t1);
 
-//Atlas texture
+//Texture2D defaultTexture3 : register(t2);
+
+//Atlas Texture
 Texture2D atlasTexture : register(t12);
 
 // Light
