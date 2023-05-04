@@ -4,6 +4,7 @@
 #include "jhSceneManager.h"
 #include "jhPaintShader.h"
 #include "jhParticleShader.h"
+#include "jhTime.h"
 
 namespace jh::renderer
 {
@@ -20,6 +21,8 @@ namespace jh::renderer
 	std::vector<DebugMesh> debugMeshes;
 	std::vector<LightAttribute> lights;
 	StructedBuffer* lightsBuffer = nullptr;
+
+	std::shared_ptr<Texture> postProcessTexture = nullptr;
 
 	void LoadMesh()
 	{
@@ -199,6 +202,13 @@ namespace jh::renderer
 		Resources::Insert<ParticleShader>(L"ParticleCS", particleCS);
 		particleCS->Create(L"ParticleCS.hlsl", "main");
 #pragma endregion
+#pragma region POST PROCESS SHADER
+		std::shared_ptr<Shader> postProcessShader = std::make_shared<Shader>();
+		postProcessShader->Create(eShaderStage::VS, L"PostProcessVS.hlsl", "main");
+		postProcessShader->Create(eShaderStage::PS, L"PostProcessPS.hlsl", "main");
+		postProcessShader->SetDSState(eDSType::NoWrite);
+		Resources::Insert<Shader>(L"PostProcessShader", postProcessShader);
+#pragma endregion
 	}
 
 	void SetUpState()
@@ -270,6 +280,13 @@ namespace jh::renderer
 			, particleShader->GetVSBlobBufferPointer()
 			, particleShader->GetVSBlobBufferSize()
 			, particleShader->GetInputLayoutAddressOf());
+
+
+		std::shared_ptr<Shader> postProcessShader = Resources::Find<Shader>(L"PostProcessShader");
+		GetDevice()->CreateInputLayout(arrLayoutDesc, 3
+			, postProcessShader->GetVSBlobBufferPointer()
+			, postProcessShader->GetVSBlobBufferSize()
+			, postProcessShader->GetInputLayoutAddressOf());
 #pragma endregion
 #pragma region sampler state
 		D3D11_SAMPLER_DESC samplerDesc = {};
@@ -448,6 +465,11 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"DefaultSprite", L"Light.png");
 		//Resources::Load<Texture>(L"HPBarTexture", L"HPBar.png");
 		Resources::Load<Texture>(L"noise_01", L"noise\\noise_01.png");
+
+		//noise
+		postProcessTexture = std::make_shared<Texture>();
+		postProcessTexture->Create(1600, 900, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE);
+		postProcessTexture->BindShaderResource(eShaderStage::PS, 60);
 #pragma endregion
 #pragma region TITLESCENE TEXTURE
 		Resources::Load<Texture>(L"TitleSkyTexture", L"TitleSky.png");
@@ -815,6 +837,13 @@ namespace jh::renderer
 		particleMaterial->SetShader(particleShader);
 		Resources::Insert<Material>(L"ParticleMaterial", particleMaterial);
 #pragma endregion
+#pragma region POSTPROCESS
+		std::shared_ptr<Shader> postProcessShader = Resources::Find<Shader>(L"PostProcessShader");
+		std::shared_ptr<Material> postProcessMaterial = std::make_shared<Material>();
+		postProcessMaterial->SetRenderingMode(eRenderingMode::PostProcess);
+		postProcessMaterial->SetShader(postProcessShader);
+		Resources::Insert<Material>(L"PostProcessMaterial", postProcessMaterial);
+#pragma endregion
 	}
 
 
@@ -877,6 +906,7 @@ namespace jh::renderer
 		cb->Bind(eShaderStage::PS);
 	}
 
+	float noiseTime = 10.0f;
 	void BindNoiseTexture()
 	{
 		std::shared_ptr<Texture> noise = Resources::Find<Texture>(L"noise_01");
@@ -890,6 +920,8 @@ namespace jh::renderer
 		NoiseCB info = {};
 		info.noiseSize.x = noise->GetWidth();
 		info.noiseSize.y = noise->GetHeight();
+		noiseTime -= Time::DeltaTime();
+		info.noiseTime = noiseTime;
 
 		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Noise];
 		cb->SetData(&info);
@@ -899,6 +931,21 @@ namespace jh::renderer
 		cb->Bind(eShaderStage::GS);
 		cb->Bind(eShaderStage::PS);
 		cb->Bind(eShaderStage::CS);
+	}
+
+	void CopyRenderTarget()
+	{
+		std::shared_ptr<Texture> renderTarget = Resources::Find<Texture>(L"RenderTargetTexture");
+
+		ID3D11ShaderResourceView* srv = nullptr;
+		GetDevice()->BindShaderResource(eShaderStage::PS, 60, &srv);
+
+		ID3D11Texture2D* dest = postProcessTexture->GetTexture().Get();
+		ID3D11Texture2D* source = renderTarget->GetTexture().Get();
+
+		GetDevice()->CopyResource(dest, source);
+
+		postProcessTexture->BindShaderResource(eShaderStage::PS, 60);
 	}
 
 

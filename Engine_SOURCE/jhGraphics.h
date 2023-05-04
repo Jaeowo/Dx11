@@ -81,6 +81,7 @@ namespace jh::graphics
 		Opaque,
 		CutOut,
 		Transparent,
+		PostProcess,
 		End,
 	};
 

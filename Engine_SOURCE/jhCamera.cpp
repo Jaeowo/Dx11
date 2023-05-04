@@ -62,6 +62,7 @@ namespace jh
 		renderOpaque();
 		renderCutout();
 		renderTransparent();
+		renderPostProcess();
 	}
 
 	void Camera::CreateViewMatrix()
@@ -127,6 +128,7 @@ namespace jh
 		mOpaqueGameObjects.clear();
 		mCutoutGameObjects.clear();
 		mTransparentGameObjects.clear();
+		mPostProcessGameObjects.clear();
 
 		Scene* scene = SceneManager::GetActiveScene();
 		for (size_t i = 0; i < (UINT)eLayerType::End; i++)
@@ -179,6 +181,17 @@ namespace jh
 		}
 	}
 
+	void Camera::renderPostProcess()
+	{
+		for (GameObject* obj : mPostProcessGameObjects)
+		{
+			if (obj == nullptr)
+				continue;
+			renderer::CopyRenderTarget();
+			obj->Render();
+		}
+	}
+
 	void Camera::pushGameObjectToRenderingModes(GameObject* gameObj)
 	{
 		BaseRenderer* renderer
@@ -199,6 +212,9 @@ namespace jh
 			break;
 		case jh::graphics::eRenderingMode::Transparent:
 			mTransparentGameObjects.push_back(gameObj);
+			break;
+		case jh::graphics::eRenderingMode::PostProcess:
+			mPostProcessGameObjects.push_back(gameObj);
 			break;
 		default:
 			break;

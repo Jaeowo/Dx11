@@ -26,8 +26,9 @@ namespace jh::enums
 		Effect,
 
 		Particle,
+		PostProcess,
 		UI,
-		End = 16,
+		End = 20,
 	};
 
 	enum class eComponentType

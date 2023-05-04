@@ -50,6 +50,7 @@ namespace jh
 		void renderOpaque();
 		void renderCutout();
 		void renderTransparent();
+		void renderPostProcess();
 		void pushGameObjectToRenderingModes(GameObject* gameObj);
 
 	private:
@@ -72,6 +73,7 @@ namespace jh
 		std::vector<GameObject*> mOpaqueGameObjects;
 		std::vector<GameObject*> mCutoutGameObjects;
 		std::vector<GameObject*> mTransparentGameObjects;
+		std::vector<GameObject*> mPostProcessGameObjects;
 	};
 }
 

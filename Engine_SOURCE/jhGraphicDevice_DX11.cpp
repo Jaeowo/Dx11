@@ -54,7 +54,7 @@ namespace jh::graphics
 		// Get rendertarget for swapchain
 		hr = mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)renderTarget.GetAddressOf());
 		mRenderTargetTexture->Create(renderTarget);
-		
+		Resources::Insert<Texture>(L"RenderTargetTexture", mRenderTargetTexture);
 
 
 

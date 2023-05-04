@@ -3,6 +3,7 @@ Texture2D NoiseTexture : register(t16);
 cbuffer Noise : register(b7)
 {
     float4 NoiseSize;
+    float NoiseTime;
 }
 
 
