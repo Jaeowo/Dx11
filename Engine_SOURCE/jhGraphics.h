@@ -18,6 +18,7 @@
 #define CBSLOT_ANIMATION 4
 #define CBSLOT_NUMBEROFLIGHT 5
 #define CBSLOT_PARTICLESYSTEM 6
+#define CBSLOT_NOISE		7
 
 using namespace jh::math;
 namespace jh::graphics
@@ -37,6 +38,7 @@ namespace jh::graphics
 		GS,
 		PS,
 		CS,
+		ALL,
 		Count,
 	};
 
@@ -107,6 +109,7 @@ namespace jh::graphics
 		Animation,
 		Light,
 		ParticleSystem,
+		Noise,
 		End,
 	};
 
@@ -183,5 +186,10 @@ namespace jh::graphics
 		float time;
 		float speed;
 		UINT active;
+	};
+
+	struct ParticleShared
+	{
+		UINT activeCount;
 	};
 }
