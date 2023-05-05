@@ -31,36 +31,37 @@ namespace jh
 
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
-		playerObj->SetIsGround(true);
-
-		if (playerObj->GetPlayerState() == ePlayerState::Fall)
+		if (playerObj)
 		{
-			playerObj->SetPlayerState(ePlayerState::Idle);
-			playerObj->SetCount(0);
+			playerObj->SetIsGround(true);
+
+			if (playerObj->GetPlayerState() == ePlayerState::Fall)
+			{
+				playerObj->SetPlayerState(ePlayerState::Idle);
+				playerObj->SetCount(0);
+			}
+
+			if (playerObj->GetIsFlyDown() == true)
+			{
+				playerObj->SetPlayerState(ePlayerState::Idle);
+				playerObj->SetCount(0);
+			}
 		}
-
-		if(playerObj->GetIsFlyDown() == true)
-		{ 
-			playerObj->SetPlayerState(ePlayerState::Idle);
-			playerObj->SetCount(0);
-		}
-
-		//if (playerObj->GetPlayerState() == ePlayerState::FlyDown)
-		//{
-		//	playerObj->SetPlayerState(ePlayerState::Idle);
-		//	playerObj->SetCount(0);
-		//}
-
-		//Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
-
-	/*	geddyObj->SetIsGround(true);
-
-		if (geddyObj->GetGeddyState() == eGeddyState::Falling)
+		else 
 		{
-			geddyObj->SetGeddyState(eGeddyState::Idle);
-			geddyObj->SetCount(0);
-		}*/
+			Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
 
+			if (geddyObj) 
+			{
+				geddyObj->SetIsGround(true);
+
+				if (geddyObj->GetGeddyState() == eGeddyState::Falling)
+				{
+					geddyObj->SetGeddyState(eGeddyState::Idle);
+					geddyObj->SetCount(0);
+				}
+			}
+		}
 
 	
 	
@@ -73,11 +74,22 @@ namespace jh
 
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
-		if (playerObj->GetIsFly() == false)
+		if (playerObj)
 		{
-			playerObj->SetIsGround(false);
+			if (playerObj->GetIsFly() == false)
+			{
+				playerObj->SetIsGround(false);
+			}
 		}
+	
+		Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
 
+		if (geddyObj)
+		{
+			
+			geddyObj->SetIsGround(false);
+		
+		}
 	
 	}
 }

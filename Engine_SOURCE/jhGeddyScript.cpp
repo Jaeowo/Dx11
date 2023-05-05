@@ -40,18 +40,11 @@ namespace jh
 
 		mGravity = 0.00005f;
 
-		//Geddyhands* mGeddyhands = object::Instantiate<Geddyhands>(eLayerType::PlayerObject);
+		//Geddyhands * mGeddyhands = object::Instantiate<Geddyhands>(eLayerType::PlayerObject);
 		//geddyhands->Death();
-		/*
-		mVelocity = (Vector2(0.0f, 0.0f));
-		mMass = 150.0f;
-
-		mGravity = 0.001f;
-	
-		Animator* mAnimator = PlayerManager::GetPlayer()->AddComponent<Animator>();
-		*/
 
 		mPlayerTransform = PlayerManager::GetPlayer()->getTransform();
+
 	}
 	GeddyScript::~GeddyScript()
 	{
@@ -87,7 +80,7 @@ namespace jh
 		}
 
 #pragma region FALL
-	/*	float deltaY = mGeddyPosition.y - mBeforePos.y;
+		float deltaY = mGeddyPosition.y - mBeforePos.y;
 
 		if (mbGround)
 		{
@@ -113,11 +106,11 @@ namespace jh
 			}
 		}
 
-		mBeforePos = mGeddyPosition;*/
+		mBeforePos = mGeddyPosition;
 
 #pragma endregion
 
-	/*	if (PlayerManager::GetGeddy()->GetIsGround() == true)
+		if (PlayerManager::GetGeddy()->GetIsGround() == true)
 		{
 			mGravity = 0.0f;
 			mVelocity.y = 0.0f;
@@ -125,16 +118,16 @@ namespace jh
 		else if (PlayerManager::GetGeddy()->GetIsGround() == false)
 		{
 			mGravity = 0.00005f;
-		}*/
+		}
 
 
-	/*	if (mGeddyState != eGeddyState::Hanging)
+		if (mGeddyState != eGeddyState::Hanging)
 		{
 			mGeddyPosition.x += mVelocity.x * (float)Time::DeltaTime();
 			mGeddyPosition.y += mVelocity.y + 0.5f * mGravity * (float)Time::DeltaTime() * (float)Time::DeltaTime();
 			mVelocity.y -= mGravity * (float)Time::DeltaTime();
 			mTransform->SetPosition(mGeddyPosition);
-		}*/
+		}
 
 	
 
@@ -144,13 +137,12 @@ namespace jh
 	}
 	void GeddyScript::OnCollisionEnter(Collider2D* collider)
 	{
-		
 
 		
 	}
 	void GeddyScript::OnCollisionStay(Collider2D* collider)
 	{
-		//Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
+		
 
 
 
@@ -173,7 +165,7 @@ namespace jh
 		if (Input::GetKeyDown(eKeyCode::G))
 		{
 			PlayerManager::GetGeddy()->SetGeddyState(eGeddyState::Hanging);
-			//mGeddyState = eGeddyState::Hanging;
+			mGeddyState = eGeddyState::Hanging;
 			PlayerManager::GetGeddy()->SetCount(0);
 
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::FlyGrab);

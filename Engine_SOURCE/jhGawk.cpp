@@ -13,6 +13,7 @@ namespace jh
 		, mHp(4)
 		, mCount(0)
 		, mTarget(false)
+		, mElapsedTime(0.0f)
 	{
 		Animator* mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -45,6 +46,8 @@ namespace jh
 		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
 		
 		mMonsterPosition = mTransform->GetPosition();
+
+		//mElapsedTime += Time::DeltaTime();
 
 		switch (mGawkState)
 		{
@@ -84,12 +87,30 @@ namespace jh
 			mCount = 1;
 		}
 
+
+		float speed = 0.15f; // 기본 이동 속도
+		float bounceHeight = 0.00005f; // 튀는 높이
+		float bounceSpeed = 6.0f; // 튀는 속도
+
+		float yDistance = abs(mTargetPosition.y - mMonsterPosition.y);
+		float speedFactor = 1.0f + yDistance * 0.3f;
+
 		Vector3 Dir = mTargetPosition - mMonsterPosition;
 		Dir.Normalize();
 
-		mMonsterPosition += (mTargetPosition * Dir) * (Time::DeltaTime() /10.0f) ;
+		mMonsterPosition += Dir * speed * speedFactor * Time::DeltaTime(); 
+
+		mElapsedTime += Time::DeltaTime();
+		float bounceY = (bounceHeight * speedFactor) * sin(bounceSpeed * mElapsedTime); 
+
+		mMonsterPosition.y = mMonsterPosition.y - bounceY;
 
 		mTransform->SetPosition(mMonsterPosition);
+
+
+	
+		
+
 	}
 	void Gawk::UpsideDown()
 	{
@@ -129,4 +150,5 @@ namespace jh
 			mCount = 1;
 		}
 	}
+
 }

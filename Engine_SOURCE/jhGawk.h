@@ -40,6 +40,8 @@ namespace jh
 
 		void SetHp(int hp) { mHp = hp; }
 
+
+
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;
@@ -52,6 +54,7 @@ namespace jh
 		Vector3 mMonsterPosition;
 		bool mTarget;
 		int mHp;
+		float mElapsedTime;
 	};
 }
 
