@@ -14,6 +14,7 @@
 #include "jhFadeOutScript.h"
 #include "jhTitleScene.h"
 #include "jhPlayScene.h"
+#include "jhCaveScene.h"
 
 namespace jh
 {
@@ -26,6 +27,7 @@ namespace jh
 
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
+		mScenes[(UINT)eSceneType::Cave] = new CaveScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Title];
 		//SceneManager::LoadScene(eSceneType::Play);

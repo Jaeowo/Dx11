@@ -7,6 +7,7 @@ namespace jh::enums
 	{
 		Title,
 		Play,
+		Cave,
 		End,
 	};
 

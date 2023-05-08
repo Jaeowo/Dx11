@@ -14,18 +14,22 @@ namespace jh
 		, mCount(0)
 	{
 		mTransform = GetComponent<Transform>();
-		mTransform->SetPosition(Vector3(0.9f, 0.86f, 1.7f));
+		mTransform->SetPosition(Vector3(0.9f, -0.43f, 1.7f));
 		mTransform->SetScale(Vector3(0.35f, 0.35f, 1.0f));
 
-		Collider2D* collider = AddComponent<Collider2D>();
-		collider->SetType(eColliderType::Rect);
-		collider->SetSize(Vector2(0.1f, 0.28f));
+		Collider2D* mCollider = AddComponent<Collider2D>();
+		//mCollider->SetCenter(Vector2(0.1f, 0.1f));
+		mCollider->SetType(eColliderType::Rect);
+		mCollider->SetSize(Vector2(0.2f, 0.35f));
+		//mCollider->SetPosition(Vector3(0.1f, 3.4f, 1.7f));
+		//mCollider->Set
 
 		SpriteRenderer* geddysr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> geddymesh = Resources::Find<Mesh>(L"RectMesh");
 		std::shared_ptr<Material> geddymaterial = Resources::Find<Material>(L"Geddymaterial");
 		geddysr->SetMaterial(geddymaterial);
 		geddysr->SetMesh(geddymesh);
+
 
 
 	}

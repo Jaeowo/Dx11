@@ -39,7 +39,13 @@ namespace jh
 		UINT GetCount() { return mCount; }
 		void SetCount(UINT count) { mCount = count; }
 
+		Vector3 GetPlayerRotation() { return mRotation; }
+		void SetPlayerRotation(Vector3 rotation) { mRotation = rotation; }
+
 		Transform* getTransform() { return mTransform; }
+
+		void SetIsLeftSlope(bool leftslope) { mIsLeftSlope = leftslope; }
+		void SetIsRightSlope(bool rightslope) { mIsRightSlope = rightslope; }
 
 	private:
 		Transform* mTransform;
@@ -48,10 +54,17 @@ namespace jh
 		bool mIsFlyingDown;
 		bool mIsFly;
 		bool mbGround;
+		bool mIsSlope;
 
 		ePlayerState mPlayerState;
 		Vector3 mPlayerPos;
+		Vector3 mRotation;
 		UINT mCount;
+
+		bool mIsLeftSlope;
+		bool mIsRightSlope;
+
+		Vector3 mColliderRotation;
 	};
 
 }

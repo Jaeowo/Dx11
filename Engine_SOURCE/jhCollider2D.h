@@ -36,6 +36,9 @@ namespace jh
 		Vector2 GetSize() { return mSize; }
 		Vector2 GetCenter() { return mCenter; }
 
+		Vector3 GetRotation() { return mRotation; }
+		void SetRotation(Vector3 rotation) { mRotation = rotation; }
+
 	private:
 		static UINT ColliderNumber;
 		UINT mID;
@@ -45,6 +48,7 @@ namespace jh
 		Vector2 mSize;
 		Vector2 mCenter;
 		Vector3 mPosition;
+		Vector3 mRotation;
 		float mRadius;
 		bool mbTrigger;
 	};

@@ -16,10 +16,10 @@ namespace jh
 		, mElapsedTime(0.0f)
 	{
 		Animator* mAnimator = AddComponent<Animator>();
-		mTransform = GetComponent<Transform>();
+		//mTransform = GetComponent<Transform>();
 
-		mTransform->SetPosition(Vector3(0.4f, 1.0f, 1.7f));
-		mTransform->SetScale(Vector3(0.29f, 0.29f, 1.0f));
+	/*	mTransform->SetPosition(Vector3(0.4f, 1.0f, 1.7f));
+		mTransform->SetScale(Vector3(0.29f, 0.29f, 1.0f));*/
 	
 		std::shared_ptr<Texture> gawktexture = Resources::Load<Texture>(L"Gawk", L"Gawk\\sprGawkSheet_81x70.png");
 		mAnimator->Create(L"GawkFlying", gawktexture, Vector2(0.0f, 0.0f), Vector2(81.0f, 70.0f), Vector2::Zero, 6, 0.2f);
@@ -47,7 +47,7 @@ namespace jh
 		
 		mMonsterPosition = mTransform->GetPosition();
 
-		//mElapsedTime += Time::DeltaTime();
+		mElapsedTime += Time::DeltaTime();
 
 		switch (mGawkState)
 		{
@@ -88,9 +88,9 @@ namespace jh
 		}
 
 
-		float speed = 0.15f; // 기본 이동 속도
+		float speed = 0.18f; // 기본 이동 속도
 		float bounceHeight = 0.00005f; // 튀는 높이
-		float bounceSpeed = 6.0f; // 튀는 속도
+		float bounceSpeed = 5.0f; // 튀는 속도
 
 		float yDistance = abs(mTargetPosition.y - mMonsterPosition.y);
 		float speedFactor = 1.0f + yDistance * 0.3f;
@@ -107,9 +107,6 @@ namespace jh
 
 		mTransform->SetPosition(mMonsterPosition);
 
-
-	
-		
 
 	}
 	void Gawk::UpsideDown()
@@ -131,7 +128,13 @@ namespace jh
 		if (mCount == 0)
 		{
 			mAnimator->Play(L"GawkUpsideDowntoFly", false);
+			mElapsedTime = 0.0f;
 			mCount = 1;
+			if (mElapsedTime >= 1.0f)
+			{
+				mGawkState = eGawkState::Flying;
+			}
+	
 		}
 	}
 	void Gawk::Hurt()

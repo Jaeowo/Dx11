@@ -488,6 +488,10 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"HorizontalTexture", L"Rings\\horizontal.png");
 		Resources::Load<Texture>(L"SlopedTexture", L"Rings\\sloped.png");
 		Resources::Load<Texture>(L"VerticalTexture", L"Rings\\vertical.png");
+
+		Resources::Load<Texture>(L"WallTexture", L"Wall.png");
+		Resources::Load<Texture>(L"GrassTexture", L"Grass.png");
+		Resources::Load<Texture>(L"CeilingTexture", L"ceiling.png");
 #pragma endregion
 #pragma region PLAYER TEXTURE
 		Resources::Load<Texture>(L"StandTexture", L"sprOtusStand.png");
@@ -513,6 +517,8 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"BackRock3ShadowTexture", L"Vellie Cave\\backRock3Shadow.png");
 #pragma endregion
 #pragma region PLATFORM TEXTURE
+		Resources::Load<Texture>(L"TotalCaveTexture", L"Test.png");
+		Resources::Load<Texture>(L"TotalVillageTexture", L"TotalVillage.png");
 		Resources::Load<Texture>(L"GrassFloorTexture", L"tileFloor.png");
 		Resources::Load<Texture>(L"GrassSlopeTexture", L"Vellie-Tropos-Owl Temple assets\\grassSlope.png");
 		Resources::Load<Texture>(L"Tile01Texture", L"Vellie-Tropos-Owl Temple assets\\tile01.png");
@@ -525,7 +531,47 @@ namespace jh::renderer
 
 	void LoadMaterial()
 	{
+#pragma region CAVESCENE MATERIAL
+		std::shared_ptr <Texture> grasstexture = Resources::Find<Texture>(L"GrassTexture");
+		std::shared_ptr<Shader> grassshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> grassmaterial = std::make_shared<Material>();
+		grassmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		grassmaterial->SetShader(grassshader);
+		grassmaterial->SetTexture(eTextureSlot::T0, grasstexture);
+		Resources::Insert<Material>(L"GrassMaterial", grassmaterial);
+
+		std::shared_ptr <Texture> ceilingtexture = Resources::Find<Texture>(L"CeilingTexture");
+		std::shared_ptr<Shader> ceilingshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> ceilingmaterial = std::make_shared<Material>();
+		ceilingmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		ceilingmaterial->SetShader(ceilingshader);
+		ceilingmaterial->SetTexture(eTextureSlot::T0, ceilingtexture);
+		Resources::Insert<Material>(L"CeilingMaterial", ceilingmaterial);
+
+		std::shared_ptr <Texture> walltexture = Resources::Find<Texture>(L"WallTexture");
+		std::shared_ptr<Shader> wallshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> wallmaterial = std::make_shared<Material>();
+		wallmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		wallmaterial->SetShader(wallshader);
+		wallmaterial->SetTexture(eTextureSlot::T0, walltexture);
+		Resources::Insert<Material>(L"WallMaterial", wallmaterial);
+#pragma endregion
 #pragma region PLATFORM MATERIAL
+		std::shared_ptr <Texture> totalcavetexture = Resources::Find<Texture>(L"TotalCaveTexture");
+		std::shared_ptr<Shader> totalcaveshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> totalcavematerial = std::make_shared<Material>();
+		totalcavematerial->SetRenderingMode(eRenderingMode::Transparent);
+		totalcavematerial->SetShader(totalcaveshader);
+		totalcavematerial->SetTexture(eTextureSlot::T0, totalcavetexture);
+		Resources::Insert<Material>(L"TotalCaveMaterial", totalcavematerial);
+
+		std::shared_ptr <Texture> totalvillagetexture = Resources::Find<Texture>(L"TotalVillageTexture");
+		std::shared_ptr<Shader> totalvillageshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> totalvillagematerial = std::make_shared<Material>();
+		totalvillagematerial->SetRenderingMode(eRenderingMode::Transparent);
+		totalvillagematerial->SetShader(totalvillageshader);
+		totalvillagematerial->SetTexture(eTextureSlot::T0, totalvillagetexture);
+		Resources::Insert<Material>(L"TotalVillageMaterial", totalvillagematerial);
 
 		std::shared_ptr <Texture> grassfloortexture = Resources::Find<Texture>(L"GrassFloorTexture");
 		std::shared_ptr<Shader> grassfloorshader = Resources::Find<Shader>(L"SpriteShader");

@@ -168,6 +168,10 @@
     <ClInclude Include="jhBaseRenderer.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraScript.h" />
+    <ClInclude Include="jhCaveScene.h" />
+    <ClInclude Include="jhCeilingScript.h" />
+    <ClInclude Include="jhChangeGawk.h" />
+    <ClInclude Include="jhChangeMonsterState.h" />
     <ClInclude Include="jhCloudScript.h" />
     <ClInclude Include="jhCollider2D.h" />
     <ClInclude Include="jhCollider3D.h" />
@@ -175,6 +179,8 @@
     <ClInclude Include="jhComponent.h" />
     <ClInclude Include="jhComputeShader.h" />
     <ClInclude Include="jhConstantBuffer.h" />
+    <ClInclude Include="jhDoor.h" />
+    <ClInclude Include="jhDoorScript.h" />
     <ClInclude Include="jhEngine.h" />
     <ClInclude Include="jhEntity.h" />
     <ClInclude Include="jhEnums.h" />
@@ -189,6 +195,7 @@
     <ClInclude Include="jhGraphicDevice_DX11.h" />
     <ClInclude Include="jhGraphics.h" />
     <ClInclude Include="jhGrassFloor.h" />
+    <ClInclude Include="jhGrassScript.h" />
     <ClInclude Include="jhGrassSlope.h" />
     <ClInclude Include="jhGridScript.h" />
     <ClInclude Include="jhGround.h" />
@@ -207,7 +214,9 @@
     <ClInclude Include="jhPrefab.h" />
     <ClInclude Include="jhRigidbody.h" />
     <ClInclude Include="jhRingScript.h" />
+    <ClInclude Include="jhSlope.h" />
     <ClInclude Include="jhSloped.h" />
+    <ClInclude Include="jhSlopeScript.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhStructedBuffer.h" />
     <ClInclude Include="jhTile01.h" />
@@ -246,6 +255,10 @@
     <ClCompile Include="jhBaseRenderer.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />
+    <ClCompile Include="jhCaveScene.cpp" />
+    <ClCompile Include="jhCeilingScript.cpp" />
+    <ClCompile Include="jhChangeGawk.cpp" />
+    <ClCompile Include="jhChangeMonsterState.cpp" />
     <ClCompile Include="jhCloudScript.cpp" />
     <ClCompile Include="jhCollider2D.cpp" />
     <ClCompile Include="jhCollider3D.cpp" />
@@ -253,6 +266,8 @@
     <ClCompile Include="jhComponent.cpp" />
     <ClCompile Include="jhComputeShader.cpp" />
     <ClCompile Include="jhConstantBuffer.cpp" />
+    <ClCompile Include="jhDoor.cpp" />
+    <ClCompile Include="jhDoorScript.cpp" />
     <ClCompile Include="jhEntity.cpp" />
     <ClCompile Include="jhFadeInScript.cpp" />
     <ClCompile Include="jhFadeOutScript.cpp" />
@@ -264,6 +279,7 @@
     <ClCompile Include="jhGeddyScript.cpp" />
     <ClCompile Include="jhGraphicDevice_DX11.cpp" />
     <ClCompile Include="jhGrassFloor.cpp" />
+    <ClCompile Include="jhGrassScript.cpp" />
     <ClCompile Include="jhGrassSlope.cpp" />
     <ClCompile Include="jhGridScript.cpp" />
     <ClCompile Include="jhGround.cpp" />
@@ -281,7 +297,9 @@
     <ClCompile Include="jhPrefab.cpp" />
     <ClCompile Include="jhRigidbody.cpp" />
     <ClCompile Include="jhRingScript.cpp" />
+    <ClCompile Include="jhSlope.cpp" />
     <ClCompile Include="jhSloped.cpp" />
+    <ClCompile Include="jhSlopeScript.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhStructedBuffer.cpp" />
     <ClCompile Include="jhTile01.cpp" />

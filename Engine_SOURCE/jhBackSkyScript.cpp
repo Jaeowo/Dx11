@@ -7,7 +7,7 @@ namespace jh
 {
 	BackSkyScript::BackSkyScript()
 		:Script()
-		, mParallax(0.95f)
+		, mParallax(1.03f)
 	{
 	}
 	BackSkyScript::~BackSkyScript()

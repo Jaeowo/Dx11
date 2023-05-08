@@ -13,13 +13,16 @@ namespace jh
 		, mIsFly(false)
 	{
 		mTransform = GetComponent<Transform>();
-		mTransform->SetPosition(Vector3(1.0f, 0.84f, 1.7f));
+		mTransform->SetPosition(Vector3(1.0f, -0.48f, 1.7f));
 		mTransform->SetScale(Vector3(0.35f, 0.35f, 1.0f));
 
-		Collider2D* collider = AddComponent<Collider2D>();
-		collider->SetType(eColliderType::Rect);
-		collider->SetSize(Vector2(0.1f, 0.28f));
-		//collider->SetCenter(Vector2(-0.015f, -0.02f));
+		mRotation = (Vector3(0.0f, 0.0f, 0.0f));
+
+		Collider2D* mCollider = AddComponent<Collider2D>();
+		mCollider->SetType(eColliderType::Rect);
+		mCollider->SetSize(Vector2(0.1f, 0.28f));
+		mCollider->SetCenter(Vector2(-0.015f, -0.02f));
+	
 
 		SpriteRenderer* standsr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");
@@ -38,8 +41,10 @@ namespace jh
 	}
 	void Player::Update()
 	{
-
+		mCollider = GetComponent<Collider2D>();
+		mTransform->SetRotation(mRotation);
 		GameObject::Update();
+
 	}
 	void Player::FixedUpdate()
 	{

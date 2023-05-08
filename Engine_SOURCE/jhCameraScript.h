@@ -17,6 +17,7 @@ namespace jh
 		virtual void Render() override;
 	private:
 		bool mEditorMode;
+		int mNumber;
 	};
 }
 

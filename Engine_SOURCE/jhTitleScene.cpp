@@ -36,29 +36,6 @@ namespace jh
 		paintShader->SetTarget(paintTex);
 		paintShader->OnExcute();
 
-		//SMILE RECT
-		{
-			//Player* obj = object::Instantiate<Player>(eLayerType::Player);
-			//obj->SetName(L"SMILE");
-			//Transform* tr = obj->GetComponent<Transform>();
-			//tr->SetPosition(Vector3(2.0f, 0.0f, 5.0f));
-			////tr->SetScale(Vector3(2.0f, 1.0f, 1.0f));
-			////tr->SetRotation(Vector3(0.0f, 0.0f, XM_PIDIV2 / 2.0f));
-			////tr->SetScale(Vector3(1.0f, 1.0f, 1.0f));
-			//Collider2D* collider = obj->AddComponent<Collider2D>();
-			//collider->SetSize(Vector2(2.0f, 2.0f));
-			//collider->SetType(eColliderType::Rect);
-			////collider->SetCenter(Vector2(0.2f, 0.2f));
-			////collider->SetSize(Vector2(1.5f, 1.5f));
-
-			//SpriteRenderer* mr = obj->AddComponent<SpriteRenderer>();
-			//std::shared_ptr<Material> mateiral = Resources::Find<Material>(L"RectMaterial");
-			//mr->SetMaterial(mateiral);
-			//std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"RectMesh");
-			//mr->SetMesh(mesh);
-			//object::DontDestroyOnLoad(obj);
-		}
-
 		{
 			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
 			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
@@ -79,11 +56,9 @@ namespace jh
 		// Main Camera Game Object
 		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera);
 		Camera* cameraComp = cameraObj->AddComponent<Camera>();
-		//cameraComp->RegisterCameraInRenderer();
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
 		cameraObj->AddComponent<CameraScript>();
 		mainCamera = cameraComp;
-		//renderer::cameras[0] = cameraComp;
 
 		// Ground2 Camera
 		GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);

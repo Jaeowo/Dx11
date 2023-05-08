@@ -82,7 +82,7 @@ namespace jh
 		mTransform = GetOwner()->GetComponent<Transform>();
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
-		
+		mRotation = PlayerManager::GetPlayer()->GetPlayerRotation();
 		mPlayerPosition = mTransform->GetPosition();
 		mTime += Time::DeltaTime();
 		mPlayerState = PlayerManager::GetPlayer()->GetPlayerState();
@@ -90,8 +90,10 @@ namespace jh
 
 		mCount = PlayerManager::GetPlayer()->GetCount();
 
+		//PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 0.0f, 230.0f));
+
 #pragma region FALL
-		float deltaY = mPlayerPosition.y - mBeforePos.y;
+		float deltaY = mPlayerPosition.y - mPrevPosition.y;
 
 		if (mbGround)
 			{
@@ -117,7 +119,7 @@ namespace jh
 			}
 		}
 
-		mBeforePos = mPlayerPosition;
+		mPrevPosition = mPlayerPosition;
 	
 #pragma endregion
 
@@ -174,6 +176,7 @@ namespace jh
 			GroundRoll();
 			break;
 		case jh::enums::ePlayerState::EnterDoor:
+			EnterDoor();
 			break;
 		case jh::enums::ePlayerState::StartAttack:
 			break;
@@ -239,10 +242,11 @@ namespace jh
 
 		if (Input::GetKeyDown(eKeyCode::D))
 		{
-			Vector3 CheckRotation = mTransform->GetRotation();
-			if (CheckRotation.y == 180.0f)
+			//Vector3 CheckRotation = mTransform->GetRotation();
+			if (mRotation.y == 180.0f)
 			{
-				mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+				//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
 			}
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::RightRun);
 			PlayerManager::GetPlayer()->SetCount(0);
@@ -281,7 +285,8 @@ namespace jh
 			
 			if (mCount == 0)
 			{
-				mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
+				//mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
 				mAnimator->Play(L"MoveRight", true);
 				PlayerManager::GetPlayer()->SetCount(1);
 			}
@@ -362,7 +367,8 @@ namespace jh
 			Vector3 pos = mTransform->GetPosition();
 			pos.x -= 0.2f * Time::DeltaTime();
 			mTransform->SetPosition(pos);
-			mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+			PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
+			//mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
 		}
 		if (Input::GetKey(eKeyCode::D))
 		{
@@ -370,10 +376,11 @@ namespace jh
 			pos.x += 0.2f * Time::DeltaTime();
 			mTransform->SetPosition(pos);
 
-			Vector3 CheckRotation = mTransform->GetRotation();
-			if (CheckRotation.y == 180.0f)
+			//Vector3 CheckRotation = mTransform->GetRotation();
+			if (mRotation.y == 180.0f)
 			{
-				mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
+				//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
 			}
 		}
 		
@@ -393,8 +400,8 @@ namespace jh
 			
 			PlayerManager::GetPlayer()->SetCount(1);
 		}
-		Vector3 CheckRotation = mTransform->GetRotation();
-		if (CheckRotation.y == 180.0f)
+		//Vector3 CheckRotation = mTransform->GetRotation();
+		if (mRotation.y == 180.0f)
 		{
 			float rollSpeed = 0.35f;
 			mPlayerPosition.x -= rollSpeed * (float)Time::DeltaTime();
@@ -413,6 +420,17 @@ namespace jh
 			PlayerManager::GetPlayer()->SetCount(0);
 		}
 	
+		
+	}
+	void PlayerScript::EnterDoor()
+	{
+		if (mCount == 0)
+		{
+			mTime = 0.0f;
+			mAnimator->Play(L"EnterDoor", false);
+			PlayerManager::GetPlayer()->SetCount(1);
+		}
+
 		
 	}
 	void PlayerScript::StartAttack()
@@ -454,15 +472,18 @@ namespace jh
 		if (Input::GetKey(eKeyCode::A))
 		{
 			movement.x -= 1.0f;
-			mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+			PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
+			//mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+
 		}
 		if (Input::GetKey(eKeyCode::D))
 		{
 			movement.x += 1.0f;
-			Vector3 CheckRotation = mTransform->GetRotation();
-			if (CheckRotation.y == 180.0f)
+			//Vector3 CheckRotation = mTransform->GetRotation();
+			if (mRotation.y == 180.0f)
 			{
-				mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+				//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
 			}
 		}
 		if (Input::GetKey(eKeyCode::S))
@@ -521,15 +542,17 @@ namespace jh
 		if (Input::GetKey(eKeyCode::A))
 		{
 			movement.x -= 1.0f;
-			mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+			//mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
+			PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
 		}
 		if (Input::GetKey(eKeyCode::D))
 		{
 			movement.x += 1.0f;
-			Vector3 CheckRotation = mTransform->GetRotation();
-			if (CheckRotation.y == 180.0f)
+			//Vector3 CheckRotation = mTransform->GetRotation();
+			if (mRotation.y == 180.0f)
 			{
-				mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+				//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
+				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
 			}
 		}
 		if (Input::GetKey(eKeyCode::S))
@@ -591,8 +614,8 @@ namespace jh
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fly);
 			PlayerManager::GetPlayer()->SetCount(0);
 		}
-		Vector3 CheckRotation = mTransform->GetRotation();
-		if (CheckRotation.y == 180.0f)
+		//Vector3 CheckRotation = mTransform->GetRotation();
+		if (mRotation.y == 180.0f)
 		{
 			float rollSpeed = 0.35f;
 			mPlayerPosition.x -= rollSpeed * (float)Time::DeltaTime();

@@ -1,33 +1,32 @@
-#include "jhGround.h"
-#include "jhCollider2D.h"
-#include "jhGroundScript.h"
+#include "jhSlope.h"
+#include "jhSlopeScript.h"
 
 namespace jh
 {
-	Ground::Ground()
+	Slope::Slope()
 	{
-		AddComponent<GroundScript>();
+		AddComponent<SlopeScript>();
 		Collider2D* groundcollider = AddComponent<Collider2D>();
 		groundcollider->SetType(eColliderType::Rect);
 	}
-	Ground::~Ground()
+	Slope::~Slope()
 	{
 	}
-	void Ground::Initalize()
+	void Slope::Initalize()
 	{
 		GameObject::Initalize();
-	
+
 	}
-	void Ground::Update()
+	void Slope::Update()
 	{
 		GameObject::Update();
 
 	}
-	void Ground::FixedUpdate()
+	void Slope::FixedUpdate()
 	{
 		GameObject::FixedUpdate();
 	}
-	void Ground::Render()
+	void Slope::Render()
 	{
 		GameObject::Render();
 	}

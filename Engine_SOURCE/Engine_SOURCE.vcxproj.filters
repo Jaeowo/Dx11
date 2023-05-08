@@ -127,9 +127,6 @@
     <ClInclude Include="jhAnimator.h">
       <Filter>Component\Animator</Filter>
     </ClInclude>
-    <ClInclude Include="jhCloudScript.h">
-      <Filter>Component\Script\BackGround</Filter>
-    </ClInclude>
     <ClInclude Include="jhPlayerManager.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
@@ -155,9 +152,6 @@
     </ClInclude>
     <ClInclude Include="jhGround.h">
       <Filter>GameObject\Ground</Filter>
-    </ClInclude>
-    <ClInclude Include="jhGroundScript.h">
-      <Filter>Component\Script\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="jhRigidbody.h">
       <Filter>Component\Rigidbody</Filter>
@@ -204,9 +198,6 @@
     <ClInclude Include="jhBackRockShadow.h">
       <Filter>GameObject\BackGround\BackRock</Filter>
     </ClInclude>
-    <ClInclude Include="jhRingScript.h">
-      <Filter>Component\Script\BackGround</Filter>
-    </ClInclude>
     <ClInclude Include="jhTile01.h">
       <Filter>GameObject\BackGround\Platform</Filter>
     </ClInclude>
@@ -227,6 +218,42 @@
     </ClInclude>
     <ClInclude Include="jhBackSkyScript.h">
       <Filter>Component\Script\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSlope.h">
+      <Filter>GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="jhDoor.h">
+      <Filter>GameObject\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="jhDoorScript.h">
+      <Filter>Component\Script\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCaveScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCloudScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGroundScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
+    </ClInclude>
+    <ClInclude Include="jhRingScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSlopeScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCeilingScript.h">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGrassScript.h">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="jhChangeMonsterState.h">
+      <Filter>GameObject\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="jhChangeGawk.h">
+      <Filter>Component\Script\Trigger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -341,9 +368,6 @@
     <ClCompile Include="jhAnimator.cpp">
       <Filter>Component\Animator</Filter>
     </ClCompile>
-    <ClCompile Include="jhCloudScript.cpp">
-      <Filter>Component\Script\BackGround</Filter>
-    </ClCompile>
     <ClCompile Include="jhPlayerManager.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
@@ -369,9 +393,6 @@
     </ClCompile>
     <ClCompile Include="jhGround.cpp">
       <Filter>GameObject\Ground</Filter>
-    </ClCompile>
-    <ClCompile Include="jhGroundScript.cpp">
-      <Filter>Component\Script\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="jhRigidbody.cpp">
       <Filter>Component\Rigidbody</Filter>
@@ -418,9 +439,6 @@
     <ClCompile Include="jhBackRockShadow.cpp">
       <Filter>GameObject\BackGround\BackRock</Filter>
     </ClCompile>
-    <ClCompile Include="jhRingScript.cpp">
-      <Filter>Component\Script\BackGround</Filter>
-    </ClCompile>
     <ClCompile Include="jhTile01.cpp">
       <Filter>GameObject\BackGround\Platform</Filter>
     </ClCompile>
@@ -441,6 +459,42 @@
     </ClCompile>
     <ClCompile Include="jhBackSkyScript.cpp">
       <Filter>Component\Script\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSlope.cpp">
+      <Filter>GameObject\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="jhDoor.cpp">
+      <Filter>GameObject\Trigger</Filter>
+    </ClCompile>
+    <ClCompile Include="jhDoorScript.cpp">
+      <Filter>Component\Script\Trigger</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCaveScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCloudScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGroundScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
+    </ClCompile>
+    <ClCompile Include="jhRingScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSlopeScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCeilingScript.cpp">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGrassScript.cpp">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="jhChangeMonsterState.cpp">
+      <Filter>GameObject\Trigger</Filter>
+    </ClCompile>
+    <ClCompile Include="jhChangeGawk.cpp">
+      <Filter>Component\Script\Trigger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -581,6 +635,15 @@
     </Filter>
     <Filter Include="GameObject\BackGround\Platform">
       <UniqueIdentifier>{8afb4a11-1149-4567-b470-0a1203c6373e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\Trigger">
+      <UniqueIdentifier>{6dce8740-e375-4424-ae42-245e1dd39df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Trigger">
+      <UniqueIdentifier>{2a1bc67e-09d9-4b1a-83e2-c8308427eca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\BackGround\BackGroundObj">
+      <UniqueIdentifier>{7277fe53-7995-46ba-b873-4d9b1e0a5061}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
