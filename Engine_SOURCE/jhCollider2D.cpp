@@ -49,8 +49,6 @@ namespace jh
 		rotationMatrix *= Matrix::CreateRotationY(mRotation.y);
 		rotationMatrix *= Matrix::CreateRotationZ(mRotation.z);
 
-		//Matrix rotationMatrix = Matrix::CreateRotationZ(mRotation.z); // 이 부분을 수정했습니다.
-
 		Matrix positionMatrix;
 		positionMatrix.Translation(Vector3(colliderPos.x, colliderPos.y, colliderPos.z));
 

@@ -15,7 +15,7 @@ namespace jh
 	PlayerScript::PlayerScript()
 		:Script()
 		, mPlayerState(ePlayerState::Idle)
-		, mbGround(true)
+		, mbGround(false)
 		, mbCarrying(false)
 		, mCount(0)
 		, mTime(0.0f)
@@ -78,7 +78,7 @@ namespace jh
 	}
 	void PlayerScript::Update()
 	{
-	
+
 		mTransform = GetOwner()->GetComponent<Transform>();
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
@@ -92,10 +92,15 @@ namespace jh
 
 		//PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 0.0f, 230.0f));
 
+		if (PlayerManager::GetPlayer()->GetVelocityZero() == true)
+		{
+			mVelocity.y = 0.0f;
+		}
+
 #pragma region FALL
 		float deltaY = mPlayerPosition.y - mPrevPosition.y;
 
-		if (mbGround)
+		if (!mbGround)
 			{
 			if (deltaY < 0.0f)
 			{
@@ -118,42 +123,33 @@ namespace jh
 				mFallingTime = 0.0f;
 			}
 		}
-
+	
 		mPrevPosition = mPlayerPosition;
 	
 #pragma endregion
 
 		PlayerManager::GetPlayer()->SetIsFly(mIsFlying);
 
-		if (mIsFlying == true)
-		{
-	
-		}
-		else
-		{
-			mPlayerPosition.x += mVelocity.x * (float)Time::DeltaTime();
-			mPlayerPosition.y += mVelocity.y + 0.5f * mGravity * (float)Time::DeltaTime() * (float)Time::DeltaTime();
-			mVelocity.y -= mGravity * (float)Time::DeltaTime();
-			mTransform->SetPosition(mPlayerPosition);
-
-			if (mPlayerState == ePlayerState::Jump)
-			{
-				mPlayerPosition.x += mVelocity.x * (float)Time::DeltaTime();
-				mPlayerPosition.y += mVelocity.y + 0.5f * mGravity * (float)Time::DeltaTime() * (float)Time::DeltaTime();
-				mVelocity.y -= mGravity * (float)Time::DeltaTime();
-				mTransform->SetPosition(mPlayerPosition);
-			}
-		}
-
-		if (PlayerManager::GetPlayer()->GetIsGround() == true)
+		if (PlayerManager::GetPlayer()->GetIsGround() == true && mPlayerState != ePlayerState::Jump)
 		{
 			mGravity = 0.0f;
 			mVelocity.y = 0.0f;
 		}
-		else if (PlayerManager::GetPlayer()->GetIsGround() == false)
+		else if (PlayerManager::GetPlayer()->GetIsGround() == false && mIsFlying == false)
 		{
 			mGravity = 0.00005f;
 		}
+
+		mPlayerPosition.x += mVelocity.x * (float)Time::DeltaTime();
+
+		if (mIsFlying == false)
+		{
+			mPlayerPosition.y += mVelocity.y + 0.5f * mGravity * (float)Time::DeltaTime() * (float)Time::DeltaTime();
+			mVelocity.y -= mGravity * (float)Time::DeltaTime();
+		}
+
+		mTransform->SetPosition(mPlayerPosition);
+
 	
 		switch (mPlayerState)
 		{
@@ -222,8 +218,7 @@ namespace jh
 	}
 	void PlayerScript::OnCollisionStay(Collider2D* collider)
 	{
-	/*	Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
-		geddyObj->SetGeddyState(eGeddyState::Hanging);*/
+	
 	}
 	void PlayerScript::OnCollisionExit(Collider2D* collider)
 	{
@@ -251,6 +246,8 @@ namespace jh
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::RightRun);
 			PlayerManager::GetPlayer()->SetCount(0);
 			
+			
+
 		}
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
@@ -276,17 +273,27 @@ namespace jh
 	}
 	void PlayerScript::LeftRun()
 	{
+		const float SlopeAngle = 0.5f; 
+
 		if (Input::GetKey(eKeyCode::A))
 		{
 			Vector3 pos = mTransform->GetPosition();
 			pos.x -= 0.5f * Time::DeltaTime();
+
+			if (PlayerManager::GetPlayer()->GetIsLeftSlope() == true)
+			{
+				pos.y += SlopeAngle * Time::DeltaTime(); 
+				mGravity = 0.0f;  
+			}
+			else if (PlayerManager::GetPlayer()->GetIsLeftSlope() == false)
+			{
+				mGravity = 0.00005f;
+			}
 			mTransform->SetPosition(pos);
-		
-			
+
 			if (mCount == 0)
 			{
 				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
-				//mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
 				mAnimator->Play(L"MoveRight", true);
 				PlayerManager::GetPlayer()->SetCount(1);
 			}
@@ -296,8 +303,6 @@ namespace jh
 		{
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
 			PlayerManager::GetPlayer()->SetCount(0);
-
-			//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
 		}
 	}
 	void PlayerScript::RightRun()
@@ -307,14 +312,26 @@ namespace jh
 
 			Vector3 pos = mTransform->GetPosition();
 			pos.x += 0.5f * Time::DeltaTime();
-			mTransform->SetPosition(pos);
+			
+
+			const float SlopeAngle = 0.5f;
+
+			if (PlayerManager::GetPlayer()->GetIsLeftSlope() == true)
+			{
+				pos.y -= SlopeAngle * Time::DeltaTime();
+				mGravity = 0.0f;
+			}
+			else if (PlayerManager::GetPlayer()->GetIsLeftSlope() == false)
+			{
+				mGravity = 0.00005f;
+			}
 
 			if (mCount == 0)
 			{
 				mAnimator->Play(L"MoveRight", true);
 				PlayerManager::GetPlayer()->SetCount(1);
 			}
-
+			mTransform->SetPosition(pos);
 		}
 
 		if (Input::GetKeyUp(eKeyCode::D))
@@ -340,6 +357,12 @@ namespace jh
 			PlayerManager::GetPlayer()->SetCount(1);
 
 		}
+
+	/*	if (mVelocity.y <= 0)
+		{
+			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fall);
+			PlayerManager::GetPlayer()->SetCount(0);
+		}*/
 
 		if (Input::GetKey(eKeyCode::E))
 		{

@@ -19,7 +19,7 @@ namespace jh
 {
 	Geddyhands::Geddyhands()
 	{
-		Animator* mAnimator = AddComponent<Animator>();
+		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 
 		std::shared_ptr<Texture> geddyhandstexture = Resources::Load<Texture>(L"GeddyArm", L"Geddy\\arm96x32.png");
@@ -48,6 +48,7 @@ namespace jh
 	}
 	Geddyhands::~Geddyhands()
 	{
+		
 	}
 	void Geddyhands::Initalize()
 	{

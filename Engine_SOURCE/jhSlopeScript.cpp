@@ -1,12 +1,15 @@
 #include "jhSlopeScript.h"
 #include "jhPlayer.h"
 #include "jhGeddy.h"
+#include "jhSlope.h"
 
 namespace jh
 {
 	SlopeScript::SlopeScript()
 		:mCount(0)
 	{
+
+	
 	}
 	SlopeScript::~SlopeScript()
 	{
@@ -16,6 +19,9 @@ namespace jh
 	}
 	void SlopeScript::Update()
 	{
+
+		
+
 	}
 	void SlopeScript::Render()
 	{
@@ -23,8 +29,10 @@ namespace jh
 	void SlopeScript::OnCollisionEnter(Collider2D* collider)
 	{
 
-		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
+
+		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
+		Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
 		if (playerObj)
 		{
 			playerObj->SetIsGround(true);
@@ -41,12 +49,11 @@ namespace jh
 				playerObj->SetCount(0);
 			}
 
-			
-		
+
 		}
 		else
 		{
-			Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
+	
 
 			if (geddyObj)
 			{
@@ -62,19 +69,29 @@ namespace jh
 
 
 
+
+
+		if (this->mslope != nullptr)
+		{
+			if (this->mslope->GetLeftUP() == true)
+			{
+				if (playerObj)
+				{
+					playerObj->SetIsLeftSlope(true);
+				}
+			}
+			else if (this->mslope->GetRightUp() == true)
+			{
+				if (playerObj)
+				{
+					playerObj->SetIsRightSlope(true);
+				}
+			}
+		}
+
 	}
 	void SlopeScript::OnCollisionStay(Collider2D* collider)
 	{
-		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
-
-		if (playerObj->GetPlayerRotation().y >= 180.0f)
-		{
-			playerObj->SetPlayerRotation(Vector3(0.0f, 180.0f, 310.0f));
-		}
-		else
-		{
-			playerObj->SetPlayerRotation(Vector3(0.0f, 0.0f, 310.0f));
-		}
 	}
 	void SlopeScript::OnCollisionExit(Collider2D* collider)
 	{
@@ -86,8 +103,9 @@ namespace jh
 			if (playerObj->GetIsFly() == false)
 			{
 				playerObj->SetIsGround(false);
+				playerObj->SetIsLeftSlope(false);
+				playerObj->SetIsRightSlope(false);
 			}
-			playerObj->SetPlayerRotation(Vector3(0.0f, 0.0f, 0.0f));
 		}
 
 		Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());

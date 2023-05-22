@@ -154,67 +154,98 @@ namespace jh
 		// 3 --- 2
 		Vector3 arrLocalPos[4] =
 		{
-			Vector3{-0.5f, 0.5f, 0.0f}
-			,Vector3{0.5f, 0.5f, 0.0f}
-			,Vector3{0.5f, -0.5f, 0.0f}
-			,Vector3{-0.5f, -0.5f, 0.0f}
+			Vector3{-0.5f, 0.5f, 0.0f},
+			Vector3{0.5f, 0.5f, 0.0f},
+			Vector3{0.5f, -0.5f, 0.0f},
+			Vector3{-0.5f, -0.5f, 0.0f}
 		};
 
 		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
 		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
 
-		Matrix leftMat = leftTr->GetWorldMatrix();
-		Matrix rightMat = rightTr->GetWorldMatrix();
-
-
-
-		// 분리축 벡터 4개 구하기
-		Vector3 Axis[4] = {};
-
 		Vector3 leftScale = Vector3(left->GetSize().x, left->GetSize().y, 1.0f);
-
-		Matrix finalLeft = Matrix::CreateScale(leftScale);
-		finalLeft *= leftMat;
-
 		Vector3 rightScale = Vector3(right->GetSize().x, right->GetSize().y, 1.0f);
-		Matrix finalRight = Matrix::CreateScale(rightScale);
-		finalRight *= rightMat;
 
-		Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
-		Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
-		Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
-		Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
-
-		Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
-		Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);
-		Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
-		Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
-
-		for (size_t i = 0; i < 4; i++)
-			Axis[i].z = 0.0f;
+		Matrix finalLeft = Matrix::CreateScale(leftScale) * leftTr->GetWorldMatrix();
+		Matrix finalRight = Matrix::CreateScale(rightScale) * rightTr->GetWorldMatrix();
 
 		Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
 		vc.z = 0.0f;
 
-		Vector3 centerDir = vc;
-		for (size_t i = 0; i < 4; i++)
+		if (left->GetType() == eColliderType::Rect && right->GetType() == eColliderType::Rect)
 		{
-			Vector3 vA = Axis[i];
-			//vA.Normalize();
+			// 분리축 벡터 4개 구하기
+			Vector3 Axis[4] = {};
 
-			float projDist = 0.0f;
-			for (size_t j = 0; j < 4; j++)
+			Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
+			Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
+			Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
+			Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
+
+			Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+			Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+			Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
+			Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
+
+			for (size_t i = 0; i < 4; i++)
+				Axis[i].z = 0.0f;
+
+			Vector3 centerDir = vc;
+			for (size_t i = 0; i < 4; i++)
 			{
-				projDist += fabsf(Axis[j].Dot(vA) / 2.0f);
+				Vector3 vA = Axis[i];
+
+				float projDist = 0.0f;
+				for (size_t j = 0; j < 4; j++)
+				{
+					projDist += fabsf(Axis[j].Dot(vA) / 2.0f);
+				}
+
+				if (projDist < fabsf(centerDir.Dot(vA)))
+				{
+					return false;
+				}
 			}
 
-			if (projDist < fabsf(centerDir.Dot(vA)))
-			{
-				return false;
-			}
+			return true;
 		}
+		else if (left->GetType() == eColliderType::Circle && right->GetType() == eColliderType::Circle)
+		{
+			float leftRadius = left->GetSize().x / 2.0f;
+			float rightRadius = right->GetSize().x / 2.0f;
+			float totalRadius = leftRadius + rightRadius;
 
+			Vector3 dir = vc;
+			float distanceSq = dir.LengthSquared();
 
-		return true;
+			return (distanceSq <= totalRadius * totalRadius);
+		}
+		else
+		{
+			Collider2D* circleCollider = (left->GetType() == eColliderType::Circle) ? left : right;
+			Collider2D* rectCollider = (left->GetType() == eColliderType::Rect) ? left : right;
+
+			float radius = circleCollider->GetSize().x / 2.0f;
+			Vector3 circleCenter = circleCollider->GetOwner()->GetComponent<Transform>()->GetPosition();
+
+			Vector3 rectCorners[4];
+			for (size_t i = 0; i < 4; i++)
+			{
+				rectCorners[i] = Vector3::Transform(arrLocalPos[i], finalRight);
+			}
+
+			for (size_t i = 0; i < 4; i++)
+			{
+				Vector3 dir = rectCorners[i] - circleCenter;
+				float distanceSq = dir.LengthSquared();
+
+				if (distanceSq < radius * radius)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
 	}
 }

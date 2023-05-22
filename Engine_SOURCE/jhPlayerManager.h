@@ -5,7 +5,6 @@ namespace jh
 	class Player;
 	class Geddy;
 
-
 	class PlayerManager
 	{
 	public:
@@ -14,7 +13,6 @@ namespace jh
 
 		static void SetGeddy(Geddy* geddy) { mGeddy = geddy; }
 		static Geddy* GetGeddy() { return mGeddy; }
-
 
 	private:
 		static Player* mPlayer;

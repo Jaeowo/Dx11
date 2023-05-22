@@ -219,12 +219,12 @@ namespace jh
 		Ground* groundObj5 = object::Instantiate<Ground>(eLayerType::BackGround);
 		Transform* groundTr5 = groundObj5->GetComponent<Transform>();
 		groundTr5->SetPosition(Vector3(2.1f, 1.28f, 1.7f));
-		groundTr5->SetScale(Vector3(0.63f, 0.001f, 1.0f));
+		groundTr5->SetScale(Vector3(0.73f, 0.001f, 1.0f));
 
 		Ground* groundObj4 = object::Instantiate<Ground>(eLayerType::BackGround);
 		Transform* groundTr4 = groundObj4->GetComponent<Transform>();
 		groundTr4->SetPosition(Vector3(1.55f, 1.44f, 1.7f));
-		groundTr4->SetScale(Vector3(0.21f, 0.001f, 1.0f));
+		groundTr4->SetScale(Vector3(0.31f, 0.001f, 1.0f));
 
 		Ground* groundObj3 = object::Instantiate<Ground>(eLayerType::BackGround);
 		Transform* groundTr3 = groundObj3->GetComponent<Transform>();
@@ -237,24 +237,27 @@ namespace jh
 		groundTr2->SetScale(Vector3(0.35f, 0.001f, 1.0f));
 #pragma endregion
 	
-		//Door
-		Door* DoorObj = object::Instantiate<Door>(eLayerType::BackGround);
-		Transform* DoorTr = DoorObj->GetComponent<Transform>();
-		DoorTr->SetPosition(Vector3(-0.18f, 2.37f, 1.7f));
-		DoorTr->SetScale(Vector3(0.07f, 0.1f, 1.0f));
 	
-		//Slope
+#pragma region SLOPE
 		Slope* SlopeObj2 = object::Instantiate<Slope>(eLayerType::BackGround);
 		Transform* slopeTr2 = SlopeObj2->GetComponent<Transform>();
 		slopeTr2->SetPosition(Vector3(1.73f, 1.35f, 1.7f));
-		slopeTr2->SetScale(Vector3(0.25f, 0.001f, 1.0f));
-		slopeTr2->SetRotation(Vector3(0.0f, 0.0f, 310.0f));
+		slopeTr2->SetScale(Vector3(0.25f, 0.01f, 1.0f));
+		SlopeObj2->SetLeftUp(true);
 
 		Slope* SlopeObj = object::Instantiate<Slope>(eLayerType::BackGround);
 		Transform* slopeTr = SlopeObj->GetComponent<Transform>();
 		slopeTr->SetPosition(Vector3(0.7f, -1.678f, 1.7f));
 		slopeTr->SetScale(Vector3(0.35f, 0.001f, 1.0f));
-		slopeTr->SetRotation(Vector3(0.0f, 0.0f, 55.0f));
+		SlopeObj->SetRightUp(true);
+	
+#pragma endregion
+
+		//Door
+		Door* DoorObj = object::Instantiate<Door>(eLayerType::BackGround);
+		Transform* DoorTr = DoorObj->GetComponent<Transform>();
+		DoorTr->SetPosition(Vector3(-0.18f, 2.37f, 1.7f));
+		DoorTr->SetScale(Vector3(0.07f, 0.1f, 1.0f));
 
 
 

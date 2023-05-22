@@ -24,6 +24,7 @@ namespace jh
 		, mCount(0)
 		, mbGround(false)
 		, mFallingTime(0.0f)
+		//, mGeddyhands(nullptr)
 	{
 		
 		Animator* mAnimator = PlayerManager::GetGeddy()->AddComponent<Animator>();
@@ -154,6 +155,12 @@ namespace jh
 	{
 		if (mCount == 0)
 		{
+			if (mGeddyhands != nullptr)
+			{
+				mGeddyhands->Death();
+				mGeddyhands = nullptr;
+			}
+
 			mAnimator->Play(L"IdleG", true);
 			PlayerManager::GetGeddy()->SetCount(1);
 			mVelocity = (Vector2(0.0f, 0.0f));
@@ -177,7 +184,7 @@ namespace jh
 		if (mCount == 0)
 		{
 			mAnimator->Play(L"HaingingG", true);
-			Geddyhands* mGeddyhands = object::Instantiate<Geddyhands>(eLayerType::PlayerObject);
+			mGeddyhands = object::Instantiate<Geddyhands>(eLayerType::PlayerObject);
 			mTransform->SetParent(mPlayerTransform);
 			Vector3 PlayerScale = mPlayerTransform->GetScale();
 			
@@ -185,15 +192,20 @@ namespace jh
 
 			mTransform->SetPosition(Vector3(-0.03f, -0.1f, 0.0f));
 			mTransform->SetScale(Vector3(0.95f, 0.95f, 1.0f));
-			
+		
+		
+
 			PlayerManager::GetGeddy()->SetCount(1);
 
 		}
 		if (Input::GetKeyDown(eKeyCode::G))
 		{
 			PlayerManager::GetGeddy()->SetGeddyState(eGeddyState::Idle);
-		
+
 			mTransform->SetParent(nullptr);
+
+			
+
 			Vector3 PlayerPosition = mPlayerTransform->GetPosition();
 			mTransform->SetPosition(Vector3(PlayerPosition.x-0.018f, PlayerPosition.y-0.05f, PlayerPosition.z));
 			mTransform->SetScale(Vector3(0.33f, 0.33f, 1.0f));

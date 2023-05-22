@@ -33,6 +33,9 @@ namespace jh
 		bool GetIsFlyDown() { return mIsFlyingDown; }
 		void SetIsFlyDown(bool flyingdown) { mIsFlyingDown = flyingdown; }
 
+		bool GetIsJumping() { return mIsJumping; }
+		void SetIsJumping(bool isjumping) { mIsJumping = isjumping; }
+
 		bool GetIsFly() { return mIsFly; }
 		void SetIsFly(bool isfly) { mIsFly = isfly; }
 
@@ -44,17 +47,22 @@ namespace jh
 
 		Transform* getTransform() { return mTransform; }
 
+		bool GetIsLeftSlope() { return mIsLeftSlope; }
+		bool GetIsRightSlope() { return mIsRightSlope; }
 		void SetIsLeftSlope(bool leftslope) { mIsLeftSlope = leftslope; }
 		void SetIsRightSlope(bool rightslope) { mIsRightSlope = rightslope; }
 
+		bool GetVelocityZero() { return mvelocityzero; }
+		void SetVelocityZero(bool velocityzero) { mvelocityzero = velocityzero; }
 	private:
 		Transform* mTransform;
 		Collider2D* mCollider;
 
 		bool mIsFlyingDown;
 		bool mIsFly;
+		bool mIsJumping;
 		bool mbGround;
-		bool mIsSlope;
+		bool mvelocityzero;
 
 		ePlayerState mPlayerState;
 		Vector3 mPlayerPos;

@@ -46,6 +46,17 @@ namespace jh
 				playerObj->SetPlayerState(ePlayerState::Idle);
 				playerObj->SetCount(0);
 			}
+
+			// adjust the player's position to be just above the ground
+			Vector3 playerPos = playerObj->GetPlayerPos();
+			Transform* groundTransform = this->GetOwner()->GetComponent<Transform>();
+			const float PLAYER_COLLIDER_HEIGHT = 1.0f;  // replace with the actual value
+			float groundTop = groundTransform->GetPosition().y + (groundTransform->GetScale().y / 2);
+			playerPos.y = groundTop + PLAYER_COLLIDER_HEIGHT / 2;
+			playerObj->SetPlayerPos(playerPos);
+
+			// set the vertical speed to 0
+			//playerObj->SetVelocityZero(true);
 		}
 		else 
 		{
@@ -80,6 +91,8 @@ namespace jh
 			{
 				playerObj->SetIsGround(false);
 			}
+
+			playerObj->SetVelocityZero(false);
 		}
 	
 		Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());

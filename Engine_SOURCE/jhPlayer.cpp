@@ -11,6 +11,8 @@ namespace jh
 		, mCount(0)
 		, mIsFlyingDown(false)
 		, mIsFly(false)
+		, mIsJumping(false)
+		, mvelocityzero(false)
 	{
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(Vector3(1.0f, -0.48f, 1.7f));

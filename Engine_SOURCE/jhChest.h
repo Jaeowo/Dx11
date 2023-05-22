@@ -3,14 +3,14 @@
 
 namespace jh
 {
-	class SlopeScript;
 
-	class Slope
+	class Animator;
+	class Chest
 		: public GameObject
 	{
 	public:
-		Slope();
-		virtual ~Slope();
+		Chest();
+		virtual ~Chest();
 
 		virtual void Initalize();
 		virtual void Update();
@@ -23,17 +23,11 @@ namespace jh
 		void SetColSize(Vector2 ColSize) { mColSize = ColSize; }
 		Vector2 GetColSize() { return mColSize; }
 
-		void SetLeftUp(bool leftup) { mLeftUp = leftup; }
-		void SetRightUp(bool rightup) { mRightUp = rightup; }
-		bool GetLeftUP() { return mLeftUp; }
-		bool GetRightUp() { return mRightUp; }
-
 	private:
-		Collider2D* mCollider2D;
+		Collider2D* mCollider;
+		Animator* mAnimator;
 		Vector3 mColPos;
 		Vector2 mColSize;
-		bool mLeftUp;
-		bool mRightUp;
-		SlopeScript* mslopescript;
+		bool mOpen;
 	};
 }

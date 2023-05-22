@@ -24,11 +24,6 @@ namespace jh
 		
 		mTransform->SetScale(Vector3(0.29f, 0.29f, 1.0f));*/
 
-		/*
-		BulletScript 따로 만들어서 충돌시 IsAttack true로 바꿔주고
-		delete되도록
-		프리팹 생기면 총알 넣자 !!!!
-		*/
 		Animator* mAnimator = AddComponent<Animator>();
 
 		mTransform = GetComponent<Transform>();
