@@ -30,6 +30,11 @@ namespace jh
 		Vector3 mGeddyPos;
 		Vector3 mBulletPos;
 
+		bool mIsDirectionSet;
+		Vector2 mDirection;
+
+		float mDeadTime;
+
 		bool mIsAttack;
 	};
 }

@@ -24,6 +24,8 @@ namespace jh
 		//mCollider->SetPosition(Vector3(0.1f, 3.4f, 1.7f));
 		//mCollider->Set
 
+		//mPos = mTransform->GetPosition();
+
 		SpriteRenderer* geddysr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> geddymesh = Resources::Find<Mesh>(L"RectMesh");
 		std::shared_ptr<Material> geddymaterial = Resources::Find<Material>(L"Geddymaterial");
@@ -43,7 +45,8 @@ namespace jh
 	void Geddy::Update()
 	{
 		GameObject::Update();
-		
+		mTransform = GetComponent<Transform>();
+		mPos = mTransform->GetPosition();
 	}
 	void Geddy::FixedUpdate()
 	{

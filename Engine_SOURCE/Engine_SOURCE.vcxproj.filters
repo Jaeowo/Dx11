@@ -255,6 +255,9 @@
     <ClInclude Include="jhChangeGawk.h">
       <Filter>Component\Script\Trigger</Filter>
     </ClInclude>
+    <ClInclude Include="jhMouseCursor.h">
+      <Filter>GameObject\etc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -496,6 +499,9 @@
     <ClCompile Include="jhChangeGawk.cpp">
       <Filter>Component\Script\Trigger</Filter>
     </ClCompile>
+    <ClCompile Include="jhMouseCursor.cpp">
+      <Filter>GameObject\etc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -644,6 +650,9 @@
     </Filter>
     <Filter Include="Component\Script\BackGround\BackGroundObj">
       <UniqueIdentifier>{7277fe53-7995-46ba-b873-4d9b1e0a5061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\etc">
+      <UniqueIdentifier>{95084780-d9d3-4662-b5ee-7a55b37f9c93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

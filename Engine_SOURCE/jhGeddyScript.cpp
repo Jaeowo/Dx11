@@ -24,7 +24,7 @@ namespace jh
 		, mCount(0)
 		, mbGround(false)
 		, mFallingTime(0.0f)
-		//, mGeddyhands(nullptr)
+		, mGeddyhands(nullptr)
 	{
 		
 		Animator* mAnimator = PlayerManager::GetGeddy()->AddComponent<Animator>();
@@ -138,15 +138,9 @@ namespace jh
 	}
 	void GeddyScript::OnCollisionEnter(Collider2D* collider)
 	{
-
-		
 	}
 	void GeddyScript::OnCollisionStay(Collider2D* collider)
 	{
-		
-
-
-
 	}
 	void GeddyScript::OnCollisionExit(Collider2D* collider)
 	{
@@ -155,12 +149,7 @@ namespace jh
 	{
 		if (mCount == 0)
 		{
-			if (mGeddyhands != nullptr)
-			{
-				mGeddyhands->Death();
-				mGeddyhands = nullptr;
-			}
-
+		
 			mAnimator->Play(L"IdleG", true);
 			PlayerManager::GetGeddy()->SetCount(1);
 			mVelocity = (Vector2(0.0f, 0.0f));
@@ -192,20 +181,21 @@ namespace jh
 
 			mTransform->SetPosition(Vector3(-0.03f, -0.1f, 0.0f));
 			mTransform->SetScale(Vector3(0.95f, 0.95f, 1.0f));
-		
-		
 
 			PlayerManager::GetGeddy()->SetCount(1);
 
 		}
 		if (Input::GetKeyDown(eKeyCode::G))
 		{
+
+		/*	if (mGeddyhands != nullptr)
+			{
+				mGeddyhands->Death();
+				mGeddyhands = nullptr;
+			}*/
 			PlayerManager::GetGeddy()->SetGeddyState(eGeddyState::Idle);
 
 			mTransform->SetParent(nullptr);
-
-			
-
 			Vector3 PlayerPosition = mPlayerTransform->GetPosition();
 			mTransform->SetPosition(Vector3(PlayerPosition.x-0.018f, PlayerPosition.y-0.05f, PlayerPosition.z));
 			mTransform->SetScale(Vector3(0.33f, 0.33f, 1.0f));
@@ -213,6 +203,12 @@ namespace jh
 
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fly);
 			PlayerManager::GetPlayer()->SetCount(0);
+
+			
+		}
+		if (Input::GetKeyDown(eKeyCode::LBTN))
+		{
+			mGeddyBullet = object::Instantiate<GeddyBullet>(eLayerType::PlayerObject);
 		}
 	}
 	void GeddyScript::Falling()
@@ -220,6 +216,7 @@ namespace jh
 		if (mCount == 0)
 		{
 			mAnimator->Play(L"fallG", false);
+
 			PlayerManager::GetGeddy()->SetCount(1);
 		}
 	}

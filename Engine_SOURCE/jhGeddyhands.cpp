@@ -105,6 +105,14 @@ namespace jh
 		mTransform->SetPosition(Vector3(-0.05f, -0.105f, 0.0f));
 		mTransform->SetScale(Vector3(0.9f, 0.9f, 1.0f));
 
+	/*	if (PlayerManager::GetGeddy()->GetGeddyState() == eGeddyState::Idle)
+		{
+			if (this != nullptr)
+			{
+				this->Death();
+			}
+		}*/
+
 		GameObject::Update();
 	}
 	void Geddyhands::FixedUpdate()

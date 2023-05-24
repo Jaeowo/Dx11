@@ -33,6 +33,7 @@
 #include "jhBackSkyScript.h"
 #include "jhSlope.h"
 #include "jhDoor.h"
+#include "jhMouseCursor.h"
 
 namespace jh
 {
@@ -72,7 +73,8 @@ namespace jh
 		cameraUIComp->DisableLayerMasks();
 		cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 		
-
+		//Cursor
+		MouseCursor* mousecursor = object::Instantiate<MouseCursor>(eLayerType::Effect);
 
 		//Village
 		GameObject* tilefloorObj = object::Instantiate<GameObject>(eLayerType::BackGround);

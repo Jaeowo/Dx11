@@ -7,7 +7,7 @@ namespace jh
 	class Animator;
 	class Transform;
 	class Geddyhands;
-
+	class GeddyBullet;
 
 	class GeddyScript
 		: public Script
@@ -36,6 +36,7 @@ namespace jh
 		Transform* mTransform;
 		Transform* mPlayerTransform;
 		Geddyhands* mGeddyhands;
+		GeddyBullet* mGeddyBullet;
 
 		eGeddyState mGeddyState;
 		int mCount;

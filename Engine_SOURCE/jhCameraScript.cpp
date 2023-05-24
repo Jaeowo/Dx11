@@ -10,7 +10,7 @@ namespace jh
 {
 	CameraScript::CameraScript()
 		: Script()
-		, mEditorMode(true)
+		, mEditorMode(false)
 		, mNumber(0)
 	{
 	}

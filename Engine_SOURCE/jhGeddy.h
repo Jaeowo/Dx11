@@ -26,6 +26,9 @@ namespace jh
 		Vector3 GetPlayerPos() { return mPlayerPos; }
 		void SetPlayerPos(Vector3 playerpos) { mPlayerPos = playerpos; }
 
+		Vector3 GetGeddyPos() { return mPos; }
+		void SetGeddyPos(Vector3 pos) { mPos = pos; }
+
 		bool GetIsGround() { return mbGround; }
 		void SetIsGround(bool bGround) { mbGround = bGround; }
 
@@ -42,6 +45,8 @@ namespace jh
 
 		eGeddyState mGeddyState;
 		Vector3 mPlayerPos;
+		Vector3 mPos;
+
 		bool mbGround;
 		int mCount;
 

@@ -526,6 +526,8 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"Tile03Texture", L"Vellie-Tropos-Owl Temple assets\\tile03.png");
 		Resources::Load<Texture>(L"Tile04Texture", L"Vellie-Tropos-Owl Temple assets\\tile04.png");
 
+		Resources::Load<Texture>(L"CursorTexture", L"cursor_36x36.png");
+
 #pragma endregion
 	}
 
@@ -557,6 +559,14 @@ namespace jh::renderer
 		Resources::Insert<Material>(L"WallMaterial", wallmaterial);
 #pragma endregion
 #pragma region PLATFORM MATERIAL
+		std::shared_ptr <Texture> cursortexture = Resources::Find<Texture>(L"CursorTexture");
+		std::shared_ptr<Shader> cursorshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> cursormaterial = std::make_shared<Material>();
+		cursormaterial->SetRenderingMode(eRenderingMode::Transparent);
+		cursormaterial->SetShader(cursorshader);
+		cursormaterial->SetTexture(eTextureSlot::T0, cursortexture);
+		Resources::Insert<Material>(L"CursorMaterial", cursormaterial);
+
 		std::shared_ptr <Texture> totalcavetexture = Resources::Find<Texture>(L"TotalCaveTexture");
 		std::shared_ptr<Shader> totalcaveshader = Resources::Find<Shader>(L"SpriteShader");
 		std::shared_ptr<Material> totalcavematerial = std::make_shared<Material>();

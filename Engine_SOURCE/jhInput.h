@@ -79,6 +79,8 @@ namespace jh
 			return mKeys[static_cast<UINT>(keyCode)].eState == eKeyState::UP;
 		}
 
+
+
 	private:
 		Input() = delete;
 		~Input() = delete;
