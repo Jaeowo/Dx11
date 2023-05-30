@@ -174,6 +174,7 @@ namespace jh
 		{
 			mAnimator->Play(L"HaingingG", true);
 			mGeddyhands = object::Instantiate<Geddyhands>(eLayerType::PlayerObject);
+
 			mTransform->SetParent(mPlayerTransform);
 			Vector3 PlayerScale = mPlayerTransform->GetScale();
 			
@@ -188,11 +189,11 @@ namespace jh
 		if (Input::GetKeyDown(eKeyCode::G))
 		{
 
-		/*	if (mGeddyhands != nullptr)
+			if (mGeddyhands != nullptr)
 			{
 				mGeddyhands->Death();
-				mGeddyhands = nullptr;
-			}*/
+				//bool DeadCheck = mGeddyhands->IsDead();
+			}
 			PlayerManager::GetGeddy()->SetGeddyState(eGeddyState::Idle);
 
 			mTransform->SetParent(nullptr);
@@ -208,7 +209,10 @@ namespace jh
 		}
 		if (Input::GetKeyDown(eKeyCode::LBTN))
 		{
+			mGeddyhands->SetPlayerState(eGeddyhandsState::Shoot);
+			mGeddyhands->SetCount(0);
 			mGeddyBullet = object::Instantiate<GeddyBullet>(eLayerType::PlayerObject);
+		
 		}
 	}
 	void GeddyScript::Falling()

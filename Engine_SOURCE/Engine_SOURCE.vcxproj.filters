@@ -73,20 +73,8 @@
     <ClInclude Include="jhSpriteRenderer.h">
       <Filter>Component\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="jhCameraScript.h">
-      <Filter>Component\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="jhGridScript.h">
-      <Filter>Component\Script</Filter>
-    </ClInclude>
     <ClInclude Include="jhObject.h">
       <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="jhFadeInScript.h">
-      <Filter>Component\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="jhFadeOutScript.h">
-      <Filter>Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="jhSceneManager.h">
       <Filter>Scene\Manager</Filter>
@@ -171,15 +159,6 @@
     <ClInclude Include="jhGeddyBullet.h">
       <Filter>GameObject\Geddy</Filter>
     </ClInclude>
-    <ClInclude Include="jhHorizontal.h">
-      <Filter>GameObject\BackGround\Ring</Filter>
-    </ClInclude>
-    <ClInclude Include="jhSloped.h">
-      <Filter>GameObject\BackGround\Ring</Filter>
-    </ClInclude>
-    <ClInclude Include="jhVertical.h">
-      <Filter>GameObject\BackGround\Ring</Filter>
-    </ClInclude>
     <ClInclude Include="jhBackRock.h">
       <Filter>GameObject\BackGround\BackRock</Filter>
     </ClInclude>
@@ -258,6 +237,22 @@
     <ClInclude Include="jhMouseCursor.h">
       <Filter>GameObject\etc</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="jhRing.h">
+      <Filter>GameObject\BackGround\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCameraScript.h">
+      <Filter>Component\Script\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="jhFadeInScript.h">
+      <Filter>Component\Script\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="jhFadeOutScript.h">
+      <Filter>Component\Script\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGridScript.h">
+      <Filter>Component\Script\etc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -308,9 +303,6 @@
     <ClCompile Include="jhTransform.cpp">
       <Filter>Component\Transform</Filter>
     </ClCompile>
-    <ClCompile Include="jhScript.cpp">
-      <Filter>Component\Script</Filter>
-    </ClCompile>
     <ClCompile Include="jhPlayerScript.cpp">
       <Filter>Component\Script\PlayerScript</Filter>
     </ClCompile>
@@ -319,18 +311,6 @@
     </ClCompile>
     <ClCompile Include="jhSpriteRenderer.cpp">
       <Filter>Component\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="jhCameraScript.cpp">
-      <Filter>Component\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="jhGridScript.cpp">
-      <Filter>Component\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="jhFadeInScript.cpp">
-      <Filter>Component\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="jhFadeOutScript.cpp">
-      <Filter>Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="jhSceneManager.cpp">
       <Filter>Scene\Manager</Filter>
@@ -415,15 +395,6 @@
     <ClCompile Include="jhGawk.cpp">
       <Filter>GameObject\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="jhHorizontal.cpp">
-      <Filter>GameObject\BackGround\Ring</Filter>
-    </ClCompile>
-    <ClCompile Include="jhSloped.cpp">
-      <Filter>GameObject\BackGround\Ring</Filter>
-    </ClCompile>
-    <ClCompile Include="jhVertical.cpp">
-      <Filter>GameObject\BackGround\Ring</Filter>
-    </ClCompile>
     <ClCompile Include="jhBackRock.cpp">
       <Filter>GameObject\BackGround\BackRock</Filter>
     </ClCompile>
@@ -501,6 +472,24 @@
     </ClCompile>
     <ClCompile Include="jhMouseCursor.cpp">
       <Filter>GameObject\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="jhRing.cpp">
+      <Filter>GameObject\BackGround\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCameraScript.cpp">
+      <Filter>Component\Script\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="jhFadeInScript.cpp">
+      <Filter>Component\Script\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="jhFadeOutScript.cpp">
+      <Filter>Component\Script\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGridScript.cpp">
+      <Filter>Component\Script\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="jhScript.cpp">
+      <Filter>Component\Script\etc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -654,10 +643,16 @@
     <Filter Include="GameObject\etc">
       <UniqueIdentifier>{95084780-d9d3-4662-b5ee-7a55b37f9c93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Script\etc">
+      <UniqueIdentifier>{795de690-9a64-454a-a050-3a17b5619aa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="yaMath.inl">
       <Filter>Common\Math</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine_SOURCE.rc" />
   </ItemGroup>
 </Project>

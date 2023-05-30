@@ -54,6 +54,12 @@ namespace jh
 
 		bool GetVelocityZero() { return mvelocityzero; }
 		void SetVelocityZero(bool velocityzero) { mvelocityzero = velocityzero; }
+
+		int GetHp() { return mHp; }
+		void SetHp(int hp) { mHp = hp; }
+
+		int GetCoin() { return mCoin; }
+		void SetCoin(int coin) { mCoin = coin; }
 	private:
 		Transform* mTransform;
 		Collider2D* mCollider;
@@ -73,6 +79,9 @@ namespace jh
 		bool mIsRightSlope;
 
 		Vector3 mColliderRotation;
+
+		int mHp;
+		int mCoin;
 	};
 
 }

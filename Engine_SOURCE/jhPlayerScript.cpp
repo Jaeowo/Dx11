@@ -351,7 +351,7 @@ namespace jh
 
 			PlayerManager::GetPlayer()->SetIsGround(false);
 
-			float JumpForce = 0.006f;
+			float JumpForce = 0.007f;
 			mVelocity.y += JumpForce / mMass ;
 			
 			PlayerManager::GetPlayer()->SetCount(1);

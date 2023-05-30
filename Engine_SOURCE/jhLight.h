@@ -7,6 +7,14 @@ namespace jh
 	class Light : public Component
 	{
 	public:
+		enum class LightState
+		{
+			Idle,
+			ChangingColor,
+			FadingOut
+		};
+
+	public:
 		Light();
 		~Light();
 
@@ -27,8 +35,20 @@ namespace jh
 		float GetRadius() { mAttribute.radius; }
 		float GetAngle() { mAttribute.angle; }
 
+		void ChangeColorOverTime(float duration, Vector4 startColor, Vector4 endColor);
+		void FadeOut(float startTime);
+
 	private:
 		graphics::LightAttribute mAttribute;
+
+	private:
+		LightState mState;
+		Vector4 mStartColor;
+		Vector4 mEndColor;
+		float mChangeColorDuration;
+		float mChangeColorStartTime;
+		float mFadeOutStartTime;
+		float mTotalTime;
 	};
 }
 

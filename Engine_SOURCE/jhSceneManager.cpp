@@ -67,7 +67,10 @@ namespace jh
 	void SceneManager::LoadScene(eSceneType type)
 	{
 		if (mActiveScene)
+		{
 			mActiveScene->OnExit();
+			mActiveScene->Destroy();  // 현재 씬에서 Death 상태의 GameObject를 제거
+		}
 
 		//dontDestroy 다음씬으로 같이 넘겨주기
 		std::vector<GameObject*> gameObjs

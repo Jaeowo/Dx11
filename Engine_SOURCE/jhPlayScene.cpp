@@ -26,14 +26,12 @@
 #include "jhGroundScript.h"
 #include "jhGeddyhands.h"
 #include "jhGawk.h"
-#include "jhHorizontal.h"
-#include "jhSloped.h"
-#include "jhVertical.h"
 #include "jhGeddyBullet.h"
 #include "jhBackSkyScript.h"
 #include "jhSlope.h"
 #include "jhDoor.h"
 #include "jhMouseCursor.h"
+#include "jhRing.h"
 
 namespace jh
 {
@@ -49,7 +47,6 @@ namespace jh
 
 	void PlayScene::Initalize()
 	{
-
 		{
 			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
 			directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
@@ -57,7 +54,6 @@ namespace jh
 			lightComp->SetType(eLightType::Directional);
 			lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
-
 
 		//Main Camera
 		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
@@ -88,75 +84,50 @@ namespace jh
 		std::shared_ptr<Material> tilefloormaterial = Resources::Find<Material>(L"TotalVillageMaterial");
 		tilefloorsr->SetMaterial(tilefloormaterial);
 		tilefloorsr->SetMesh(tilefloormesh);
-	
-		
-
 
 		// Horizontal
-		Horizontal* horizontalObj = object::Instantiate<Horizontal>(eLayerType::BackGrouncObj);
-		Transform* horizontalTr = horizontalObj->GetComponent<Transform>();
-		horizontalTr->SetPosition(Vector3(1.5f, 1.0f, 1.7f));
-		horizontalTr->SetScale(Vector3(0.16, 0.08f, 1.0f));
+		Ring* horizontalObj = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		//Transform* horizontalTr = horizontalObj->GetComponent<Transform>();
+		horizontalObj->SetPosition(Vector3(1.5f, 1.0f, 1.7f));
+		//horizontalTr->SetScale(Vector3(0.16, 0.08f, 1.0f));
 
-		SpriteRenderer* horizontalsr = horizontalObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> horizontalmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> horizontalmaterial = Resources::Find<Material>(L"Horizontalmaterial");
-		horizontalsr->SetMaterial(horizontalmaterial);
-		horizontalsr->SetMesh(horizontalmesh);
 
-		// Sloped
-		Sloped* slopedObj = object::Instantiate<Sloped>(eLayerType::BackGrouncObj);
-		Transform* slopedTr = slopedObj->GetComponent<Transform>();
-		slopedTr->SetPosition(Vector3(1.5f, 0.9f, 1.7f));
-		slopedTr->SetScale(Vector3(0.14f, 0.1f, 1.0f));
+		//// Sloped
+		//Ring* slopedObj = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		//Transform* slopedTr = slopedObj->GetComponent<Transform>();
+		//slopedTr->SetPosition(Vector3(1.5f, 0.9f, 1.7f));
+		//slopedTr->SetScale(Vector3(0.14f, 0.1f, 1.0f));
 
-		SpriteRenderer* slopedsr = slopedObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> slopedmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> slopedmaterial = Resources::Find<Material>(L"Slopedmaterial");
-		slopedsr->SetMaterial(slopedmaterial);
-		slopedsr->SetMesh(slopedmesh);
+		//SpriteRenderer* slopedsr = slopedObj->AddComponent<SpriteRenderer>();
+		//std::shared_ptr<Mesh> slopedmesh = Resources::Find<Mesh>(L"RectMesh");
+		//std::shared_ptr<Material> slopedmaterial = Resources::Find<Material>(L"Slopedmaterial");
+		//slopedsr->SetMaterial(slopedmaterial);
+		//slopedsr->SetMesh(slopedmesh);
 
-		// Vertical
-		Vertical* verticalObj = object::Instantiate<Vertical>(eLayerType::BackGrouncObj);
-		Transform* VerticalTr = verticalObj->GetComponent<Transform>();
-		VerticalTr->SetPosition(Vector3(1.5f, 0.8f, 1.7f));
-		VerticalTr->SetScale(Vector3(0.1f, 0.13f, 1.0f));
+		//// Vertical
+		//Ring* verticalObj = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		//Transform* VerticalTr = verticalObj->GetComponent<Transform>();
+		//VerticalTr->SetPosition(Vector3(1.5f, 0.8f, 1.7f));
+		//VerticalTr->SetScale(Vector3(0.1f, 0.13f, 1.0f));
 
-		SpriteRenderer* verticalsr = verticalObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> verticalymesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> verticalmaterial = Resources::Find<Material>(L"Verticalmaterial");
-		verticalsr->SetMaterial(verticalmaterial);
-		verticalsr->SetMesh(verticalymesh);
+		//SpriteRenderer* verticalsr = verticalObj->AddComponent<SpriteRenderer>();
+		//std::shared_ptr<Mesh> verticalymesh = Resources::Find<Mesh>(L"RectMesh");
+		//std::shared_ptr<Material> verticalmaterial = Resources::Find<Material>(L"Verticalmaterial");
+		//verticalsr->SetMaterial(verticalmaterial);
+		//verticalsr->SetMesh(verticalymesh);
 
 		// Player
 		Player* playerObj = object::Instantiate<Player>(eLayerType::Player);
 		PlayerManager::SetPlayer(playerObj);
 		playerObj->AddComponent<PlayerScript>();
-
 		cameraComp->SetTarget(playerObj);
-
-		//object::DontDestroyOnLoad(playerObj);
 
 		//Geddy
 		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
 		PlayerManager::SetGeddy(geddyObj);
 		geddyObj->AddComponent<GeddyScript>();
 		geddyObj->SetName(L"Geddy");
-		//object::DontDestroyOnLoad(geddyObj);
-
-		////GeddyBullet
-		//GeddyBullet* geddybulletobj = object::Instantiate<GeddyBullet>(eLayerType::PlayerObject);
-		//Transform* geddybulletTr = geddybulletobj->GetComponent<Transform>();
-		//geddybulletTr->SetPosition(Vector3(0.5f, 0.9f, 1.7f));
-		//geddybulletTr->SetScale(Vector3(0.3f, 0.3f, 1.0f));
-		//SpriteRenderer* bulletsr = geddybulletobj->AddComponent<SpriteRenderer>();
-		//std::shared_ptr<Mesh> bulletmesh = Resources::Find<Mesh>(L"RectMesh");
-		//std::shared_ptr<Material> geddybulletmaterial = Resources::Find<Material>(L"Mechanicbulletmaterial");
-		//bulletsr->SetMaterial(geddybulletmaterial);
-		//bulletsr->SetMesh(bulletmesh);
-
 	
-
 #pragma region GROUND
 		Ground* groundObj17 = object::Instantiate<Ground>(eLayerType::BackGround);
 		Transform* groundTr17 = groundObj17->GetComponent<Transform>();
@@ -239,7 +210,6 @@ namespace jh
 		groundTr2->SetScale(Vector3(0.35f, 0.001f, 1.0f));
 #pragma endregion
 	
-	
 #pragma region SLOPE
 		Slope* SlopeObj2 = object::Instantiate<Slope>(eLayerType::BackGround);
 		Transform* slopeTr2 = SlopeObj2->GetComponent<Transform>();
@@ -260,9 +230,6 @@ namespace jh
 		Transform* DoorTr = DoorObj->GetComponent<Transform>();
 		DoorTr->SetPosition(Vector3(-0.18f, 2.37f, 1.7f));
 		DoorTr->SetScale(Vector3(0.07f, 0.1f, 1.0f));
-
-
-
 
 		// Sky
 		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround2);
@@ -307,6 +274,7 @@ namespace jh
 		toppropObj->AddComponent<CloudScript>();
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGrouncObj, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Friends, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Friends, eLayerType::BackGround, true);
 

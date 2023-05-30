@@ -4,6 +4,7 @@
 #include "jhCollider2D.h"
 #include "jhSpriteRenderer.h"
 #include "jhResources.h"
+
 namespace jh
 {
 	Player::Player()
@@ -23,15 +24,18 @@ namespace jh
 		Collider2D* mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
 		mCollider->SetSize(Vector2(0.1f, 0.28f));
-		mCollider->SetCenter(Vector2(-0.015f, -0.02f));
-	
+		//mCollider->SetCenter(Vector2(-0.015f, -0.02f));
+
+		Vector3 ColliderPos = mCollider->GetPosition();
+		Vector2 Center = (Vector2(-0.55f, -0.02f));
+		Vector3 NewColliderPos = ColliderPos + Vector3(Center.x, Center.y, 0.0f);
+		mCollider->SetPosition(NewColliderPos);
 
 		SpriteRenderer* standsr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");
 		std::shared_ptr<Material> standmaterial = Resources::Find<Material>(L"Standmaterial");
 		standsr->SetMaterial(standmaterial);
 		standsr->SetMesh(standmesh);
-
 		
 	}
 	Player::~Player()
@@ -45,6 +49,9 @@ namespace jh
 	{
 		mCollider = GetComponent<Collider2D>();
 		mTransform->SetRotation(mRotation);
+
+		
+
 		GameObject::Update();
 
 	}

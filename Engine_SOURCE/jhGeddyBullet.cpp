@@ -11,6 +11,7 @@
 #include "jhRenderer.h"
 #include "jhPlayer.h"
 #include "jhTime.h"
+#include "jhCollider2D.h"
 extern jh::Application application;
 
 namespace jh
@@ -46,6 +47,9 @@ namespace jh
 		mTransform->SetPosition(mGeddyPos);
 		mBulletPos = mTransform->GetPosition();
 
+		Collider2D* mCollider = AddComponent<Collider2D>();
+		mCollider->SetType(eColliderType::Circle);
+		mCollider->SetSize(Vector2(0.1f, 0.1f));
 
 	}
 	GeddyBullet::~GeddyBullet()

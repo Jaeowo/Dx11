@@ -29,6 +29,12 @@ namespace jh
 
 		Vector3 GetGeddyHandsPos() { return mPos; }
 
+		void SetCount(UINT count) { mCount = count; }
+
+		//State
+		void Shoot();
+		void Stop();
+
 	private:
 		eGeddyhandsState mGeddyhandsState;
 		Animator* mAnimator;
@@ -37,7 +43,8 @@ namespace jh
 		Vector3 mAngle;
 		Vector2 mMousePos;
 		Vector3 mPos;
-
+		UINT mCount;
+		float mTime;
 
 		Transform* mArmTransform;
 		float mArmLength = 0.1f;

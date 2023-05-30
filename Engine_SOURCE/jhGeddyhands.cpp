@@ -18,6 +18,9 @@ extern jh::Application application;
 namespace jh
 {
 	Geddyhands::Geddyhands()
+		:mCount(0)
+		,mGeddyhandsState(eGeddyhandsState::Stop)
+		,mTime(0.0f)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -65,34 +68,27 @@ namespace jh
 		mPos = mTransform->GetPosition();
 		mMousePos = Input::GetMousePosition();
 
-		//마우스 좌표를 스크린 좌표계에서 [-1,1] 범위로 변환
 		float mouseX = (2.0f * mMousePos.x) / application.GetWidth() - 1.0f;
 		float mouseY = 1.0f - (2.0f * mMousePos.y) / application.GetHeight();
 
-		//NDC 좌표로 변환
 		Vector4 ndcPos = Vector4(mouseX, mouseY, 0.0f, 1.0f);
 
-		//vew matrix 역행렬 구하기
 		Matrix viewMatrix = Camera::GetGpuViewMatrix();
 		Matrix inverseViewMatrix = viewMatrix.Invert();
 
-		//NDC 좌표를 view matrix 좌표계로 변환
 		Vector4 viewPos = Vector4::Transform(ndcPos, inverseViewMatrix);
 
 		mMousePos = Vector2(viewPos.x, viewPos.y);
 
-		// 부모 Transform의 월드 좌표를 사용하여 마우스 위치를 캐릭터에 상대적으로 계산
 		Vector3 parentPos = mGeddyTransform->GetPosition();
 		float dx = mMousePos.x - parentPos.x;
 		float dy = mMousePos.y - parentPos.y;
 		float angle = atan2(dy, dx) * 180.0f / XM_PI;
 
-		// 부모 Transform의 월드 행렬을 사용하여 로컬 공간으로 좌표 변환
 		Matrix parentWorldMatrix = mGeddyTransform->GetWorldMatrix();
 		Matrix parentWorldMatrixInverse = parentWorldMatrix.Invert();
 		Vector3 localMousePos = Vector3::Transform(Vector3(mMousePos.x, mMousePos.y, 0.0f), parentWorldMatrixInverse);
 
-		// 로컬 공간에서의 회전 각도 계산
 		dx = localMousePos.x - mPos.x;
 		dy = localMousePos.y - mPos.y;
 		angle = atan2(dy, dx) * 180.0f / XM_PI;
@@ -105,6 +101,18 @@ namespace jh
 		mTransform->SetPosition(Vector3(-0.05f, -0.105f, 0.0f));
 		mTransform->SetScale(Vector3(0.9f, 0.9f, 1.0f));
 
+
+		switch (mGeddyhandsState)
+		{
+		case jh::eGeddyhandsState::Stop:
+			Stop();
+			break;
+		case jh::eGeddyhandsState::Shoot:
+			Shoot();
+			break;
+		default:
+			break;
+		}
 	/*	if (PlayerManager::GetGeddy()->GetGeddyState() == eGeddyState::Idle)
 		{
 			if (this != nullptr)
@@ -122,5 +130,28 @@ namespace jh
 	void Geddyhands::Render()
 	{
 		GameObject::Render();
+	}
+	void Geddyhands::Shoot()
+	{
+		if (mCount == 0)
+		{
+			mAnimator->Play(L"Shoot1", false);
+			mCount = 1;
+		}
+		mTime += Time::DeltaTime();
+		if (mTime >= 0.5f)
+		{
+			mGeddyhandsState = eGeddyhandsState::Stop;
+			mCount = 0;
+			mTime = 0.0f;
+		}
+	}
+	void Geddyhands::Stop()
+	{
+		if (mCount == 0)
+		{
+			mAnimator->Play(L"Stop", false);
+			mCount = 1;
+		}
 	}
 }

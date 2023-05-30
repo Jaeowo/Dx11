@@ -200,7 +200,6 @@
     <ClInclude Include="jhGridScript.h" />
     <ClInclude Include="jhGround.h" />
     <ClInclude Include="jhGroundScript.h" />
-    <ClInclude Include="jhHorizontal.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhLight.h" />
@@ -214,9 +213,9 @@
     <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhPrefab.h" />
     <ClInclude Include="jhRigidbody.h" />
+    <ClInclude Include="jhRing.h" />
     <ClInclude Include="jhRingScript.h" />
     <ClInclude Include="jhSlope.h" />
-    <ClInclude Include="jhSloped.h" />
     <ClInclude Include="jhSlopeScript.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhStructedBuffer.h" />
@@ -225,7 +224,7 @@
     <ClInclude Include="jhTile03.h" />
     <ClInclude Include="jhTile04.h" />
     <ClInclude Include="jhTitleScene.h" />
-    <ClInclude Include="jhVertical.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="yaMath.h" />
     <ClInclude Include="jhMesh.h" />
     <ClInclude Include="jhMeshRenderer.h" />
@@ -285,7 +284,6 @@
     <ClCompile Include="jhGridScript.cpp" />
     <ClCompile Include="jhGround.cpp" />
     <ClCompile Include="jhGroundScript.cpp" />
-    <ClCompile Include="jhHorizontal.cpp" />
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhLight.cpp" />
@@ -298,9 +296,9 @@
     <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhPrefab.cpp" />
     <ClCompile Include="jhRigidbody.cpp" />
+    <ClCompile Include="jhRing.cpp" />
     <ClCompile Include="jhRingScript.cpp" />
     <ClCompile Include="jhSlope.cpp" />
-    <ClCompile Include="jhSloped.cpp" />
     <ClCompile Include="jhSlopeScript.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhStructedBuffer.cpp" />
@@ -309,7 +307,6 @@
     <ClCompile Include="jhTile03.cpp" />
     <ClCompile Include="jhTile04.cpp" />
     <ClCompile Include="jhTitleScene.cpp" />
-    <ClCompile Include="jhVertical.cpp" />
     <ClCompile Include="yaMath.cpp" />
     <ClCompile Include="jhMesh.cpp" />
     <ClCompile Include="jhMeshRenderer.cpp" />
@@ -328,6 +325,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="yaMath.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine_SOURCE.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
