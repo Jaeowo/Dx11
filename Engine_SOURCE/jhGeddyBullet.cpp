@@ -48,7 +48,7 @@ namespace jh
 		mBulletPos = mTransform->GetPosition();
 
 		Collider2D* mCollider = AddComponent<Collider2D>();
-		mCollider->SetType(eColliderType::Circle);
+		mCollider->SetType(eColliderType::Rect);
 		mCollider->SetSize(Vector2(0.1f, 0.1f));
 
 	}

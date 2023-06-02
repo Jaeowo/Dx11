@@ -11,7 +11,7 @@ namespace jh
 		, mTarget(false)
 		, mElapsedTime(0.0f)
 	{
-		Animator* mAnimator = AddComponent<Animator>();
+		mAnimator = AddComponent<Animator>();
 
 		std::shared_ptr<Texture> tortoisetexture = Resources::Load<Texture>(L"IdleMask", L"Masked Tortoise\\idleMask.png");
 		std::shared_ptr<Texture> tortoisetexture2 = Resources::Load<Texture>(L"IdleNoMask", L"Masked Tortoise\\idleNoMask.png");

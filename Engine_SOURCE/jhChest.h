@@ -5,6 +5,16 @@ namespace jh
 {
 
 	class Animator;
+	class Transform;
+
+	enum class eChestState
+	{
+		Idle,
+		Open,
+		Hanging,
+		Finish,
+	};
+
 	class Chest
 		: public GameObject
 	{
@@ -17,17 +27,38 @@ namespace jh
 		virtual void FixedUpdate();
 		virtual void Render();
 
-		void SetColPos(Vector3 ColPos) { mColPos = ColPos; }
-		Vector3 GetColPos() { return mColPos; }
+		void PlayOpen2Animation();
+		void PlayFinishAnimation();
+		void SpawnCoin(int coinCount);
 
-		void SetColSize(Vector2 ColSize) { mColSize = ColSize; }
-		Vector2 GetColSize() { return mColSize; }
+		void SetPosition(Vector3 position) { mPosition = position; }
+
+		void SetCount(bool onecount) { mOneCount = onecount; }
+
+		void SetState(eChestState cheststate) { mChestState = cheststate; }
+
+		//State
+		void Idle();
+		void Open();
+		void Hanging();
+		void Finish();
 
 	private:
+		Vector3 mPosition;
+		Vector3 mPlayerPosition;
+
 		Collider2D* mCollider;
 		Animator* mAnimator;
-		Vector3 mColPos;
-		Vector2 mColSize;
+		Transform* mTransform;
+		Transform* mPlayerTransform;
+
+		float mElpasedTime;
+
+		eChestState mChestState;
 		bool mOpen;
+		bool mOneCount;
+		bool mIsOpen2Played;
+		bool mIsOpenFinishPlayed;
 	};
 }
+

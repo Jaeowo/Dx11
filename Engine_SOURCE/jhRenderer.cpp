@@ -471,6 +471,10 @@ namespace jh::renderer
 		postProcessTexture->Create(1600, 900, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE);
 		postProcessTexture->BindShaderResource(eShaderStage::PS, 60);
 #pragma endregion
+#pragma region OBJECT TEXTURE
+		Resources::Load<Texture>(L"ChestTexture", L"spr_TreasureChest_64x64.png");
+		Resources::Load<Texture>(L"CoinTexture", L"coin_15x17.png");
+#pragma endregion
 #pragma region TITLESCENE TEXTURE
 		Resources::Load<Texture>(L"TitleSkyTexture", L"TitleSky.png");
 		Resources::Load<Texture>(L"OwlboyLogoTexture", L"OwlboyLogo.png");
@@ -533,6 +537,23 @@ namespace jh::renderer
 
 	void LoadMaterial()
 	{
+#pragma region OBJECT MATERIAL
+		std::shared_ptr <Texture> chesttexture = Resources::Find<Texture>(L"ChestTexture");
+		std::shared_ptr<Shader> chestshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> chestmaterial = std::make_shared<Material>();
+		chestmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		chestmaterial->SetShader(chestshader);
+		chestmaterial->SetTexture(eTextureSlot::T0, chesttexture);
+		Resources::Insert<Material>(L"Chestmaterial", chestmaterial);
+
+		std::shared_ptr <Texture> cointexture = Resources::Find<Texture>(L"CoinTexture");
+		std::shared_ptr<Shader> coinshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> coinmaterial = std::make_shared<Material>();
+		coinmaterial->SetRenderingMode(eRenderingMode::Transparent);
+		coinmaterial->SetShader(coinshader);
+		coinmaterial->SetTexture(eTextureSlot::T0, cointexture);
+		Resources::Insert<Material>(L"Coinmaterial", coinmaterial);
+#pragma endregion
 #pragma region CAVESCENE MATERIAL
 		std::shared_ptr <Texture> grasstexture = Resources::Find<Texture>(L"GrassTexture");
 		std::shared_ptr<Shader> grassshader = Resources::Find<Shader>(L"SpriteShader");

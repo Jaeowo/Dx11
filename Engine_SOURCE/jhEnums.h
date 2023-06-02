@@ -15,6 +15,7 @@ namespace jh::enums
 	{
 		None = 0,
 		Camera,
+		BackGround3,
 		BackGround2,
 		BackGround,
 		Grid,

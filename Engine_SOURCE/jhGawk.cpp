@@ -5,6 +5,8 @@
 #include "jhPlayerManager.h"
 #include "jhPlayer.h"
 #include "jhTime.h"
+#include "jhGawkScript.h"
+#include "jhCollider2D.h"
 
 namespace jh
 {
@@ -29,12 +31,17 @@ namespace jh
 
 		mAnimator->Play(L"GawkFlying", true);
 	
+		Collider2D* mCollider = AddComponent<Collider2D>();
+		mCollider->SetType(eColliderType::Rect);
+		mCollider->SetSize(Vector2(0.2f, 0.2f));
+
 	}
 	Gawk::~Gawk()
 	{
 	}
 	void Gawk::Initalize()
 	{
+		AddComponent<GawkScript>();
 		GameObject::Initalize();
 
 	}
@@ -48,6 +55,11 @@ namespace jh
 		mMonsterPosition = mTransform->GetPosition();
 
 		mElapsedTime += Time::DeltaTime();
+
+		if (mHp <= 0)
+		{
+			Death();
+		}
 
 		switch (mGawkState)
 		{
@@ -142,7 +154,14 @@ namespace jh
 		if (mCount == 0)
 		{
 			mAnimator->Play(L"GawkHurt", false);
+			mHp -= 1;
+			mElapsedTime = 0.0f;
 			mCount = 1;
+		}
+		if (mElapsedTime >= 0.5f)
+		{
+			mCount = 0;
+			mGawkState = eGawkState::Flying;
 		}
 	}
 	void Gawk::Sturn()

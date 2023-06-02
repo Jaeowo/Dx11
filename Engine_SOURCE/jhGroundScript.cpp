@@ -7,6 +7,8 @@
 #include "jhGeddy.h"
 #include "jhGeddyScript.h"
 #include "jhGawk.h"
+#include "jhCoin.h"
+#include "jhCoinScript.h"
 
 namespace jh
 {
@@ -58,11 +60,11 @@ namespace jh
 			// set the vertical speed to 0
 			//playerObj->SetVelocityZero(true);
 		}
-		else 
+		else
 		{
 			Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
 
-			if (geddyObj) 
+			if (geddyObj)
 			{
 				geddyObj->SetIsGround(true);
 
@@ -74,8 +76,13 @@ namespace jh
 			}
 		}
 
-	
-	
+		Coin* coinObj = dynamic_cast<Coin*>(collider->GetOwner());
+
+		if (coinObj)
+		{
+			coinObj->SetGround(true);
+		}
+
 	}
 	void GroundScript::OnCollisionStay(Collider2D* collider)
 	{
@@ -94,15 +101,15 @@ namespace jh
 
 			playerObj->SetVelocityZero(false);
 		}
-	
+
 		Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
 
 		if (geddyObj)
 		{
-			
+
 			geddyObj->SetIsGround(false);
-		
+
 		}
-	
+
 	}
 }

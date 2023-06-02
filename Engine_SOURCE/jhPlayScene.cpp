@@ -32,6 +32,8 @@
 #include "jhDoor.h"
 #include "jhMouseCursor.h"
 #include "jhRing.h"
+#include "jhChest.h"
+#include "jhCoin.h"
 
 namespace jh
 {
@@ -85,36 +87,11 @@ namespace jh
 		tilefloorsr->SetMaterial(tilefloormaterial);
 		tilefloorsr->SetMesh(tilefloormesh);
 
-		// Horizontal
-		Ring* horizontalObj = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
-		//Transform* horizontalTr = horizontalObj->GetComponent<Transform>();
-		horizontalObj->SetPosition(Vector3(1.5f, 1.0f, 1.7f));
-		//horizontalTr->SetScale(Vector3(0.16, 0.08f, 1.0f));
-
-
-		//// Sloped
-		//Ring* slopedObj = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
-		//Transform* slopedTr = slopedObj->GetComponent<Transform>();
-		//slopedTr->SetPosition(Vector3(1.5f, 0.9f, 1.7f));
-		//slopedTr->SetScale(Vector3(0.14f, 0.1f, 1.0f));
-
-		//SpriteRenderer* slopedsr = slopedObj->AddComponent<SpriteRenderer>();
-		//std::shared_ptr<Mesh> slopedmesh = Resources::Find<Mesh>(L"RectMesh");
-		//std::shared_ptr<Material> slopedmaterial = Resources::Find<Material>(L"Slopedmaterial");
-		//slopedsr->SetMaterial(slopedmaterial);
-		//slopedsr->SetMesh(slopedmesh);
-
-		//// Vertical
-		//Ring* verticalObj = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
-		//Transform* VerticalTr = verticalObj->GetComponent<Transform>();
-		//VerticalTr->SetPosition(Vector3(1.5f, 0.8f, 1.7f));
-		//VerticalTr->SetScale(Vector3(0.1f, 0.13f, 1.0f));
-
-		//SpriteRenderer* verticalsr = verticalObj->AddComponent<SpriteRenderer>();
-		//std::shared_ptr<Mesh> verticalymesh = Resources::Find<Mesh>(L"RectMesh");
-		//std::shared_ptr<Material> verticalmaterial = Resources::Find<Material>(L"Verticalmaterial");
-		//verticalsr->SetMaterial(verticalmaterial);
-		//verticalsr->SetMesh(verticalymesh);
+		//Door
+		Door* DoorObj = object::Instantiate<Door>(eLayerType::BackGround);
+		Transform* DoorTr = DoorObj->GetComponent<Transform>();
+		DoorTr->SetPosition(Vector3(-0.18f, 2.37f, 1.7f));
+		DoorTr->SetScale(Vector3(0.07f, 0.1f, 1.0f));
 
 		// Player
 		Player* playerObj = object::Instantiate<Player>(eLayerType::Player);
@@ -127,7 +104,50 @@ namespace jh
 		PlayerManager::SetGeddy(geddyObj);
 		geddyObj->AddComponent<GeddyScript>();
 		geddyObj->SetName(L"Geddy");
+
+		
+
 	
+
+#pragma region RING
+
+		Ring* RingObj = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		RingObj->SetPosition(Vector3(1.2f, 0.0f, 1.7f));
+		RingObj->SetState(eRingSet::horizontal);
+
+		Ring* RingObj2 = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		RingObj2->SetPosition(Vector3(1.2f, 0.05f, 1.7f));
+		RingObj2->SetState(eRingSet::horizontal);
+
+		Ring* RingObj3 = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		RingObj3->SetPosition(Vector3(1.2f, 0.1f, 1.7f));
+		RingObj3->SetState(eRingSet::horizontal);
+
+		Ring* RingObj4 = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		RingObj4->SetPosition(Vector3(0.6f, 0.4f, 1.7f));
+		RingObj4->SetState(eRingSet::Vertical);
+
+		Ring* RingObj5 = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		RingObj5->SetPosition(Vector3(0.55f, 0.4f, 1.7f));
+		RingObj5->SetState(eRingSet::Vertical);
+
+		Ring* RingObj6 = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		RingObj6->SetPosition(Vector3(0.5f, 0.4f, 1.7f));
+		RingObj6->SetState(eRingSet::Vertical);
+
+		Ring* RingObj7 = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		RingObj7->SetPosition(Vector3(0.1f, 1.5f, 1.7f));
+		RingObj7->SetState(eRingSet::Sloped);
+
+		Ring* RingObj8 = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		RingObj8->SetPosition(Vector3(0.15f, 1.55f, 1.7f));
+		RingObj8->SetState(eRingSet::Sloped);
+
+		Ring* RingObj9 = object::Instantiate<Ring>(eLayerType::BackGrouncObj);
+		RingObj9->SetPosition(Vector3(0.2f, 1.6f, 1.7f));
+		RingObj9->SetState(eRingSet::Sloped);
+
+#pragma endregion
 #pragma region GROUND
 		Ground* groundObj17 = object::Instantiate<Ground>(eLayerType::BackGround);
 		Transform* groundTr17 = groundObj17->GetComponent<Transform>();
@@ -225,14 +245,10 @@ namespace jh
 	
 #pragma endregion
 
-		//Door
-		Door* DoorObj = object::Instantiate<Door>(eLayerType::BackGround);
-		Transform* DoorTr = DoorObj->GetComponent<Transform>();
-		DoorTr->SetPosition(Vector3(-0.18f, 2.37f, 1.7f));
-		DoorTr->SetScale(Vector3(0.07f, 0.1f, 1.0f));
+
 
 		// Sky
-		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround2);
+		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround3);
 		Transform* backskyTr = backskyObj->GetComponent<Transform>();
 		backskyTr->SetPosition(Vector3(1.0f, 1.1f, 1.7f));
 		backskyTr->SetScale(Vector3(2.1f, 2.1f, 1.0f));
@@ -258,6 +274,9 @@ namespace jh
 		hpsr->SetMesh(hpmesh);
 		hpsr->SetMaterial(hpspriteMaterial);
 
+		Chest* chestObj = object::Instantiate<Chest>(eLayerType::BackGrouncObj);
+		chestObj->SetPosition(Vector3(0.35f, -0.82f, 1.7f));
+
 		// TopProp
 		GameObject* toppropObj = object::Instantiate<GameObject>(eLayerType::BackGround2);
 		toppropObj->SetName(L"TopProp");
@@ -273,6 +292,10 @@ namespace jh
 
 		toppropObj->AddComponent<CloudScript>();
 
+
+
+		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::BackGrouncObj, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround2, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGrouncObj, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Friends, true);

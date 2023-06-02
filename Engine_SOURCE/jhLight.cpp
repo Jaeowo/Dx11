@@ -31,7 +31,7 @@ namespace jh
 		{
 		case LightState::ChangingColor:
 		{
-			float t = (Time::DeltaTime() - mChangeColorStartTime) / mChangeColorDuration;
+			float t = (mTotalTime - mChangeColorStartTime) / mChangeColorDuration;
 			if (t >= 1.0f)
 			{
 				mState = LightState::Idle;
@@ -47,7 +47,7 @@ namespace jh
 
 		case LightState::FadingOut:
 		{
-			if (Time::DeltaTime() >= mFadeOutStartTime)
+			if (mTotalTime >= mFadeOutStartTime)
 			{
 				mState = LightState::Idle;
 				SetRadius(0.0f);
@@ -57,6 +57,7 @@ namespace jh
 
 		default: break;
 		}
+
 	}
 
 	void Light::FixedUpdate()

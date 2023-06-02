@@ -80,7 +80,8 @@ namespace jh
 		float mMass; //Áú·®
 		float mGravity;
 
-		
+		int mHp;
+		int mCoin;
 	
 
 	};

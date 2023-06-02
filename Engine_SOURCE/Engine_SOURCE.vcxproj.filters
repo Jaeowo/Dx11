@@ -210,18 +210,6 @@
     <ClInclude Include="jhCaveScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="jhCloudScript.h">
-      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
-    </ClInclude>
-    <ClInclude Include="jhGroundScript.h">
-      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
-    </ClInclude>
-    <ClInclude Include="jhRingScript.h">
-      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
-    </ClInclude>
-    <ClInclude Include="jhSlopeScript.h">
-      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
-    </ClInclude>
     <ClInclude Include="jhCeilingScript.h">
       <Filter>Component\Script\BackGround</Filter>
     </ClInclude>
@@ -252,6 +240,39 @@
     </ClInclude>
     <ClInclude Include="jhGridScript.h">
       <Filter>Component\Script\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="jhChest.h">
+      <Filter>GameObject\BackGround\Chest,Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCoin.h">
+      <Filter>GameObject\BackGround\Chest,Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="jhChestScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Chest,Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGroundScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSlopeScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCoinScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Chest,Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="jhCloudScript.h">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="jhRingScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Ring</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTortoise.h">
+      <Filter>GameObject\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGawkScript.h">
+      <Filter>Component\Script\MonsterScript</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTortoiseScript.h">
+      <Filter>Component\Script\MonsterScript</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -446,18 +467,6 @@
     <ClCompile Include="jhCaveScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="jhCloudScript.cpp">
-      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
-    </ClCompile>
-    <ClCompile Include="jhGroundScript.cpp">
-      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
-    </ClCompile>
-    <ClCompile Include="jhRingScript.cpp">
-      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
-    </ClCompile>
-    <ClCompile Include="jhSlopeScript.cpp">
-      <Filter>Component\Script\BackGround\BackGroundObj</Filter>
-    </ClCompile>
     <ClCompile Include="jhCeilingScript.cpp">
       <Filter>Component\Script\BackGround</Filter>
     </ClCompile>
@@ -490,6 +499,39 @@
     </ClCompile>
     <ClCompile Include="jhScript.cpp">
       <Filter>Component\Script\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="jhChest.cpp">
+      <Filter>GameObject\BackGround\Chest,Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCoin.cpp">
+      <Filter>GameObject\BackGround\Chest,Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="jhChestScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Chest,Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCoinScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Chest,Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="jhRingScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Ring</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGroundScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSlopeScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCloudScript.cpp">
+      <Filter>Component\Script\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTortoise.cpp">
+      <Filter>GameObject\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGawkScript.cpp">
+      <Filter>Component\Script\MonsterScript</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTortoiseScript.cpp">
+      <Filter>Component\Script\MonsterScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -645,6 +687,21 @@
     </Filter>
     <Filter Include="Component\Script\etc">
       <UniqueIdentifier>{795de690-9a64-454a-a050-3a17b5619aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\Chest,Coin">
+      <UniqueIdentifier>{ae9913b1-4288-4016-bfde-a345b7f1764d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\BackGround\BackGroundObj\Chest,Coin">
+      <UniqueIdentifier>{a8db187b-c8f3-4846-8ef8-5d88e356c3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\BackGround\BackGroundObj\Ring">
+      <UniqueIdentifier>{46faf782-9550-4d5b-a8ae-498ba626c0dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\BackGround\BackGroundObj\Ground">
+      <UniqueIdentifier>{27b7e249-4060-415a-904c-ef3adf7295b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\MonsterScript">
+      <UniqueIdentifier>{0b1397f3-ee89-4116-bbfc-529e61aeed7a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

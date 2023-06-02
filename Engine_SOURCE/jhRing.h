@@ -28,6 +28,8 @@ namespace jh
 		bool GetTouch() { return mIsTouch; }
 		void SetTouch(bool istouch) { mIsTouch = istouch; }
 
+		void SetState(eRingSet ringset) { mRingSet = ringset; }
+
 		//State
 		void Vertical();
 		void Horizontal();

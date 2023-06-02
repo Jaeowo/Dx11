@@ -172,7 +172,11 @@
     <ClInclude Include="jhCeilingScript.h" />
     <ClInclude Include="jhChangeGawk.h" />
     <ClInclude Include="jhChangeMonsterState.h" />
+    <ClInclude Include="jhChest.h" />
+    <ClInclude Include="jhChestScript.h" />
     <ClInclude Include="jhCloudScript.h" />
+    <ClInclude Include="jhCoin.h" />
+    <ClInclude Include="jhCoinScript.h" />
     <ClInclude Include="jhCollider2D.h" />
     <ClInclude Include="jhCollider3D.h" />
     <ClInclude Include="jhCollisionManager.h" />
@@ -188,6 +192,7 @@
     <ClInclude Include="jhFadeOutScript.h" />
     <ClInclude Include="jhGameObject.h" />
     <ClInclude Include="jhGawk.h" />
+    <ClInclude Include="jhGawkScript.h" />
     <ClInclude Include="jhGeddy.h" />
     <ClInclude Include="jhGeddyBullet.h" />
     <ClInclude Include="jhGeddyhands.h" />
@@ -224,6 +229,8 @@
     <ClInclude Include="jhTile03.h" />
     <ClInclude Include="jhTile04.h" />
     <ClInclude Include="jhTitleScene.h" />
+    <ClInclude Include="jhTortoise.h" />
+    <ClInclude Include="jhTortoiseScript.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="yaMath.h" />
     <ClInclude Include="jhMesh.h" />
@@ -259,7 +266,11 @@
     <ClCompile Include="jhCeilingScript.cpp" />
     <ClCompile Include="jhChangeGawk.cpp" />
     <ClCompile Include="jhChangeMonsterState.cpp" />
+    <ClCompile Include="jhChest.cpp" />
+    <ClCompile Include="jhChestScript.cpp" />
     <ClCompile Include="jhCloudScript.cpp" />
+    <ClCompile Include="jhCoin.cpp" />
+    <ClCompile Include="jhCoinScript.cpp" />
     <ClCompile Include="jhCollider2D.cpp" />
     <ClCompile Include="jhCollider3D.cpp" />
     <ClCompile Include="jhCollisionManager.cpp" />
@@ -273,6 +284,7 @@
     <ClCompile Include="jhFadeOutScript.cpp" />
     <ClCompile Include="jhGameObject.cpp" />
     <ClCompile Include="jhGawk.cpp" />
+    <ClCompile Include="jhGawkScript.cpp" />
     <ClCompile Include="jhGeddy.cpp" />
     <ClCompile Include="jhGeddyBullet.cpp" />
     <ClCompile Include="jhGeddyhands.cpp" />
@@ -307,6 +319,8 @@
     <ClCompile Include="jhTile03.cpp" />
     <ClCompile Include="jhTile04.cpp" />
     <ClCompile Include="jhTitleScene.cpp" />
+    <ClCompile Include="jhTortoise.cpp" />
+    <ClCompile Include="jhTortoiseScript.cpp" />
     <ClCompile Include="yaMath.cpp" />
     <ClCompile Include="jhMesh.cpp" />
     <ClCompile Include="jhMeshRenderer.cpp" />

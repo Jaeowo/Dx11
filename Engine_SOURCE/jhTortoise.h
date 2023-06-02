@@ -53,8 +53,6 @@ namespace jh
 
 		void SetHp(int hp) { mHp = hp; }
 
-
-
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;
@@ -70,3 +68,4 @@ namespace jh
 		float mElapsedTime;
 	};
 }
+

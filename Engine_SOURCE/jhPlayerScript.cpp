@@ -92,6 +92,9 @@ namespace jh
 
 		//PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 0.0f, 230.0f));
 
+		mHp = PlayerManager::GetPlayer()->GetHp();
+		mCoin = PlayerManager::GetPlayer()->GetCoin();
+
 		if (PlayerManager::GetPlayer()->GetVelocityZero() == true)
 		{
 			mVelocity.y = 0.0f;
@@ -651,8 +654,6 @@ namespace jh
 			mTransform->SetPosition(mPlayerPosition);
 		}
 	}
-
-
 
 	void PlayerScript::JumpComplete()
 	{

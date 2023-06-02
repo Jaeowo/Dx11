@@ -23,11 +23,11 @@ namespace jh
 	{
 		if (mCount == 0)
 		{
-			Gawk* gawkObj = dynamic_cast<Gawk*>(collider->GetOwner());
+			/*Gawk* gawkObj = dynamic_cast<Gawk*>(collider->GetOwner());
 
 			gawkObj->SetPlayerState(eGawkState::UpsideDowntoFly);
 
-			mCount = 1;
+			mCount = 1;*/
 		}
 	
 	}

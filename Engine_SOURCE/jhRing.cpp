@@ -70,18 +70,17 @@ namespace jh
 			lightComp->SetDiffuse(Vector4(0.0f, 1.0f, 0.0f, 1.0f));
 
 			//동작 제대로 안하는데 함 확인해보기
-			lightComp->ChangeColorOverTime(1.0f, Vector4(0.0f, 1.0f, 0.0f, 1.0f), Vector4(1.0f, 1.0f, 0.0f, 1.0f));
+			lightComp->ChangeColorOverTime(2.0f, Vector4(0.0f, 1.0f, 0.0f, 1.0f), Vector4(1.0f, 0.0f, 1.0f, 1.0f));
 
 			mOneCount = true;
 
 			mTotalTime += Time::DeltaTime();
 
+			//this->Death();
 
-			this->Death();
-
-			if (mTotalTime >= 1.0f)
+			if (mTotalTime >= 2.0f)
 			{
-				Death();
+				//Death();
 			}
 		}
 

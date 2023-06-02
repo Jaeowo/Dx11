@@ -6,6 +6,7 @@ namespace jh
 {
 
 	class Animator;
+	class Transform;
 
 	class Coin
 		: public GameObject
@@ -19,16 +20,27 @@ namespace jh
 		virtual void FixedUpdate();
 		virtual void Render();
 
-		void SetColPos(Vector3 ColPos) { mColPos = ColPos; }
-		Vector3 GetColPos() { return mColPos; }
+		void SetPosition(Vector3 position) { mPosition = position; }
 
-		void SetColSize(Vector2 ColSize) { mColSize = ColSize; }
-		Vector2 GetColSize() { return mColSize; }
+		void SetCount(bool onecount) { mOneCount = onecount; }
+		void Move(const Vector3& direction);
+
+		void SetGround(bool bground) { mbGround = bground; }
 
 	private:
+		Vector3 mPosition;
+		Vector3 mVelocity;
 		Collider2D* mCollider;
+
 		Animator* mAnimator;
-		Vector3 mColPos;
-		Vector2 mColSize;
+		Transform* mTransform;
+
+		bool mbGround;
+		bool mOneCount;
+		float mSpeed;  
+		float mGravity;  
+		
 	};
 }
+
+

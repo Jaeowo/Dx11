@@ -14,6 +14,10 @@
 #include "jhGround.h"
 #include "jhGawk.h"
 #include "jhChangeMonsterState.h"
+#include "jhGeddy.h"
+#include "jhGeddyScript.h"
+#include "jhCollisionManager.h"
+#include "jhMouseCursor.h"
 
 namespace jh
 {
@@ -38,6 +42,9 @@ namespace jh
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
 		cameraObj->AddComponent<CameraScript>();
 		mainCamera = cameraComp;
+
+		//Cursor
+		MouseCursor* mousecursor = object::Instantiate<MouseCursor>(eLayerType::Effect);
 
 		//Wall
 		GameObject* WallObj = object::Instantiate<GameObject>(eLayerType::BackGround2);
@@ -70,8 +77,14 @@ namespace jh
 		PlayerManager::SetPlayer(playerObj);
 		//playerObj->SetPlayerPos(Vector3(1.0f, 15.0f, 0.0f));
 		playerObj->AddComponent<PlayerScript>();
-
 		cameraComp->SetTarget(playerObj);
+
+		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Player);
+		PlayerManager::SetGeddy(geddyObj);
+		//playerObj->SetPlayerPos(Vector3(1.0f, 15.0f, 0.0f));
+		geddyObj->SetCount(0);
+		geddyObj->AddComponent<GeddyScript>();
+		//cameraComp->SetTarget(playerObj);
 
 		//ground
 		Ground* groundObj4 = object::Instantiate<Ground>(eLayerType::BackGround);
@@ -99,13 +112,15 @@ namespace jh
 		Transform* gawkTr = gawkObj->GetComponent<Transform>();
 		gawkTr->SetPosition(Vector3(-0.5f, -0.5f, 1.7f));
 		gawkTr->SetScale(Vector3(0.29f, 0.29f, 1.0f));
-
+		
 
 		//Change
 		ChangeMonsterState* changeMObj = object::Instantiate<ChangeMonsterState>(eLayerType::BackGround);
 		Transform* changeMTr = changeMObj->GetComponent<Transform>();
 		changeMTr->SetPosition(Vector3(-0.18f, 0.6f, 1.7f));
 		changeMTr->SetScale(Vector3(0.4f, 0.4f, 1.0f));
+
+		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);
 
 		Scene::Initalize();
 	}
@@ -126,6 +141,8 @@ namespace jh
 		//PlayerManager::GetPlayer()->SetPlayerPos(Vector3(0.0f, 0.0f, 1.7f));
 		PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
 		PlayerManager::GetPlayer()->SetCount(0);
+
+		PlayerManager::GetGeddy()->SetCount(0);
 	}
 	void CaveScene::OnExit()
 	{

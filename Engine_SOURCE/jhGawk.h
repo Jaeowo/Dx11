@@ -35,11 +35,12 @@ namespace jh
 		void Sturn();
 
 	//Get Set
-		eGawkState GetPlayerState() { return mGawkState; }
-		void SetPlayerState(eGawkState gawkstate) { mGawkState = gawkstate; }
+		eGawkState GetState() { return mGawkState; }
+		void SetState(eGawkState gawkstate) { mGawkState = gawkstate; }
 
 		void SetHp(int hp) { mHp = hp; }
 
+		void SetCount(int count) { mCount = count; }
 
 
 	private:
