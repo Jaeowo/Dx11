@@ -533,6 +533,14 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"CursorTexture", L"cursor_36x36.png");
 
 #pragma endregion
+#pragma region UI TEXTURE
+		Resources::Load<Texture>(L"Coin1Texture", L"UI\\coin_15x17.png");
+		Resources::Load<Texture>(L"HpTexture", L"UI\\Hp.png");
+		Resources::Load<Texture>(L"HpBackTexture", L"UI\\Hpback.png");
+		Resources::Load<Texture>(L"NumberTexture", L"UI\\Number.png");
+		Resources::Load<Texture>(L"LeftHpTexture", L"UI\\left_3x19.png");
+		Resources::Load<Texture>(L"RightHpTexture", L"UI\\right_9x19.png");
+#pragma endregion
 	}
 
 	void LoadMaterial()
@@ -879,7 +887,55 @@ namespace jh::renderer
 		spriteMaterial->SetTexture(eTextureSlot::T0, spriteTexture);
 		Resources::Insert<Material>(L"SpriteMaterial", spriteMaterial);
 #pragma endregion
-#pragma region UI
+#pragma region UI MATERIAL
+		std::shared_ptr <Texture> coin1Texture = Resources::Find<Texture>(L"Coin1Texture");
+		std::shared_ptr<Shader> coin1Shader = Resources::Find<Shader>(L"UIShader");
+		std::shared_ptr<Material> coin1Material = std::make_shared<Material>();
+		coin1Material->SetRenderingMode(eRenderingMode::Transparent);
+		coin1Material->SetShader(coin1Shader);
+		coin1Material->SetTexture(eTextureSlot::T0, coin1Texture);
+		Resources::Insert<Material>(L"Coin1Material", coin1Material);
+
+		std::shared_ptr <Texture> hpTexture = Resources::Find<Texture>(L"HpTexture");
+		std::shared_ptr<Shader> hpShader = Resources::Find<Shader>(L"UIShader");
+		std::shared_ptr<Material> hpMaterial = std::make_shared<Material>();
+		hpMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		hpMaterial->SetShader(hpShader);
+		hpMaterial->SetTexture(eTextureSlot::T0, hpTexture);
+		Resources::Insert<Material>(L"HpMaterial", hpMaterial);
+
+		std::shared_ptr <Texture> hpbackTexture = Resources::Find<Texture>(L"HpBackTexture");
+		std::shared_ptr<Shader> hpbackShader = Resources::Find<Shader>(L"UIShader");
+		std::shared_ptr<Material> hpbackMaterial = std::make_shared<Material>();
+		hpbackMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		hpbackMaterial->SetShader(hpbackShader);
+		hpbackMaterial->SetTexture(eTextureSlot::T0, hpbackTexture);
+		Resources::Insert<Material>(L"HpBackMaterial", hpbackMaterial);
+
+		std::shared_ptr <Texture> numberTexture = Resources::Find<Texture>(L"NumberTexture");
+		std::shared_ptr<Shader> numberShader = Resources::Find<Shader>(L"UIShader");
+		std::shared_ptr<Material> numberMaterial = std::make_shared<Material>();
+		numberMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		numberMaterial->SetShader(numberShader);
+		numberMaterial->SetTexture(eTextureSlot::T0, numberTexture);
+		Resources::Insert<Material>(L"NumberMaterial", numberMaterial);
+
+		std::shared_ptr <Texture> lefthpTexture = Resources::Find<Texture>(L"LeftHpTexture");
+		std::shared_ptr<Shader> lefthpShader = Resources::Find<Shader>(L"UIShader");
+		std::shared_ptr<Material> lefthpMaterial = std::make_shared<Material>();
+		lefthpMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		lefthpMaterial->SetShader(lefthpShader);
+		lefthpMaterial->SetTexture(eTextureSlot::T0, lefthpTexture);
+		Resources::Insert<Material>(L"LeftHpMaterial", lefthpMaterial);
+
+		std::shared_ptr <Texture> righthpTexture = Resources::Find<Texture>(L"RightHpTexture");
+		std::shared_ptr<Shader> righthpShader = Resources::Find<Shader>(L"UIShader");
+		std::shared_ptr<Material> righthpMaterial = std::make_shared<Material>();
+		righthpMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		righthpMaterial->SetShader(righthpShader);
+		righthpMaterial->SetTexture(eTextureSlot::T0, righthpTexture);
+		Resources::Insert<Material>(L"RightHpMaterial", righthpMaterial);
+
 		std::shared_ptr <Texture> uiTexture = Resources::Find<Texture>(L"HPBarTexture");
 		std::shared_ptr<Shader> uiShader = Resources::Find<Shader>(L"UIShader");
 		std::shared_ptr<Material> uiMaterial = std::make_shared<Material>();

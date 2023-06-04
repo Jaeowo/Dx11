@@ -31,14 +31,6 @@ namespace jh
 	
 		if (playerObj)
 		{
-		/*	if (playerObj->GetPlayerState() != ePlayerState::FlyGrab)
-			{
-				int coinCheck = 0;
-				coinCheck = (playerObj->GetCoin() + 1);
-				playerObj->SetCoin(coinCheck);
-
-				mcoin->Death();
-			}*/
 			if (mCount == 0)
 			{
 				mTime = 0.0f;
@@ -47,11 +39,10 @@ namespace jh
 		
 			if (mTime >= 1.0f)
 			{
-	/*			int coinCheck = 0;
-				coinCheck = (playerObj->GetCoin() + 1);
+				int coinCheck = (playerObj->GetCoin() + 1);
 				playerObj->SetCoin(coinCheck);
 
-				mcoin->Death();*/
+				mcoin->Death();
 			}
 		}
 	

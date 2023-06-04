@@ -14,7 +14,7 @@ namespace jh
 		, mIsFly(false)
 		, mIsJumping(false)
 		, mvelocityzero(false)
-		, mHp(3)
+		, mHp(500)
 		, mCoin(0)
 	{
 		mTransform = GetComponent<Transform>();

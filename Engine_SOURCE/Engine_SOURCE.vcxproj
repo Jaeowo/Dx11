@@ -205,10 +205,12 @@
     <ClInclude Include="jhGridScript.h" />
     <ClInclude Include="jhGround.h" />
     <ClInclude Include="jhGroundScript.h" />
+    <ClInclude Include="jhHpBar.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhLight.h" />
     <ClInclude Include="jhMouseCursor.h" />
+    <ClInclude Include="jhNumber.h" />
     <ClInclude Include="jhObject.h" />
     <ClInclude Include="jhPaintShader.h" />
     <ClInclude Include="jhParticleShader.h" />
@@ -231,6 +233,7 @@
     <ClInclude Include="jhTitleScene.h" />
     <ClInclude Include="jhTortoise.h" />
     <ClInclude Include="jhTortoiseScript.h" />
+    <ClInclude Include="jhUIBase.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="yaMath.h" />
     <ClInclude Include="jhMesh.h" />
@@ -296,10 +299,12 @@
     <ClCompile Include="jhGridScript.cpp" />
     <ClCompile Include="jhGround.cpp" />
     <ClCompile Include="jhGroundScript.cpp" />
+    <ClCompile Include="jhHpBar.cpp" />
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhLight.cpp" />
     <ClCompile Include="jhMouseCursor.cpp" />
+    <ClCompile Include="jhNumber.cpp" />
     <ClCompile Include="jhPaintShader.cpp" />
     <ClCompile Include="jhParticleShader.cpp" />
     <ClCompile Include="jhParticleSystem.cpp" />
@@ -321,6 +326,7 @@
     <ClCompile Include="jhTitleScene.cpp" />
     <ClCompile Include="jhTortoise.cpp" />
     <ClCompile Include="jhTortoiseScript.cpp" />
+    <ClCompile Include="jhUIBase.cpp" />
     <ClCompile Include="yaMath.cpp" />
     <ClCompile Include="jhMesh.cpp" />
     <ClCompile Include="jhMeshRenderer.cpp" />

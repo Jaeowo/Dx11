@@ -30,6 +30,30 @@ namespace jh
 	}
 	void CaveScene::Initalize()
 	{
+		
+
+		Scene::Initalize();
+	}
+	void CaveScene::Update()
+	{
+		Scene::Update();
+	}
+	void CaveScene::FixedUpdate()
+	{
+		Scene::FixedUpdate();
+	}
+	void CaveScene::Render()
+	{
+		Scene::Render();
+	}
+	void CaveScene::OnEnter()
+	{
+		//PlayerManager::GetPlayer()->SetPlayerPos(Vector3(0.0f, 0.0f, 1.7f));
+		PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
+		PlayerManager::GetPlayer()->SetCount(0);
+
+		PlayerManager::GetGeddy()->SetCount(0);
+
 		GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
 		directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
 		Light* lightComp = directionalLight->AddComponent<Light>();
@@ -112,7 +136,7 @@ namespace jh
 		Transform* gawkTr = gawkObj->GetComponent<Transform>();
 		gawkTr->SetPosition(Vector3(-0.5f, -0.5f, 1.7f));
 		gawkTr->SetScale(Vector3(0.29f, 0.29f, 1.0f));
-		
+
 
 		//Change
 		ChangeMonsterState* changeMObj = object::Instantiate<ChangeMonsterState>(eLayerType::BackGround);
@@ -121,28 +145,6 @@ namespace jh
 		changeMTr->SetScale(Vector3(0.4f, 0.4f, 1.0f));
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);
-
-		Scene::Initalize();
-	}
-	void CaveScene::Update()
-	{
-		Scene::Update();
-	}
-	void CaveScene::FixedUpdate()
-	{
-		Scene::FixedUpdate();
-	}
-	void CaveScene::Render()
-	{
-		Scene::Render();
-	}
-	void CaveScene::OnEnter()
-	{
-		//PlayerManager::GetPlayer()->SetPlayerPos(Vector3(0.0f, 0.0f, 1.7f));
-		PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
-		PlayerManager::GetPlayer()->SetCount(0);
-
-		PlayerManager::GetGeddy()->SetCount(0);
 	}
 	void CaveScene::OnExit()
 	{

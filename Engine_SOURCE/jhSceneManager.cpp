@@ -30,12 +30,11 @@ namespace jh
 		mScenes[(UINT)eSceneType::Cave] = new CaveScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Title];
-		//SceneManager::LoadScene(eSceneType::Play);
-		mActiveScene->Initalize();
-	/*	for (Scene* scene : mScenes)
+
+		for (Scene* scene : mScenes)
 		{
 			scene->Initalize();
-		}*/
+		}
 	}
 
 	void SceneManager::Update()
@@ -67,10 +66,8 @@ namespace jh
 	void SceneManager::LoadScene(eSceneType type)
 	{
 		if (mActiveScene)
-		{
 			mActiveScene->OnExit();
-			mActiveScene->Destroy();  // 현재 씬에서 Death 상태의 GameObject를 제거
-		}
+			mActiveScene->Destroy();
 
 		//dontDestroy 다음씬으로 같이 넘겨주기
 		std::vector<GameObject*> gameObjs
@@ -84,6 +81,6 @@ namespace jh
 		}
 
 		mActiveScene->OnEnter();
-		mActiveScene->Initalize();
+		//mActiveScene->Initalize();
 	}
 }

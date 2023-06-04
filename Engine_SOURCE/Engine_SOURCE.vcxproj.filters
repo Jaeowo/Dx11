@@ -274,6 +274,15 @@
     <ClInclude Include="jhTortoiseScript.h">
       <Filter>Component\Script\MonsterScript</Filter>
     </ClInclude>
+    <ClInclude Include="jhUIBase.h">
+      <Filter>GameObject\UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="jhHpBar.h">
+      <Filter>GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="jhNumber.h">
+      <Filter>GameObject\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -533,6 +542,15 @@
     <ClCompile Include="jhTortoiseScript.cpp">
       <Filter>Component\Script\MonsterScript</Filter>
     </ClCompile>
+    <ClCompile Include="jhUIBase.cpp">
+      <Filter>GameObject\UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="jhHpBar.cpp">
+      <Filter>GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="jhNumber.cpp">
+      <Filter>GameObject\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -702,6 +720,12 @@
     </Filter>
     <Filter Include="Component\Script\MonsterScript">
       <UniqueIdentifier>{0b1397f3-ee89-4116-bbfc-529e61aeed7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI">
+      <UniqueIdentifier>{926bcece-cf18-4860-b48a-d4b8cd8bffd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\UI\Base">
+      <UniqueIdentifier>{8500b92b-cc75-42c1-9e1d-b4b9a96543fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

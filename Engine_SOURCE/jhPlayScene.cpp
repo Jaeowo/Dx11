@@ -34,6 +34,7 @@
 #include "jhRing.h"
 #include "jhChest.h"
 #include "jhCoin.h"
+#include "jhHpBar.h"
 
 namespace jh
 {
@@ -48,6 +49,33 @@ namespace jh
 	}
 
 	void PlayScene::Initalize()
+	{
+		
+
+		Scene::Initalize();
+	}
+
+	void PlayScene::Update()
+	{
+		if (Input::GetKeyDown(eKeyCode::N))
+		{
+			SceneManager::LoadScene(eSceneType::Cave);
+		}
+
+		Scene::Update();
+	}
+
+	void PlayScene::FixedUpdate()
+	{
+		Scene::FixedUpdate();
+	}
+
+	void PlayScene::Render()
+	{
+		Scene::Render();
+	}
+
+	void PlayScene::OnEnter()
 	{
 		{
 			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
@@ -70,7 +98,7 @@ namespace jh
 		cameraUIComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 		cameraUIComp->DisableLayerMasks();
 		cameraUIComp->TurnLayerMask(eLayerType::UI, true);
-		
+
 		//Cursor
 		MouseCursor* mousecursor = object::Instantiate<MouseCursor>(eLayerType::Effect);
 
@@ -105,9 +133,9 @@ namespace jh
 		geddyObj->AddComponent<GeddyScript>();
 		geddyObj->SetName(L"Geddy");
 
-		
 
-	
+
+
 
 #pragma region RING
 
@@ -229,7 +257,7 @@ namespace jh
 		groundTr2->SetPosition(Vector3(0.4f, 1.0f, 1.7f));
 		groundTr2->SetScale(Vector3(0.35f, 0.001f, 1.0f));
 #pragma endregion
-	
+
 #pragma region SLOPE
 		Slope* SlopeObj2 = object::Instantiate<Slope>(eLayerType::BackGround);
 		Transform* slopeTr2 = SlopeObj2->GetComponent<Transform>();
@@ -242,7 +270,7 @@ namespace jh
 		slopeTr->SetPosition(Vector3(0.7f, -1.678f, 1.7f));
 		slopeTr->SetScale(Vector3(0.35f, 0.001f, 1.0f));
 		SlopeObj->SetRightUp(true);
-	
+
 #pragma endregion
 
 
@@ -261,7 +289,7 @@ namespace jh
 		backskyObj->AddComponent<BackSkyScript>();
 
 		// hpbar
-		GameObject* hpBar = object::Instantiate<GameObject>(eLayerType::UI);
+		/*GameObject* hpBar = object::Instantiate<GameObject>(eLayerType::UI);
 		hpBar->SetName(L"HPBAR");
 		Transform* hpBarTR = hpBar->GetComponent<Transform>();
 		hpBarTR->SetPosition(Vector3(-5.5f, 4.5f, 1.0f));
@@ -272,7 +300,9 @@ namespace jh
 		std::shared_ptr<Mesh> hpmesh = Resources::Find<Mesh>(L"RectMesh");
 		std::shared_ptr<Material> hpspriteMaterial = Resources::Find<Material>(L"Hpbarmaterial");
 		hpsr->SetMesh(hpmesh);
-		hpsr->SetMaterial(hpspriteMaterial);
+		hpsr->SetMaterial(hpspriteMaterial);*/
+		HpBar* hpbar = object::Instantiate<HpBar>(eLayerType::UI);
+		hpbar->SetPosition(Vector3(-5.5f, 4.5f, 1.0f));
 
 		Chest* chestObj = object::Instantiate<Chest>(eLayerType::BackGrouncObj);
 		chestObj->SetPosition(Vector3(0.35f, -0.82f, 1.7f));
@@ -300,33 +330,6 @@ namespace jh
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGrouncObj, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Friends, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Friends, eLayerType::BackGround, true);
-
-		Scene::Initalize();
-	}
-
-	void PlayScene::Update()
-	{
-		if (Input::GetKeyDown(eKeyCode::N))
-		{
-			SceneManager::LoadScene(eSceneType::Cave);
-		}
-
-		Scene::Update();
-	}
-
-	void PlayScene::FixedUpdate()
-	{
-		Scene::FixedUpdate();
-	}
-
-	void PlayScene::Render()
-	{
-		Scene::Render();
-	}
-
-	void PlayScene::OnEnter()
-	{
-
 	}
 
 	void PlayScene::OnExit()

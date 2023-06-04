@@ -142,7 +142,7 @@ namespace jh
 		leftsr->SetMaterial(titleleftmaterial);
 		leftsr->SetMesh(leftmesh);
 
-		//Scene::Initalize();
+		Scene::Initalize();
 	}
 	void TitleScene::Update()
 	{
