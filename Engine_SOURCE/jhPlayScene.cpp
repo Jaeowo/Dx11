@@ -35,6 +35,9 @@
 #include "jhChest.h"
 #include "jhCoin.h"
 #include "jhHpBar.h"
+#include "jhWall.h"
+#include "jhNumber.h"
+#include "jhTortoise.h"
 
 namespace jh
 {
@@ -124,7 +127,7 @@ namespace jh
 		// Player
 		Player* playerObj = object::Instantiate<Player>(eLayerType::Player);
 		PlayerManager::SetPlayer(playerObj);
-		playerObj->AddComponent<PlayerScript>();
+		//playerObj->AddComponent<PlayerScript>();
 		cameraComp->SetTarget(playerObj);
 
 		//Geddy
@@ -258,6 +261,11 @@ namespace jh
 		groundTr2->SetScale(Vector3(0.35f, 0.001f, 1.0f));
 #pragma endregion
 
+		Wall* wallObj1 = object::Instantiate<Wall>(eLayerType::BackGround);
+		Transform* wallTr1 = wallObj1->GetComponent<Transform>();
+		wallTr1->SetPosition(Vector3(0.4f, 1.0f, 1.7f));
+		wallTr1->SetScale(Vector3(0.01f, 0.35f, 1.0f));
+
 #pragma region SLOPE
 		Slope* SlopeObj2 = object::Instantiate<Slope>(eLayerType::BackGround);
 		Transform* slopeTr2 = SlopeObj2->GetComponent<Transform>();
@@ -288,24 +296,30 @@ namespace jh
 		backskysr->SetMesh(backskymesh);
 		backskyObj->AddComponent<BackSkyScript>();
 
-		// hpbar
-		/*GameObject* hpBar = object::Instantiate<GameObject>(eLayerType::UI);
-		hpBar->SetName(L"HPBAR");
+		// coin UI
+		GameObject* hpBar = object::Instantiate<GameObject>(eLayerType::UI);
 		Transform* hpBarTR = hpBar->GetComponent<Transform>();
-		hpBarTR->SetPosition(Vector3(-5.5f, 4.5f, 1.0f));
-		hpBarTR->SetScale(Vector3(2.0f, 0.5f, 1.0f));
+		hpBarTR->SetPosition(Vector3(-6.2f, 4.2f, 1.0f));
+		hpBarTR->SetScale(Vector3(0.25f, 0.25f, 1.0f));
 
 		SpriteRenderer* hpsr = hpBar->AddComponent<SpriteRenderer>();
 		hpBar->AddComponent(hpsr);
 		std::shared_ptr<Mesh> hpmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> hpspriteMaterial = Resources::Find<Material>(L"Hpbarmaterial");
+		std::shared_ptr<Material> hpspriteMaterial = Resources::Find<Material>(L"Coin1Material");
 		hpsr->SetMesh(hpmesh);
-		hpsr->SetMaterial(hpspriteMaterial);*/
+		hpsr->SetMaterial(hpspriteMaterial);
+
 		HpBar* hpbar = object::Instantiate<HpBar>(eLayerType::UI);
 		hpbar->SetPosition(Vector3(-5.5f, 4.5f, 1.0f));
 
+		Number* number = object::Instantiate<Number>(eLayerType::UI);
+		number->SetPosition(Vector3(-5.5f, 4.5f, 1.0f));
+
 		Chest* chestObj = object::Instantiate<Chest>(eLayerType::BackGrouncObj);
 		chestObj->SetPosition(Vector3(0.35f, -0.82f, 1.7f));
+
+		/*Tortoise* tortoiseObj = object::Instantiate<Tortoise>(eLayerType::Monster);
+		tortoiseObj->SetPosition(Vector3(0.35f, -0.82f, 1.7f));*/
 
 		// TopProp
 		GameObject* toppropObj = object::Instantiate<GameObject>(eLayerType::BackGround2);

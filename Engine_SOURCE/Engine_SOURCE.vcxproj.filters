@@ -265,13 +265,7 @@
     <ClInclude Include="jhRingScript.h">
       <Filter>Component\Script\BackGround\BackGroundObj\Ring</Filter>
     </ClInclude>
-    <ClInclude Include="jhTortoise.h">
-      <Filter>GameObject\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="jhGawkScript.h">
-      <Filter>Component\Script\MonsterScript</Filter>
-    </ClInclude>
-    <ClInclude Include="jhTortoiseScript.h">
       <Filter>Component\Script\MonsterScript</Filter>
     </ClInclude>
     <ClInclude Include="jhUIBase.h">
@@ -282,6 +276,27 @@
     </ClInclude>
     <ClInclude Include="jhNumber.h">
       <Filter>GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="jhWall.h">
+      <Filter>GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="jhWallScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTortoise.h">
+      <Filter>GameObject\Monster\Tortoise</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTortoiseBullet.h">
+      <Filter>GameObject\Monster\Tortoise</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTortoiseMask.h">
+      <Filter>GameObject\Monster\Tortoise</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTortoiseScript.h">
+      <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTortoiseBulletScript.h">
+      <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -533,13 +548,7 @@
     <ClCompile Include="jhCloudScript.cpp">
       <Filter>Component\Script\BackGround</Filter>
     </ClCompile>
-    <ClCompile Include="jhTortoise.cpp">
-      <Filter>GameObject\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="jhGawkScript.cpp">
-      <Filter>Component\Script\MonsterScript</Filter>
-    </ClCompile>
-    <ClCompile Include="jhTortoiseScript.cpp">
       <Filter>Component\Script\MonsterScript</Filter>
     </ClCompile>
     <ClCompile Include="jhUIBase.cpp">
@@ -550,6 +559,27 @@
     </ClCompile>
     <ClCompile Include="jhNumber.cpp">
       <Filter>GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="jhWall.cpp">
+      <Filter>GameObject\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="jhWallScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTortoise.cpp">
+      <Filter>GameObject\Monster\Tortoise</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTortoiseBullet.cpp">
+      <Filter>GameObject\Monster\Tortoise</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTortoiseMask.cpp">
+      <Filter>GameObject\Monster\Tortoise</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTortoiseScript.cpp">
+      <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTortoiseBulletScript.cpp">
+      <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -726,6 +756,12 @@
     </Filter>
     <Filter Include="GameObject\UI\Base">
       <UniqueIdentifier>{8500b92b-cc75-42c1-9e1d-b4b9a96543fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster\Tortoise">
+      <UniqueIdentifier>{39788c15-1226-44f6-a56c-094f27b8c7ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\MonsterScript\TortoiseScript">
+      <UniqueIdentifier>{a98c69fe-a79f-4dde-8f80-09c81f2994a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

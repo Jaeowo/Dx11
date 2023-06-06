@@ -27,6 +27,9 @@ namespace jh
 		Vector3 GetPlayerPos() { return mPlayerPos; }
 		void SetPlayerPos(Vector3 playerpos) { mPlayerPos = playerpos; }
 
+		Vector3 GetPreviousPos() const { return mPreviousPos; }
+		void SetPreviousPos(Vector3 previouspos) { mPreviousPos = previouspos; }
+
 		bool GetIsGround() { return mbGround; }
 		void SetIsGround(bool bGround) { mbGround = bGround; }
 
@@ -60,6 +63,7 @@ namespace jh
 
 		int GetCoin() { return mCoin; }
 		void SetCoin(int coin) { mCoin = coin; }
+
 	private:
 		Transform* mTransform;
 		Collider2D* mCollider;
@@ -72,8 +76,11 @@ namespace jh
 
 		ePlayerState mPlayerState;
 		Vector3 mPlayerPos;
+		Vector3 mPreviousPos;
 		Vector3 mRotation;
 		UINT mCount;
+
+	
 
 		bool mIsLeftSlope;
 		bool mIsRightSlope;

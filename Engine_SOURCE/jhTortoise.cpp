@@ -1,17 +1,32 @@
 #include "jhTortoise.h"
 #include "jhAnimator.h"
 #include "jhResources.h"
+#include "jhSpriteRenderer.h"
+#include "jhTortoiseBullet.h"
+#include "jhObject.h"
 
 namespace jh
 {
 	Tortoise::Tortoise()
 		: mTortoiseState(eTortoiseState::Idle)
-		, mHp(20)
+		, mMonsterPosition(Vector3(0.0f, 0.0f, 0.0f))
+		, mHp(50)
 		, mCount(0)
 		, mTarget(false)
 		, mElapsedTime(0.0f)
+		, mCheck(false)
 	{
 		mAnimator = AddComponent<Animator>();
+		mTransform = GetComponent<Transform>();
+
+		mTransform->SetScale(Vector3(0.3f, 0.3f, 1.0f));
+		mTransform->SetPosition(mMonsterPosition);
+
+		SpriteRenderer* tortoisesr = AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> tortoisemesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> tortoisematerial = Resources::Find<Material>(L"TortoiseMaterial");
+		tortoisesr->SetMaterial(tortoisematerial);
+		tortoisesr->SetMesh(tortoisemesh);
 
 		std::shared_ptr<Texture> tortoisetexture = Resources::Load<Texture>(L"IdleMask", L"Masked Tortoise\\idleMask.png");
 		std::shared_ptr<Texture> tortoisetexture2 = Resources::Load<Texture>(L"IdleNoMask", L"Masked Tortoise\\idleNoMask.png");
@@ -50,6 +65,8 @@ namespace jh
 		mAnimator->Create(L"SpawnWings", tortoisetexture16, Vector2(0.0f, 0.0f), Vector2(129.0f, 124.0f), Vector2::Zero, 7, 0.2f);
 		mAnimator->Create(L"TurnMask", tortoisetexture17, Vector2(0.0f, 0.0f), Vector2(129.0f, 124.0f), Vector2::Zero, 5, 0.2f);
 		mAnimator->Create(L"TurnNomask", tortoisetexture18, Vector2(0.0f, 0.0f), Vector2(129.0f, 124.0f), Vector2::Zero, 5, 0.2f);
+
+		mAnimator->Play(L"IdleMask", true);
 	}	
 	Tortoise::~Tortoise()
 	{
@@ -62,41 +79,70 @@ namespace jh
 	void Tortoise::Update()
 	{
 		GameObject::Update();
+
+		mTransform = GetComponent<Transform>();
+		mTransform->SetPosition(mMonsterPosition);
+
 		switch (mTortoiseState)
 		{
+		case jh::eTortoiseState::MaskIdle:
+			MaskIdle();
+			break;
+		case jh::eTortoiseState::MaskJump:
+			MaskJump();
+			break;
+		case jh::eTortoiseState::MaskMove:
+			MaskMove();
+			break;
+		case jh::eTortoiseState::MaskTurn:
+			MaskTurn();
+			break;
+		case jh::eTortoiseState::MaskShoot:
+			MaskShoot();
+			break;
+		case jh::eTortoiseState::MaskFlyShoot:
+			MaskFlyShoot();
+			break;
+		case jh::eTortoiseState::MaskSpawnWing:
+			MaskSpawnWing();
+			break;
+		case jh::eTortoiseState::MaskFly:
+			MaskFly();
+			break;
 		case jh::eTortoiseState::Idle:
 			Idle();
 			break;
-		case jh::eTortoiseState::Jump:
-			Jump();
+		case jh::eTortoiseState::Hit:
+			Hit();
 			break;
 		case jh::eTortoiseState::Move:
 			Move();
 			break;
-		case jh::eTortoiseState::MoveShoot:
-			MoveShoot();
-			break;
 		case jh::eTortoiseState::EquipMask:
 			EquipMask();
-			break;
-		case jh::eTortoiseState::TurnMask:
-			TurnMask();
-			break;
-		case jh::eTortoiseState::SpawnWings:
-			SpawnWings();
 			break;
 		case jh::eTortoiseState::Fly:
 			Fly();
 			break;
-		case jh::eTortoiseState::FlyEquipMask:
-			FlyEquipMask();
+		case jh::eTortoiseState::FlyHit:
+			FlyHit();
 			break;
 		case jh::eTortoiseState::FlyDeath:
 			FlyDeath();
 			break;
+		case jh::eTortoiseState::FlyEquipMask:
+			FlyEquipMask();
+			break;
+		case jh::eTortoiseState::FindMask:
+			FindMask();
+			break;
+		case jh::eTortoiseState::Turn:
+			Turn();
+			break;
 		default:
 			break;
 		}
+
 	}
 	void Tortoise::FixedUpdate()
 	{
@@ -106,45 +152,150 @@ namespace jh
 	{
 		GameObject::Render();
 	}
-
+	void Tortoise::MaskIdle()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"IdleMask", true);
+			mCheck = true;
+		}
+	}
+	void Tortoise::MaskJump()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"Jump", false);
+			mCheck = true;
+		}
+	}
+	void Tortoise::MaskMove()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"Move", true);
+			mCheck = true;
+		}
+	}
+	void Tortoise::MaskTurn()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"TurnMask", false);
+			mCheck = true;
+		}
+	}
+	void Tortoise::MaskShoot()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"MoveShoot", false);
+			//TortoiseBullet* tortoisebullet = object::Instantiate<TortoiseBullet>(eLayerType::MonsterObject);
+			mCheck = true;
+			
+		}
+	}
 	void Tortoise::Idle()
 	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"IdleNoMask", true);
+			mCheck = true;
+		}
 	}
-
-	void Tortoise::Jump()
+	void Tortoise::Hit()
 	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"Hit", false);
+			mCheck = true;
+		}
 	}
-
 	void Tortoise::Move()
 	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"MoveNomask", true);
+			mCheck = true;
+		}
 	}
-
-	void Tortoise::MoveShoot()
-	{
-	}
-
 	void Tortoise::EquipMask()
 	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"EquipMask", false);
+			mCheck = true;
+		}
 	}
-
-	void Tortoise::TurnMask()
-	{
-	}
-
-	void Tortoise::SpawnWings()
-	{
-	}
-
 	void Tortoise::Fly()
 	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"FlyNomask", true);
+			mCheck = true;
+		}
 	}
-
-	void Tortoise::FlyEquipMask()
+	void Tortoise::FlyHit()
 	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"FlyHit", false);
+			mCheck = true;
+		}
 	}
-
 	void Tortoise::FlyDeath()
 	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"FlyDeath", false);
+			mCheck = true;
+		}
 	}
-
+	void Tortoise::FlyEquipMask()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"FlyEquipMask", false);
+			mCheck = true;
+		}
+	}
+	void Tortoise::FindMask()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"MoveNomask", true);
+			mCheck = true;
+		}
+	}
+	void Tortoise::Turn()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"TurnNomask", false);
+			mCheck = true;
+		}
+	}
+	void Tortoise::MaskSpawnWing()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"SpawnWings", false);
+			mCheck = true;
+		}
+	}
+	void Tortoise::MaskFly()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"Fly", true);
+			mCheck = true;
+		}
+	}
+	void Tortoise::MaskFlyShoot()
+	{
+		if (mCheck == false)
+		{
+			mAnimator->Play(L"FlyShoot", false);
+			mCheck = true;
+		}
+	}
 }

@@ -6,7 +6,6 @@ namespace jh
 	class Transform;
 	class Animator;
 
-
 	class Number
 		: public GameObject
 	{

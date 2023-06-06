@@ -6,7 +6,7 @@ namespace jh
 
 	class Animator;
 	class Transform;
-	class Rigidbody;
+	class Player;
 
 	class PlayerScript
 		: public Script
@@ -28,6 +28,10 @@ namespace jh
 		void Start();
 		void Action();
 		void End();
+
+
+		Vector3 GetPlayerPos() { return mPlayerPosition; }
+		void SetPlayerPos(Vector3 playerpos) { mPlayerPosition = playerpos; }
 
 		//Status
 		void Idle();
@@ -60,6 +64,7 @@ namespace jh
 
 		Animator* mAnimator;
 		Transform* mTransform;
+		Player* mPlayer;
 	
 		bool mbCarrying;
 
@@ -71,6 +76,7 @@ namespace jh
 
 		Vector3 mPrevPosition;
 		Vector3 mPlayerPosition;
+		Vector3 mNewPosition;
 		bool mbGround;
 		bool mIsFlying; //Flying상태일때 중력 안받도록 예외처리 하기
 	

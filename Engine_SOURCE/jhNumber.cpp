@@ -9,32 +9,22 @@ namespace jh
 	Number::Number()
 		: mPosition(Vector3(0.0f, 0.0f, 0.0f))
 	{
-		//mAnimator = AddComponent<Animator>();
-		//mTransform = GetComponent<Transform>();
+		mAnimator = AddComponent<Animator>();
+		mTransform = GetComponent<Transform>();
 
-		//mTransform->SetScale(Vector3(0.3f, 0.3f, 1.0f));
-		//mTransform->SetPosition(mPosition);
-		//SpriteRenderer* horizontalsr = AddComponent<SpriteRenderer>();
-		//std::shared_ptr<Mesh> horizontalmesh = Resources::Find<Mesh>(L"RectMesh");
-		//std::shared_ptr<Material> horizontalmaterial = Resources::Find<Material>(L"Horizontalmaterial");
-		//horizontalsr->SetMaterial(horizontalmaterial);
-		//horizontalsr->SetMesh(horizontalmesh);
+		mTransform->SetScale(Vector3(2.3f, 2.3f, 1.0f));
+		mTransform->SetPosition(mPosition);
 
-		//std::shared_ptr<Texture> ringwoodtexture = Resources::Load<Texture>(L"RingWood", L"Rings\\ring_wood.png");
-		//std::shared_ptr<Texture> ringwoodtexture2 = Resources::Load<Texture>(L"RingWood2", L"Rings\\ring_wood.png");
+		SpriteRenderer* numbersr = AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> numbermesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> numbermaterial = Resources::Find<Material>(L"NumberMaterial");
+		numbersr->SetMaterial(numbermaterial);
+		numbersr->SetMesh(numbermesh);
 
-		//mAnimator->Create(L"Vertical", ringwoodtexture, Vector2(0.0f, 0.0f), Vector2(115.0f, 115.0f), Vector2::Zero, 1, 0.3f);
-		//mAnimator->Create(L"Horizontal", ringwoodtexture, Vector2(0.0f, 115.0f), Vector2(115.0f, 115.0f), Vector2::Zero, 1, 0.3f);
-		//mAnimator->Create(L"Sloped", ringwoodtexture, Vector2(0.0f, 230.0f), Vector2(115.0f, 115.0f), Vector2::Zero, 1, 0.3f);
+		std::shared_ptr<Texture> numbertexture = Resources::Load<Texture>(L"Number", L"UI\\Number.png");
+		mAnimator->Create(L"number1", numbertexture, Vector2(0.0f, 0.0f), Vector2(8.0f, 0.0f), Vector2::Zero, 5, 0.3f);
 
-		//mAnimator->Play(L"Sloped", false);
-
-		//Collider2D* mCollider = AddComponent<Collider2D>();
-		//mCollider->SetType(eColliderType::Rect);
-		//mCollider->SetSize(Vector2(0.1f, 0.1f));
-
-
-
+		mAnimator->Play(L"number1", false);
 	}
 	Number::~Number()
 	{
@@ -49,8 +39,6 @@ namespace jh
 
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
-
-
 
 	}
 	void Number::FixedUpdate()

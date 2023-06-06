@@ -31,6 +31,8 @@ namespace jh
 		bool mOneCount;
 
 		GameObject* mTarget;
-		Player* mPlayer;
+
+		int mHp;
+		//Player* mPlayer;
 	};
 }

@@ -20,6 +20,7 @@ namespace jh::enums
 		BackGround,
 		Grid,
 		Monster,
+		MonsterObject,
 		FriendsObject,
 		Player,
 		Friends,

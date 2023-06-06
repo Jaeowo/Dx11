@@ -504,6 +504,9 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"MechanicBulletTexture", L"Bullets\\sprMechanicBullet_38x31.png");
 #pragma endregion
 #pragma region MONSTER TEXTURE
+		Resources::Load<Texture>(L"TortoiseMaskTexture", L"Masked Tortoise\\Mask\\sprLand_strip9.png");
+		Resources::Load<Texture>(L"TortoiseBulletTexture", L"Masked Tortoise\\sprTortoiseShot_25x17_strip4.png");
+		Resources::Load<Texture>(L"TortoiseTexture", L"Masked Tortoise\\sprIdle.png");
 		Resources::Load<Texture>(L"GawkTexture", L"Gawk\\sprGawkHurt_81x70.png");
 #pragma endregion
 #pragma region DYNAMIC TEXTURE
@@ -862,6 +865,14 @@ namespace jh::renderer
 		Resources::Insert<Material>(L"Standmaterial", standmaterial);
 #pragma endregion
 #pragma region MONSTER MATERIAL
+		std::shared_ptr <Texture> tortisetexture = Resources::Find<Texture>(L"TortoiseTexture");
+		std::shared_ptr<Shader> tortoiseshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> tortoisematerial = std::make_shared<Material>();
+		tortoisematerial->SetRenderingMode(eRenderingMode::Transparent);
+		tortoisematerial->SetShader(tortoiseshader);
+		tortoisematerial->SetTexture(eTextureSlot::T0, tortisetexture);
+		Resources::Insert<Material>(L"TortoiseMaterial", tortoisematerial);
+
 		std::shared_ptr <Texture> gawktexture = Resources::Find<Texture>(L"GawkTexture");
 		std::shared_ptr<Shader> gawkshader = Resources::Find<Shader>(L"SpriteShader");
 		std::shared_ptr<Material> gawkmaterial = std::make_shared<Material>();

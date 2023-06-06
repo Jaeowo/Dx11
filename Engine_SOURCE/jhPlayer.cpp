@@ -14,7 +14,7 @@ namespace jh
 		, mIsFly(false)
 		, mIsJumping(false)
 		, mvelocityzero(false)
-		, mHp(500)
+		, mHp(5)
 		, mCoin(0)
 	{
 		mTransform = GetComponent<Transform>();
@@ -46,10 +46,14 @@ namespace jh
 	void Player::Initalize()
 	{
 		GameObject::Initalize();
-		//AddComponent<PlayerScript>();
+		AddComponent<PlayerScript>();
 	}
 	void Player::Update()
 	{
+		if (mCollider)
+		{
+			mTransform->SetRotation(mRotation);
+		}
 		mCollider = GetComponent<Collider2D>();
 		mTransform->SetRotation(mRotation);
 		

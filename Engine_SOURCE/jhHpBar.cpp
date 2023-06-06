@@ -4,14 +4,16 @@
 #include "jhSpriteRenderer.h"
 #include "jhResources.h"
 #include "jhPlayer.h"
+#include "jhPlayerManager.h"
 
 namespace jh
 {
 	HpBar::HpBar()
 		: mPosition(Vector3(0.0f, 0.0f, 0.0f))
+		, mHp(0)
 	{
 		mTransform = GetComponent<Transform>();
-		mTransform->SetScale(Vector3(2.5f, 0.35f, 1.0f));
+		mTransform->SetScale(Vector3(3.5f, 0.35f, 1.0f));
 		mTransform->SetPosition(mPosition);
 
 		SpriteRenderer* hpsr = AddComponent<SpriteRenderer>();
@@ -30,7 +32,7 @@ namespace jh
 	void HpBar::Initalize()
 	{
 		GameObject::Initalize();
-		//mPlayer = dynamic_cast<Player*>(mTarget);
+		
 	}
 	void HpBar::Update()
 	{
@@ -39,18 +41,11 @@ namespace jh
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
 
-		if (mPlayer == nullptr)
-			mPlayer = dynamic_cast<Player*>(mTarget);
-
-		if (mPlayer == nullptr)
-			return;
-
-		int hp = mPlayer->GetHp();
-		float xRatio = (hp / 100.0f);
+		mHp = PlayerManager::GetPlayer()->GetHp();
+		float xRatio = (mHp / 3.0f);
 
 		// We need to apply xRatio to the scale of the image.
-		Vector3 currentScale = mTransform->GetScale();
-		mTransform->SetScale(Vector3(xRatio * currentScale.x, currentScale.y, currentScale.z));
+		mTransform->SetScale(Vector3(xRatio, 0.3f, 1.0f));
 
 	}
 	void HpBar::FixedUpdate()

@@ -7,7 +7,6 @@
 #include "jhPlayerManager.h"
 #include "jhPlayer.h"
 #include "jhResources.h"
-#include "jhRigidbody.h"
 #include "jhGeddy.h"
 
 namespace jh
@@ -29,7 +28,21 @@ namespace jh
 
 		mGravity = 0.00005f;
 	
-		Animator* mAnimator = PlayerManager::GetPlayer()->AddComponent<Animator>();
+	
+
+		
+	}
+	PlayerScript::~PlayerScript()
+	{
+	}
+	void PlayerScript::Initalize()
+	{
+		mPlayer = dynamic_cast<Player*>(GetOwner());
+		if (mPlayer == nullptr)
+		{
+			return;
+		}
+		Animator* mAnimator = mPlayer->AddComponent<Animator>();
 
 
 		std::shared_ptr<Texture> herotexture = Resources::Load<Texture>(L"hero", L"Otus\\hero.png");
@@ -65,15 +78,6 @@ namespace jh
 		mAnimator->Create(L"FlyStartRoll", FlyStartRolltexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 8, 0.15f);
 		mAnimator->Create(L"FlyRoll", FlyRolltexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 9, 0.15f);
 		mAnimator->Create(L"GroundRoll", GroundRolltexture, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), Vector2::Zero, 6, 0.15f);
-
-		
-	}
-	PlayerScript::~PlayerScript()
-	{
-	}
-	void PlayerScript::Initalize()
-	{
-		
 	
 	}
 	void PlayerScript::Update()
@@ -82,20 +86,20 @@ namespace jh
 		mTransform = GetOwner()->GetComponent<Transform>();
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
-		mRotation = PlayerManager::GetPlayer()->GetPlayerRotation();
+		mRotation = mPlayer->GetPlayerRotation();
 		mPlayerPosition = mTransform->GetPosition();
 		mTime += Time::DeltaTime();
-		mPlayerState = PlayerManager::GetPlayer()->GetPlayerState();
-		PlayerManager::GetPlayer()->SetPlayerPos(mPlayerPosition);
+		mPlayerState = mPlayer->GetPlayerState();
+		mPlayer->SetPlayerPos(mPlayerPosition);
 
-		mCount = PlayerManager::GetPlayer()->GetCount();
+		mCount = mPlayer->GetCount();
 
 		//PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 0.0f, 230.0f));
 
-		mHp = PlayerManager::GetPlayer()->GetHp();
-		mCoin = PlayerManager::GetPlayer()->GetCoin();
+		mHp = mPlayer->GetHp();
+		mCoin = mPlayer->GetCoin();
 
-		if (PlayerManager::GetPlayer()->GetVelocityZero() == true)
+		if (mPlayer->GetVelocityZero() == true)
 		{
 			mVelocity.y = 0.0f;
 		}
@@ -113,8 +117,8 @@ namespace jh
 				{	
 					if (mPlayerState != ePlayerState::Fall && mIsFlying == false)
 					{
-						PlayerManager::GetPlayer()->SetCount(0);
-						PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fall);
+						mPlayer->SetCount(0);
+						mPlayer->SetPlayerState(ePlayerState::Fall);
 					}
 
 					mFallingTime = 0.0f;
@@ -131,14 +135,14 @@ namespace jh
 	
 #pragma endregion
 
-		PlayerManager::GetPlayer()->SetIsFly(mIsFlying);
+		mPlayer->SetIsFly(mIsFlying);
 
-		if (PlayerManager::GetPlayer()->GetIsGround() == true && mPlayerState != ePlayerState::Jump)
+		if (mPlayer->GetIsGround() == true && mPlayerState != ePlayerState::Jump)
 		{
 			mGravity = 0.0f;
 			mVelocity.y = 0.0f;
 		}
-		else if (PlayerManager::GetPlayer()->GetIsGround() == false && mIsFlying == false)
+		else if (mPlayer->GetIsGround() == false && mIsFlying == false)
 		{
 			mGravity = 0.00005f;
 		}
@@ -234,8 +238,8 @@ namespace jh
 
 			mIsFlying = false;
 			mAnimator->Play(L"Idle", true);
-			PlayerManager::GetPlayer()->SetCount(1);
-			PlayerManager::GetPlayer()->SetIsFlyDown(false);
+			mPlayer->SetCount(1);
+			mPlayer->SetIsFlyDown(false);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::D))
@@ -244,33 +248,33 @@ namespace jh
 			if (mRotation.y == 180.0f)
 			{
 				//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
-				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
+				mPlayer->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
 			}
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::RightRun);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::RightRun);
+			mPlayer->SetCount(0);
 			
 			
 
 		}
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::LeftRun);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::LeftRun);
+			mPlayer->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::W))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Jump);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Jump);
+			mPlayer->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::GroundRoll);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::GroundRoll);
+			mPlayer->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::LBTN))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Attacking);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Attacking);
+			mPlayer->SetCount(0);
 		}
 		
 	}
@@ -283,12 +287,12 @@ namespace jh
 			Vector3 pos = mTransform->GetPosition();
 			pos.x -= 0.5f * Time::DeltaTime();
 
-			if (PlayerManager::GetPlayer()->GetIsLeftSlope() == true)
+			if (mPlayer->GetIsLeftSlope() == true)
 			{
 				pos.y += SlopeAngle * Time::DeltaTime(); 
 				mGravity = 0.0f;  
 			}
-			else if (PlayerManager::GetPlayer()->GetIsLeftSlope() == false)
+			else if (mPlayer->GetIsLeftSlope() == false)
 			{
 				mGravity = 0.00005f;
 			}
@@ -296,16 +300,16 @@ namespace jh
 
 			if (mCount == 0)
 			{
-				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
+				mPlayer->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
 				mAnimator->Play(L"MoveRight", true);
-				PlayerManager::GetPlayer()->SetCount(1);
+				mPlayer->SetCount(1);
 			}
 		}
 
 		if (Input::GetKeyUp(eKeyCode::A))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Idle);
+			mPlayer->SetCount(0);
 		}
 	}
 	void PlayerScript::RightRun()
@@ -319,12 +323,12 @@ namespace jh
 
 			const float SlopeAngle = 0.5f;
 
-			if (PlayerManager::GetPlayer()->GetIsLeftSlope() == true)
+			if (mPlayer->GetIsLeftSlope() == true)
 			{
 				pos.y -= SlopeAngle * Time::DeltaTime();
 				mGravity = 0.0f;
 			}
-			else if (PlayerManager::GetPlayer()->GetIsLeftSlope() == false)
+			else if (mPlayer->GetIsLeftSlope() == false)
 			{
 				mGravity = 0.00005f;
 			}
@@ -332,15 +336,15 @@ namespace jh
 			if (mCount == 0)
 			{
 				mAnimator->Play(L"MoveRight", true);
-				PlayerManager::GetPlayer()->SetCount(1);
+				mPlayer->SetCount(1);
 			}
 			mTransform->SetPosition(pos);
 		}
 
 		if (Input::GetKeyUp(eKeyCode::D))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Idle);
+			mPlayer->SetCount(0);
 		}
 
 	}
@@ -352,12 +356,12 @@ namespace jh
 			
 			mAnimator->Play(L"Jump", false);
 
-			PlayerManager::GetPlayer()->SetIsGround(false);
+			mPlayer->SetIsGround(false);
 
 			float JumpForce = 0.007f;
 			mVelocity.y += JumpForce / mMass ;
 			
-			PlayerManager::GetPlayer()->SetCount(1);
+			mPlayer->SetCount(1);
 
 		}
 
@@ -369,14 +373,14 @@ namespace jh
 
 		if (Input::GetKey(eKeyCode::E))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fly);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Fly);
+			mPlayer->SetCount(0);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::I))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Idle);
+			mPlayer->SetCount(0);
 		}
 	
 
@@ -386,14 +390,14 @@ namespace jh
 		if (mCount == 0)
 		{
 			mAnimator->Play(L"JumpDown", false);
-			PlayerManager::GetPlayer()->SetCount(1);
+			mPlayer->SetCount(1);
 		}
 		if (Input::GetKey(eKeyCode::A))
 		{
 			Vector3 pos = mTransform->GetPosition();
 			pos.x -= 0.2f * Time::DeltaTime();
 			mTransform->SetPosition(pos);
-			PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
+			mPlayer->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
 			//mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
 		}
 		if (Input::GetKey(eKeyCode::D))
@@ -405,7 +409,7 @@ namespace jh
 			//Vector3 CheckRotation = mTransform->GetRotation();
 			if (mRotation.y == 180.0f)
 			{
-				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
+				mPlayer->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
 				//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
 			}
 		}
@@ -424,7 +428,7 @@ namespace jh
 			mTime = 0.0f;
 			mAnimator->Play(L"GroundRoll", false);
 			
-			PlayerManager::GetPlayer()->SetCount(1);
+			mPlayer->SetCount(1);
 		}
 		//Vector3 CheckRotation = mTransform->GetRotation();
 		if (mRotation.y == 180.0f)
@@ -442,8 +446,8 @@ namespace jh
 
 		if (mTime >= 0.5f)
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Idle);
+			mPlayer->SetCount(0);
 		}
 	
 		
@@ -454,7 +458,7 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"EnterDoor", false);
-			PlayerManager::GetPlayer()->SetCount(1);
+			mPlayer->SetCount(1);
 		}
 
 		
@@ -468,12 +472,12 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"Attacking", false);
-			PlayerManager::GetPlayer()->SetCount(1);
+			mPlayer->SetCount(1);
 		}
 		if (mTime >= 0.5f)
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Idle);
+			mPlayer->SetCount(0);
 		}
 	}
 	void PlayerScript::StartFly()
@@ -490,7 +494,7 @@ namespace jh
 		{
 			mGravity = 0.0f;
 			mAnimator->Play(L"Flying", true);
-			PlayerManager::GetPlayer()->SetCount(1);
+			mPlayer->SetCount(1);
 		}
 		
 
@@ -498,7 +502,7 @@ namespace jh
 		if (Input::GetKey(eKeyCode::A))
 		{
 			movement.x -= 1.0f;
-			PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
+			mPlayer->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
 			//mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
 
 		}
@@ -509,17 +513,17 @@ namespace jh
 			if (mRotation.y == 180.0f)
 			{
 				//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
-				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
+				mPlayer->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
 			}
 		}
 		if (Input::GetKey(eKeyCode::S))
 		{
 			movement.y -= 1.0f;
-			PlayerManager::GetPlayer()->SetIsFlyDown(true);
+			mPlayer->SetIsFlyDown(true);
 		}
 		if (Input::GetKeyUp(eKeyCode::S))
 		{
-			PlayerManager::GetPlayer()->SetIsFlyDown(false);
+			mPlayer->SetIsFlyDown(false);
 		}
 		if (Input::GetKey(eKeyCode::W))
 		{
@@ -527,18 +531,18 @@ namespace jh
 		}
 		if (Input::GetKeyDown(eKeyCode::LBTN))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::FlyAttack);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::FlyAttack);
+			mPlayer->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::FlyRoll);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::FlyRoll);
+			mPlayer->SetCount(0);
 		}
 		if (Input::GetKeyDown(eKeyCode::I))
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Idle);
+			mPlayer->SetCount(0);
 		}
 
 		if (movement != Vector2::Zero)
@@ -558,7 +562,7 @@ namespace jh
 
 			mTime = 0.0f;
 			mAnimator->Play(L"FlyGrab", true);
-			PlayerManager::GetPlayer()->SetCount(1);
+			mPlayer->SetCount(1);
 		}
 
 		Vector2 movement = Vector2::Zero;
@@ -569,7 +573,7 @@ namespace jh
 		{
 			movement.x -= 1.0f;
 			//mTransform->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
-			PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
+			mPlayer->SetPlayerRotation(Vector3(0.0f, 180.0f, 0.0f));
 		}
 		if (Input::GetKey(eKeyCode::D))
 		{
@@ -578,17 +582,17 @@ namespace jh
 			if (mRotation.y == 180.0f)
 			{
 				//mTransform->SetRotation(Vector3(0.0f, 360.0f, 0.0f));
-				PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
+				mPlayer->SetPlayerRotation(Vector3(0.0f, 360.0f, 0.0f));
 			}
 		}
 		if (Input::GetKey(eKeyCode::S))
 		{
 			movement.y -= 1.0f;
-			PlayerManager::GetPlayer()->SetIsFlyDown(true);
+			mPlayer->SetIsFlyDown(true);
 		}
 		if (Input::GetKeyUp(eKeyCode::S))
 		{
-			PlayerManager::GetPlayer()->SetIsFlyDown(false);
+			mPlayer->SetIsFlyDown(false);
 		}
 		if (Input::GetKey(eKeyCode::W))
 		{
@@ -614,12 +618,12 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"Attacking", false);
-			PlayerManager::GetPlayer()->SetCount(1);
+			mPlayer->SetCount(1);
 		}
 		if (mTime >= 0.5f)
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fly);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Fly);
+			mPlayer->SetCount(0);
 		}
 	}
 
@@ -633,12 +637,12 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"FlyRoll", false);
-			PlayerManager::GetPlayer()->SetCount(1);
+			mPlayer->SetCount(1);
 		}
 		if (mTime >= 0.5f)
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fly);
-			PlayerManager::GetPlayer()->SetCount(0);
+			mPlayer->SetPlayerState(ePlayerState::Fly);
+			mPlayer->SetCount(0);
 		}
 		//Vector3 CheckRotation = mTransform->GetRotation();
 		if (mRotation.y == 180.0f)

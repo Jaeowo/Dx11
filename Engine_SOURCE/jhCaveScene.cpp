@@ -49,10 +49,10 @@ namespace jh
 	void CaveScene::OnEnter()
 	{
 		//PlayerManager::GetPlayer()->SetPlayerPos(Vector3(0.0f, 0.0f, 1.7f));
-		PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
-		PlayerManager::GetPlayer()->SetCount(0);
+		//PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Idle);
+		//PlayerManager::GetPlayer()->SetCount(0);
 
-		PlayerManager::GetGeddy()->SetCount(0);
+		//PlayerManager::GetGeddy()->SetCount(0);
 
 		GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
 		directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
@@ -100,7 +100,7 @@ namespace jh
 		Player* playerObj = object::Instantiate<Player>(eLayerType::Player);
 		PlayerManager::SetPlayer(playerObj);
 		//playerObj->SetPlayerPos(Vector3(1.0f, 15.0f, 0.0f));
-		playerObj->AddComponent<PlayerScript>();
+		//playerObj->AddComponent<PlayerScript>();
 		cameraComp->SetTarget(playerObj);
 
 		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Player);

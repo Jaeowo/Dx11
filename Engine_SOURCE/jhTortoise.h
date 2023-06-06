@@ -8,18 +8,27 @@ namespace jh
 
 	enum class eTortoiseState
 	{
+		//Wear Mask
+		MaskIdle,
+		MaskJump,
+		MaskMove, //Rotation값 이용해서 left,right방향 감지하기
+		MaskTurn,
+		MaskShoot,
+		MaskSpawnWing,
+		MaskFly,
+		MaskFlyShoot,
+
+		//No Mask
 		Idle,
-		Jump,
-		Move, //BlinkEye, Nomask
-		MoveShoot,
+		Hit,
+		Move,
 		EquipMask,
-		TurnMask,
-
-		SpawnWings,
-		Fly, //Nomask,Mask 값 나누기
-		FlyEquipMask,
+		Fly,
+		FlyHit,
 		FlyDeath,
-
+		FlyEquipMask,
+		FindMask,
+		Turn,
 	};
 
 	class Tortoise
@@ -35,23 +44,34 @@ namespace jh
 		virtual void Render();
 
 		//State
-		void Idle();
-		void Jump();
-		void Move();
-		void MoveShoot();
-		void EquipMask();
-		void TurnMask();
+		void MaskIdle();
+		void MaskJump();
+		void MaskMove();
+		void MaskTurn();
+		void MaskShoot();
+		void MaskSpawnWing();
+		void MaskFly();
+		void MaskFlyShoot();
 
-		void SpawnWings();
+		void Idle();
+		void Hit();
+		void Move();
+		void EquipMask();
 		void Fly();
-		void FlyEquipMask();
+		void FlyHit();
 		void FlyDeath();
+		void FlyEquipMask();
+		void FindMask();
+		void Turn();
 
 		//Get Set
 		eTortoiseState GetPlayerState() { return mTortoiseState; }
 		void SetPlayerState(eTortoiseState tortoisestate) { mTortoiseState = tortoisestate; }
 
 		void SetHp(int hp) { mHp = hp; }
+
+		void SetPosition(Vector3 position) { mMonsterPosition = position; }
+		Vector3 GetPosition() { return mMonsterPosition; }
 
 	private:
 		Animator* mAnimator;
@@ -63,6 +83,7 @@ namespace jh
 	private:
 		Vector3 mTargetPosition;
 		Vector3 mMonsterPosition;
+		bool mCheck;
 		bool mTarget;
 		int mHp;
 		float mElapsedTime;
