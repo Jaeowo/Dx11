@@ -24,6 +24,8 @@ namespace jh
 
 		void SetPosition(const Vector3& position);
 
+
+
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;

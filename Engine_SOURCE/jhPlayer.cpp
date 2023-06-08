@@ -9,7 +9,7 @@ namespace jh
 {
 	Player::Player()
 		: mbGround(false)
-		, mCount(0)
+		, mCount(0)               
 		, mIsFlyingDown(false)
 		, mIsFly(false)
 		, mIsJumping(false)
@@ -28,10 +28,10 @@ namespace jh
 		mCollider->SetSize(Vector2(0.1f, 0.28f));
 		//mCollider->SetCenter(Vector2(-0.015f, -0.02f));
 
-		Vector3 ColliderPos = mCollider->GetPosition();
-		Vector2 Center = (Vector2(-0.55f, -0.02f));
-		Vector3 NewColliderPos = ColliderPos + Vector3(Center.x, Center.y, 0.0f);
-		mCollider->SetPosition(NewColliderPos);
+		//Vector3 ColliderPos = mCollider->GetPosition();
+		//Vector2 Center = (Vector2(-0.55f, -0.02f));
+		//Vector3 NewColliderPos = ColliderPos + Vector3(Center.x, Center.y, 0.0f);
+		//mCollider->SetPosition(NewColliderPos);
 
 		SpriteRenderer* standsr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");

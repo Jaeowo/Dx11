@@ -18,6 +18,7 @@
 #include "jhGeddyScript.h"
 #include "jhCollisionManager.h"
 #include "jhMouseCursor.h"
+#include "jhTortoise.h"
 
 namespace jh
 {
@@ -137,12 +138,8 @@ namespace jh
 		gawkTr->SetPosition(Vector3(-0.5f, -0.5f, 1.7f));
 		gawkTr->SetScale(Vector3(0.29f, 0.29f, 1.0f));
 
-
-		//Change
-		ChangeMonsterState* changeMObj = object::Instantiate<ChangeMonsterState>(eLayerType::BackGround);
-		Transform* changeMTr = changeMObj->GetComponent<Transform>();
-		changeMTr->SetPosition(Vector3(-0.18f, 0.6f, 1.7f));
-		changeMTr->SetScale(Vector3(0.4f, 0.4f, 1.0f));
+		Tortoise* tortoiseObj = object::Instantiate<Tortoise>(eLayerType::Monster);
+		tortoiseObj->SetPosition(Vector3(-1.35f, -2.53f, 1.7f));
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);
 	}

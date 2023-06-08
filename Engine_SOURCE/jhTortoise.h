@@ -5,6 +5,7 @@ namespace jh
 {
 	class Animator;
 	class Transform;
+	class Collider2D;
 
 	enum class eTortoiseState
 	{
@@ -73,9 +74,13 @@ namespace jh
 		void SetPosition(Vector3 position) { mMonsterPosition = position; }
 		Vector3 GetPosition() { return mMonsterPosition; }
 
+		Vector3 GetPlayerRotation() { return mRotation; }
+		void SetPlayerRotation(Vector3 rotation) { mRotation = rotation; }
+
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;
+		Collider2D* mCollider;
 		eTortoiseState mTortoiseState;
 
 		int mCount;
@@ -83,8 +88,10 @@ namespace jh
 	private:
 		Vector3 mTargetPosition;
 		Vector3 mMonsterPosition;
+		Vector3 mRotation;
 		bool mCheck;
 		bool mTarget;
+		bool mStartTrigger;
 		int mHp;
 		float mElapsedTime;
 	};

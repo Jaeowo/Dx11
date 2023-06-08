@@ -9,6 +9,14 @@ namespace jh
 	Number::Number()
 		: mPosition(Vector3(0.0f, 0.0f, 0.0f))
 	{
+	
+	}
+	Number::~Number()
+	{
+	}
+	void Number::Initalize()
+	{
+		GameObject::Initalize();
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 
@@ -22,16 +30,9 @@ namespace jh
 		numbersr->SetMesh(numbermesh);
 
 		std::shared_ptr<Texture> numbertexture = Resources::Load<Texture>(L"Number", L"UI\\Number.png");
-		mAnimator->Create(L"number1", numbertexture, Vector2(0.0f, 0.0f), Vector2(8.0f, 0.0f), Vector2::Zero, 5, 0.3f);
+		mAnimator->Create(L"number1", numbertexture, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), Vector2::Zero, 1, 0.3f);
 
 		mAnimator->Play(L"number1", false);
-	}
-	Number::~Number()
-	{
-	}
-	void Number::Initalize()
-	{
-		GameObject::Initalize();
 	}
 	void Number::Update()
 	{

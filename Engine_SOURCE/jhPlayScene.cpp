@@ -318,9 +318,6 @@ namespace jh
 		Chest* chestObj = object::Instantiate<Chest>(eLayerType::BackGrouncObj);
 		chestObj->SetPosition(Vector3(0.35f, -0.82f, 1.7f));
 
-		/*Tortoise* tortoiseObj = object::Instantiate<Tortoise>(eLayerType::Monster);
-		tortoiseObj->SetPosition(Vector3(0.35f, -0.82f, 1.7f));*/
-
 		// TopProp
 		GameObject* toppropObj = object::Instantiate<GameObject>(eLayerType::BackGround2);
 		toppropObj->SetName(L"TopProp");

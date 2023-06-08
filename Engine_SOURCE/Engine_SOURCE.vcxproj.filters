@@ -295,9 +295,6 @@
     <ClInclude Include="jhTortoiseScript.h">
       <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
     </ClInclude>
-    <ClInclude Include="jhTortoiseBulletScript.h">
-      <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -576,9 +573,6 @@
       <Filter>GameObject\Monster\Tortoise</Filter>
     </ClCompile>
     <ClCompile Include="jhTortoiseScript.cpp">
-      <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
-    </ClCompile>
-    <ClCompile Include="jhTortoiseBulletScript.cpp">
       <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
     </ClCompile>
   </ItemGroup>

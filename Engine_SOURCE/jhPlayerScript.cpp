@@ -87,6 +87,16 @@ namespace jh
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
 		mRotation = mPlayer->GetPlayerRotation();
+
+		//mPlayerPosition = mTransform->GetPosition();
+		//mTime += Time::DeltaTime();
+		//mPlayerState = mPlayer->GetPlayerState();
+		//mPlayer->SetPlayerPos(mPlayerPosition);
+
+		//mCount = mPlayer->GetCount();
+
+		mPlayer->SetPreviousPos(mPlayerPosition);
+
 		mPlayerPosition = mTransform->GetPosition();
 		mTime += Time::DeltaTime();
 		mPlayerState = mPlayer->GetPlayerState();

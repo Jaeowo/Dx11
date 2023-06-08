@@ -233,7 +233,6 @@
     <ClInclude Include="jhTitleScene.h" />
     <ClInclude Include="jhTortoise.h" />
     <ClInclude Include="jhTortoiseBullet.h" />
-    <ClInclude Include="jhTortoiseBulletScript.h" />
     <ClInclude Include="jhTortoiseMask.h" />
     <ClInclude Include="jhTortoiseScript.h" />
     <ClInclude Include="jhUIBase.h" />
@@ -331,7 +330,6 @@
     <ClCompile Include="jhTitleScene.cpp" />
     <ClCompile Include="jhTortoise.cpp" />
     <ClCompile Include="jhTortoiseBullet.cpp" />
-    <ClCompile Include="jhTortoiseBulletScript.cpp" />
     <ClCompile Include="jhTortoiseMask.cpp" />
     <ClCompile Include="jhTortoiseScript.cpp" />
     <ClCompile Include="jhUIBase.cpp" />

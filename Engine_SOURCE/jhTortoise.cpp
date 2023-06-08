@@ -4,30 +4,40 @@
 #include "jhSpriteRenderer.h"
 #include "jhTortoiseBullet.h"
 #include "jhObject.h"
+#include "jhInput.h"
+#include "jhCollider2D.h"
 
 namespace jh
 {
 	Tortoise::Tortoise()
-		: mTortoiseState(eTortoiseState::Idle)
+		: mTortoiseState(eTortoiseState::MaskIdle)
 		, mMonsterPosition(Vector3(0.0f, 0.0f, 0.0f))
 		, mHp(50)
 		, mCount(0)
 		, mTarget(false)
 		, mElapsedTime(0.0f)
 		, mCheck(false)
+		, mStartTrigger(false)
+		
 	{
+
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 
 		mTransform->SetScale(Vector3(0.3f, 0.3f, 1.0f));
 		mTransform->SetPosition(mMonsterPosition);
+		mRotation = (Vector3(0.0f, 0.0f, 0.0f));
+
+		mCollider = AddComponent<Collider2D>();
+		mCollider->SetType(eColliderType::Rect);
+		mCollider->SetSize(Vector2(0.1f, 0.28f));
 
 		SpriteRenderer* tortoisesr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> tortoisemesh = Resources::Find<Mesh>(L"RectMesh");
 		std::shared_ptr<Material> tortoisematerial = Resources::Find<Material>(L"TortoiseMaterial");
 		tortoisesr->SetMaterial(tortoisematerial);
 		tortoisesr->SetMesh(tortoisemesh);
-
+	
 		std::shared_ptr<Texture> tortoisetexture = Resources::Load<Texture>(L"IdleMask", L"Masked Tortoise\\idleMask.png");
 		std::shared_ptr<Texture> tortoisetexture2 = Resources::Load<Texture>(L"IdleNoMask", L"Masked Tortoise\\idleNoMask.png");
 		std::shared_ptr<Texture> tortoisetexture3 = Resources::Load<Texture>(L"EquipMask", L"Masked Tortoise\\sprEquipMask_strip8.png");
@@ -82,6 +92,15 @@ namespace jh
 
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mMonsterPosition);
+
+		mTransform->SetRotation(mRotation);
+
+		if (Input::GetKeyDown(eKeyCode::K))
+		{
+			TortoiseBullet* tortoisebullet = object::Instantiate<TortoiseBullet>(eLayerType::MonsterObject);
+			tortoisebullet->SetPosition(mMonsterPosition);
+		}
+
 
 		switch (mTortoiseState)
 		{
@@ -189,7 +208,8 @@ namespace jh
 		if (mCheck == false)
 		{
 			mAnimator->Play(L"MoveShoot", false);
-			//TortoiseBullet* tortoisebullet = object::Instantiate<TortoiseBullet>(eLayerType::MonsterObject);
+	
+	
 			mCheck = true;
 			
 		}
