@@ -41,7 +41,7 @@ namespace jh
 
 		Vector3 position = mTransform->GetPosition();
 		Vector3 colliderPos = position + Vector3(mCenter.x, mCenter.y, 0.0f);
-		mPosition = colliderPos;
+		mPosition = colliderPos;  
 
 		Matrix scaleMatrix = Matrix::CreateScale(scale);
 		Matrix rotationMatrix;

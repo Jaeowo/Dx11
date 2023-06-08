@@ -163,6 +163,9 @@ namespace jh
 		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
 		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
 
+		Vector3 leftCenter = leftTr->GetPosition() + Vector3(left->GetCenter().x, left->GetCenter().y, 0.0f);  
+		Vector3 rightCenter = rightTr->GetPosition() + Vector3(right->GetCenter().x, right->GetCenter().y, 0.0f);  
+
 		Vector3 leftScale = Vector3(left->GetSize().x, left->GetSize().y, 1.0f);
 		Vector3 rightScale = Vector3(right->GetSize().x, right->GetSize().y, 1.0f);
 
@@ -177,10 +180,10 @@ namespace jh
 			// 분리축 벡터 4개 구하기
 			Vector3 Axis[4] = {};
 
-			Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
-			Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
-			Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
-			Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
+			Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft) + left->GetCenter();
+			Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft) + left->GetCenter();
+			Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight) + right->GetCenter();
+			Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight) + right->GetCenter();
 
 			Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
 			Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);

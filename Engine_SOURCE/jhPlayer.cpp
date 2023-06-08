@@ -26,7 +26,7 @@ namespace jh
 		Collider2D* mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
 		mCollider->SetSize(Vector2(0.1f, 0.28f));
-		//mCollider->SetCenter(Vector2(-0.015f, -0.02f));
+		mCollider->SetCenter(Vector2(-0.015f, -0.02f));
 
 		//Vector3 ColliderPos = mCollider->GetPosition();
 		//Vector2 Center = (Vector2(-0.55f, -0.02f));
