@@ -53,8 +53,6 @@ namespace jh
 
 	void PlayScene::Initalize()
 	{
-		
-
 		Scene::Initalize();
 	}
 
@@ -261,11 +259,14 @@ namespace jh
 		groundTr2->SetScale(Vector3(0.35f, 0.001f, 1.0f));
 #pragma endregion
 
+#pragma region WALL
+
 		Wall* wallObj1 = object::Instantiate<Wall>(eLayerType::BackGround);
 		Transform* wallTr1 = wallObj1->GetComponent<Transform>();
 		wallTr1->SetPosition(Vector3(0.4f, 1.0f, 1.7f));
 		wallTr1->SetScale(Vector3(0.01f, 0.35f, 1.0f));
 
+#pragma endregion
 #pragma region SLOPE
 		Slope* SlopeObj2 = object::Instantiate<Slope>(eLayerType::BackGround);
 		Transform* slopeTr2 = SlopeObj2->GetComponent<Transform>();

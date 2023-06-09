@@ -20,6 +20,8 @@
 #include "jhMouseCursor.h"
 #include "jhTortoise.h"
 
+#include "jhTortoiseMask.h"
+
 namespace jh
 {
 	CaveScene::CaveScene()
@@ -140,6 +142,9 @@ namespace jh
 
 		Tortoise* tortoiseObj = object::Instantiate<Tortoise>(eLayerType::Monster);
 		tortoiseObj->SetPosition(Vector3(-1.35f, -2.53f, 1.7f));
+
+		TortoiseMask* maskObj = object::Instantiate<TortoiseMask>(eLayerType::MonsterObject);
+		maskObj->SetPosition(Vector3(-1.35f, -2.53f, 1.7f));
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);
 	}

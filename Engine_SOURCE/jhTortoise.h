@@ -89,7 +89,10 @@ namespace jh
 		Vector3 mTargetPosition;
 		Vector3 mMonsterPosition;
 		Vector3 mRotation;
-		bool mCheck;
+
+		bool mSpawn;
+		bool mAniCheck;
+		bool mFunctionCheck;
 		bool mTarget;
 		bool mStartTrigger;
 		int mHp;

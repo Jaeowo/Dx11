@@ -9,7 +9,7 @@ namespace jh
 {
 	Player::Player()
 		: mbGround(false)
-		, mCount(0)               
+		, mCount(0)                 
 		, mIsFlyingDown(false)
 		, mIsFly(false)
 		, mIsJumping(false)
@@ -18,20 +18,17 @@ namespace jh
 		, mCoin(0)
 	{
 		mTransform = GetComponent<Transform>();
-		mTransform->SetPosition(Vector3(1.0f, -0.48f, 1.7f));
+		mTransform->SetPosition(Vector3(1.0f, -0.45f, 1.7f));
 		mTransform->SetScale(Vector3(0.35f, 0.35f, 1.0f));
 
 		mRotation = (Vector3(0.0f, 0.0f, 0.0f));
 
 		Collider2D* mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
-		mCollider->SetSize(Vector2(0.1f, 0.28f));
-		mCollider->SetCenter(Vector2(-0.015f, -0.02f));
+		mCollider->SetSize(Vector2(0.1f, 0.22f));
+		mCollider->SetCenter(Vector2(-0.015f, -0.01f));
 
-		//Vector3 ColliderPos = mCollider->GetPosition();
-		//Vector2 Center = (Vector2(-0.55f, -0.02f));
-		//Vector3 NewColliderPos = ColliderPos + Vector3(Center.x, Center.y, 0.0f);
-		//mCollider->SetPosition(NewColliderPos);
+		
 
 		SpriteRenderer* standsr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");

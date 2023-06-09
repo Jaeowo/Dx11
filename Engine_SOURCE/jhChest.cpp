@@ -112,13 +112,13 @@ namespace jh
 	void Chest::PlayOpen2Animation()
 	{
 		mAnimator->Play(L"Open2", false);
-		mChestState = eChestState::Finish; // 애니메이션을 Open2로 전환 후, 상태를 Finish로 변경
+		mChestState = eChestState::Finish; 
 	}
 
 	void Chest::PlayFinishAnimation()
 	{
 		mAnimator->Play(L"OpenFinish", false);
-		mChestState = eChestState::Idle; // 애니메이션을 OpenFinish로 전환 후, 상태를 Idle로 변경
+		mChestState = eChestState::Idle;
 	}
 
 	void Chest::SpawnCoin(int coinCount)
@@ -127,11 +127,9 @@ namespace jh
 		{
 			Coin* coin = object::Instantiate<Coin>(eLayerType::BackGrouncObj);
 
-			// Set the coin to the position of the chest
 			Vector3 chestPos = mTransform->GetPosition();
 			coin->SetPosition(Vector3(chestPos.x, chestPos.y, 1.7f));
 
-			// Set a random direction. The random direction is a vector from (-0.5, 1) to (0.5, 1)
 			float randomX = (((float)rand() / (RAND_MAX)) - 0.5f) / 2.0f;
 			Vector3 direction(randomX, 1.0f, 0.0f);
 

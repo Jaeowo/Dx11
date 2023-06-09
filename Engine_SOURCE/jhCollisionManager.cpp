@@ -172,7 +172,8 @@ namespace jh
 		Matrix finalLeft = Matrix::CreateScale(leftScale) * leftTr->GetWorldMatrix();
 		Matrix finalRight = Matrix::CreateScale(rightScale) * rightTr->GetWorldMatrix();
 
-		Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
+		//Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
+		Vector3 vc = leftCenter - rightCenter;
 		vc.z = 0.0f;
 
 		if (left->GetType() == eColliderType::Rect && right->GetType() == eColliderType::Rect)
@@ -180,15 +181,15 @@ namespace jh
 			// 분리축 벡터 4개 구하기
 			Vector3 Axis[4] = {};
 
-			Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft) + left->GetCenter();
-			Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft) + left->GetCenter();
-			Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight) + right->GetCenter();
-			Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight) + right->GetCenter();
+			Axis[0] = Vector3::Transform(arrLocalPos[1] + left->GetCenter(), finalLeft);
+			Axis[1] = Vector3::Transform(arrLocalPos[3] + left->GetCenter(), finalLeft);
+			Axis[2] = Vector3::Transform(arrLocalPos[1] + right->GetCenter(), finalRight);
+			Axis[3] = Vector3::Transform(arrLocalPos[3] + right->GetCenter(), finalRight);
 
-			Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
-			Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);
-			Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
-			Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
+			Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft) - Vector3::Transform(arrLocalPos[0], finalLeft);
+			Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft) - Vector3::Transform(arrLocalPos[0], finalLeft);
+			Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight) - Vector3::Transform(arrLocalPos[0], finalRight);
+			Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight) - Vector3::Transform(arrLocalPos[0], finalRight);
 
 			for (size_t i = 0; i < 4; i++)
 				Axis[i].z = 0.0f;

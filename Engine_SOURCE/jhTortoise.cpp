@@ -6,18 +6,20 @@
 #include "jhObject.h"
 #include "jhInput.h"
 #include "jhCollider2D.h"
+#include "jhTime.h"
 
 namespace jh
 {
 	Tortoise::Tortoise()
-		: mTortoiseState(eTortoiseState::MaskIdle)
+		: mTortoiseState(eTortoiseState::MaskShoot)
 		, mMonsterPosition(Vector3(0.0f, 0.0f, 0.0f))
 		, mHp(50)
 		, mCount(0)
 		, mTarget(false)
 		, mElapsedTime(0.0f)
-		, mCheck(false)
+		, mAniCheck(false)
 		, mStartTrigger(false)
+		, mFunctionCheck(false)
 		
 	{
 
@@ -26,7 +28,7 @@ namespace jh
 
 		mTransform->SetScale(Vector3(0.3f, 0.3f, 1.0f));
 		mTransform->SetPosition(mMonsterPosition);
-		mRotation = (Vector3(0.0f, 0.0f, 0.0f));
+		mRotation = (Vector3(0.0f, 180.0f, 0.0f));
 
 		mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
@@ -95,11 +97,8 @@ namespace jh
 
 		mTransform->SetRotation(mRotation);
 
-		if (Input::GetKeyDown(eKeyCode::K))
-		{
-			TortoiseBullet* tortoisebullet = object::Instantiate<TortoiseBullet>(eLayerType::MonsterObject);
-			tortoisebullet->SetPosition(mMonsterPosition);
-		}
+		mElapsedTime += Time::DeltaTime();
+		
 
 
 		switch (mTortoiseState)
@@ -173,149 +172,228 @@ namespace jh
 	}
 	void Tortoise::MaskIdle()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"IdleMask", true);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::MaskJump()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"Jump", false);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::MaskMove()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"Move", true);
-			mCheck = true;
+			mAniCheck = true;
+		}
+
+		if (mRotation.y >= 180.0f)
+		{
+			mMonsterPosition.x -= 0.1f * Time::DeltaTime();
+		}
+		else
+		{
+			mMonsterPosition.x += 0.1f * Time::DeltaTime();
 		}
 	}
 	void Tortoise::MaskTurn()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"TurnMask", false);
-			mCheck = true;
+			mAniCheck = true;
+		}
+		if (mRotation.y >= 180.0f)
+		{
+			mRotation.y = 0.0f;
+		}
+		else
+		{
+			mRotation.y = 180.0f;
 		}
 	}
 	void Tortoise::MaskShoot()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
-			mAnimator->Play(L"MoveShoot", false);
-	
-	
-			mCheck = true;
-			
+			mAnimator->Play(L"MoveShoot", true);
+			mAniCheck = true;
 		}
+
+		if (mRotation.y >= 180.0f)
+		{
+			mMonsterPosition.x -= 0.1f * Time::DeltaTime();
+		}
+		else
+		{
+			mMonsterPosition.x += 0.1f * Time::DeltaTime();
+		}
+
+		if (!mFunctionCheck)
+		{
+			static float time = 0.0f;
+			time += Time::DeltaTime();
+
+			static int bulletCount = 0;  
+
+			if (time >= 0.2f && bulletCount < 5)  
+			{
+				TortoiseBullet* tortoisebullet = object::Instantiate<TortoiseBullet>(eLayerType::MonsterObject);
+				tortoisebullet->SetPosition(mMonsterPosition);
+
+				time = 0.0f;
+				bulletCount++;
+
+				if (bulletCount >= 5)
+				{
+					mFunctionCheck = true; 
+				}
+			}
+		}
+
+		
+
+
 	}
 	void Tortoise::Idle()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"IdleNoMask", true);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::Hit()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"Hit", false);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::Move()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"MoveNomask", true);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::EquipMask()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"EquipMask", false);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::Fly()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"FlyNomask", true);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::FlyHit()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"FlyHit", false);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::FlyDeath()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"FlyDeath", false);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::FlyEquipMask()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"FlyEquipMask", false);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::FindMask()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"MoveNomask", true);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::Turn()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"TurnNomask", false);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::MaskSpawnWing()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"SpawnWings", false);
-			mCheck = true;
+			mAniCheck = true;
+
+			mElapsedTime = 0.0f;
+		}
+
+		if (mElapsedTime >= 1.6f)
+		{
+			mTortoiseState = eTortoiseState::MaskFly;
+			mAniCheck = false;
 		}
 	}
 	void Tortoise::MaskFly()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"Fly", true);
-			mCheck = true;
+			mAniCheck = true;
 		}
 	}
 	void Tortoise::MaskFlyShoot()
 	{
-		if (mCheck == false)
+		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"FlyShoot", false);
-			mCheck = true;
+			mAniCheck = true;
+		}
+
+		if (!mFunctionCheck)
+		{
+			static float time = 0.0f;
+			time += Time::DeltaTime();
+
+			static int bulletCount = 0;
+
+			if (time >= 0.2f && bulletCount < 5)
+			{
+				TortoiseBullet* tortoisebullet = object::Instantiate<TortoiseBullet>(eLayerType::MonsterObject);
+				tortoisebullet->SetPosition(mMonsterPosition);
+
+				time = 0.0f;
+				bulletCount++;
+
+				if (bulletCount >= 5)
+				{
+					mFunctionCheck = true;
+				}
+			}
 		}
 	}
 }

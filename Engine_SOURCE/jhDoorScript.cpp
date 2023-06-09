@@ -33,18 +33,21 @@ namespace jh
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
 		
-
-		if (Input::GetKeyDown(eKeyCode::S))
+		if (playerObj->GetPlayerState() == ePlayerState::Idle)
 		{
-			if (mCount == 0)
+			if (Input::GetKeyDown(eKeyCode::S))
 			{
-				mElapsedTime = 0.0f;
-				mCount = 1;
-			}			
-			playerObj->SetCount(0);
-			playerObj->SetPlayerState(ePlayerState::EnterDoor);
-		
+				if (mCount == 0)
+				{
+					mElapsedTime = 0.0f;
+					mCount = 1;
+					playerObj->SetCount(0);
+					playerObj->SetPlayerState(ePlayerState::EnterDoor);
+				}
+			}
+
 		}
+	
 		if (mCount == 1)
 		{
 			mElapsedTime += Time::DeltaTime();
