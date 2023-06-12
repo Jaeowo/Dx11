@@ -5,6 +5,8 @@
 
 namespace jh
 {
+
+
 	class Transform;
 	class Collider2D;
 	class PlayerScript;
@@ -64,23 +66,33 @@ namespace jh
 		int GetCoin() { return mCoin; }
 		void SetCoin(int coin) { mCoin = coin; }
 
+		bool GetEventTrigger() { return mEventOn; }
+		void SetEventTrigger(bool eventon) { mEventOn = eventon; }
+
+		bool GetCaveEventTrigger() { return mCaveEventOn; }
+		void SetCaveEventTrigger(bool caveeventon) { mCaveEventOn = caveeventon; }
+
+		bool GetHurt() { return mHurt; }
+		void SetHurt(bool hurt) { mHurt = hurt; }
+
 	private:
 		Transform* mTransform;
 		Collider2D* mCollider;
+		Collider2D* mAnotherCollider;
 
 		bool mIsFlyingDown;
 		bool mIsFly;
 		bool mIsJumping;
 		bool mbGround;
 		bool mvelocityzero;
+		bool mColliderCheck;
+		bool mHurt;
 
 		ePlayerState mPlayerState;
 		Vector3 mPlayerPos;
 		Vector3 mPreviousPos;
 		Vector3 mRotation;
 		UINT mCount;
-
-	
 
 		bool mIsLeftSlope;
 		bool mIsRightSlope;
@@ -89,6 +101,8 @@ namespace jh
 
 		int mHp;
 		int mCoin;
+		bool mEventOn;
+		bool mCaveEventOn;
 	};
 
 }

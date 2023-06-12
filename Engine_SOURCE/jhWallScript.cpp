@@ -28,6 +28,9 @@ namespace jh
 			Vector3 previousPos = playerObj->GetPreviousPos();
 			playerObj->getTransform()->SetPosition(previousPos);
 			playerObj->SetPlayerPos(previousPos);
+
+			playerObj->SetVelocityZero(true);
+			
 		}
 	}
 
@@ -43,6 +46,10 @@ namespace jh
 
 	void WallScript::OnCollisionExit(Collider2D* collider)
 	{
-
+		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
+		if (playerObj)
+		{
+			playerObj->SetVelocityZero(false);
+		}
 	}
 }

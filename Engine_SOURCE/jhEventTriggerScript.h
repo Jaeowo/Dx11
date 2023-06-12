@@ -1,17 +1,21 @@
 #pragma once
+class EventTriggerScript
+{
+};
+
 #include "jhScript.h"
 
 namespace jh
 {
-	class Gawk;
+	class EventTrigger;
 
-	class TortoiseScript
+	class EventTriggerScript
 		: public Script
 	{
 	public:
 
-		TortoiseScript();
-		~TortoiseScript();
+		EventTriggerScript();
+		~EventTriggerScript();
 
 		virtual void Initalize() override;
 		virtual void Update() override;
@@ -22,6 +26,6 @@ namespace jh
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
 	private:
-		Tortoise* mtortoise;
+		EventTrigger* meventtrigger;
 	};
 }

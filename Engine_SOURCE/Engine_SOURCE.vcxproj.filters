@@ -295,6 +295,18 @@
     <ClInclude Include="jhTortoiseScript.h">
       <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
     </ClInclude>
+    <ClInclude Include="jhNumberTens.h">
+      <Filter>GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="jhPlayerAttackCol.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="jhEventTrigger.h">
+      <Filter>GameObject\Trigger\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="jhEventTriggerScript.h">
+      <Filter>GameObject\Trigger\Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -575,6 +587,18 @@
     <ClCompile Include="jhTortoiseScript.cpp">
       <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
     </ClCompile>
+    <ClCompile Include="jhNumberTens.cpp">
+      <Filter>GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="jhPlayerAttackCol.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="jhEventTrigger.cpp">
+      <Filter>GameObject\Trigger\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="jhEventTriggerScript.cpp">
+      <Filter>GameObject\Trigger\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -756,6 +780,9 @@
     </Filter>
     <Filter Include="Component\Script\MonsterScript\TortoiseScript">
       <UniqueIdentifier>{a98c69fe-a79f-4dde-8f80-09c81f2994a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Trigger\Event">
+      <UniqueIdentifier>{dcce0336-e390-469a-9cea-dcf23a9e07e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -188,6 +188,8 @@
     <ClInclude Include="jhEngine.h" />
     <ClInclude Include="jhEntity.h" />
     <ClInclude Include="jhEnums.h" />
+    <ClInclude Include="jhEventTrigger.h" />
+    <ClInclude Include="jhEventTriggerScript.h" />
     <ClInclude Include="jhFadeInScript.h" />
     <ClInclude Include="jhFadeOutScript.h" />
     <ClInclude Include="jhGameObject.h" />
@@ -211,11 +213,13 @@
     <ClInclude Include="jhLight.h" />
     <ClInclude Include="jhMouseCursor.h" />
     <ClInclude Include="jhNumber.h" />
+    <ClInclude Include="jhNumberTens.h" />
     <ClInclude Include="jhObject.h" />
     <ClInclude Include="jhPaintShader.h" />
     <ClInclude Include="jhParticleShader.h" />
     <ClInclude Include="jhParticleSystem.h" />
     <ClInclude Include="jhPlayer.h" />
+    <ClInclude Include="jhPlayerAttackCol.h" />
     <ClInclude Include="jhPlayerManager.h" />
     <ClInclude Include="jhPlayScene.h" />
     <ClInclude Include="jhPrefab.h" />
@@ -287,6 +291,8 @@
     <ClCompile Include="jhDoor.cpp" />
     <ClCompile Include="jhDoorScript.cpp" />
     <ClCompile Include="jhEntity.cpp" />
+    <ClCompile Include="jhEventTrigger.cpp" />
+    <ClCompile Include="jhEventTriggerScript.cpp" />
     <ClCompile Include="jhFadeInScript.cpp" />
     <ClCompile Include="jhFadeOutScript.cpp" />
     <ClCompile Include="jhGameObject.cpp" />
@@ -309,10 +315,12 @@
     <ClCompile Include="jhLight.cpp" />
     <ClCompile Include="jhMouseCursor.cpp" />
     <ClCompile Include="jhNumber.cpp" />
+    <ClCompile Include="jhNumberTens.cpp" />
     <ClCompile Include="jhPaintShader.cpp" />
     <ClCompile Include="jhParticleShader.cpp" />
     <ClCompile Include="jhParticleSystem.cpp" />
     <ClCompile Include="jhPlayer.cpp" />
+    <ClCompile Include="jhPlayerAttackCol.cpp" />
     <ClCompile Include="jhPlayerManager.cpp" />
     <ClCompile Include="jhPlayScene.cpp" />
     <ClCompile Include="jhPrefab.cpp" />

@@ -16,6 +16,9 @@ namespace jh
 		, mvelocityzero(false)
 		, mHp(5)
 		, mCoin(0)
+		, mEventOn(false)
+		, mHurt(false)
+		, mCaveEventOn(false)
 	{
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(Vector3(1.0f, -0.45f, 1.7f));
@@ -27,8 +30,6 @@ namespace jh
 		mCollider->SetType(eColliderType::Rect);
 		mCollider->SetSize(Vector2(0.1f, 0.22f));
 		mCollider->SetCenter(Vector2(-0.015f, -0.01f));
-
-		
 
 		SpriteRenderer* standsr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> standmesh = Resources::Find<Mesh>(L"RectMesh");

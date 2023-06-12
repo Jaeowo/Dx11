@@ -39,7 +39,7 @@ namespace jh
 		
 			if (mTime >= 1.0f)
 			{
-				int coinCheck = (playerObj->GetCoin() + 1);
+				int coinCheck = (playerObj->GetCoin() + 5);
 				playerObj->SetCoin(coinCheck);
 
 				mcoin->Death();

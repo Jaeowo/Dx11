@@ -18,6 +18,7 @@ namespace jh
 	private:
 		bool mEditorMode;
 		int mNumber;
+		bool mCaveEvent;
 	};
 }
 

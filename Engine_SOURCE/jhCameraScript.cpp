@@ -5,6 +5,8 @@
 #include "jhTime.h"
 #include "jhCamera.h"
 #include "jhObject.h"
+#include "jhPlayerManager.h"
+#include "jhPlayer.h"
 
 namespace jh
 {
@@ -12,6 +14,7 @@ namespace jh
 		: Script()
 		, mEditorMode(true)
 		, mNumber(0)
+		, mCaveEvent(false)
 	{
 	}
 	CameraScript::~CameraScript()
@@ -24,26 +27,14 @@ namespace jh
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Camera* cameraobj = GetOwner()->GetComponent<Camera>();
-
+		cameraobj->SetCaveEvent(mCaveEvent);
 
 		Transform* cameraTransform = GetOwner()->GetComponent<Transform>();
 		Vector3 cameraposition;
 
-		if(cameraobj->GetTarget() != nullptr && mEditorMode == false)
-		{
-			Transform* targetTransform = cameraobj->GetTarget()->GetComponent<Transform>();
-			Vector3 targetposition = targetTransform->GetPosition();
-		
-			targetposition.y += 0.1f;
-			targetposition.z -= 0.7f;
-			cameraposition = targetTransform->Right();
-			cameraTransform->SetPosition(targetposition);
-		}
 
 		if (mEditorMode == true)
 		{
-			
-
 			if (mNumber == 0)
 			{
 				cameraposition.x = 0.0f;
@@ -53,10 +44,7 @@ namespace jh
 
 				mNumber = 1;
 			}
-	
-
 			Transform* tr = GetOwner()->GetComponent<Transform>();
-
 			Vector3 pos = tr->GetPosition();
 
 			if (Input::GetKeyState(eKeyCode::RIGHT) == eKeyState::PRESSED)
@@ -88,11 +76,30 @@ namespace jh
 
 		}
 
-		
-		
-	
+		if (mCaveEvent == true)
+		{
+			cameraposition.x = -1.55f;
+			cameraposition.y = -2.25f;
+			cameraposition.z = 1.0f;
+			cameraTransform->SetPosition(cameraposition);
+		}
+		else if(cameraobj->GetTarget() != nullptr && mEditorMode == false)
+		{
+			Transform* targetTransform = cameraobj->GetTarget()->GetComponent<Transform>();
+			Vector3 targetposition = targetTransform->GetPosition();
 
+			targetposition.y += 0.1f;
+			targetposition.z -= 0.7f;
+			cameraposition = targetTransform->Right();
+			cameraTransform->SetPosition(targetposition);
+		}
+			
 
+		//if (PlayerManager::GetPlayer()->GetCaveEventTrigger() == true)
+		//{
+		//	mCaveEvent = true;
+		//}
+		
 	
 	}
 	void CameraScript::Render()

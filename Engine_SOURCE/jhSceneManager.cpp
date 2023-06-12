@@ -69,7 +69,6 @@ namespace jh
 			mActiveScene->OnExit();
 			//mActiveScene->Destroy();
 
-		//dontDestroy 다음씬으로 같이 넘겨주기
 		std::vector<GameObject*> gameObjs
 			= mActiveScene->GetDontDestroyGameObjects();
 		mActiveScene = mScenes[(UINT)type];

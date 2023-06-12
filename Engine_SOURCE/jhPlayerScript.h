@@ -7,6 +7,8 @@ namespace jh
 	class Animator;
 	class Transform;
 	class Player;
+	class Collider2D;
+	class PlayerAttackCol;
 
 	class PlayerScript
 		: public Script
@@ -52,19 +54,23 @@ namespace jh
 		void FlyGrab();
 		void FlyCarry();
 		void FlyAttack();
+		void FlyHurt();
 		void StartFlyRoll();
 		void FlyRoll();
-		void FlyDown();
-		//
+		
+		void EventOn();
+	
 		void JumpComplete();
 	
 	private:
 
 		ePlayerState mPlayerState;
+		ePlayerState mPrevState;
 
 		Animator* mAnimator;
 		Transform* mTransform;
 		Player* mPlayer;
+		PlayerAttackCol* mAttackCol;
 	
 		bool mbCarrying;
 

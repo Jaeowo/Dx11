@@ -6,18 +6,21 @@ namespace jh
 	class Animator;
 	class Transform;
 	class Collider2D;
+	class TortoiseMask;
 
 	enum class eTortoiseState
 	{
 		//Wear Mask
 		MaskIdle,
 		MaskJump,
-		MaskMove, //Rotation값 이용해서 left,right방향 감지하기
+		MaskMove, 
 		MaskTurn,
 		MaskShoot,
 		MaskSpawnWing,
 		MaskFly,
 		MaskFlyShoot,
+		RemoveMask,
+		RemoveFlyMask,
 
 		//No Mask
 		Idle,
@@ -53,6 +56,8 @@ namespace jh
 		void MaskSpawnWing();
 		void MaskFly();
 		void MaskFlyShoot();
+		void RemoveMask();
+		void RemoveFlyMask();
 
 		void Idle();
 		void Hit();
@@ -65,6 +70,7 @@ namespace jh
 		void FindMask();
 		void Turn();
 
+		void FlyBase();
 		//Get Set
 		eTortoiseState GetPlayerState() { return mTortoiseState; }
 		void SetPlayerState(eTortoiseState tortoisestate) { mTortoiseState = tortoisestate; }
@@ -77,11 +83,18 @@ namespace jh
 		Vector3 GetPlayerRotation() { return mRotation; }
 		void SetPlayerRotation(Vector3 rotation) { mRotation = rotation; }
 
+		void SetAniCheck(bool anicheck) { mAniCheck = anicheck; }
+
+		bool GetIsFlying() { return mIsFlying; }
+
+		bool GetMaskOn() { return mMaskOn; }
+
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;
 		Collider2D* mCollider;
 		eTortoiseState mTortoiseState;
+		TortoiseMask* mtortoisemask;
 
 		int mCount;
 
@@ -95,8 +108,10 @@ namespace jh
 		bool mFunctionCheck;
 		bool mTarget;
 		bool mStartTrigger;
+		bool mIsFlying;
 		int mHp;
 		float mElapsedTime;
+		bool mMaskOn;
 	};
 }
 

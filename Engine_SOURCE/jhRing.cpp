@@ -58,6 +58,8 @@ namespace jh
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
 
+		mTotalTime += Time::DeltaTime();
+
 		if (mIsTouch == true && mOneCount == false)
 		{
 			GameObject* pointLight = object::Instantiate<GameObject>(eLayerType::Player);
@@ -69,22 +71,19 @@ namespace jh
 
 			lightComp->SetDiffuse(Vector4(0.0f, 1.0f, 0.0f, 1.0f));
 
-			//동작 제대로 안하는데 함 확인해보기
 			lightComp->ChangeColorOverTime(2.0f, Vector4(0.0f, 1.0f, 0.0f, 1.0f), Vector4(1.0f, 0.0f, 1.0f, 1.0f));
 
 			mOneCount = true;
-
-			mTotalTime += Time::DeltaTime();
-
-			//this->Death();
-
-			if (mTotalTime >= 2.0f)
-			{
-				//Death();
-			}
+			mTotalTime = 0.0f;
 		}
 
-		
+		if (mIsTouch == true)
+		{
+			if (mTotalTime >= 0.3f)
+			{
+				Death();
+			}
+		}
 
 		switch (mRingSet)
 		{

@@ -28,6 +28,10 @@ namespace jh
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 		mring->SetTouch(true);
 		mring->SetCount(false);
+
+		int coinCheck = (playerObj->GetCoin() + 1);
+		playerObj->SetCoin(coinCheck);
+
 	}
 	void RingScript::OnCollisionStay(Collider2D* collider)
 	{

@@ -2,13 +2,19 @@
 #include "jhSpriteRenderer.h"
 #include "jhResources.h"
 #include "jhAnimator.h"
+#include "jhTime.h"
 
 namespace jh
 {
 	TortoiseMask::TortoiseMask()
 		: mPosition(Vector3(0.0f, 0.0f, 0.0f))
 		, mOneCount(false)
-		, mTotalTime(0.0f)
+		, mTime(0.0f)
+		, mInitialVelocity(Vector2(0.0f, 1.0f))
+		, mGravity (0.00005f)
+		, mLeft(false)
+		, mRight(false)
+		, mHorizontalSpeed(0.1f)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -27,7 +33,7 @@ namespace jh
 		mAnimator->Create(L"ThrowMask", tortoisemasktexture,
 			Vector2(0.0f, 0.0f), Vector2(129.0f, 124.0f), Vector2::Zero, 9, 0.23f);
 
-		mAnimator->Play(L"ThrowMask", true);
+		mAnimator->Play(L"ThrowMask", false);
 
 		Collider2D* mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
@@ -49,8 +55,24 @@ namespace jh
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
 
-		//포물선 모양으로 날아가도록!
+		mTime += Time::DeltaTime();
 
+		// 포물선 움직임 계산
+		Vector2 pos2D = Vector2(mPosition.x, mPosition.y);
+
+		if (mLeft == true)
+		{
+			pos2D.x -= mHorizontalSpeed * mTime;
+		}
+		if (mRight == true)
+		{
+			pos2D.x += mHorizontalSpeed * mTime;
+		}
+
+		pos2D.y += mInitialVelocity.y * mTime + 0.5f * mGravity * mTime * mTime;
+		mPosition = Vector3(pos2D.x, pos2D.y, mPosition.z);
+
+		mTransform->SetPosition(mPosition);
 	}
 	void TortoiseMask::FixedUpdate()
 	{

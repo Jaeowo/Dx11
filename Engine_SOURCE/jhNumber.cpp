@@ -3,6 +3,8 @@
 #include "jhAnimator.h"
 #include "jhSpriteRenderer.h"
 #include "jhResources.h"
+#include "jhPlayerManager.h"
+#include "jhPlayer.h"
 
 namespace jh
 {
@@ -33,7 +35,7 @@ namespace jh
 		mAnimator->Create(L"number9", numbertexture, Vector2(66.4f, 0.0f), Vector2(8.3f, 17.0f), Vector2::Zero, 1, 0.3f);
 		mAnimator->Create(L"number0", numbertexture, Vector2(74.7f, 0.0f), Vector2(8.3f, 17.0f), Vector2::Zero, 1, 0.3f);
 
-		mAnimator->Play(L"number5", false);
+		mAnimator->Play(L"number1", false);
 	}
 	Number::~Number()
 	{
@@ -41,7 +43,7 @@ namespace jh
 	void Number::Initalize()
 	{
 		GameObject::Initalize();
-	
+
 	}
 	void Number::Update()
 	{
@@ -50,6 +52,8 @@ namespace jh
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
 
+		mPlayerCoin = PlayerManager::GetPlayer()->GetCoin();
+		SetNumber(mPlayerCoin);
 	}
 	void Number::FixedUpdate()
 	{
@@ -58,6 +62,17 @@ namespace jh
 	void Number::Render()
 	{
 		GameObject::Render();
+	}
+
+	void Number::SetNumber(int number)
+	{
+		std::string numberStr = std::to_string(number);
+
+		for (size_t i = 0; i < numberStr.size(); ++i)
+		{
+			std::wstring animationName = L"number" + std::to_wstring(numberStr[i] - '0');
+			mAnimator->Play(animationName, false);
+		}
 	}
 
 }

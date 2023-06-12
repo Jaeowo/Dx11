@@ -37,6 +37,7 @@
 #include "jhHpBar.h"
 #include "jhWall.h"
 #include "jhNumber.h"
+#include "jhNumberTens.h"
 #include "jhTortoise.h"
 
 namespace jh
@@ -260,11 +261,20 @@ namespace jh
 #pragma endregion
 
 #pragma region WALL
+		Wall* wallObj3 = object::Instantiate<Wall>(eLayerType::BackGround);
+		Transform* wallTr3 = wallObj3->GetComponent<Transform>();
+		wallTr3->SetPosition(Vector3(2.07f, -1.7f, 1.7f));
+		wallTr3->SetScale(Vector3(0.01f, 0.3f, 1.0f));
+
+		Wall* wallObj2 = object::Instantiate<Wall>(eLayerType::BackGround);
+		Transform* wallTr2 = wallObj2->GetComponent<Transform>();
+		wallTr2->SetPosition(Vector3(1.4f, -1.7f, 1.7f));
+		wallTr2->SetScale(Vector3(0.01f, 0.3f, 1.0f));
 
 		Wall* wallObj1 = object::Instantiate<Wall>(eLayerType::BackGround);
 		Transform* wallTr1 = wallObj1->GetComponent<Transform>();
-		wallTr1->SetPosition(Vector3(0.4f, 1.0f, 1.7f));
-		wallTr1->SetScale(Vector3(0.01f, 0.35f, 1.0f));
+		wallTr1->SetPosition(Vector3(0.05f, -1.7f, 1.7f));
+		wallTr1->SetScale(Vector3(0.01f, 0.3f, 1.0f));
 
 #pragma endregion
 #pragma region SLOPE
@@ -282,21 +292,7 @@ namespace jh
 
 #pragma endregion
 
-
-
-		// Sky
-		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround3);
-		Transform* backskyTr = backskyObj->GetComponent<Transform>();
-		backskyTr->SetPosition(Vector3(1.0f, 1.1f, 1.7f));
-		backskyTr->SetScale(Vector3(2.1f, 2.1f, 1.0f));
-
-		SpriteRenderer* backskysr = backskyObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> backskymesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> backskymaterial = Resources::Find<Material>(L"Backskymaterial");
-		backskysr->SetMaterial(backskymaterial);
-		backskysr->SetMesh(backskymesh);
-		backskyObj->AddComponent<BackSkyScript>();
-
+#pragma region UI
 		// coin UI
 		GameObject* hpBar = object::Instantiate<GameObject>(eLayerType::UI);
 		Transform* hpBarTR = hpBar->GetComponent<Transform>();
@@ -314,7 +310,24 @@ namespace jh
 		hpbar->SetPosition(Vector3(-5.5f, 4.5f, 1.0f));
 
 		Number* number = object::Instantiate<Number>(eLayerType::UI);
-		number->SetPosition(Vector3(-5.5f, 4.5f, 1.0f));
+		number->SetPosition(Vector3(-5.75f, 4.2f, 1.0f));
+
+		NumberTens* numbertens = object::Instantiate<NumberTens>(eLayerType::UI);
+		numbertens->SetPosition(Vector3(-5.9f, 4.2f, 1.0f));
+#pragma endregion
+
+		// Sky
+		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround3);
+		Transform* backskyTr = backskyObj->GetComponent<Transform>();
+		backskyTr->SetPosition(Vector3(1.0f, 1.1f, 1.7f));
+		backskyTr->SetScale(Vector3(2.1f, 2.1f, 1.0f));
+
+		SpriteRenderer* backskysr = backskyObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> backskymesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> backskymaterial = Resources::Find<Material>(L"Backskymaterial");
+		backskysr->SetMaterial(backskymaterial);
+		backskysr->SetMesh(backskymesh);
+		backskyObj->AddComponent<BackSkyScript>();
 
 		Chest* chestObj = object::Instantiate<Chest>(eLayerType::BackGrouncObj);
 		chestObj->SetPosition(Vector3(0.35f, -0.82f, 1.7f));

@@ -21,12 +21,14 @@ namespace jh
 		void SetPosition(Vector3 position) { mPosition = position; }
 		void SetCount(bool onecount) { mOneCount = onecount; }
 
+		void SetNumber(int number);
 	private:
 		Vector3 mPosition;
 
 		Transform* mTransform;
 		Animator* mAnimator;
 
+		int mPlayerCoin;
 		bool mOneCount;
 	};
 }

@@ -45,6 +45,9 @@ namespace jh
 		static void SetTarget(GameObject* gameObj) { mTarget = gameObj; }
 		GameObject* GetTarget() { return mTarget; }
 
+		void SetCaveEvent(bool caveevent) { mCaveEvent = caveevent; }
+		bool GetCaveEvent() { return mCaveEvent; }
+
 	private:
 		void sortGameObjects();
 		void renderOpaque();
@@ -57,7 +60,6 @@ namespace jh
 		static Matrix View;
 		static Matrix Projection;
 		static GameObject* mTarget;
-
 
 		Matrix mView;
 		Matrix mProjection;
@@ -74,6 +76,8 @@ namespace jh
 		std::vector<GameObject*> mCutoutGameObjects;
 		std::vector<GameObject*> mTransparentGameObjects;
 		std::vector<GameObject*> mPostProcessGameObjects;
+
+		bool mCaveEvent;
 	};
 }
 

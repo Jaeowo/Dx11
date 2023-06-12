@@ -123,6 +123,8 @@ namespace jh::enums
 		Hurt,
 		Die,
 
+		Event,
+
 	};
 
 	enum class eGeddyState

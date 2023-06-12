@@ -17,6 +17,9 @@ namespace jh
 	private:
 		static Player* mPlayer;
 		static Geddy* mGeddy;
+
+		static int mSavedHp;  
+		static int mSavedCoins;  
 		
 	};
 }

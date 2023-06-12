@@ -8,6 +8,8 @@
 #include "jhPlayer.h"
 #include "jhResources.h"
 #include "jhGeddy.h"
+#include "jhPlayerAttackCol.h"
+#include "jhObject.h"
 
 namespace jh
 {
@@ -24,7 +26,7 @@ namespace jh
 	{
 
 		mVelocity = (Vector2(0.0f, 0.0f));
-		mMass = 150.0f;
+		mMass = 250.0f;
 
 		mGravity = 0.00005f;
 	
@@ -87,14 +89,6 @@ namespace jh
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
 		mRotation = mPlayer->GetPlayerRotation();
-
-		//mPlayerPosition = mTransform->GetPosition();
-		//mTime += Time::DeltaTime();
-		//mPlayerState = mPlayer->GetPlayerState();
-		//mPlayer->SetPlayerPos(mPlayerPosition);
-
-		//mCount = mPlayer->GetCount();
-
 		mPlayer->SetPreviousPos(mPlayerPosition);
 
 		mPlayerPosition = mTransform->GetPosition();
@@ -104,13 +98,33 @@ namespace jh
 
 		mCount = mPlayer->GetCount();
 
-		//PlayerManager::GetPlayer()->SetPlayerRotation(Vector3(0.0f, 0.0f, 230.0f));
 
 		mHp = mPlayer->GetHp();
 		mCoin = mPlayer->GetCoin();
 
+		if (mPlayer->GetEventTrigger() == true)
+		{
+			mPrevState = mPlayerState;
+			mPlayerState = ePlayerState::Event;
+		}
+
+		if (mPlayer->GetHurt() == true)
+		{
+			mPrevState = mPlayerState;
+
+			if (mIsFlying == true)
+			{
+				mPlayerState = ePlayerState::FlyHurt;
+			}
+			else
+			{
+				mPlayerState = ePlayerState::Hurt;
+			}
+		}
+
 		if (mPlayer->GetVelocityZero() == true)
 		{
+			mVelocity.x = 0.0f;
 			mVelocity.y = 0.0f;
 		}
 
@@ -154,7 +168,7 @@ namespace jh
 		}
 		else if (mPlayer->GetIsGround() == false && mIsFlying == false)
 		{
-			mGravity = 0.00005f;
+			mGravity = 0.00015f;
 		}
 
 		mPlayerPosition.x += mVelocity.x * (float)Time::DeltaTime();
@@ -211,6 +225,7 @@ namespace jh
 		case jh::enums::ePlayerState::FlyCarry:
 			break;
 		case jh::enums::ePlayerState::FlyHurt:
+			FlyHurt();
 			break;
 		case jh::enums::ePlayerState::FlyAttack:
 			FlyAttack();
@@ -218,8 +233,12 @@ namespace jh
 		case jh::enums::ePlayerState::Eat:
 			break;
 		case jh::enums::ePlayerState::Hurt:
+			Hurt();
 			break;
 		case jh::enums::ePlayerState::Die:
+			break;
+		case jh::enums::ePlayerState::Event:
+			EventOn();
 			break;
 		default:
 			break;
@@ -244,6 +263,7 @@ namespace jh
 	{
 		if (mCount == 0)
 		{
+			mVelocity.x = 0.0f;
 			mVelocity.y = 0.0f;
 
 			mIsFlying = false;
@@ -295,7 +315,7 @@ namespace jh
 		if (Input::GetKey(eKeyCode::A))
 		{
 			Vector3 pos = mTransform->GetPosition();
-			pos.x -= 0.5f * Time::DeltaTime();
+			pos.x -= 0.35f * Time::DeltaTime();
 
 			if (mPlayer->GetIsLeftSlope() == true)
 			{
@@ -321,14 +341,24 @@ namespace jh
 			mPlayer->SetPlayerState(ePlayerState::Idle);
 			mPlayer->SetCount(0);
 		}
+
+		mVelocity.x = -0.05f;
+
+		if (Input::GetKeyDown(eKeyCode::W))
+		{
+			mPlayer->SetPlayerState(ePlayerState::Jump);
+			mPlayer->SetCount(0);
+		}
 	}
 	void PlayerScript::RightRun()
 	{
+
+
 		if (Input::GetKey(eKeyCode::D))
 		{
 
 			Vector3 pos = mTransform->GetPosition();
-			pos.x += 0.5f * Time::DeltaTime();
+			pos.x += 0.35f * Time::DeltaTime();
 			
 
 			const float SlopeAngle = 0.5f;
@@ -356,30 +386,36 @@ namespace jh
 			mPlayer->SetPlayerState(ePlayerState::Idle);
 			mPlayer->SetCount(0);
 		}
+		mVelocity.x = 0.05f;
 
+		if (Input::GetKeyDown(eKeyCode::W))
+		{
+			mPlayer->SetPlayerState(ePlayerState::Jump);
+			mPlayer->SetCount(0);
+		}
 	}
 	void PlayerScript::Jump()
 	{
 
 		if (mCount == 0)
 		{
-			
 			mAnimator->Play(L"Jump", false);
-
 			mPlayer->SetIsGround(false);
 
-			float JumpForce = 0.007f;
-			mVelocity.y += JumpForce / mMass ;
-			
+			float JumpForce = 0.02f;
+			mVelocity.y += JumpForce / mMass;
+
 			mPlayer->SetCount(1);
 
+		
+			mTime = 0.0f;
 		}
 
-	/*	if (mVelocity.y <= 0)
+		if (Input::GetKey(eKeyCode::W) && mTime <= 0.2f)
 		{
-			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fall);
-			PlayerManager::GetPlayer()->SetCount(0);
-		}*/
+			float additionalJumpForce = 0.00008f;
+			mVelocity.y += additionalJumpForce / mMass;
+		}
 
 		if (Input::GetKey(eKeyCode::E))
 		{
@@ -387,11 +423,6 @@ namespace jh
 			mPlayer->SetCount(0);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::I))
-		{
-			mPlayer->SetPlayerState(ePlayerState::Idle);
-			mPlayer->SetCount(0);
-		}
 	
 
 	}
@@ -399,6 +430,8 @@ namespace jh
 	{
 		if (mCount == 0)
 		{
+			mVelocity.x = 0.0f;
+			mVelocity.y = 0.0f;
 			mAnimator->Play(L"JumpDown", false);
 			mPlayer->SetCount(1);
 		}
@@ -427,6 +460,21 @@ namespace jh
 	}
 	void PlayerScript::Hurt()
 	{
+		if (mCount == 0)
+		{
+			mTime = 0.0f;
+			mAnimator->Play(L"hurt", false);
+			mVelocity.x = 0;
+			mCount = 1;
+
+			mPlayer->SetHurt(false);
+		}
+		if (mTime >= 0.5f)
+		{
+			mPlayerState = mPrevState;
+			mCount = 0;
+		}
+
 	}
 	void PlayerScript::Die()
 	{
@@ -482,12 +530,23 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"Attacking", false);
+
+			if (mAttackCol == nullptr)
+			{
+				mAttackCol = object::Instantiate<PlayerAttackCol>(eLayerType::Player);
+			}
+
 			mPlayer->SetCount(1);
 		}
 		if (mTime >= 0.5f)
 		{
 			mPlayer->SetPlayerState(ePlayerState::Idle);
 			mPlayer->SetCount(0);
+
+			if (mAttackCol != nullptr)
+			{
+				mAttackCol->Death();
+			}
 		}
 	}
 	void PlayerScript::StartFly()
@@ -624,16 +683,43 @@ namespace jh
 
 	void PlayerScript::FlyAttack()
 	{
+
 		if (mCount == 0)
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"Attacking", false);
+
+			if (mAttackCol == nullptr)
+			{
+				mAttackCol = object::Instantiate<PlayerAttackCol>(eLayerType::Player);
+			}
+
 			mPlayer->SetCount(1);
 		}
 		if (mTime >= 0.5f)
 		{
 			mPlayer->SetPlayerState(ePlayerState::Fly);
 			mPlayer->SetCount(0);
+
+			if (mAttackCol != nullptr)
+			{
+				mAttackCol->Death();
+			}
+		}
+	}
+
+	void PlayerScript::FlyHurt()
+	{
+		if (mCount == 0)
+		{
+			mTime = 0.0f;
+			mAnimator->Play(L"flyinghurt", false);
+			mCount = 1;
+		}
+		if (mTime >= 0.2f)
+		{
+			mPlayerState = mPrevState;
+			mCount = 0;
 		}
 	}
 
@@ -654,7 +740,7 @@ namespace jh
 			mPlayer->SetPlayerState(ePlayerState::Fly);
 			mPlayer->SetCount(0);
 		}
-		//Vector3 CheckRotation = mTransform->GetRotation();
+
 		if (mRotation.y == 180.0f)
 		{
 			float rollSpeed = 0.35f;
@@ -666,6 +752,14 @@ namespace jh
 			float rollSpeed = 0.35f;
 			mPlayerPosition.x += rollSpeed * (float)Time::DeltaTime();
 			mTransform->SetPosition(mPlayerPosition);
+		}
+	}
+
+	void PlayerScript::EventOn()
+	{
+		if (mPlayer->GetEventTrigger() == false)
+		{
+			mPlayerState = mPrevState;
 		}
 	}
 
