@@ -155,6 +155,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="jhAegis.h" />
+    <ClInclude Include="jhAegisBullet.h" />
     <ClInclude Include="jhAnimation.h" />
     <ClInclude Include="jhAnimator.h" />
     <ClInclude Include="jhApplication.h" />
@@ -166,9 +168,12 @@
     <ClInclude Include="jhBackRockShadow.h" />
     <ClInclude Include="jhBackSkyScript.h" />
     <ClInclude Include="jhBaseRenderer.h" />
+    <ClInclude Include="jhBee.h" />
+    <ClInclude Include="jhBeeHive.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraScript.h" />
     <ClInclude Include="jhCaveScene.h" />
+    <ClInclude Include="jhCaveScene2.h" />
     <ClInclude Include="jhCeilingScript.h" />
     <ClInclude Include="jhChangeGawk.h" />
     <ClInclude Include="jhChangeMonsterState.h" />
@@ -209,6 +214,8 @@
     <ClInclude Include="jhGroundScript.h" />
     <ClInclude Include="jhHpBar.h" />
     <ClInclude Include="jhInput.h" />
+    <ClInclude Include="jhJungleDoor.h" />
+    <ClInclude Include="jhJungleScene.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhLight.h" />
     <ClInclude Include="jhMouseCursor.h" />
@@ -230,6 +237,8 @@
     <ClInclude Include="jhSlopeScript.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhStructedBuffer.h" />
+    <ClInclude Include="jhThrower.h" />
+    <ClInclude Include="jhThrowerStone.h" />
     <ClInclude Include="jhTile01.h" />
     <ClInclude Include="jhTile02.h" />
     <ClInclude Include="jhTile03.h" />
@@ -260,6 +269,8 @@
     <ClInclude Include="jhTransform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jhAegis.cpp" />
+    <ClCompile Include="jhAegisBullet.cpp" />
     <ClCompile Include="jhAnimation.cpp" />
     <ClCompile Include="jhAnimator.cpp" />
     <ClCompile Include="jhApplication.cpp" />
@@ -271,9 +282,12 @@
     <ClCompile Include="jhBackRockShadow.cpp" />
     <ClCompile Include="jhBackSkyScript.cpp" />
     <ClCompile Include="jhBaseRenderer.cpp" />
+    <ClCompile Include="jhBee.cpp" />
+    <ClCompile Include="jhBeeHive.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />
     <ClCompile Include="jhCaveScene.cpp" />
+    <ClCompile Include="jhCaveScene2.cpp" />
     <ClCompile Include="jhCeilingScript.cpp" />
     <ClCompile Include="jhChangeGawk.cpp" />
     <ClCompile Include="jhChangeMonsterState.cpp" />
@@ -311,6 +325,8 @@
     <ClCompile Include="jhGroundScript.cpp" />
     <ClCompile Include="jhHpBar.cpp" />
     <ClCompile Include="jhInput.cpp" />
+    <ClCompile Include="jhJungleDoor.cpp" />
+    <ClCompile Include="jhJungleScene.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhLight.cpp" />
     <ClCompile Include="jhMouseCursor.cpp" />
@@ -331,6 +347,8 @@
     <ClCompile Include="jhSlopeScript.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhStructedBuffer.cpp" />
+    <ClCompile Include="jhThrower.cpp" />
+    <ClCompile Include="jhThrowerStone.cpp" />
     <ClCompile Include="jhTile01.cpp" />
     <ClCompile Include="jhTile02.cpp" />
     <ClCompile Include="jhTile03.cpp" />

@@ -28,6 +28,8 @@ namespace jh
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		mScenes[(UINT)eSceneType::Cave] = new CaveScene();
+		mScenes[(UINT)eSceneType::Cave2] = new CaveScene();
+		mScenes[(UINT)eSceneType::Jungle] = new CaveScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Title];
 

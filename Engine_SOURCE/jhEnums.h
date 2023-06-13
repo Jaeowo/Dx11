@@ -8,6 +8,8 @@ namespace jh::enums
 		Title,
 		Play,
 		Cave,
+		Cave2,
+		Jungle,
 		End,
 	};
 

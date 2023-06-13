@@ -24,6 +24,7 @@
 #include "jhNumberTens.h"
 #include "jhWall.h"
 #include "jhEventTrigger.h"
+#include "jhInput.h"
 
 #include "jhTortoiseMask.h"
 
@@ -44,6 +45,10 @@ namespace jh
 	}
 	void CaveScene::Update()
 	{
+		if (Input::GetKeyDown(eKeyCode::N))
+		{
+			SceneManager::LoadScene(eSceneType::Cave2);
+		}
 		Scene::Update();
 	}
 	void CaveScene::FixedUpdate()

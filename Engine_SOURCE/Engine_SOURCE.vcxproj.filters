@@ -153,9 +153,6 @@
     <ClInclude Include="jhGeddyhands.h">
       <Filter>GameObject\Geddy</Filter>
     </ClInclude>
-    <ClInclude Include="jhGawk.h">
-      <Filter>GameObject\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="jhGeddyBullet.h">
       <Filter>GameObject\Geddy</Filter>
     </ClInclude>
@@ -307,6 +304,36 @@
     <ClInclude Include="jhEventTriggerScript.h">
       <Filter>GameObject\Trigger\Event</Filter>
     </ClInclude>
+    <ClInclude Include="jhCaveScene2.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="jhJungleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGawk.h">
+      <Filter>GameObject\Monster\Gawk</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBee.h">
+      <Filter>GameObject\Monster\Bee</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBeeHive.h">
+      <Filter>GameObject\Monster\Bee</Filter>
+    </ClInclude>
+    <ClInclude Include="jhThrower.h">
+      <Filter>GameObject\Monster\Thrower</Filter>
+    </ClInclude>
+    <ClInclude Include="jhThrowerStone.h">
+      <Filter>GameObject\Monster\Thrower</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAegis.h">
+      <Filter>GameObject\Monster\Aegis</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAegisBullet.h">
+      <Filter>GameObject\Monster\Aegis</Filter>
+    </ClInclude>
+    <ClInclude Include="jhJungleDoor.h">
+      <Filter>GameObject\BackGround\Door</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -445,9 +472,6 @@
     </ClCompile>
     <ClCompile Include="jhGeddyBullet.cpp">
       <Filter>GameObject\Geddy</Filter>
-    </ClCompile>
-    <ClCompile Include="jhGawk.cpp">
-      <Filter>GameObject\Monster</Filter>
     </ClCompile>
     <ClCompile Include="jhBackRock.cpp">
       <Filter>GameObject\BackGround\BackRock</Filter>
@@ -598,6 +622,36 @@
     </ClCompile>
     <ClCompile Include="jhEventTriggerScript.cpp">
       <Filter>GameObject\Trigger\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="jhCaveScene2.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="jhJungleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGawk.cpp">
+      <Filter>GameObject\Monster\Gawk</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBee.cpp">
+      <Filter>GameObject\Monster\Bee</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBeeHive.cpp">
+      <Filter>GameObject\Monster\Bee</Filter>
+    </ClCompile>
+    <ClCompile Include="jhThrower.cpp">
+      <Filter>GameObject\Monster\Thrower</Filter>
+    </ClCompile>
+    <ClCompile Include="jhThrowerStone.cpp">
+      <Filter>GameObject\Monster\Thrower</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAegis.cpp">
+      <Filter>GameObject\Monster\Aegis</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAegisBullet.cpp">
+      <Filter>GameObject\Monster\Aegis</Filter>
+    </ClCompile>
+    <ClCompile Include="jhJungleDoor.cpp">
+      <Filter>GameObject\BackGround\Door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -783,6 +837,24 @@
     </Filter>
     <Filter Include="GameObject\Trigger\Event">
       <UniqueIdentifier>{dcce0336-e390-469a-9cea-dcf23a9e07e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster\Gawk">
+      <UniqueIdentifier>{90e3060d-7896-449b-8987-0dc744dc0995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster\Thrower">
+      <UniqueIdentifier>{71e7dd38-9a35-4d94-ae47-1734bf1767e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster\Bee">
+      <UniqueIdentifier>{a92c8602-4f0d-433b-b7dd-f714a69ea95c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster\Aegis">
+      <UniqueIdentifier>{6e2896df-d1b5-4c8a-a856-e6d820770d57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\Door">
+      <UniqueIdentifier>{6095e0fc-88ee-4bff-985f-520d71daeac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\Fruit">
+      <UniqueIdentifier>{1a8950e8-ebaf-42f4-9755-96fb2de7585f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
