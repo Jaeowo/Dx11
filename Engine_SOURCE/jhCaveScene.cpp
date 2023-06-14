@@ -144,7 +144,7 @@ namespace jh
 		WallObj->AddComponent<BackSkyScript>();
 
 
-		//Test
+		//tile
 		GameObject* tilefloorObj = object::Instantiate<GameObject>(eLayerType::BackGround);
 		tilefloorObj->SetName(L"Tilefloor");
 		Transform* tilefloorTr = tilefloorObj->GetComponent<Transform>();

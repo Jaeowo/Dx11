@@ -15,6 +15,8 @@
 #include "jhTitleScene.h"
 #include "jhPlayScene.h"
 #include "jhCaveScene.h"
+#include "jhCaveScene2.h"
+#include "jhJungleScene.h"
 
 namespace jh
 {
@@ -28,8 +30,8 @@ namespace jh
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		mScenes[(UINT)eSceneType::Cave] = new CaveScene();
-		mScenes[(UINT)eSceneType::Cave2] = new CaveScene();
-		mScenes[(UINT)eSceneType::Jungle] = new CaveScene();
+		mScenes[(UINT)eSceneType::Cave2] = new CaveScene2();
+		mScenes[(UINT)eSceneType::Jungle] = new JungleScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Title];
 

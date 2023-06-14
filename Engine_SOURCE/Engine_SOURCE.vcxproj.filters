@@ -156,42 +156,6 @@
     <ClInclude Include="jhGeddyBullet.h">
       <Filter>GameObject\Geddy</Filter>
     </ClInclude>
-    <ClInclude Include="jhBackRock.h">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClInclude>
-    <ClInclude Include="jhBackRock2.h">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClInclude>
-    <ClInclude Include="jhBackRock2Shadow.h">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClInclude>
-    <ClInclude Include="jhBackRock3.h">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClInclude>
-    <ClInclude Include="jhBackRock3Shadow.h">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClInclude>
-    <ClInclude Include="jhBackRockShadow.h">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClInclude>
-    <ClInclude Include="jhTile01.h">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="jhTile02.h">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="jhTile03.h">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="jhTile04.h">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="jhGrassFloor.h">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="jhGrassSlope.h">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClInclude>
     <ClInclude Include="jhBackSkyScript.h">
       <Filter>Component\Script\BackGround</Filter>
     </ClInclude>
@@ -334,6 +298,30 @@
     <ClInclude Include="jhJungleDoor.h">
       <Filter>GameObject\BackGround\Door</Filter>
     </ClInclude>
+    <ClInclude Include="jhTorch.h">
+      <Filter>GameObject\BackGround\Torch</Filter>
+    </ClInclude>
+    <ClInclude Include="jhScrewPiece.h">
+      <Filter>GameObject\BackGround\ScrewPuzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="jhButton.h">
+      <Filter>GameObject\BackGround\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="jhScrewPuzzle.h">
+      <Filter>GameObject\BackGround\ScrewPuzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSoil.h">
+      <Filter>GameObject\BackGround\Food</Filter>
+    </ClInclude>
+    <ClInclude Include="jhTree.h">
+      <Filter>GameObject\BackGround\Food</Filter>
+    </ClInclude>
+    <ClInclude Include="jhStoneDoor.h">
+      <Filter>GameObject\BackGround\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="jhStoneDoorScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Door</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -472,42 +460,6 @@
     </ClCompile>
     <ClCompile Include="jhGeddyBullet.cpp">
       <Filter>GameObject\Geddy</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBackRock.cpp">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBackRock2.cpp">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBackRock2Shadow.cpp">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBackRock3.cpp">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBackRock3Shadow.cpp">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBackRockShadow.cpp">
-      <Filter>GameObject\BackGround\BackRock</Filter>
-    </ClCompile>
-    <ClCompile Include="jhTile01.cpp">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="jhTile02.cpp">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="jhTile03.cpp">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="jhTile04.cpp">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="jhGrassFloor.cpp">
-      <Filter>GameObject\BackGround\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="jhGrassSlope.cpp">
-      <Filter>GameObject\BackGround\Platform</Filter>
     </ClCompile>
     <ClCompile Include="jhBackSkyScript.cpp">
       <Filter>Component\Script\BackGround</Filter>
@@ -653,6 +605,30 @@
     <ClCompile Include="jhJungleDoor.cpp">
       <Filter>GameObject\BackGround\Door</Filter>
     </ClCompile>
+    <ClCompile Include="jhTorch.cpp">
+      <Filter>GameObject\BackGround\Torch</Filter>
+    </ClCompile>
+    <ClCompile Include="jhScrewPiece.cpp">
+      <Filter>GameObject\BackGround\ScrewPuzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="jhButton.cpp">
+      <Filter>GameObject\BackGround\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="jhScrewPuzzle.cpp">
+      <Filter>GameObject\BackGround\ScrewPuzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSoil.cpp">
+      <Filter>GameObject\BackGround\Food</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTree.cpp">
+      <Filter>GameObject\BackGround\Food</Filter>
+    </ClCompile>
+    <ClCompile Include="jhStoneDoor.cpp">
+      <Filter>GameObject\BackGround\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="jhStoneDoorScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Door</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -787,12 +763,6 @@
     <Filter Include="GameObject\BackGround\Ring">
       <UniqueIdentifier>{63fe17d5-bba3-461a-aad9-ac23bdfad6d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\BackGround\BackRock">
-      <UniqueIdentifier>{a580c01f-d483-4b5a-88f9-cedd40271a08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\BackGround\Platform">
-      <UniqueIdentifier>{8afb4a11-1149-4567-b470-0a1203c6373e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\Script\Trigger">
       <UniqueIdentifier>{6dce8740-e375-4424-ae42-245e1dd39df9}</UniqueIdentifier>
     </Filter>
@@ -853,8 +823,20 @@
     <Filter Include="GameObject\BackGround\Door">
       <UniqueIdentifier>{6095e0fc-88ee-4bff-985f-520d71daeac5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\BackGround\Fruit">
+    <Filter Include="GameObject\BackGround\Food">
       <UniqueIdentifier>{1a8950e8-ebaf-42f4-9755-96fb2de7585f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\Torch">
+      <UniqueIdentifier>{9d904c5e-17d8-41d3-9ce0-c15663759a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\ScrewPuzzle">
+      <UniqueIdentifier>{6302ee50-a760-4341-a63b-50750c8e919c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\Button">
+      <UniqueIdentifier>{0f77ef01-4acd-48f2-ae74-debe9656191d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\BackGround\BackGroundObj\Door">
+      <UniqueIdentifier>{99c9b343-1a62-47c9-b829-9ad5b0b35208}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

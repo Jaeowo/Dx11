@@ -496,6 +496,9 @@ namespace jh::renderer
 		Resources::Load<Texture>(L"WallTexture", L"Wall.png");
 		Resources::Load<Texture>(L"GrassTexture", L"Grass.png");
 		Resources::Load<Texture>(L"CeilingTexture", L"ceiling.png");
+
+		Resources::Load<Texture>(L"CaveSceneTexture", L"CaveBackGround.png");
+		Resources::Load<Texture>(L"JungleSceneTexture", L"Jungle.png");
 #pragma endregion
 #pragma region PLAYER TEXTURE
 		Resources::Load<Texture>(L"StandTexture", L"sprOtusStand.png");
@@ -775,6 +778,22 @@ namespace jh::renderer
 	
 #pragma endregion
 #pragma region BACKGROUND MATERIAL
+		std::shared_ptr <Texture> cavetexture = Resources::Find<Texture>(L"CaveSceneTexture");
+		std::shared_ptr<Shader> caveshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> cavematerial = std::make_shared<Material>();
+		cavematerial->SetRenderingMode(eRenderingMode::Transparent);
+		cavematerial->SetShader(caveshader);
+		cavematerial->SetTexture(eTextureSlot::T0, cavetexture);
+		Resources::Insert<Material>(L"Cavematerial", cavematerial);
+
+		std::shared_ptr <Texture> jungletexture = Resources::Find<Texture>(L"JungleSceneTexture");
+		std::shared_ptr<Shader> jungleshader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Material> junglematerial = std::make_shared<Material>();
+		junglematerial->SetRenderingMode(eRenderingMode::Transparent);
+		junglematerial->SetShader(jungleshader);
+		junglematerial->SetTexture(eTextureSlot::T0, jungletexture);
+		Resources::Insert<Material>(L"Junglematerial", junglematerial);
+
 		std::shared_ptr <Texture> verticaltexture = Resources::Find<Texture>(L"VerticalTexture");
 		std::shared_ptr<Shader> verticalshader = Resources::Find<Shader>(L"SpriteShader");
 		std::shared_ptr<Material> verticalmaterial = std::make_shared<Material>();
