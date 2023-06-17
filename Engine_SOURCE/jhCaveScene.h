@@ -3,6 +3,9 @@
 
 namespace jh
 {
+	class Tortoise;
+	class Player;
+
 	class CaveScene : public Scene
 	{
 	public:
@@ -18,5 +21,9 @@ namespace jh
 		virtual void OnExit() override;
 
 	private:
+		Tortoise* mtortoise;
+		Player* mplayer;
+
+		bool mCount;
 	};
 }

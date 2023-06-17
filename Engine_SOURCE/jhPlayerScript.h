@@ -85,7 +85,7 @@ namespace jh
 		Vector3 mNewPosition;
 		bool mbGround;
 		bool mIsFlying; //Flying상태일때 중력 안받도록 예외처리 하기
-	
+		bool mHurtCheck;
 
 		Vector3 mRotation;
 		Vector2 mVelocity; //속도

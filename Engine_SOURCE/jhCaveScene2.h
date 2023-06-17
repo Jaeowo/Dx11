@@ -3,6 +3,8 @@
 
 namespace jh
 {
+	class Player;
+
 	class CaveScene2 : public Scene
 	{
 	public:
@@ -18,5 +20,6 @@ namespace jh
 		virtual void OnExit() override;
 
 	private:
+		Player* mplayer;
 	};
 }

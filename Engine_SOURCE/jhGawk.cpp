@@ -7,33 +7,37 @@
 #include "jhTime.h"
 #include "jhGawkScript.h"
 #include "jhCollider2D.h"
+#include "jhSpriteRenderer.h"
 
 namespace jh
 {
 	Gawk::Gawk()
-		: mGawkState(eGawkState::Flying)
+		: mGawkState(eGawkState::UpsideDown)
 		, mHp(4)
 		, mCount(0)
 		, mTarget(false)
 		, mElapsedTime(0.0f)
 	{
 		Animator* mAnimator = AddComponent<Animator>();
-		//mTransform = GetComponent<Transform>();
 
-	/*	mTransform->SetPosition(Vector3(0.4f, 1.0f, 1.7f));
-		mTransform->SetScale(Vector3(0.29f, 0.29f, 1.0f));*/
-	
+		SpriteRenderer* gawksr = AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> gawkmesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> gawkmaterial = Resources::Find<Material>(L"GawkMaterial");
+		gawksr->SetMaterial(gawkmaterial);
+		gawksr->SetMesh(gawkmesh);
+
 		std::shared_ptr<Texture> gawktexture = Resources::Load<Texture>(L"Gawk", L"Gawk\\sprGawkSheet_81x70.png");
 		mAnimator->Create(L"GawkFlying", gawktexture, Vector2(0.0f, 0.0f), Vector2(81.0f, 70.0f), Vector2::Zero, 6, 0.2f);
 		mAnimator->Create(L"GawkUpsideDown", gawktexture, Vector2(0.0f, 70.0f), Vector2(81.0f, 70.0f), Vector2::Zero, 2, 0.4f);
-		mAnimator->Create(L"GawkUpsideDowntoFly", gawktexture, Vector2(0.0f, 140.0f), Vector2(81.0f, 70.0f), Vector2::Zero, 11, 0.2f);
+		mAnimator->Create(L"GawkUpsideDowntoFly", gawktexture, Vector2(0.0f, 140.0f), Vector2(81.0f, 70.0f), Vector2::Zero, 11, 0.15f);
 		mAnimator->Create(L"GawkHurt", gawktexture, Vector2(0.0f, 210.0f), Vector2(81.0f, 70.0f), Vector2::Zero, 1, 0.2f);
 
 		mAnimator->Play(L"GawkFlying", true);
 	
-		Collider2D* mCollider = AddComponent<Collider2D>();
+		mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
-		mCollider->SetSize(Vector2(0.2f, 0.2f));
+		mCollider->SetSize(Vector2(5.0f, 5.0f));
+		//mCollider->SetCenter(Vector2(0.5f,0.0f))
 
 	}
 	Gawk::~Gawk()
@@ -99,7 +103,6 @@ namespace jh
 			mCount = 1;
 		}
 
-
 		float speed = 0.18f; // 기본 이동 속도
 		float bounceHeight = 0.00005f; // 튀는 높이
 		float bounceSpeed = 5.0f; // 튀는 속도
@@ -142,11 +145,13 @@ namespace jh
 			mAnimator->Play(L"GawkUpsideDowntoFly", false);
 			mElapsedTime = 0.0f;
 			mCount = 1;
-			if (mElapsedTime >= 1.0f)
-			{
-				mGawkState = eGawkState::Flying;
-			}
+			mCollider->SetSize(Vector2(0.2f, 0.2f));
 	
+		}
+		if (mElapsedTime >= 0.8f)
+		{
+			mCount = 0;
+			mGawkState = eGawkState::Flying;
 		}
 	}
 	void Gawk::Hurt()

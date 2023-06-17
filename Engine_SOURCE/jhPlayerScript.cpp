@@ -98,7 +98,6 @@ namespace jh
 
 		mCount = mPlayer->GetCount();
 
-
 		mHp = mPlayer->GetHp();
 		mCoin = mPlayer->GetCoin();
 
@@ -108,25 +107,13 @@ namespace jh
 			mPlayerState = ePlayerState::Event;
 		}
 
-		if (mPlayer->GetHurt() == true)
-		{
-			mPrevState = mPlayerState;
-
-			if (mIsFlying == true)
-			{
-				mPlayerState = ePlayerState::FlyHurt;
-			}
-			else
-			{
-				mPlayerState = ePlayerState::Hurt;
-			}
-		}
-
 		if (mPlayer->GetVelocityZero() == true)
 		{
 			mVelocity.x = 0.0f;
 			mVelocity.y = 0.0f;
 		}
+
+
 
 #pragma region FALL
 		float deltaY = mPlayerPosition.y - mPrevPosition.y;
@@ -411,11 +398,11 @@ namespace jh
 			mTime = 0.0f;
 		}
 
-		if (Input::GetKey(eKeyCode::W) && mTime <= 0.2f)
+	/*	if (Input::GetKey(eKeyCode::W) && mTime <= 0.2f)
 		{
 			float additionalJumpForce = 0.00008f;
 			mVelocity.y += additionalJumpForce / mMass;
-		}
+		}*/
 
 		if (Input::GetKey(eKeyCode::E))
 		{
@@ -467,12 +454,6 @@ namespace jh
 			mVelocity.x = 0;
 			mCount = 1;
 
-			mPlayer->SetHurt(false);
-		}
-		if (mTime >= 0.5f)
-		{
-			mPlayerState = mPrevState;
-			mCount = 0;
 		}
 
 	}
@@ -546,6 +527,7 @@ namespace jh
 			if (mAttackCol != nullptr)
 			{
 				mAttackCol->Death();
+				mAttackCol = nullptr;
 			}
 		}
 	}
@@ -710,17 +692,16 @@ namespace jh
 
 	void PlayerScript::FlyHurt()
 	{
+	
 		if (mCount == 0)
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"flyinghurt", false);
+			mVelocity.x = 0;
 			mCount = 1;
+
 		}
-		if (mTime >= 0.2f)
-		{
-			mPlayerState = mPrevState;
-			mCount = 0;
-		}
+	
 	}
 
 	void PlayerScript::StartFlyRoll()

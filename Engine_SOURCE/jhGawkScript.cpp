@@ -30,7 +30,35 @@ namespace jh
 
 		if (playerObj)
 		{
+			if (mgawk->GetState() == eGawkState::UpsideDown)
+			{
+				mgawk->SetState(eGawkState::UpsideDowntoFly);
+				mgawk->SetCount(0);
+			}
+			else
+			{
+				if (playerObj->GetIsInvincible())
+				{
+					return;
+				}
 
+				int hpCheck = (playerObj->GetHp() - 1);
+				playerObj->SetHp(hpCheck);
+
+				playerObj->SetInvincibleTimer(0.0f);
+				playerObj->SetIsInvincible(true);
+
+				if (playerObj->GetIsFly())
+				{
+					playerObj->SetCount(0);
+					playerObj->SetPlayerState(ePlayerState::FlyHurt);
+				}
+				else
+				{
+					playerObj->SetCount(0);
+					playerObj->SetPlayerState(ePlayerState::Hurt);
+				}
+			}
 		}
 
 		GeddyBullet* geddyBulletObj = dynamic_cast<GeddyBullet*>(collider->GetOwner());

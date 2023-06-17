@@ -1,6 +1,8 @@
 #include "jhWallScript.h"
 #include "jhPlayer.h"
 #include "jhCoin.h"
+#include "jhTortoiseMask.h"
+#include "jhTortoise.h"
 
 namespace jh
 {
@@ -31,6 +33,24 @@ namespace jh
 
 			playerObj->SetVelocityZero(true);
 			
+		}
+
+		TortoiseMask* tortoisemaskObj = dynamic_cast<TortoiseMask*>(collider->GetOwner());
+		if (tortoisemaskObj)
+		{
+			tortoisemaskObj->ReverseDirection();
+		}
+		Tortoise* tortoiseObj = dynamic_cast<Tortoise*>(collider->GetOwner());
+		if (tortoiseObj && tortoiseObj->GetIgnoreCollisionTime() <= 0.0f) 
+		{
+			if (tortoiseObj->GetPlayerState() == eTortoiseState::MaskMove)
+			{
+				tortoiseObj->SetPlayerState(eTortoiseState::MaskTurn);
+			}
+			if (tortoiseObj->GetPlayerState() == eTortoiseState::Move) 
+			{
+				tortoiseObj->SetPlayerState(eTortoiseState::Turn);
+			}
 		}
 	}
 

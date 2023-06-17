@@ -9,6 +9,7 @@
 #include "jhGawk.h"
 #include "jhCoin.h"
 #include "jhCoinScript.h"
+#include "jhTortoiseMask.h"
 
 namespace jh
 {
@@ -82,6 +83,14 @@ namespace jh
 		{
 			coinObj->SetGround(true);
 		}
+
+		TortoiseMask* maskObj = dynamic_cast<TortoiseMask*>(collider->GetOwner());
+
+		if(maskObj)
+		{
+			maskObj->SetGround(true);
+		}
+
 
 	}
 	void GroundScript::OnCollisionStay(Collider2D* collider)

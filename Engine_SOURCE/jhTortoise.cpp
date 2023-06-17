@@ -26,7 +26,7 @@ namespace jh
 		, mFunctionCheck(false)
 		, mMaskOn(true)
 		, mIsFlying(false)
-		
+		, mIgnoreCollisionTime(0.0f)
 	{
 
 		mAnimator = AddComponent<Animator>();
@@ -107,6 +107,10 @@ namespace jh
 
 		mElapsedTime += Time::DeltaTime();
 
+		if (mIgnoreCollisionTime > 0.0f) 
+		{
+			mIgnoreCollisionTime -= Time::DeltaTime();
+		}
 		switch (mTortoiseState)
 		{
 		case jh::eTortoiseState::MaskIdle:
@@ -163,11 +167,11 @@ namespace jh
 		case jh::eTortoiseState::FlyEquipMask:
 			FlyEquipMask();
 			break;
-		case jh::eTortoiseState::FindMask:
-			FindMask();
-			break;
 		case jh::eTortoiseState::Turn:
 			Turn();
+			break;
+		case jh::eTortoiseState::Jump:
+			Jump();
 			break;
 		default:
 			break;
@@ -200,35 +204,43 @@ namespace jh
 	}
 	void Tortoise::MaskMove()
 	{
-		if (mAniCheck == false)
+		if (mAniCheck == false) 
 		{
 			mAnimator->Play(L"Move", true);
 			mAniCheck = true;
 		}
 
-		if (mRotation.y >= 180.0f)
+		if (mIgnoreCollisionTime > 0.0f)
+		{
+			mIgnoreCollisionTime -= Time::DeltaTime();
+		}
+
+		if (mRotation.y >= 180.0f) 
 		{
 			mMonsterPosition.x -= 0.1f * Time::DeltaTime();
 		}
-		else
+		else 
 		{
 			mMonsterPosition.x += 0.1f * Time::DeltaTime();
 		}
 	}
 	void Tortoise::MaskTurn()
 	{
-		if (mAniCheck == false)
-		{
+		if (mAniCheck == false) {
 			mAnimator->Play(L"TurnMask", false);
 			mAniCheck = true;
 		}
-		if (mRotation.y >= 180.0f)
-		{
+		if (mRotation.y >= 180.0f) {
 			mRotation.y = 0.0f;
+			mAniCheck = false;
+			mIgnoreCollisionTime = 0.1f; // Ignore collisions for 0.1 seconds
+			mTortoiseState = eTortoiseState::MaskMove;
 		}
-		else
-		{
+		else {
 			mRotation.y = 180.0f;
+			mAniCheck = false;
+			mIgnoreCollisionTime = 0.1f; // Ignore collisions for 0.1 seconds
+			mTortoiseState = eTortoiseState::MaskMove;
 		}
 	}
 	void Tortoise::MaskShoot()
@@ -293,19 +305,20 @@ namespace jh
 	void Tortoise::Move()
 	{
 		if (mAniCheck == false)
-		{
-			mAnimator->Play(L"MoveNomask", true);
-			mAniCheck = true;
-		}
+			if (mAniCheck == false)
+			{
+				mAnimator->Play(L"MoveNomask", true);
+				mAniCheck = true;
+			}
 
 		if (mtortoisemask != nullptr)
 		{
-			Vector3 mMaskPos = mtortoisemask->GetPos();
-			float speed = 0.15f;  
+			Vector3 mMaskPos = mtortoisemask->GetPosition();
+			float speed = 0.1f;
 
 			Vector3 Dir = mMaskPos - mMonsterPosition;
 			Dir.Normalize();
-			mMonsterPosition.x += Dir.x * speed * Time::DeltaTime(); 
+			mMonsterPosition.x += Dir.x * speed * Time::DeltaTime();
 
 			if (mMaskPos.x < mMonsterPosition.x)
 			{
@@ -316,6 +329,8 @@ namespace jh
 				mRotation.y = 0.0f;
 			}
 		}
+
+	
 	}
 	void Tortoise::EquipMask()
 	{
@@ -323,6 +338,10 @@ namespace jh
 		{
 			mAnimator->Play(L"EquipMask", false);
 			mAniCheck = true;
+			if (mtortoisemask != nullptr)
+			{
+				mtortoisemask->Death();
+			}
 		}
 	}
 	void Tortoise::Fly()
@@ -378,13 +397,18 @@ namespace jh
 			mAniCheck = true;
 		}
 	}
-	void Tortoise::FindMask()
+	void Tortoise::Jump()
 	{
 		if (mAniCheck == false)
 		{
-			mAnimator->Play(L"MoveNomask", true);
-			mAniCheck = true;
+			mAnimator->Play(L"Jump", false);
+			mElapsedTime = 0.0f;
 		}
+		if (mElapsedTime >= 1.0f)
+		{
+			mTortoiseState = eTortoiseState::MaskSpawnWing;
+		}
+
 	}
 	void Tortoise::Turn()
 	{
@@ -392,6 +416,18 @@ namespace jh
 		{
 			mAnimator->Play(L"TurnNomask", false);
 			mAniCheck = true;
+		}
+		if (mRotation.y >= 180.0f)
+		{
+			mRotation.y = 0.0f;
+			mAniCheck = false;
+			mTortoiseState = eTortoiseState::MaskMove;
+		}
+		else
+		{
+			mRotation.y = 180.0f;
+			mAniCheck = false;
+			mTortoiseState = eTortoiseState::MaskMove;
 		}
 	}
 	void Tortoise::FlyBase()
@@ -415,6 +451,7 @@ namespace jh
 	}
 	void Tortoise::MaskSpawnWing()
 	{
+
 		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"SpawnWings", false);
@@ -496,6 +533,7 @@ namespace jh
 			mtortoisemask = object::Instantiate<TortoiseMask>(eLayerType::MonsterObject);
 			mtortoisemask->SetPosition(mMonsterPosition);
 			mAnimator->Play(L"Hit", false);
+			mElapsedTime = 0.0f;
 
 			if (mRotation.y >= 180.0f)
 			{
@@ -509,7 +547,11 @@ namespace jh
 			mAniCheck = true;
 		}
 
-		
+		if (mElapsedTime >= 0.5f)
+		{
+			mTortoiseState = eTortoiseState::Move;
+			mAniCheck = false;
+		}
 		
 	}
 	void Tortoise::RemoveFlyMask()

@@ -5,6 +5,7 @@ namespace jh
 {
 	class Animator;
 	class Transform;
+	class Collider2D;
 
 	enum class eGawkState
 	{
@@ -46,8 +47,9 @@ namespace jh
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;
+		Collider2D* mCollider;
 		eGawkState mGawkState;
-
+		
 		int mCount;
 
 	private:

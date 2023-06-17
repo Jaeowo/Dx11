@@ -3,6 +3,7 @@
 #include "jhTortoise.h"
 #include "jhGeddyBullet.h"
 #include "jhPlayerAttackCol.h"
+#include "jhTortoiseMask.h"
 
 namespace jh
 {
@@ -32,35 +33,79 @@ namespace jh
 
 		if (playerObj)
 		{
-			playerObj->SetCount(0);
-			playerObj->SetHurt(true);
+			if (playerObj->GetIsInvincible())  
+			{
+				return;
+			}
+
+			int hpCheck = (playerObj->GetHp() - 1);
+			playerObj->SetHp(hpCheck);
+
+			playerObj->SetInvincibleTimer(0.0f);
+			playerObj->SetIsInvincible(true);
+
+			if (playerObj->GetIsFly())
+			{
+				playerObj->SetCount(0);
+				playerObj->SetPlayerState(ePlayerState::FlyHurt);
+			}
+			else
+			{
+				playerObj->SetCount(0);
+				playerObj->SetPlayerState(ePlayerState::Hurt);
+			}
 		}
 
 		if (attackcol)
 		{
-			if (mtortoise->GetIsFlying() == true)
+			if (mtortoise->GetPlayerState() == eTortoiseState::MaskMove ||
+				mtortoise->GetPlayerState() == eTortoiseState::MaskFly)
 			{
-				mtortoise->SetAniCheck(false);
-				mtortoise->SetPlayerState(eTortoiseState::RemoveFlyMask);
+				if (mtortoise->GetPlayerState() == eTortoiseState::MaskFly)
+				{
+					mtortoise->SetAniCheck(false);
+					mtortoise->SetPlayerState(eTortoiseState::RemoveFlyMask);
+				}
+				else
+				{
+					mtortoise->SetAniCheck(false);
+					mtortoise->SetPlayerState(eTortoiseState::RemoveMask);
+				}
 			}
-			else
-			{
-				mtortoise->SetAniCheck(false);
-				mtortoise->SetPlayerState(eTortoiseState::RemoveMask);
-			}
-			
 		}
 
 		GeddyBullet* geddyBulletObj = dynamic_cast<GeddyBullet*>(collider->GetOwner());
 		if (geddyBulletObj)
 		{
-			if (mtortoise->GetMaskOn() == false)
+
+			if (mtortoise->GetPlayerState() == eTortoiseState::Move )
 			{
 				mtortoise->SetAniCheck(false);
 				mtortoise->SetPlayerState(eTortoiseState::Hit);
+			
 			}
-			else
+			if (mtortoise->GetPlayerState() == eTortoiseState::Fly)
 			{
+				mtortoise->SetAniCheck(false);
+				mtortoise->SetPlayerState(eTortoiseState::FlyHit);
+			}
+		
+		
+		}
+
+		TortoiseMask* tortoisemaskObj = dynamic_cast<TortoiseMask*>(collider->GetOwner());
+		if (tortoisemaskObj)
+		{
+			if (mtortoise->GetPlayerState() == eTortoiseState::Move)
+			{
+				mtortoise->SetAniCheck(false);
+				mtortoise->SetPlayerState(eTortoiseState::EquipMask);
+			}
+			
+			if (mtortoise->GetPlayerState() == eTortoiseState::Fly)
+			{
+				mtortoise->SetAniCheck(false);
+				mtortoise->SetPlayerState(eTortoiseState::FlyEquipMask);
 			}
 		
 		}

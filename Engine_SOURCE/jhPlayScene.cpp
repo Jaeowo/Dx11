@@ -124,10 +124,11 @@ namespace jh
 		DoorTr->SetScale(Vector3(0.07f, 0.1f, 1.0f));
 
 		// Player
-		Player* playerObj = object::Instantiate<Player>(eLayerType::Player);
-		PlayerManager::SetPlayer(playerObj);
+		mplayer = object::Instantiate<Player>(eLayerType::Player);
+		PlayerManager::SetPlayer(mplayer);
 		//playerObj->AddComponent<PlayerScript>();
-		cameraComp->SetTarget(playerObj);
+		cameraComp->SetTarget(mplayer);
+
 
 		//Geddy
 		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
@@ -359,6 +360,7 @@ namespace jh
 
 	void PlayScene::OnExit()
 	{
+		PlayerManager::SavePlayerState(mplayer);
 	}
 
 }

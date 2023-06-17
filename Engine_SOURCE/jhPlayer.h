@@ -72,8 +72,14 @@ namespace jh
 		bool GetCaveEventTrigger() { return mCaveEventOn; }
 		void SetCaveEventTrigger(bool caveeventon) { mCaveEventOn = caveeventon; }
 
-		bool GetHurt() { return mHurt; }
-		void SetHurt(bool hurt) { mHurt = hurt; }
+		bool GetIsInvincible() { return mIsInvincible; }
+		void SetIsInvincible(bool invincible) { mIsInvincible = invincible; }
+
+		float GetInvincibleTimer() { return mInvincibleTimer; }
+		void SetInvincibleTimer(float invincibletimer) { mInvincibleTimer = invincibletimer; }
+
+		float GetHurtTimer() { return mHurtTimer; }
+		void SetHurtTimer(float hurttimer) { mHurtTimer = hurttimer; }
 
 	private:
 		Transform* mTransform;
@@ -86,9 +92,10 @@ namespace jh
 		bool mbGround;
 		bool mvelocityzero;
 		bool mColliderCheck;
-		bool mHurt;
+
 
 		ePlayerState mPlayerState;
+		ePlayerState mPrevState;
 		Vector3 mPlayerPos;
 		Vector3 mPreviousPos;
 		Vector3 mRotation;
@@ -103,6 +110,10 @@ namespace jh
 		int mCoin;
 		bool mEventOn;
 		bool mCaveEventOn;
+
+		bool mIsInvincible;
+		float mInvincibleTimer;
+		float mHurtTimer;
 	};
 
 }

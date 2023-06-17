@@ -32,6 +32,7 @@ namespace jh
 {
 	CaveScene::CaveScene()
 		: Scene(eSceneType::Cave)
+		, mCount(false)
 	{
 	}
 	CaveScene::~CaveScene()
@@ -50,6 +51,17 @@ namespace jh
 			SceneManager::LoadScene(eSceneType::Cave2);
 		}
 		Scene::Update();
+
+		if (mplayer->GetCaveEventTrigger() == true)
+		{
+			if (mCount == false)
+			{
+				mtortoise->SetPlayerState(eTortoiseState::MaskMove);
+				mtortoise->SetAniCheck(false);
+				mCount = true;
+			}
+
+		}
 	}
 	void CaveScene::FixedUpdate()
 	{
@@ -158,12 +170,13 @@ namespace jh
 		tilefloorsr->SetMesh(tilefloormesh);
 
 		//Player
-		Player* playerObj = object::Instantiate<Player>(eLayerType::Player);
-		PlayerManager::SetPlayer(playerObj);
-		playerObj->SetCoin(PlayerManager::GetPlayer()->GetCoin());
-		cameraComp->SetTarget(playerObj);
+		mplayer = object::Instantiate<Player>(eLayerType::Player);
+		PlayerManager::SetPlayer(mplayer);
+		mplayer->SetCoin(PlayerManager::GetPlayer()->GetCoin());
+		cameraComp->SetTarget(mplayer);
+		PlayerManager::LoadPlayerState(mplayer);
 
-		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Player);
+		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
 		PlayerManager::SetGeddy(geddyObj);
 		geddyObj->SetCount(0);
 		geddyObj->AddComponent<GeddyScript>();
@@ -186,21 +199,13 @@ namespace jh
 
 		//Gawk
 		Gawk* gawkObj = object::Instantiate<Gawk>(eLayerType::Monster);
-		SpriteRenderer* gawksr = gawkObj->AddComponent<SpriteRenderer>();
-		std::shared_ptr<Mesh> gawkmesh = Resources::Find<Mesh>(L"RectMesh");
-		std::shared_ptr<Material> gawkmaterial = Resources::Find<Material>(L"GawkMaterial");
-		gawksr->SetMaterial(gawkmaterial);
-		gawksr->SetMesh(gawkmesh);
 		Transform* gawkTr = gawkObj->GetComponent<Transform>();
 		gawkTr->SetPosition(Vector3(-0.5f, -0.5f, 1.7f));
 		gawkTr->SetScale(Vector3(0.29f, 0.29f, 1.0f));
 
-		Tortoise* tortoiseObj = object::Instantiate<Tortoise>(eLayerType::Monster);
-		tortoiseObj->SetPosition(Vector3(-1.2f, -2.53f, 1.7f)); //테스트 끝나고 이걸로
-		//tortoiseObj->SetPosition(Vector3(1.35f, -0.3f, 1.7f));
+		mtortoise = object::Instantiate<Tortoise>(eLayerType::Monster);
+		mtortoise->SetPosition(Vector3(-1.8f, -2.53f, 1.7f));
 
-	/*	TortoiseMask* maskObj = object::Instantiate<TortoiseMask>(eLayerType::MonsterObject);
-		maskObj->SetPosition(Vector3(-1.35f, -2.53f, 1.7f));*/
 
 		
 
@@ -230,7 +235,10 @@ namespace jh
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::Player, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::MonsterObject, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::BackGround, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::BackGrouncObj, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::MonsterObject, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround2, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGrouncObj, true);
@@ -241,5 +249,6 @@ namespace jh
 
 	void CaveScene::OnExit()
 	{
+		PlayerManager::SavePlayerState(mplayer);
 	}
 }

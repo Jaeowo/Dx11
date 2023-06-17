@@ -31,8 +31,8 @@ namespace jh
 		FlyHit,
 		FlyDeath,
 		FlyEquipMask,
-		FindMask,
 		Turn,
+		Jump,
 	};
 
 	class Tortoise
@@ -67,7 +67,7 @@ namespace jh
 		void FlyHit();
 		void FlyDeath();
 		void FlyEquipMask();
-		void FindMask();
+		void Jump();
 		void Turn();
 
 		void FlyBase();
@@ -89,6 +89,10 @@ namespace jh
 
 		bool GetMaskOn() { return mMaskOn; }
 
+		float GetIgnoreCollisionTime() { return mIgnoreCollisionTime; }
+
+		bool GetEventOn() { return mEventOn; }
+
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;
@@ -109,9 +113,12 @@ namespace jh
 		bool mTarget;
 		bool mStartTrigger;
 		bool mIsFlying;
+		bool mEventOn;
 		int mHp;
 		float mElapsedTime;
 		bool mMaskOn;
+		float mIgnoreCollisionTime;
+
 	};
 }
 

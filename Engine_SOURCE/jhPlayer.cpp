@@ -4,12 +4,13 @@
 #include "jhCollider2D.h"
 #include "jhSpriteRenderer.h"
 #include "jhResources.h"
+#include "jhTime.h"
 
 namespace jh
 {
 	Player::Player()
 		: mbGround(false)
-		, mCount(0)                 
+		, mCount(0)
 		, mIsFlyingDown(false)
 		, mIsFly(false)
 		, mIsJumping(false)
@@ -17,8 +18,9 @@ namespace jh
 		, mHp(5)
 		, mCoin(0)
 		, mEventOn(false)
-		, mHurt(false)
 		, mCaveEventOn(false)
+		, mHurtTimer(0.0f)
+
 	{
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(Vector3(1.0f, -0.45f, 1.7f));
@@ -54,8 +56,32 @@ namespace jh
 		}
 		mCollider = GetComponent<Collider2D>();
 		mTransform->SetRotation(mRotation);
-		
 
+		if (mPlayerState != ePlayerState::Hurt && mPlayerState != ePlayerState::FlyHurt)
+		{
+			mPrevState = mPlayerState;
+		}
+
+		if (mIsInvincible)
+		{
+			mInvincibleTimer += Time::DeltaTime();
+			if (mInvincibleTimer >= 1.5f)
+			{
+				mIsInvincible = false;
+			}
+		}
+
+		if (mPlayerState == ePlayerState::Hurt || mPlayerState == ePlayerState::FlyHurt)
+		{
+			mHurtTimer += Time::DeltaTime();
+			if (mHurtTimer >= 0.1f)
+			{
+				mPlayerState = mPrevState;
+				mCount = 0;
+				mHurtTimer = 0.0f;  
+			}
+		}
+	
 		GameObject::Update();
 
 	}

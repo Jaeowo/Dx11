@@ -14,14 +14,19 @@ namespace jh
 		static void SetGeddy(Geddy* geddy) { mGeddy = geddy; }
 		static Geddy* GetGeddy() { return mGeddy; }
 
+		static void SavePlayerState(Player* player);
+		static void LoadPlayerState(Player* player);
+
 	private:
 		static Player* mPlayer;
 		static Geddy* mGeddy;
 
-		static int mSavedHp;  
-		static int mSavedCoins;  
+		static int mSavedHp;
+		static int mSavedCoins;
 		
 	};
+	int PlayerManager::mSavedHp = 0;
+	int PlayerManager::mSavedCoins = 0;
 }
 
 

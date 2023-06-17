@@ -27,7 +27,11 @@ namespace jh
 	void EventTriggerScript::OnCollisionEnter(Collider2D* collider)
 	{
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
-		playerObj->SetCaveEventTrigger(true);
+		if (playerObj)
+		{
+			playerObj->SetCaveEventTrigger(true);
+		}
+
 
 		meventtrigger->Death();
 	}

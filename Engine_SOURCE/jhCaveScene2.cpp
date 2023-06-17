@@ -14,6 +14,10 @@
 #include "jhGround.h"
 #include "jhStoneDoor.h"
 #include "jhButton.h"
+#include "jhMouseCursor.h"
+#include "jhNumber.h"
+#include "jhNumberTens.h"
+#include "jhHpBar.h"
 
 namespace jh
 {
@@ -78,6 +82,33 @@ namespace jh
 		cameraUIComp->DisableLayerMasks();
 		cameraUIComp->TurnLayerMask(eLayerType::UI, true);
 
+		//Cursor
+		MouseCursor* mousecursor = object::Instantiate<MouseCursor>(eLayerType::Effect);
+
+#pragma region UI
+		// coin UI
+		GameObject* hpBar = object::Instantiate<GameObject>(eLayerType::UI);
+		Transform* hpBarTR = hpBar->GetComponent<Transform>();
+		hpBarTR->SetPosition(Vector3(-6.2f, 4.2f, 1.0f));
+		hpBarTR->SetScale(Vector3(0.25f, 0.25f, 1.0f));
+
+		SpriteRenderer* hpsr = hpBar->AddComponent<SpriteRenderer>();
+		hpBar->AddComponent(hpsr);
+		std::shared_ptr<Mesh> hpmesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> hpspriteMaterial = Resources::Find<Material>(L"Coin1Material");
+		hpsr->SetMesh(hpmesh);
+		hpsr->SetMaterial(hpspriteMaterial);
+
+		HpBar* hpbar = object::Instantiate<HpBar>(eLayerType::UI);
+		hpbar->SetPosition(Vector3(-5.5f, 4.5f, 1.0f));
+
+		Number* number = object::Instantiate<Number>(eLayerType::UI);
+		number->SetPosition(Vector3(-5.75f, 4.2f, 1.0f));
+
+		NumberTens* numbertens = object::Instantiate<NumberTens>(eLayerType::UI);
+		numbertens->SetPosition(Vector3(-5.9f, 4.2f, 1.0f));
+#pragma endregion
+
 		//Total BackGround
 		GameObject* cavescene2Obj = object::Instantiate<GameObject>(eLayerType::BackGround);
 		Transform* CaveScene2Tr = cavescene2Obj->GetComponent<Transform>();
@@ -92,10 +123,11 @@ namespace jh
 		tilefloorsr->SetMesh(tilefloormesh);
 
 		//Player
-		Player* playerObj = object::Instantiate<Player>(eLayerType::Player);
-		PlayerManager::SetPlayer(playerObj);
-		playerObj->SetCoin(PlayerManager::GetPlayer()->GetCoin());
-		cameraComp->SetTarget(playerObj);
+		mplayer = object::Instantiate<Player>(eLayerType::Player);
+		PlayerManager::SetPlayer(mplayer);
+		mplayer->SetCoin(PlayerManager::GetPlayer()->GetCoin());
+		cameraComp->SetTarget(mplayer);
+		PlayerManager::LoadPlayerState(mplayer);
 
 		Ground* groundObj2 = object::Instantiate<Ground>(eLayerType::BackGround);
 		Transform* groundTr2 = groundObj2->GetComponent<Transform>();
@@ -126,7 +158,7 @@ namespace jh
 
 	void CaveScene2::OnExit()
 	{
-
+		PlayerManager::SavePlayerState(mplayer);
 	}
 
 }
