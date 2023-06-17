@@ -36,7 +36,7 @@ namespace jh
 	
 		mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
-		mCollider->SetSize(Vector2(5.0f, 5.0f));
+		mCollider->SetSize(Vector2(4.5f, 4.5f));
 		//mCollider->SetCenter(Vector2(0.5f,0.0f))
 
 	}

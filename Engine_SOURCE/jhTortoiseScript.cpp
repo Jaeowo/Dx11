@@ -58,6 +58,11 @@ namespace jh
 
 		if (attackcol)
 		{
+			if (mtortoise->GetPlayerState() == eTortoiseState::MaskSpawnWing)
+			{
+				return;
+			}
+
 			if (mtortoise->GetPlayerState() == eTortoiseState::MaskMove ||
 				mtortoise->GetPlayerState() == eTortoiseState::MaskFly)
 			{
@@ -78,18 +83,33 @@ namespace jh
 		if (geddyBulletObj)
 		{
 
+			if (mtortoise->GetPlayerState() == eTortoiseState::MaskSpawnWing)
+			{
+				return;
+			}
+
+			if (mtortoise->GetEventOn() == true)
+			{
+				return;
+			}
 			if (mtortoise->GetPlayerState() == eTortoiseState::Move )
 			{
+				int tortoisehpCheck = (mtortoise->GetHp() - 1);
+				mtortoise->SetHp(tortoisehpCheck);
+
 				mtortoise->SetAniCheck(false);
 				mtortoise->SetPlayerState(eTortoiseState::Hit);
 			
 			}
 			if (mtortoise->GetPlayerState() == eTortoiseState::Fly)
 			{
+				int tortoisehpCheck = (mtortoise->GetHp() - 1);
+				mtortoise->SetHp(tortoisehpCheck);
+
 				mtortoise->SetAniCheck(false);
 				mtortoise->SetPlayerState(eTortoiseState::FlyHit);
 			}
-		
+			
 		
 		}
 

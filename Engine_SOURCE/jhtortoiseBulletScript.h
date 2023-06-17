@@ -3,13 +3,15 @@
 
 namespace jh
 {
-	class TortoiseScript
+	class TortoiseBullet;
+
+	class tortoiseBulletScript
 		: public Script
 	{
 	public:
 
-		TortoiseScript();
-		~TortoiseScript();
+		tortoiseBulletScript();
+		~tortoiseBulletScript();
 
 		virtual void Initalize() override;
 		virtual void Update() override;
@@ -20,6 +22,6 @@ namespace jh
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
 	private:
-		Tortoise* mtortoise;
+		TortoiseBullet* mtortoisebullet;
 	};
 }

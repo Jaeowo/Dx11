@@ -168,6 +168,11 @@ namespace jh
 
 		mTransform->SetPosition(mPlayerPosition);
 
+		if (mPlayerState != ePlayerState::LeftRun && mPlayerState != ePlayerState::RightRun)
+		{
+			mVelocity.x = 0.0f;
+		}
+
 	
 		switch (mPlayerState)
 		{
@@ -686,6 +691,7 @@ namespace jh
 			if (mAttackCol != nullptr)
 			{
 				mAttackCol->Death();
+				mAttackCol = nullptr;
 			}
 		}
 	}

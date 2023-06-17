@@ -12,7 +12,7 @@ namespace jh
 		mTransform->SetPosition(mPlayerPos);
 		mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
-		mCollider->SetSize(Vector2(0.04f, 0.04f));
+		mCollider->SetSize(Vector2(0.07f, 0.07f));
 
 		if (PlayerManager::GetPlayer()->GetPlayerRotation().y == 180.0f)
 		{

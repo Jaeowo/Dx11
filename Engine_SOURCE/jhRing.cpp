@@ -17,6 +17,7 @@ namespace jh
 		, mPosition (Vector3(0.0f,0.0f,0.0f))
 		, mOneCount(false)
 		, mTotalTime(0.0f)
+		, pointLight(nullptr)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -62,7 +63,7 @@ namespace jh
 
 		if (mIsTouch == true && mOneCount == false)
 		{
-			GameObject* pointLight = object::Instantiate<GameObject>(eLayerType::Player);
+			pointLight = object::Instantiate<GameObject>(eLayerType::Effect);
 			pointLight->GetComponent<Transform>()->SetPosition(mTransform->GetPosition());
 
 			Light* lightComp = pointLight->AddComponent<Light>();
@@ -79,8 +80,12 @@ namespace jh
 
 		if (mIsTouch == true)
 		{
-			if (mTotalTime >= 0.3f)
+			if (mTotalTime >= 0.7f)
 			{
+				if (pointLight)
+				{
+					pointLight->Death(); 
+				}
 				Death();
 			}
 		}

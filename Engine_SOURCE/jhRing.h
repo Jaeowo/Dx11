@@ -44,6 +44,7 @@ namespace jh
 		eRingSet mRingSet;
 		Transform* mTransform;
 		Animator* mAnimator;
+		GameObject* pointLight;
 
 		bool mOneCount;
 		float mTotalTime;

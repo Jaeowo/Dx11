@@ -322,6 +322,9 @@
     <ClInclude Include="jhStoneDoorScript.h">
       <Filter>Component\Script\BackGround\BackGroundObj\Door</Filter>
     </ClInclude>
+    <ClInclude Include="jhtortoiseBulletScript.h">
+      <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -628,6 +631,9 @@
     </ClCompile>
     <ClCompile Include="jhStoneDoorScript.cpp">
       <Filter>Component\Script\BackGround\BackGroundObj\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="jhtortoiseBulletScript.cpp">
+      <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

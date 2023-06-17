@@ -75,14 +75,6 @@ namespace jh
 			tr->SetPosition(pos);
 
 		}
-
-		if (mCaveEvent == true)
-		{
-			cameraposition.x = -1.55f;
-			cameraposition.y = -2.25f;
-			cameraposition.z = 1.0f;
-			cameraTransform->SetPosition(cameraposition);
-		}
 		else if(cameraobj->GetTarget() != nullptr && mEditorMode == false)
 		{
 			Transform* targetTransform = cameraobj->GetTarget()->GetComponent<Transform>();
@@ -94,13 +86,23 @@ namespace jh
 			cameraTransform->SetPosition(targetposition);
 		}
 			
+		if (PlayerManager::GetPlayer() != nullptr)
+		{
+			if (PlayerManager::GetPlayer()->GetCaveEventTrigger() == true)
+			{
+				mCaveEvent = true;
+			}
+			if (mCaveEvent == true)
+			{
+				cameraposition.x = -1.55f;
+				cameraposition.y = -2.25f;
+				cameraposition.z = 1.0f;
+				cameraTransform->SetPosition(cameraposition);
+			}
 
-		//if (PlayerManager::GetPlayer()->GetCaveEventTrigger() == true)
-		//{
-		//	mCaveEvent = true;
-		//}
+		}
+
 		
-	
 	}
 	void CameraScript::Render()
 	{

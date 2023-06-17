@@ -27,7 +27,7 @@ namespace jh
 		void SetPlayerState(ePlayerState playerstate) { mPlayerState = playerstate; }
 
 		Vector3 GetPlayerPos() { return mPlayerPos; }
-		void SetPlayerPos(Vector3 playerpos) { mPlayerPos = playerpos; }
+		void SetPlayerPos(Vector3 playerpos) { mPlayerPos = playerpos;  mTransform->SetPosition(mPlayerPos); }
 
 		Vector3 GetPreviousPos() const { return mPreviousPos; }
 		void SetPreviousPos(Vector3 previouspos) { mPreviousPos = previouspos; }
@@ -92,7 +92,7 @@ namespace jh
 		bool mbGround;
 		bool mvelocityzero;
 		bool mColliderCheck;
-
+		bool mMoveCheck;
 
 		ePlayerState mPlayerState;
 		ePlayerState mPrevState;

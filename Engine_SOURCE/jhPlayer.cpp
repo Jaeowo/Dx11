@@ -20,6 +20,7 @@ namespace jh
 		, mEventOn(false)
 		, mCaveEventOn(false)
 		, mHurtTimer(0.0f)
+		, mMoveCheck(false)
 
 	{
 		mTransform = GetComponent<Transform>();
@@ -80,6 +81,11 @@ namespace jh
 				mCount = 0;
 				mHurtTimer = 0.0f;  
 			}
+		}
+	
+		if (mCaveEventOn == true)
+		{
+
 		}
 	
 		GameObject::Update();

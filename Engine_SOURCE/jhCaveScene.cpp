@@ -25,14 +25,15 @@
 #include "jhWall.h"
 #include "jhEventTrigger.h"
 #include "jhInput.h"
-
-#include "jhTortoiseMask.h"
+#include "jhTime.h"
+#include "jhFadeInScript.h"
 
 namespace jh
 {
 	CaveScene::CaveScene()
 		: Scene(eSceneType::Cave)
 		, mCount(false)
+		, mTime(0.0f)
 	{
 	}
 	CaveScene::~CaveScene()
@@ -56,12 +57,23 @@ namespace jh
 		{
 			if (mCount == false)
 			{
+				GameObject* FadeInObject = object::Instantiate<GameObject>(eLayerType::UI);
+				MeshRenderer* FadeInMr = FadeInObject->AddComponent<MeshRenderer>();
+				FadeInMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				FadeInMr->SetMaterial(Resources::Find<Material>(L"FadeInMaterial"));
+				FadeInObject->AddComponent<FadeInScript>();
+				Transform* fadetr = FadeInObject->GetComponent<Transform>();
+				fadetr->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+				fadetr->SetScale(Vector3(25.0f, 25.0f, 1.0f));
+
 				mtortoise->SetPlayerState(eTortoiseState::MaskMove);
 				mtortoise->SetAniCheck(false);
 				mCount = true;
 			}
 
 		}
+		
+	
 	}
 	void CaveScene::FixedUpdate()
 	{
@@ -73,6 +85,8 @@ namespace jh
 	}
 	void CaveScene::OnEnter()
 	{
+		mTime += Time::DeltaTime();
+
 		GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
 		directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
 		Light* lightComp = directionalLight->AddComponent<Light>();
@@ -80,11 +94,11 @@ namespace jh
 		lightComp->SetDiffuse(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		//Main Camera
-		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
-		Camera* cameraComp = cameraObj->AddComponent<Camera>();
-		cameraComp->TurnLayerMask(eLayerType::UI, false);
-		cameraObj->AddComponent<CameraScript>();
-		mainCamera = cameraComp;
+		mcamera = object::Instantiate<GameObject>(eLayerType::Camera, this);
+		mcameracomp = mcamera->AddComponent<Camera>();
+		mcameracomp->TurnLayerMask(eLayerType::UI, false);
+		mcamera->AddComponent<CameraScript>();
+		mainCamera = mcameracomp;
 
 		// UI Camera
 		GameObject* cameraUIObj = object::Instantiate<GameObject>(eLayerType::Camera);
@@ -173,7 +187,7 @@ namespace jh
 		mplayer = object::Instantiate<Player>(eLayerType::Player);
 		PlayerManager::SetPlayer(mplayer);
 		mplayer->SetCoin(PlayerManager::GetPlayer()->GetCoin());
-		cameraComp->SetTarget(mplayer);
+		mcameracomp->SetTarget(mplayer);
 		PlayerManager::LoadPlayerState(mplayer);
 
 		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
@@ -204,7 +218,7 @@ namespace jh
 		gawkTr->SetScale(Vector3(0.29f, 0.29f, 1.0f));
 
 		mtortoise = object::Instantiate<Tortoise>(eLayerType::Monster);
-		mtortoise->SetPosition(Vector3(-1.8f, -2.53f, 1.7f));
+		mtortoise->SetPosition(Vector3(-1.2f, -2.53f, 1.7f));
 
 
 		

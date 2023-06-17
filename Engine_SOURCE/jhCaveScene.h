@@ -5,6 +5,7 @@ namespace jh
 {
 	class Tortoise;
 	class Player;
+	class Camera;
 
 	class CaveScene : public Scene
 	{
@@ -23,7 +24,10 @@ namespace jh
 	private:
 		Tortoise* mtortoise;
 		Player* mplayer;
+		GameObject* mcamera;
+		Camera* mcameracomp;
 
 		bool mCount;
+		float mTime;
 	};
 }

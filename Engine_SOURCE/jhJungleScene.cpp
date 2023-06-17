@@ -58,7 +58,7 @@ namespace jh
 		directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
 		Light* lightComp = directionalLight->AddComponent<Light>();
 		lightComp->SetType(eLightType::Directional);
-		lightComp->SetDiffuse(Vector4(0.5f, 0.5f, 0.5f, 0.5f));
+		lightComp->SetDiffuse(Vector4(0.5f, 0.5f, 0.5f, 1.0f));
 
 		//Main Camera
 		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);

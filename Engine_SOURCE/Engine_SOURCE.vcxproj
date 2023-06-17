@@ -241,6 +241,7 @@
     <ClInclude Include="jhTorch.h" />
     <ClInclude Include="jhTortoise.h" />
     <ClInclude Include="jhTortoiseBullet.h" />
+    <ClInclude Include="jhtortoiseBulletScript.h" />
     <ClInclude Include="jhTortoiseMask.h" />
     <ClInclude Include="jhTortoiseScript.h" />
     <ClInclude Include="jhTree.h" />
@@ -347,6 +348,7 @@
     <ClCompile Include="jhTorch.cpp" />
     <ClCompile Include="jhTortoise.cpp" />
     <ClCompile Include="jhTortoiseBullet.cpp" />
+    <ClCompile Include="jhtortoiseBulletScript.cpp" />
     <ClCompile Include="jhTortoiseMask.cpp" />
     <ClCompile Include="jhTortoiseScript.cpp" />
     <ClCompile Include="jhTree.cpp" />

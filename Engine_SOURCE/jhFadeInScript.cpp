@@ -25,11 +25,10 @@ namespace jh
 		ConstantBuffer* cb = renderer::constantBuffers[(UINT)eCBType::Fade];
 		renderer::FadeCB data;
 
-		if (Input::GetKeyState(eKeyCode::F) == eKeyState::PRESSED)
-		{
-			mAmount += Time::DeltaTime();
-			data.FadeAmount = mAmount;
-		}
+		
+		mAmount += Time::DeltaTime();
+		data.FadeAmount = mAmount;
+	
 		if (mAmount >= 1.0f)
 		{
 			mAmount = 1.0f;

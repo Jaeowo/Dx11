@@ -76,6 +76,7 @@ namespace jh
 		void SetPlayerState(eTortoiseState tortoisestate) { mTortoiseState = tortoisestate; }
 
 		void SetHp(int hp) { mHp = hp; }
+		int GetHp() { return mHp; }
 
 		void SetPosition(Vector3 position) { mMonsterPosition = position; }
 		Vector3 GetPosition() { return mMonsterPosition; }

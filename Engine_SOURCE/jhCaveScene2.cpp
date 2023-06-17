@@ -109,6 +109,15 @@ namespace jh
 		numbertens->SetPosition(Vector3(-5.9f, 4.2f, 1.0f));
 #pragma endregion
 
+#pragma region GROUND
+		Ground* groundObj2 = object::Instantiate<Ground>(eLayerType::BackGround);
+		Transform* groundTr2 = groundObj2->GetComponent<Transform>();
+		groundTr2->SetPosition(Vector3(1.2f, -0.56f, 1.7f));
+		groundTr2->SetScale(Vector3(1.3f, 0.001f, 1.0f));
+#pragma endregion
+
+#pragma region WALL
+#pragma endregion
 		//Total BackGround
 		GameObject* cavescene2Obj = object::Instantiate<GameObject>(eLayerType::BackGround);
 		Transform* CaveScene2Tr = cavescene2Obj->GetComponent<Transform>();
@@ -128,11 +137,9 @@ namespace jh
 		mplayer->SetCoin(PlayerManager::GetPlayer()->GetCoin());
 		cameraComp->SetTarget(mplayer);
 		PlayerManager::LoadPlayerState(mplayer);
+		mplayer->SetPlayerPos(Vector3(0.0f, 0.0f, 1.7f));
 
-		Ground* groundObj2 = object::Instantiate<Ground>(eLayerType::BackGround);
-		Transform* groundTr2 = groundObj2->GetComponent<Transform>();
-		groundTr2->SetPosition(Vector3(1.2f, -0.56f, 1.7f));
-		groundTr2->SetScale(Vector3(1.3f, 0.001f, 1.0f));
+
 
 		StoneDoor* stoneDoorObj = object::Instantiate<StoneDoor>(eLayerType::BackGround);
 		stoneDoorObj->SetPosition(Vector3(-1.275f, 0.3f, 1.7f));
