@@ -2,6 +2,7 @@
 #include "jhAnimator.h"
 #include "jhResources.h"
 #include "jhSpriteRenderer.h"
+#include "jhStoneDoorScript.h"
 
 namespace jh
 {
@@ -45,6 +46,7 @@ namespace jh
 	void StoneDoor::Initalize()
 	{
 		GameObject::Initalize();
+		AddComponent<StoneDoorScript>();
 	}
 	void StoneDoor::Update()
 	{

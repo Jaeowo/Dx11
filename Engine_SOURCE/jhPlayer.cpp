@@ -21,6 +21,7 @@ namespace jh
 		, mCaveEventOn(false)
 		, mHurtTimer(0.0f)
 		, mMoveCheck(false)
+		, mJungleEventOn(false)
 
 	{
 		mTransform = GetComponent<Transform>();
@@ -87,7 +88,16 @@ namespace jh
 		{
 
 		}
-	
+
+		//if (mRotation.y == 180.0f)
+		//{
+		//	mCollider->SetCenter(Vector2(0.01f, -0.01f));
+		//}
+		//else
+		//{
+		//	mCollider->SetCenter(Vector2(-0.015f, -0.01f));
+		//}
+
 		GameObject::Update();
 
 	}

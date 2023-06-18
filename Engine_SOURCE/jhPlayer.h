@@ -72,6 +72,9 @@ namespace jh
 		bool GetCaveEventTrigger() { return mCaveEventOn; }
 		void SetCaveEventTrigger(bool caveeventon) { mCaveEventOn = caveeventon; }
 
+		bool GetJungleEventTrigger() { return mJungleEventOn; }
+		void SetJungleEventTrigger(bool jungleeventon) { mJungleEventOn = jungleeventon; }
+
 		bool GetIsInvincible() { return mIsInvincible; }
 		void SetIsInvincible(bool invincible) { mIsInvincible = invincible; }
 
@@ -80,6 +83,7 @@ namespace jh
 
 		float GetHurtTimer() { return mHurtTimer; }
 		void SetHurtTimer(float hurttimer) { mHurtTimer = hurttimer; }
+
 
 	private:
 		Transform* mTransform;
@@ -110,6 +114,7 @@ namespace jh
 		int mCoin;
 		bool mEventOn;
 		bool mCaveEventOn;
+		bool mJungleEventOn;
 
 		bool mIsInvincible;
 		float mInvincibleTimer;

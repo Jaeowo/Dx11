@@ -263,6 +263,7 @@ namespace jh
 
 	void CaveScene::OnExit()
 	{
+		mplayer->SetCaveEventTrigger(false);
 		PlayerManager::SavePlayerState(mplayer);
 	}
 }

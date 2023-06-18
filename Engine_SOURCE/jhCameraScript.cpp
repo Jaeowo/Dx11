@@ -38,7 +38,7 @@ namespace jh
 			if (mNumber == 0)
 			{
 				cameraposition.x = 0.0f;
-				cameraposition.y = -1.0f;
+				cameraposition.y = 0.0f;
 				cameraposition.z = 0.1f;
 				cameraTransform->SetPosition(cameraposition);
 
@@ -96,6 +96,22 @@ namespace jh
 			{
 				cameraposition.x = -1.55f;
 				cameraposition.y = -2.25f;
+				cameraposition.z = 1.0f;
+				cameraTransform->SetPosition(cameraposition);
+			}
+
+		}
+
+		if (PlayerManager::GetPlayer() != nullptr)
+		{
+			if (PlayerManager::GetPlayer()->GetJungleEventTrigger() == true)
+			{
+				mJungleEvent = true;
+			}
+			if (mJungleEvent == true)
+			{
+				cameraposition.x = 0.0f;
+				cameraposition.y = 0.0f;
 				cameraposition.z = 1.0f;
 				cameraTransform->SetPosition(cameraposition);
 			}

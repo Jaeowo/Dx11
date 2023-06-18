@@ -19,6 +19,7 @@ namespace jh
 		bool mEditorMode;
 		int mNumber;
 		bool mCaveEvent;
+		bool mJungleEvent;
 	};
 }
 

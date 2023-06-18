@@ -16,6 +16,8 @@
 #include "jhNumber.h"
 #include "jhNumberTens.h"
 #include "jhHpBar.h"
+#include "jhCollisionManager.h"
+#include "jhWall.h"
 
 namespace jh
 {
@@ -104,8 +106,8 @@ namespace jh
 		//Total BackGround
 		GameObject* cavescene2Obj = object::Instantiate<GameObject>(eLayerType::BackGround);
 		Transform* CaveScene2Tr = cavescene2Obj->GetComponent<Transform>();
-		CaveScene2Tr->SetPosition(Vector3(0.0f, 0.0f, 1.7f));
-		CaveScene2Tr->SetScale(Vector3(1.5f, 1.0f, 1.0f));
+		CaveScene2Tr->SetPosition(Vector3(0.02f, -0.05f, 1.7f));
+		CaveScene2Tr->SetScale(Vector3(1.9f, 1.2f, 1.0f));
 
 		SpriteRenderer* tilefloorsr = cavescene2Obj->AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> tilefloormesh = Resources::Find<Mesh>(L"RectMesh");
@@ -117,13 +119,42 @@ namespace jh
 		mplayer = object::Instantiate<Player>(eLayerType::Player);
 		PlayerManager::SetPlayer(mplayer);
 		mplayer->SetCoin(PlayerManager::GetPlayer()->GetCoin());
-		cameraComp->SetTarget(mplayer);
+		//cameraComp->SetTarget(mplayer);
 		PlayerManager::LoadPlayerState(mplayer);
+		mplayer->SetPlayerPos(Vector3(0.0f, 0.0f, 1.7f));
+		//mplayer->SetJungleEventTrigger(true);
 
 		Ground* groundObj2 = object::Instantiate<Ground>(eLayerType::BackGround);
 		Transform* groundTr2 = groundObj2->GetComponent<Transform>();
-		groundTr2->SetPosition(Vector3(1.2f, -0.56f, 1.7f));
+		groundTr2->SetPosition(Vector3(0.0f, -0.3f, 1.7f));
 		groundTr2->SetScale(Vector3(1.3f, 0.001f, 1.0f));
+
+		Wall* wallObj3 = object::Instantiate<Wall>(eLayerType::BackGround);
+		Transform* wallTr3 = wallObj3->GetComponent<Transform>();
+		wallTr3->SetPosition(Vector3(0.0f, 0.33f, 1.7f));
+		wallTr3->SetScale(Vector3(1.2f, 0.01f, 1.0f));
+
+		Wall* wallObj2 = object::Instantiate<Wall>(eLayerType::BackGround);
+		Transform* wallTr2 = wallObj2->GetComponent<Transform>();
+		wallTr2->SetPosition(Vector3(0.55f, 0.0f, 1.7f));
+		wallTr2->SetScale(Vector3(0.01f, 0.8f, 1.0f));
+
+		Wall* wallObj1 = object::Instantiate<Wall>(eLayerType::BackGround);
+		Transform* wallTr1 = wallObj1->GetComponent<Transform>();
+		wallTr1->SetPosition(Vector3(-0.55f, 0.0f, 1.7f));
+		wallTr1->SetScale(Vector3(0.01f, 0.8f, 1.0f));
+
+		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::Player, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::MonsterObject, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::BackGround, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::BackGrouncObj, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::MonsterObject, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround2, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGrouncObj, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Friends, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Friends, eLayerType::BackGround, true);
 	}
 
 	void JungleScene::OnExit()
