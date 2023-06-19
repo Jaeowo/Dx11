@@ -35,6 +35,8 @@ namespace jh
 		void SetPosition(Vector3 position) { mPosition = position; }
 		void SetCount(bool onecount) { mOneCount = onecount; }
 
+		void SetAegisState(eAegisState aegisstate) { mAegisState = aegisstate; }
+
 	private:
 		Vector3 mPosition;
 		Vector3 mTargetPosition;

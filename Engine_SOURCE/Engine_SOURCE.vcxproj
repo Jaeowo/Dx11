@@ -157,6 +157,7 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="jhAegis.h" />
     <ClInclude Include="jhAegisBullet.h" />
+    <ClInclude Include="jhAegisScript.h" />
     <ClInclude Include="jhAnimation.h" />
     <ClInclude Include="jhAnimator.h" />
     <ClInclude Include="jhApplication.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="jhHpBar.h" />
     <ClInclude Include="jhInput.h" />
     <ClInclude Include="jhJungleDoor.h" />
+    <ClInclude Include="jhJungleDoorScript.h" />
     <ClInclude Include="jhJungleScene.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhLight.h" />
@@ -228,8 +230,10 @@
     <ClInclude Include="jhRigidbody.h" />
     <ClInclude Include="jhRing.h" />
     <ClInclude Include="jhRingScript.h" />
+    <ClInclude Include="jhScrewDoor.h" />
     <ClInclude Include="jhScrewPiece.h" />
     <ClInclude Include="jhScrewPuzzle.h" />
+    <ClInclude Include="jhScrewPuzzleScript.h" />
     <ClInclude Include="jhSlope.h" />
     <ClInclude Include="jhSlopeScript.h" />
     <ClInclude Include="jhSoil.h" />
@@ -238,6 +242,7 @@
     <ClInclude Include="jhStoneDoorScript.h" />
     <ClInclude Include="jhStructedBuffer.h" />
     <ClInclude Include="jhThrower.h" />
+    <ClInclude Include="jhThrowerScript.h" />
     <ClInclude Include="jhThrowerStone.h" />
     <ClInclude Include="jhTitleScene.h" />
     <ClInclude Include="jhTorch.h" />
@@ -270,6 +275,7 @@
   <ItemGroup>
     <ClCompile Include="jhAegis.cpp" />
     <ClCompile Include="jhAegisBullet.cpp" />
+    <ClCompile Include="jhAegisScript.cpp" />
     <ClCompile Include="jhAnimation.cpp" />
     <ClCompile Include="jhAnimator.cpp" />
     <ClCompile Include="jhApplication.cpp" />
@@ -319,6 +325,7 @@
     <ClCompile Include="jhHpBar.cpp" />
     <ClCompile Include="jhInput.cpp" />
     <ClCompile Include="jhJungleDoor.cpp" />
+    <ClCompile Include="jhJungleDoorScript.cpp" />
     <ClCompile Include="jhJungleScene.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhLight.cpp" />
@@ -337,8 +344,10 @@
     <ClCompile Include="jhRigidbody.cpp" />
     <ClCompile Include="jhRing.cpp" />
     <ClCompile Include="jhRingScript.cpp" />
+    <ClCompile Include="jhScrewDoor.cpp" />
     <ClCompile Include="jhScrewPiece.cpp" />
     <ClCompile Include="jhScrewPuzzle.cpp" />
+    <ClCompile Include="jhScrewPuzzleScript.cpp" />
     <ClCompile Include="jhSlope.cpp" />
     <ClCompile Include="jhSlopeScript.cpp" />
     <ClCompile Include="jhSoil.cpp" />
@@ -347,6 +356,7 @@
     <ClCompile Include="jhStoneDoorScript.cpp" />
     <ClCompile Include="jhStructedBuffer.cpp" />
     <ClCompile Include="jhThrower.cpp" />
+    <ClCompile Include="jhThrowerScript.cpp" />
     <ClCompile Include="jhThrowerStone.cpp" />
     <ClCompile Include="jhTitleScene.cpp" />
     <ClCompile Include="jhTorch.cpp" />

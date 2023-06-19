@@ -6,6 +6,7 @@
 #include "jhPlayer.h"
 #include "jhPlayerManager.h"
 #include "jhTime.h"
+#include "jhAegisScript.h"
 
 namespace jh
 {
@@ -14,9 +15,10 @@ namespace jh
 		, mTotalTime(0.0f)
 		, mRotation(Vector3(0.0f, 0.0f, 0.0f))
 		, mPosition(Vector3(0.0f, 0.0f, 0.0f))
-		, mHp(4)
-		, mMinY(-0.1f)
-		, mMaxY(0.1f)
+		, mHp(1)
+		, mMinY(0.35f)
+		, mMaxY(0.55f)
+		, mAegisState(eAegisState::WaitShoot)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -36,7 +38,9 @@ namespace jh
 		std::shared_ptr<Texture> aegistexture = Resources::Load<Texture>(L"Aegis", L"Mini Aegis\\spr_AegisMini_43x57.png");
 
 		mAnimator->Create(L"AegisIdle", aegistexture, Vector2(0.0f, 0.0f), Vector2(43.0f, 57.0f), Vector2::Zero, 1, 0.2f);
-	
+		mAnimator->Create(L"AegisDie", aegistexture, Vector2(0.0f, 0.0f), Vector2(43.0f, 57.0f), Vector2::Zero, 3, 0.2f);
+		mAnimator->Create(L"AegisWaitShoot", aegistexture, Vector2(0.0f, 57.0f), Vector2(43.0f, 57.0f), Vector2::Zero, 4, 0.2f);
+		mAnimator->Create(L"AegisShoot", aegistexture, Vector2(0.0f, 114.0f), Vector2(43.0f, 57.0f), Vector2::Zero, 5, 0.2f);
 
 		mAnimator->Play(L"AegisIdle", true);
 
@@ -49,6 +53,7 @@ namespace jh
 	{
 		GameObject::Initalize();
 		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
+		AddComponent<AegisScript>();
 	}
 	void Aegis::Update()
 	{
@@ -58,6 +63,8 @@ namespace jh
 		mTransform->SetPosition(mPosition);
 		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
 		mTransform->SetRotation(mRotation);
+
+		mTotalTime += Time::DeltaTime();
 
 		switch (mAegisState)
 		{
@@ -115,6 +122,17 @@ namespace jh
 
 	void Aegis::Die()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"AegisDie", false);
+			mOneCount = true;
+			mTotalTime = 0.0f;
+		}
+
+		if (mTotalTime >= 0.5f)
+		{
+			Death();
+		}
 	}
 
 }

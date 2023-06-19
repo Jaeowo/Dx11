@@ -3,15 +3,15 @@
 
 namespace jh
 {
-	class Aegis;
+	class Collider2D;
+	class JungleDoor;
 
-	class AegisScript
+	class JungleDoorScript
 		: public Script
 	{
 	public:
-
-		AegisScript();
-		~AegisScript();
+		JungleDoorScript();
+		~JungleDoorScript();
 
 		virtual void Initalize() override;
 		virtual void Update() override;
@@ -22,6 +22,10 @@ namespace jh
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
 	private:
-		Aegis* mAegis;
+		Collider2D* mCollider;
+		Vector3 mColPos;
+		int mCount;
+		float mElapsedTime;
+		JungleDoor* mJungleDoor;
 	};
 }

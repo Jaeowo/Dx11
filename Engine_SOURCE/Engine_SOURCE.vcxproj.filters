@@ -331,6 +331,21 @@
     <ClInclude Include="jhMonsterSpawn.h">
       <Filter>GameObject\BackGround\MonsterSpawn</Filter>
     </ClInclude>
+    <ClInclude Include="jhAegisScript.h">
+      <Filter>Component\Script\MonsterScript\AegisScript</Filter>
+    </ClInclude>
+    <ClInclude Include="jhThrowerScript.h">
+      <Filter>Component\Script\MonsterScript\ThrowerScript</Filter>
+    </ClInclude>
+    <ClInclude Include="jhScrewPuzzleScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Screw</Filter>
+    </ClInclude>
+    <ClInclude Include="jhScrewDoor.h">
+      <Filter>GameObject\BackGround\ScrewPuzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="jhJungleDoorScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Door</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -647,6 +662,21 @@
     <ClCompile Include="jhMonsterSpawn.cpp">
       <Filter>GameObject\BackGround\MonsterSpawn</Filter>
     </ClCompile>
+    <ClCompile Include="jhAegisScript.cpp">
+      <Filter>Component\Script\MonsterScript\AegisScript</Filter>
+    </ClCompile>
+    <ClCompile Include="jhThrowerScript.cpp">
+      <Filter>Component\Script\MonsterScript\ThrowerScript</Filter>
+    </ClCompile>
+    <ClCompile Include="jhScrewPuzzleScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Screw</Filter>
+    </ClCompile>
+    <ClCompile Include="jhScrewDoor.cpp">
+      <Filter>GameObject\BackGround\ScrewPuzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="jhJungleDoorScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Door</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -861,6 +891,15 @@
     </Filter>
     <Filter Include="GameObject\BackGround\MonsterSpawn">
       <UniqueIdentifier>{bb4b5f58-eff5-4208-bb91-74259b6ab99a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\MonsterScript\AegisScript">
+      <UniqueIdentifier>{4b18ed3f-45ec-4ebd-8948-2ad24feceb42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\MonsterScript\ThrowerScript">
+      <UniqueIdentifier>{21d2c7f4-79ea-4359-bfdc-d2f323eca09f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\BackGround\BackGroundObj\Screw">
+      <UniqueIdentifier>{93ae133d-63da-41a3-b960-b706f596ea19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

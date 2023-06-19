@@ -150,7 +150,7 @@ namespace jh
 		{
 			SceneManager::LoadScene(eSceneType::Cave2);
 		}
-		Scene::Update();
+		Scene::Update(); 
 	}
 	void TitleScene::FixedUpdate()
 	{

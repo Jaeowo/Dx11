@@ -56,8 +56,12 @@ namespace jh
 
 		if (mMonsters.empty())
 		{
-			mStoneDoor->SetOpenTrigger(true);
-			mStoneDoor->SetCount(false);
+			if (mOneCount == false)
+			{
+				mStoneDoor->SetOpenTrigger(true);
+				mStoneDoor->SetCount(false);
+				mOneCount = true;
+			}
 		}
 	}
 	void MonsterSpawn::FixedUpdate()

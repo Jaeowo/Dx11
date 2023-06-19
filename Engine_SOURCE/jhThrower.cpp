@@ -6,6 +6,7 @@
 #include "jhPlayer.h"
 #include "jhPlayerManager.h"
 #include "jhTime.h"
+#include "jhThrowerScript.h"
 
 namespace jh
 {
@@ -14,7 +15,8 @@ namespace jh
 		, mTotalTime(0.0f)
 		, mRotation (Vector3(0.0f,180.0f,0.0f))
 		, mPosition(Vector3(0.0f, 0.0f, 0.0f))
-		, mHp (4)
+		, mHp (2)
+		, mThrowerState(eThrowerState::Idle)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -34,9 +36,9 @@ namespace jh
 		mAnimator->Create(L"Throw", throwertexture, Vector2(0.0f, 210.0f), Vector2(100.0f, 70.0f), Vector2::Zero, 6, 0.2f);
 		mAnimator->Create(L"Hurt", throwertexture, Vector2(0.0f, 280.0f), Vector2(100.0f, 70.0f), Vector2::Zero, 2, 0.2f);
 
-		Collider2D* mCollider = AddComponent<Collider2D>();
+		mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
-		mCollider->SetSize(Vector2(0.1f, 0.1f));
+		mCollider->SetSize(Vector2(3.0f, 3.0f));
 
 
 		mAnimator->Play(L"ThrowerIdle", true);
@@ -49,6 +51,7 @@ namespace jh
 	void Thrower::Initalize()
 	{
 		GameObject::Initalize();
+		AddComponent<ThrowerScript>();
 		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
 	}
 	void Thrower::Update()
@@ -59,6 +62,8 @@ namespace jh
 		mTransform->SetPosition(mPosition);
 		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
 		mTransform->SetRotation(mRotation);
+
+		mTotalTime += Time::DeltaTime();
 
 		switch (mThrowerState)
 		{
@@ -93,15 +98,21 @@ namespace jh
 
 	void Thrower::Idle()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"ThrowerIdle", false);
+			mOneCount = true;
+		}
 	}
 
 	void Thrower::Follow()
 	{
-
 		Vector3 Dir = mTargetPosition - mPosition;
-		float speed = 0.1f;
+		float speed = 0.2f;
 		Dir.Normalize();
 		mPosition.x += Dir.x * speed * Time::DeltaTime();
+
+		mCollider->SetSize(Vector2(0.15f, 0.15f));
 
 		if (mTargetPosition.x < mPosition.x)
 		{
@@ -111,18 +122,52 @@ namespace jh
 		{
 			mRotation.y = 0.0f;
 		}
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"ThrowerFollow", true);
+			mOneCount = true;
+		}
+
 	}
 
 	void Thrower::ThrowWait()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"Throw", false);
+			mOneCount = true;
+		}
 	}
 
 	void Thrower::Throw()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"Throw", false);
+			mOneCount = true;
+		}
 	}
 
 	void Thrower::Hurt()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"Hurt", false);
+			mOneCount = true;
+			mTotalTime = 0.0f;
+			mHp -= 1;
+		}
+
+		if (mHp <= 0 && 
+			mTotalTime >= 0.5f)
+		{
+			Death();
+		}
+		else if (mTotalTime >= 0.5f)
+		{
+			mThrowerState = eThrowerState::Follow;
+			mOneCount = false;
+		}
 	}
 
 }

@@ -5,6 +5,7 @@ namespace jh
 {
 	class Transform;
 	class Animator;
+	class Collider2D;
 
 	enum class eThrowerState
 	{
@@ -37,11 +38,17 @@ namespace jh
 		void SetPosition(Vector3 position) { mPosition = position; }
 		void SetCount(bool onecount) { mOneCount = onecount; }
 
+		eThrowerState GetThrowerState() { return mThrowerState; }
+		void SetThrowerState(eThrowerState throwerstate) { mThrowerState = throwerstate; }
+ 
 	private:
 		Vector3 mPosition;
 		Vector3 mTargetPosition;
+
 		Transform* mTransform;
 		Animator* mAnimator;
+		Collider2D* mCollider;
+
 		Vector3 mRotation;
 		eThrowerState mThrowerState;
 

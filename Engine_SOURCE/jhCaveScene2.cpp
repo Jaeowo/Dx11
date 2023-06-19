@@ -25,6 +25,8 @@
 #include "jhThrower.h"
 #include "jhAegis.h"
 #include "jhMonsterSpawn.h"
+#include "jhScrewDoor.h"
+#include "jhJungleDoor.h"
 
 namespace jh
 {
@@ -164,7 +166,7 @@ namespace jh
 #pragma endregion
 
 #pragma region WALL
-		Wall* wallObj19 = object::Instantiate<Wall>(eLayerType::BackGround);
+	/*	Wall* wallObj19 = object::Instantiate<Wall>(eLayerType::BackGround);
 		Transform* wallTr19 = wallObj19->GetComponent<Transform>();
 		wallTr19->SetPosition(Vector3(1.53f, -0.67f, 1.7f));
 		wallTr19->SetScale(Vector3(1.1f, 0.01f, 1.0f));
@@ -257,7 +259,7 @@ namespace jh
 		Wall* wallObj1 = object::Instantiate<Wall>(eLayerType::BackGround);
 		Transform* wallTr1 = wallObj1->GetComponent<Transform>();
 		wallTr1->SetPosition(Vector3(-2.5f, 0.0f, 1.7f));
-		wallTr1->SetScale(Vector3(0.01f, 1.5f, 1.0f));
+		wallTr1->SetScale(Vector3(0.01f, 1.5f, 1.0f));*/
 #pragma endregion
 		//Total BackGround
 		GameObject* cavescene2Obj = object::Instantiate<GameObject>(eLayerType::BackGround);
@@ -289,13 +291,11 @@ namespace jh
 
 		MonsterSpawn* monsterspawn = object::Instantiate<MonsterSpawn>(eLayerType::UI);
 
+		ScrewDoor* screwdoor = object::Instantiate<ScrewDoor>(eLayerType::UI);
 
-
-		StoneDoor* stoneDoorObj3 = object::Instantiate<StoneDoor>(eLayerType::BackGround);
-		stoneDoorObj3->SetPosition(Vector3(1.2f, -0.88f, 1.7f));
-		stoneDoorObj3->SetScale(Vector3(0.45f, 0.47f, 1.0f));
-		stoneDoorObj3->SetRotation(Vector3(0.0f, 0.0f, 180.0f));
-		stoneDoorObj3->SetCenter(Vector2(-0.05f, 0.0f));
+		JungleDoor* jungledoor = object::Instantiate<JungleDoor>(eLayerType::BackGround);
+		jungledoor->SetCave2toJungle(true);
+		jungledoor->SetPosition(Vector3(1.2f, -1.02f, 1.7f));
 
 		Button* buttonObj = object::Instantiate<Button>(eLayerType::BackGround);
 		buttonObj->SetPosition(Vector3(-1.8f, 0.02f, 1.7f));

@@ -3,15 +3,16 @@
 
 namespace jh
 {
-	class Aegis;
+	class Collider2D;
+	class ScrewPuzzle;
 
-	class AegisScript
+	class ScrewPuzzleScript
 		: public Script
 	{
 	public:
 
-		AegisScript();
-		~AegisScript();
+		ScrewPuzzleScript();
+		~ScrewPuzzleScript();
 
 		virtual void Initalize() override;
 		virtual void Update() override;
@@ -22,6 +23,9 @@ namespace jh
 		virtual void OnCollisionExit(Collider2D* collider) override;
 
 	private:
-		Aegis* mAegis;
+		Collider2D* mCollider;
+		Vector3 mColPos;
+		int mCount;
+		ScrewPuzzle* mScrewPuzzle;
 	};
 }
