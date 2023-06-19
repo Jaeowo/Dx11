@@ -48,6 +48,8 @@ namespace jh::enums
 		SpriteRenderer,
 		Animator,
 		ParticleSystem,
+		AudioListener,
+		AudioSource,
 		Light,
 		UI,
 		FadeOut,
@@ -67,6 +69,7 @@ namespace jh::enums
 		MeshData,
 		GraphicShader,
 		ComputeShader,
+		AudioClip,
 		Script,
 		End,
 	};

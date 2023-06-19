@@ -161,6 +161,9 @@
     <ClInclude Include="jhAnimation.h" />
     <ClInclude Include="jhAnimator.h" />
     <ClInclude Include="jhApplication.h" />
+    <ClInclude Include="jhAudioClip.h" />
+    <ClInclude Include="jhAudioListener.h" />
+    <ClInclude Include="jhAudioSource.h" />
     <ClInclude Include="jhBackSkyScript.h" />
     <ClInclude Include="jhBaseRenderer.h" />
     <ClInclude Include="jhBee.h" />
@@ -194,6 +197,7 @@
     <ClInclude Include="jhEventTriggerScript.h" />
     <ClInclude Include="jhFadeInScript.h" />
     <ClInclude Include="jhFadeOutScript.h" />
+    <ClInclude Include="jhFmod.h" />
     <ClInclude Include="jhGameObject.h" />
     <ClInclude Include="jhGawk.h" />
     <ClInclude Include="jhGawkScript.h" />
@@ -279,6 +283,9 @@
     <ClCompile Include="jhAnimation.cpp" />
     <ClCompile Include="jhAnimator.cpp" />
     <ClCompile Include="jhApplication.cpp" />
+    <ClCompile Include="jhAudioClip.cpp" />
+    <ClCompile Include="jhAudioListener.cpp" />
+    <ClCompile Include="jhAudioSource.cpp" />
     <ClCompile Include="jhBackSkyScript.cpp" />
     <ClCompile Include="jhBaseRenderer.cpp" />
     <ClCompile Include="jhBee.cpp" />
@@ -310,6 +317,7 @@
     <ClCompile Include="jhEventTriggerScript.cpp" />
     <ClCompile Include="jhFadeInScript.cpp" />
     <ClCompile Include="jhFadeOutScript.cpp" />
+    <ClCompile Include="jhFmod.cpp" />
     <ClCompile Include="jhGameObject.cpp" />
     <ClCompile Include="jhGawk.cpp" />
     <ClCompile Include="jhGawkScript.cpp" />

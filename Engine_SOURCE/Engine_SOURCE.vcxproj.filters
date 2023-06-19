@@ -346,6 +346,18 @@
     <ClInclude Include="jhJungleDoorScript.h">
       <Filter>Component\Script\BackGround\BackGroundObj\Door</Filter>
     </ClInclude>
+    <ClInclude Include="jhAudioClip.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAudioListener.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="jhAudioSource.h">
+      <Filter>Resource\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="jhFmod.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -677,6 +689,18 @@
     <ClCompile Include="jhJungleDoorScript.cpp">
       <Filter>Component\Script\BackGround\BackGroundObj\Door</Filter>
     </ClCompile>
+    <ClCompile Include="jhAudioClip.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAudioListener.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAudioSource.cpp">
+      <Filter>Resource\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="jhFmod.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -900,6 +924,12 @@
     </Filter>
     <Filter Include="Component\Script\BackGround\BackGroundObj\Screw">
       <UniqueIdentifier>{93ae133d-63da-41a3-b960-b706f596ea19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Audio">
+      <UniqueIdentifier>{fc11d34d-9a08-44f8-a0ea-021fb976ee84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Audio">
+      <UniqueIdentifier>{307a0b1d-0e35-441b-bbe8-5c2b36fcbf63}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
