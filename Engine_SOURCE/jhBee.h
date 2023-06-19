@@ -6,7 +6,7 @@ namespace jh
 	class Transform;
 	class Animator;
 
-	enum class BeeState
+	enum class eBeeState
 	{
 		Idle,
 		Attack,
@@ -41,6 +41,7 @@ namespace jh
 		Vector3 mPosition;
 		Transform* mTransform;
 		Animator* mAnimator;
+		eBeeState mBeeState;
 
 		bool mOneCount;
 		float mTotalTime;

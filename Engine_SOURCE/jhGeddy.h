@@ -24,7 +24,7 @@ namespace jh
 		void SetGeddyState(eGeddyState geddystate) { mGeddyState = geddystate; }
 
 		Vector3 GetPlayerPos() { return mPlayerPos; }
-		void SetPlayerPos(Vector3 playerpos) { mPlayerPos = playerpos; }
+		void SetPlayerPos(Vector3 playerpos) { mPlayerPos = playerpos;  mTransform->SetPosition(mPlayerPos); }
 
 		Vector3 GetGeddyPos() { return mPos; }
 		void SetGeddyPos(Vector3 pos) { mPos = pos; }

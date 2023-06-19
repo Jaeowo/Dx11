@@ -18,6 +18,8 @@
 #include "jhHpBar.h"
 #include "jhCollisionManager.h"
 #include "jhWall.h"
+#include "jhBeeHive.h"
+#include "jhBee.h"
 
 namespace jh
 {
@@ -143,6 +145,12 @@ namespace jh
 		Transform* wallTr1 = wallObj1->GetComponent<Transform>();
 		wallTr1->SetPosition(Vector3(-0.55f, 0.0f, 1.7f));
 		wallTr1->SetScale(Vector3(0.01f, 0.8f, 1.0f));
+
+		BeeHive* beehiveObj = object::Instantiate<BeeHive>(eLayerType::Monster);
+		beehiveObj->SetPosition(Vector3(0.02f, 0.2f, 1.7f));
+
+		Bee* beeObj = object::Instantiate<Bee>(eLayerType::Monster);
+		beeObj->SetPosition(Vector3(-0.2f, 0.2f, 1.7f));
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::Player, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);

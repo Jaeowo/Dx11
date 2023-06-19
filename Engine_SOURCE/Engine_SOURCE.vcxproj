@@ -165,6 +165,7 @@
     <ClInclude Include="jhBee.h" />
     <ClInclude Include="jhBeeHive.h" />
     <ClInclude Include="jhButton.h" />
+    <ClInclude Include="jhButtonScript.h" />
     <ClInclude Include="jhCamera.h" />
     <ClInclude Include="jhCameraScript.h" />
     <ClInclude Include="jhCaveScene.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="jhJungleScene.h" />
     <ClInclude Include="jhLayer.h" />
     <ClInclude Include="jhLight.h" />
+    <ClInclude Include="jhMonsterSpawn.h" />
     <ClInclude Include="jhMouseCursor.h" />
     <ClInclude Include="jhNumber.h" />
     <ClInclude Include="jhNumberTens.h" />
@@ -276,6 +278,7 @@
     <ClCompile Include="jhBee.cpp" />
     <ClCompile Include="jhBeeHive.cpp" />
     <ClCompile Include="jhButton.cpp" />
+    <ClCompile Include="jhButtonScript.cpp" />
     <ClCompile Include="jhCamera.cpp" />
     <ClCompile Include="jhCameraScript.cpp" />
     <ClCompile Include="jhCaveScene.cpp" />
@@ -319,6 +322,7 @@
     <ClCompile Include="jhJungleScene.cpp" />
     <ClCompile Include="jhLayer.cpp" />
     <ClCompile Include="jhLight.cpp" />
+    <ClCompile Include="jhMonsterSpawn.cpp" />
     <ClCompile Include="jhMouseCursor.cpp" />
     <ClCompile Include="jhNumber.cpp" />
     <ClCompile Include="jhNumberTens.cpp" />

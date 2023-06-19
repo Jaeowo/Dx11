@@ -325,6 +325,12 @@
     <ClInclude Include="jhtortoiseBulletScript.h">
       <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
     </ClInclude>
+    <ClInclude Include="jhButtonScript.h">
+      <Filter>Component\Script\BackGround\BackGroundObj\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="jhMonsterSpawn.h">
+      <Filter>GameObject\BackGround\MonsterSpawn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -635,6 +641,12 @@
     <ClCompile Include="jhtortoiseBulletScript.cpp">
       <Filter>Component\Script\MonsterScript\TortoiseScript</Filter>
     </ClCompile>
+    <ClCompile Include="jhButtonScript.cpp">
+      <Filter>Component\Script\BackGround\BackGroundObj\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="jhMonsterSpawn.cpp">
+      <Filter>GameObject\BackGround\MonsterSpawn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -843,6 +855,12 @@
     </Filter>
     <Filter Include="Component\Script\BackGround\BackGroundObj\Door">
       <UniqueIdentifier>{99c9b343-1a62-47c9-b829-9ad5b0b35208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\BackGround\BackGroundObj\Button">
+      <UniqueIdentifier>{c2d1d697-a875-4003-9e2e-b270832af993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround\MonsterSpawn">
+      <UniqueIdentifier>{bb4b5f58-eff5-4208-bb91-74259b6ab99a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

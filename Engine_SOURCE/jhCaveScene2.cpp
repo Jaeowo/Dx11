@@ -20,6 +20,11 @@
 #include "jhHpBar.h"
 #include "jhWall.h"
 #include "jhCollisionManager.h"
+#include "jhGeddy.h"
+#include "jhGeddyScript.h"
+#include "jhThrower.h"
+#include "jhAegis.h"
+#include "jhMonsterSpawn.h"
 
 namespace jh
 {
@@ -275,19 +280,16 @@ namespace jh
 		PlayerManager::LoadPlayerState(mplayer);
 		mplayer->SetPlayerPos(Vector3(-2.13f, -0.27f, 1.7f));
 
+		//Geddy
+		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
+		PlayerManager::SetGeddy(geddyObj);
+		geddyObj->SetCount(0);
+		geddyObj->AddComponent<GeddyScript>();
+		geddyObj->SetPlayerPos(Vector3(-2.23f, -0.27f, 1.7f));
+
+		MonsterSpawn* monsterspawn = object::Instantiate<MonsterSpawn>(eLayerType::UI);
 
 
-		StoneDoor* stoneDoorObj = object::Instantiate<StoneDoor>(eLayerType::BackGround);
-		stoneDoorObj->SetPosition(Vector3(-1.275f, 0.3f, 1.7f));
-		stoneDoorObj->SetScale(Vector3(0.45f, 0.45f, 1.0f));
-		stoneDoorObj->SetRotation(Vector3(0.0f, 0.0f, 270.0f));
-		stoneDoorObj->SetCenter(Vector2(0.0f, -0.04f));
-
-		StoneDoor* stoneDoorObj2 = object::Instantiate<StoneDoor>(eLayerType::BackGround);
-		stoneDoorObj2->SetPosition(Vector3(0.8f, 0.3f, 1.7f));
-		stoneDoorObj2->SetScale(Vector3(0.45f, 0.47f, 1.0f));
-		stoneDoorObj2->SetRotation(Vector3(0.0f, 0.0f, 270.0f));
-		stoneDoorObj2->SetCenter(Vector2(0.0f, -0.04f));
 
 		StoneDoor* stoneDoorObj3 = object::Instantiate<StoneDoor>(eLayerType::BackGround);
 		stoneDoorObj3->SetPosition(Vector3(1.2f, -0.88f, 1.7f));

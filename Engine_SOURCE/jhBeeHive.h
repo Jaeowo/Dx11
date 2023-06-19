@@ -10,7 +10,7 @@ namespace jh
 	{
 		Idle,
 		SpawnBees,
-		Fallen,
+		Broken
 	};
 
 	class BeeHive
@@ -26,6 +26,9 @@ namespace jh
 		virtual void Render();
 
 		//State
+		void Idle();
+		void SpawnBees();
+		void Broken();
 
 		void SetPosition(Vector3 position) { mPosition = position; }
 		void SetCount(bool onecount) { mOneCount = onecount; }

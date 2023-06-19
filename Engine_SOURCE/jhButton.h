@@ -6,12 +6,13 @@ namespace jh
 	class Transform;
 	class Animator;
 	class Collider2D;
+	class StoneDoor;
 
 	enum class eButtonState
 	{
 		Idle,
 		Press,
-		UnPress,
+		PressIdle
 	};
 
 	class Button
@@ -28,21 +29,25 @@ namespace jh
 
 		//State
 		void Idle();
-		void Close();
-		void Open();
+		void Press();
+		void PressIdle();
 
 		void SetPosition(Vector3 position) { mPosition = position; }
 		void SetCount(bool onecount) { mOneCount = onecount; }
-
+		void SetPressTrigger(bool presstrigger) { mPressTrigger = presstrigger; }
 
 	private:
 		Vector3 mPosition;
 		Transform* mTransform;
 		Animator* mAnimator;
 		Collider2D* mCollider;
+		StoneDoor* mStonedoor;
+
 		eButtonState mButtonState;
 
 		bool mOneCount;
+		bool mPressTrigger;
+		bool mPressOneCheck;
 		float mTotalTime;
 	};
 }

@@ -12,6 +12,8 @@ namespace jh
 		, mOneCount(false)
 		, mTotalTime(0.0f)
 		, mDoorState (DoorState::Idle)
+		, mOpenTrigger (false)
+		, mOpenOneCheck (false)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -35,8 +37,8 @@ namespace jh
 		std::shared_ptr<Texture> StoneDoortexture2 = Resources::Load<Texture>(L"StoneDoor2", L"MapObject\\spr_StoneDoor_99x192_strip15.png");
 
 		mAnimator->Create(L"IdleDoor", StoneDoortexture2, Vector2(0.0f, 0.0f), Vector2(99.0f, 192.0f), Vector2::Zero, 1, 0.3f);
-		mAnimator->Create(L"OpenDoor", StoneDoortexture1, Vector2(0.0f, 0.0f), Vector2(99.0f, 192.0f), Vector2::Zero, 15, 0.3f);
-		mAnimator->Create(L"CloseDoor", StoneDoortexture2, Vector2(0.0f, 0.0f), Vector2(99.0f, 192.0f), Vector2::Zero, 15, 0.3f);
+		mAnimator->Create(L"CloseDoor", StoneDoortexture1, Vector2(0.0f, 0.0f), Vector2(99.0f, 192.0f), Vector2::Zero, 15, 0.3f);
+		mAnimator->Create(L"OpenDoor", StoneDoortexture2, Vector2(0.0f, 0.0f), Vector2(99.0f, 192.0f), Vector2::Zero, 15, 0.3f);
 
 		mAnimator->Play(L"IdleDoor", false);
 	}
@@ -52,14 +54,27 @@ namespace jh
 	{
 		GameObject::Update();
 
-		mCollider = GetComponent<Collider2D>();
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
 		mTransform->SetRotation(mRotation);
 		mTransform->SetScale(mScale);
-		mCollider->SetCenter(mCenter);
+
+		mCollider = GetComponent<Collider2D>();
+		if (mCollider) 
+		{
+			mCollider->SetCenter(mCenter);
+		}
 	
+		if (mOpenOneCheck == false)
+		{
+			if (mOpenTrigger == true)
+			{
+				mDoorState = DoorState::Open;
+				mOpenOneCheck = true;
+			}
+		}
 		
+
 		switch (mDoorState)
 		{
 		case jh::DoorState::Idle:
@@ -87,14 +102,30 @@ namespace jh
 
 	void StoneDoor::Idle()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"IdleDoor", false);
+			mOneCount = true;
+		}
 	}
 
 	void StoneDoor::Close()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"CloseDoor", false);
+			mOneCount = true;
+		}
 	}
 
 	void StoneDoor::Open()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"OpenDoor", false);
+			RemoveComponent<Collider2D>();
+			mOneCount = true;
+		}
 	}
 
 }

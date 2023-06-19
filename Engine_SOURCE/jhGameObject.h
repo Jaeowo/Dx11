@@ -80,6 +80,21 @@ namespace jh
 			return components;
 		}
 
+		template <typename T>
+		void RemoveComponent()
+		{
+			T* comp = GetComponent<T>();
+			if (comp != nullptr)
+			{
+				auto iter = std::find(mComponents.begin(), mComponents.end(), comp);
+				if (iter != mComponents.end())
+				{
+					mComponents.erase(iter);
+				}
+				delete comp;
+			}
+		}
+
 		const std::vector<Script*>& GetScripts() { return mScripts; }
 
 		bool IsDead()

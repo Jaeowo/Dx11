@@ -113,7 +113,11 @@ namespace jh
 			mVelocity.y = 0.0f;
 		}
 
-
+		if (Input::GetKeyDown(eKeyCode::I))
+		{
+			mPlayer->SetPlayerState(ePlayerState::Idle);
+			mPlayer->SetCount(0);
+		}
 
 #pragma region FALL
 		float deltaY = mPlayerPosition.y - mPrevPosition.y;
@@ -394,7 +398,7 @@ namespace jh
 			mAnimator->Play(L"Jump", false);
 			mPlayer->SetIsGround(false);
 
-			float JumpForce = 0.02f;
+			float JumpForce = 0.03f;
 			mVelocity.y += JumpForce / mMass;
 
 			mPlayer->SetCount(1);

@@ -36,7 +36,7 @@ namespace jh
 		void SetScale(Vector3 scale) { mScale = scale; }
 		void SetCenter(Vector2 center) { mCenter = center; }
 		void SetCount(bool onecount) { mOneCount = onecount; }
-
+		void SetOpenTrigger(bool opentrigger) { mOpenTrigger = opentrigger; }
 
 	private:
 		Vector3 mPosition;
@@ -49,6 +49,8 @@ namespace jh
 		DoorState mDoorState;
 
 		bool mOneCount;
+		bool mOpenTrigger;
+		bool mOpenOneCheck;
 		float mTotalTime;
 	};
 }

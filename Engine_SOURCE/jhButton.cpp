@@ -2,6 +2,10 @@
 #include "jhAnimator.h"
 #include "jhResources.h"
 #include "jhSpriteRenderer.h"
+#include "jhButtonScript.h"
+#include "jhTime.h"
+#include "jhStoneDoor.h"
+#include "jhObject.h"
 
 namespace jh
 {
@@ -10,6 +14,8 @@ namespace jh
 		, mOneCount(false)
 		, mTotalTime(0.0f)
 		, mButtonState(eButtonState::Idle)
+		, mPressTrigger(false)
+		, mPressOneCheck(false)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -33,8 +39,13 @@ namespace jh
 		mAnimator->Create(L"Press", HeavyButtontexture, Vector2(0.0f, 86.0f), Vector2(76.0f, 43.0f), Vector2::Zero, 3, 0.3f);
 		mAnimator->Create(L"PressIdle", HeavyButtontexture, Vector2(0.0f, 129.0f), Vector2(76.0f, 43.0f), Vector2::Zero, 4, 0.3f);
 
-
 		mAnimator->Play(L"Idle", false);
+
+		mStonedoor = object::Instantiate<StoneDoor>(eLayerType::BackGround);
+		mStonedoor->SetPosition(Vector3(-1.275f, 0.3f, 1.7f));
+		mStonedoor->SetScale(Vector3(0.45f, 0.45f, 1.0f));
+		mStonedoor->SetRotation(Vector3(0.0f, 0.0f, 270.0f));
+		mStonedoor->SetCenter(Vector2(0.0f, -0.04f));
 
 	}
 	Button::~Button()
@@ -43,6 +54,7 @@ namespace jh
 	void Button::Initalize()
 	{
 		GameObject::Initalize();
+		AddComponent<ButtonScript>();
 	}
 	void Button::Update()
 	{
@@ -52,6 +64,32 @@ namespace jh
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
 
+		mTotalTime += Time::DeltaTime();
+
+		if (mPressOneCheck == false)
+		{
+			if (mPressTrigger == true)
+			{
+				mButtonState = eButtonState::Press;
+				mPressOneCheck = true;
+			}
+		}
+		
+
+		switch (mButtonState)
+		{
+		case jh::eButtonState::Idle:
+			Idle();
+			break;
+		case jh::eButtonState::Press:
+			Press();
+			break;
+		case jh::eButtonState::PressIdle:
+			PressIdle();
+			break;
+		default:
+			break;
+		}
 
 	}
 	void Button::FixedUpdate()
@@ -65,14 +103,48 @@ namespace jh
 
 	void Button::Idle()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"Idle", false);
+
+			mOneCount = true;
+		}
 	}
 
-	void Button::Close()
+	void Button::Press()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"Press", false);
+			mTotalTime = 0.0f;
+			mOneCount = true;
+
+		}
+
+		float newY = mCollider->GetCenter().y - Time::DeltaTime() * 0.1f; 
+		mCollider->SetCenter(Vector2(0.0f, newY));
+
+		if (newY <= -0.1f)
+		{
+			mOneCount = 0;
+			mButtonState = eButtonState::PressIdle;
+		}
 	}
 
-	void Button::Open()
+	void Button::PressIdle()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"PressIdle", false);
+			
+			mStonedoor->SetOpenTrigger(true);
+			mStonedoor->SetCount(false);
+			RemoveComponent<Collider2D>();
+			mOneCount = true;
+			
+		}
 	}
+
+	
 
 }
