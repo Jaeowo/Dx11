@@ -358,6 +358,9 @@
     <ClInclude Include="jhFmod.h">
       <Filter>Component\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="jhTorchOwl.h">
+      <Filter>GameObject\BackGround\Torch</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -700,6 +703,9 @@
     </ClCompile>
     <ClCompile Include="jhFmod.cpp">
       <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="jhTorchOwl.cpp">
+      <Filter>GameObject\BackGround\Torch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

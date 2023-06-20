@@ -37,6 +37,12 @@ namespace jh
 		Vector3 mPosition;
 		Transform* mTransform;
 		Animator* mAnimator;
+		eBeeHiveState mBeeHiveState;
+
+		float mSpawnTimer;
+		int mSpawnedBees;
+		int mDeadBees;
+		int mSpawnCycle;
 
 		bool mOneCount;
 		float mTotalTime;

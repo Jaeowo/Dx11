@@ -5,6 +5,7 @@
 #include "jhSceneManager.h"
 #include "jhResources.h"
 #include "jhCollisionManager.h"
+//#include "jhFmod.h"
 
 namespace jh
 {
@@ -21,11 +22,13 @@ namespace jh
 
 	void Application::Initalize()
 	{
+		//Fmod::Initialize();
 		Time::Initialize();
 		Input::Initialize();
 		CollisionManager::Initialize();
 		renderer::Initialize();
 		SceneManager::Initalize();
+		
 	}
 
 	// 게임 로직 캐릭터 이동 등등 
@@ -81,6 +84,7 @@ namespace jh
 	void Application::Release()
 	{
 		Resources::deleteTest();
+		//Fmod::Release();
 	}
 
 	void Application::SetWindow(HWND hwnd, UINT width, UINT height)

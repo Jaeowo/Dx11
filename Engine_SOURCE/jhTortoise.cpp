@@ -11,6 +11,7 @@
 #include "jhPlayer.h"
 #include "jhTortoiseScript.h"
 #include "jhTortoiseMask.h"
+#include "jhJungleDoor.h"
 
 namespace jh
 {
@@ -456,6 +457,9 @@ namespace jh
 		{
 			mElapsedTime = 0.0f;
 			mAnimator->Play(L"FlyDeath", false);
+			JungleDoor* jungledoor = object::Instantiate<JungleDoor>(eLayerType::BackGround);
+			jungledoor->SetCavetoCave2(true);
+			jungledoor->SetPosition(Vector3(-1.53f, -2.55f, 1.7f));
 			mAniCheck = true;
 		}
 

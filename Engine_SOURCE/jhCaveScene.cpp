@@ -221,9 +221,7 @@ namespace jh
 		mtortoise = object::Instantiate<Tortoise>(eLayerType::Monster);
 		mtortoise->SetPosition(Vector3(-1.2f, -2.53f, 1.7f));
 
-		JungleDoor* jungledoor = object::Instantiate<JungleDoor>(eLayerType::BackGround);
-		jungledoor->SetCavetoCave2(true);
-		jungledoor->SetPosition(Vector3(1.2f, -0.5f, 1.7f));
+
 
 #pragma region UI
 		// coin UI

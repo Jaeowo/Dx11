@@ -10,6 +10,7 @@ namespace jh
 	{
 		Idle,
 		Attack,
+		Follow,
 		HitWall,
 		Hit,
 		Death,
@@ -30,9 +31,10 @@ namespace jh
 		//State
 		void Idle();
 		void Attack();
+		void Follow();
 		void HitWall();
 		void Hit();
-		void Death();
+		void BeeDeath();
 
 		void SetPosition(Vector3 position) { mPosition = position; }
 		void SetCount(bool onecount) { mOneCount = onecount; }
@@ -45,5 +47,12 @@ namespace jh
 
 		bool mOneCount;
 		float mTotalTime;
+		int mHp;
+
+		Vector3 mMoveDirection;
+		float mMoveSpeed;
+		float mWobbleMagnitude;
+		float mWobbleSpeed;
+		Vector3 mPlayerPosition;
 	};
 }

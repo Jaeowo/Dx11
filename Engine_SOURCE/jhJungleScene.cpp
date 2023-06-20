@@ -20,6 +20,8 @@
 #include "jhWall.h"
 #include "jhBeeHive.h"
 #include "jhBee.h"
+#include "jhTorch.h"
+#include "jhTorchOwl.h"
 
 namespace jh
 {
@@ -62,7 +64,7 @@ namespace jh
 		directionalLight->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -100.0f));
 		Light* lightComp = directionalLight->AddComponent<Light>();
 		lightComp->SetType(eLightType::Directional);
-		lightComp->SetDiffuse(Vector4(0.5f, 0.5f, 0.5f, 1.0f));
+		lightComp->SetDiffuse(Vector4(0.4f, 0.4f, 0.4f, 1.0f));
 
 		//Main Camera
 		GameObject* cameraObj = object::Instantiate<GameObject>(eLayerType::Camera, this);
@@ -151,6 +153,12 @@ namespace jh
 
 		Bee* beeObj = object::Instantiate<Bee>(eLayerType::Monster);
 		beeObj->SetPosition(Vector3(-0.2f, 0.2f, 1.7f));
+
+		Torch* torchobj = object::Instantiate<Torch>(eLayerType::BackGround);
+		torchobj->SetPosition(Vector3(-0.0f, -0.2f, 1.7f));
+
+		TorchOwl* torchowlobj = object::Instantiate<TorchOwl>(eLayerType::BackGround);
+		torchowlobj->SetPosition(Vector3(-0.0f, -0.26f, 1.7f));
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::Player, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);

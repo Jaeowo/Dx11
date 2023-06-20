@@ -32,6 +32,7 @@ namespace jh
 		bool initialized = false;
 		std::unique_ptr<graphics::GraphicDevice_DX11> graphicDevice;
 
+
 		HWND mHwnd;
 		HDC mHdc;
 		UINT mHeight;

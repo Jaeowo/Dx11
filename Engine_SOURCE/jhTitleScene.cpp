@@ -17,9 +17,13 @@
 #include "jhAnimator.h"
 #include "jhLight.h"
 #include "jhPaintShader.h"
+#include "jhAudioSource.h"
+#include "jhAudioListener.h"
+
 
 namespace jh
 {
+
 	TitleScene::TitleScene()
 		: Scene(eSceneType::Title)
 	{
@@ -142,13 +146,27 @@ namespace jh
 		leftsr->SetMaterial(titleleftmaterial);
 		leftsr->SetMesh(leftmesh);
 
+		GameObject* soundObject = object::Instantiate<GameObject>(eLayerType::BackGround);
+		AudioSource* audioSource = new AudioSource();
+		soundObject->AddComponent(audioSource);
+		std::shared_ptr<AudioClip> clip = std::make_shared<AudioClip>();
+		clip->Load(L"Audio\\MainTitle.mp3");
+		audioSource->SetClip(clip);
+		audioSource->Play();
+		AudioListener* listener = new AudioListener();
+		cameraObj->AddComponent(listener);
+
+
 		Scene::Initalize();
+
+
 	}
+
 	void TitleScene::Update()
 	{
 		if (Input::GetKeyDown(eKeyCode::N))
 		{
-			SceneManager::LoadScene(eSceneType::Cave2);
+			SceneManager::LoadScene(eSceneType::Play);
 		}
 		Scene::Update(); 
 	}

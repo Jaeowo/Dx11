@@ -6,6 +6,7 @@
 #include "jhPlayer.h"
 #include "jhPlayerManager.h"
 #include "jhTime.h"
+#include "jhBee.h"
 
 namespace jh
 {
@@ -13,6 +14,11 @@ namespace jh
 		: mPosition(Vector3(0.0f, 0.0f, 0.0f))
 		, mOneCount(false)
 		, mTotalTime(0.0f)
+		, mSpawnTimer(0.0f)
+		, mSpawnedBees(0)
+		, mDeadBees(0)
+		, mSpawnCycle(0)
+		, mBeeHiveState(eBeeHiveState::SpawnBees)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -56,6 +62,22 @@ namespace jh
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
 
+		switch (mBeeHiveState)
+		{
+		case jh::eBeeHiveState::Idle:
+			Idle();
+			break;
+		case jh::eBeeHiveState::SpawnBees:
+			SpawnBees();
+			break;
+		case jh::eBeeHiveState::Broken:
+			Broken();
+			break;
+		default:
+			break;
+		}
+
+	
 	}
 	void BeeHive::FixedUpdate()
 	{
@@ -70,8 +92,14 @@ namespace jh
 	{
 		if (mOneCount == false)
 		{
-			mAnimator->Play(L"Idle", false);
+			mAnimator->Play(L"Buzzing", false);
 			mOneCount == true;
+		}
+		if (mDeadBees >= 4) 
+		{
+			mDeadBees = 0;
+			mBeeHiveState = eBeeHiveState::SpawnBees;
+			mOneCount = false;
 		}
 	}
 
@@ -81,6 +109,32 @@ namespace jh
 		{
 			mAnimator->Play(L"Buzzing", true);
 			mOneCount == true;
+
+		}
+
+		if (mSpawnCycle >= 4)  
+		{
+			mBeeHiveState = eBeeHiveState::Broken;
+			mOneCount = false;
+			return;
+		}
+
+		mSpawnTimer += Time::DeltaTime(); 
+
+		if (mSpawnTimer >= 1.0f)
+		{
+			mSpawnTimer = 0.0f;
+		/*	Bee* beeObj = object::Instantiate<Bee>(eLayerType::Monster);
+			beeObj->SetPosition(Vector3(-0.2f, 0.2f, 1.7f));*/
+			mSpawnedBees++;
+		}
+
+		if (mSpawnedBees >= 4) 
+		{
+			mSpawnedBees = 0;
+			mBeeHiveState = eBeeHiveState::Idle;
+			mOneCount = false;
+			mSpawnCycle++;
 		}
 	}
 

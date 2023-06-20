@@ -131,6 +131,9 @@
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>copy "$(SolutionDir)fmodL.dll" "$(SolutionDir)\x64\Debug\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -152,6 +155,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>copy "$(SolutionDir)fmod.dl" "$(SolutionDir)\x64\Release\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommonInclude.h" />
@@ -250,6 +256,7 @@
     <ClInclude Include="jhThrowerStone.h" />
     <ClInclude Include="jhTitleScene.h" />
     <ClInclude Include="jhTorch.h" />
+    <ClInclude Include="jhTorchOwl.h" />
     <ClInclude Include="jhTortoise.h" />
     <ClInclude Include="jhTortoiseBullet.h" />
     <ClInclude Include="jhtortoiseBulletScript.h" />
@@ -368,6 +375,7 @@
     <ClCompile Include="jhThrowerStone.cpp" />
     <ClCompile Include="jhTitleScene.cpp" />
     <ClCompile Include="jhTorch.cpp" />
+    <ClCompile Include="jhTorchOwl.cpp" />
     <ClCompile Include="jhTortoise.cpp" />
     <ClCompile Include="jhTortoiseBullet.cpp" />
     <ClCompile Include="jhtortoiseBulletScript.cpp" />

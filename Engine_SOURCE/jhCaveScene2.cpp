@@ -27,6 +27,9 @@
 #include "jhMonsterSpawn.h"
 #include "jhScrewDoor.h"
 #include "jhJungleDoor.h"
+#include "jhAudioSource.h"
+#include "jhAudioListener.h"
+#include "jhBackSkyScript.h"
 
 namespace jh
 {
@@ -311,6 +314,18 @@ namespace jh
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGrouncObj, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Friends, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Friends, eLayerType::BackGround, true);
+
+		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround3);
+		Transform* backskyTr = backskyObj->GetComponent<Transform>();
+		backskyTr->SetPosition(Vector3(1.0f, 1.1f, 1.7f));
+		backskyTr->SetScale(Vector3(2.1f, 2.1f, 1.0f));
+
+		SpriteRenderer* backskysr = backskyObj->AddComponent<SpriteRenderer>();
+		std::shared_ptr<Mesh> backskymesh = Resources::Find<Mesh>(L"RectMesh");
+		std::shared_ptr<Material> backskymaterial = Resources::Find<Material>(L"Backskymaterial");
+		backskysr->SetMaterial(backskymaterial);
+		backskysr->SetMesh(backskymesh);
+		backskyObj->AddComponent<BackSkyScript>();
 	}
 
 	void CaveScene2::OnExit()
