@@ -28,6 +28,8 @@
 #include "jhTime.h"
 #include "jhFadeInScript.h"
 #include "jhJungleDoor.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -67,9 +69,19 @@ namespace jh
 				fadetr->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
 				fadetr->SetScale(Vector3(25.0f, 25.0f, 1.0f));
 
+				std::shared_ptr<AudioClip> audioClip2 = Resources::Load<AudioClip>(L"Turtle", L"..\\Resources\\Audio\\15. Turtle Guardian Phase 1.mp3");
+
+				maudioSource->Stop();
+				maudioSource->SetClip(audioClip2);
+	
+				maudioSource->Play();
+
+
 				mtortoise->SetPlayerState(eTortoiseState::MaskMove);
 				mtortoise->SetAniCheck(false);
 				mCount = true;
+
+			
 			}
 
 		}
@@ -184,6 +196,15 @@ namespace jh
 		tilefloorsr->SetMaterial(tilefloormaterial);
 		tilefloorsr->SetMesh(tilefloormesh);
 
+
+		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>(L"Cave", L"..\\Resources\\Audio\\12. Vellie Cave.mp3");
+
+		maudioSource = tilefloorObj->AddComponent<AudioSource>();
+		maudioSource->SetClip(audioClip);
+		maudioSource->SetLoop(true);
+
+		maudioSource->Play();
+
 		//Player
 		mplayer = object::Instantiate<Player>(eLayerType::Player);
 		PlayerManager::SetPlayer(mplayer);
@@ -246,7 +267,7 @@ namespace jh
 		NumberTens* numbertens = object::Instantiate<NumberTens>(eLayerType::UI);
 		numbertens->SetPosition(Vector3(-5.9f, 4.2f, 1.0f));
 #pragma endregion
-
+		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::PlayerObject, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::Player, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::MonsterObject, true);
@@ -264,6 +285,7 @@ namespace jh
 	void CaveScene::OnExit()
 	{
 		mplayer->SetCaveEventTrigger(false);
+		maudioSource->Stop();
 		PlayerManager::SavePlayerState(mplayer);
 	}
 }

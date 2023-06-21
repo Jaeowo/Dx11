@@ -314,6 +314,7 @@ namespace jh
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGrouncObj, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Friends, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Friends, eLayerType::BackGround, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::PlayerObject, true);
 
 		GameObject* backskyObj = object::Instantiate<GameObject>(eLayerType::BackGround3);
 		Transform* backskyTr = backskyObj->GetComponent<Transform>();
@@ -326,11 +327,22 @@ namespace jh
 		backskysr->SetMaterial(backskymaterial);
 		backskysr->SetMesh(backskymesh);
 		backskyObj->AddComponent<BackSkyScript>();
+
+		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+			(L"Cave", L"..\\Resources\\Audio\\12. Vellie Cave.mp3");
+
+		maudioSource = cavescene2Obj->AddComponent<AudioSource>();
+		maudioSource->SetClip(audioClip);
+		maudioSource->SetLoop(true);
+
+		maudioSource->Play();
+
 	}
 
 	void CaveScene2::OnExit()
 	{
 		PlayerManager::SavePlayerState(mplayer);
+		maudioSource->Stop();
 	}
 
 }

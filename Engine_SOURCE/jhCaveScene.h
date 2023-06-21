@@ -6,6 +6,7 @@ namespace jh
 	class Tortoise;
 	class Player;
 	class Camera;
+	class AudioSource;
 
 	class CaveScene : public Scene
 	{
@@ -26,6 +27,7 @@ namespace jh
 		Player* mplayer;
 		GameObject* mcamera;
 		Camera* mcameracomp;
+		AudioSource* maudioSource;
 
 		bool mCount;
 		float mTime;

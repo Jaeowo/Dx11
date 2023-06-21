@@ -17,9 +17,9 @@
 #include "jhAnimator.h"
 #include "jhLight.h"
 #include "jhPaintShader.h"
+#include "jhAudioClip.h"
 #include "jhAudioSource.h"
 #include "jhAudioListener.h"
-
 
 namespace jh
 {
@@ -33,12 +33,6 @@ namespace jh
 	}
 	void TitleScene::Initalize()
 	{
-		//Paint Shader 
-		std::shared_ptr<PaintShader> paintShader = Resources::Find<PaintShader>(L"PaintShader");
-		//L"SmileTexture"
-		std::shared_ptr<Texture> paintTex = Resources::Find<Texture>(L"PaintTexture");
-		paintShader->SetTarget(paintTex);
-		paintShader->OnExcute();
 
 		{
 			GameObject* directionalLight = object::Instantiate<GameObject>(eLayerType::Player);
@@ -62,6 +56,7 @@ namespace jh
 		Camera* cameraComp = cameraObj->AddComponent<Camera>();
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
 		cameraObj->AddComponent<CameraScript>();
+		AudioListener* listener = cameraObj->AddComponent<AudioListener>();
 		mainCamera = cameraComp;
 
 		// Ground2 Camera
@@ -146,27 +141,24 @@ namespace jh
 		leftsr->SetMaterial(titleleftmaterial);
 		leftsr->SetMesh(leftmesh);
 
-		GameObject* soundObject = object::Instantiate<GameObject>(eLayerType::BackGround);
-		AudioSource* audioSource = new AudioSource();
-		soundObject->AddComponent(audioSource);
-		std::shared_ptr<AudioClip> clip = std::make_shared<AudioClip>();
-		clip->Load(L"Audio\\MainTitle.mp3");
-		audioSource->SetClip(clip);
-		audioSource->Play();
-		AudioListener* listener = new AudioListener();
-		cameraObj->AddComponent(listener);
-
-
 		Scene::Initalize();
 
+		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+			(L"MainTitle", L"..\\Resources\\Audio\\MainTitle.mp3");
 
+		maudioSource = leftObj->AddComponent<AudioSource>();
+		maudioSource->SetClip(audioClip);
+		maudioSource->SetLoop(true);
+
+		maudioSource->Play();
+	
 	}
 
 	void TitleScene::Update()
 	{
 		if (Input::GetKeyDown(eKeyCode::N))
 		{
-			SceneManager::LoadScene(eSceneType::Play);
+			SceneManager::LoadScene(eSceneType::Cave2);
 		}
 		Scene::Update(); 
 	}
@@ -183,5 +175,6 @@ namespace jh
 	}
 	void TitleScene::OnExit()
 	{
+		maudioSource->Stop();
 	}
 }

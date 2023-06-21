@@ -20,7 +20,7 @@ namespace jh
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
-
+		mPrevPosition = mPosition;
 		mTransform->SetScale(Vector3(0.3f, 0.3f, 1.0f));
 
 		SpriteRenderer* gawksr = AddComponent<SpriteRenderer>();
@@ -65,6 +65,8 @@ namespace jh
 
 		mTotalTime += Time::DeltaTime();
 
+		mPrevPosition = mPosition;
+
 		switch (mThrowerState)
 		{
 		case jh::eThrowerState::Idle:
@@ -103,6 +105,9 @@ namespace jh
 			mAnimator->Play(L"ThrowerIdle", false);
 			mOneCount = true;
 		}
+
+	
+
 	}
 
 	void Thrower::Follow()

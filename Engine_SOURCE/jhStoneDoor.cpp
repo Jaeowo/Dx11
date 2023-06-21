@@ -3,6 +3,8 @@
 #include "jhResources.h"
 #include "jhSpriteRenderer.h"
 #include "jhStoneDoorScript.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -41,6 +43,13 @@ namespace jh
 		mAnimator->Create(L"OpenDoor", StoneDoortexture2, Vector2(0.0f, 0.0f), Vector2(99.0f, 192.0f), Vector2::Zero, 15, 0.3f);
 
 		mAnimator->Play(L"IdleDoor", false);
+
+		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+			(L"DoorOpen", L"..\\Resources\\Audio\\DoorOpen.wav");
+
+		mAudioSource = AddComponent<AudioSource>();
+		mAudioSource->SetClip(audioClip);
+		mAudioSource->SetLoop(false);
 	}
 	StoneDoor::~StoneDoor()
 	{
@@ -122,6 +131,11 @@ namespace jh
 	{
 		if (mOneCount == false)
 		{
+			
+
+
+			mAudioSource->Play();
+
 			mAnimator->Play(L"OpenDoor", false);
 			RemoveComponent<Collider2D>();
 			mOneCount = true;

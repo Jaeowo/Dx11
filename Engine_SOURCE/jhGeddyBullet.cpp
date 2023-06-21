@@ -12,6 +12,9 @@
 #include "jhPlayer.h"
 #include "jhTime.h"
 #include "jhCollider2D.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
+
 extern jh::Application application;
 
 namespace jh
@@ -51,6 +54,16 @@ namespace jh
 		mCollider->SetType(eColliderType::Rect);
 		mCollider->SetSize(Vector2(0.1f, 0.1f));
 
+		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+			(L"Shoot2", L"..\\Resources\\Audio\\shoot2.wav");
+
+		AudioSource* audioSource = AddComponent<AudioSource>();
+		audioSource->SetClip(audioClip);
+		audioSource->SetLoop(false);
+		
+
+		audioSource->Play();
+
 	}
 	GeddyBullet::~GeddyBullet()
 	{
@@ -64,6 +77,8 @@ namespace jh
 	{
 
 		GameObject::Update();
+
+		mPosition = mTransform->GetPosition();
 
 		if (!mIsDirectionSet && Input::GetKey(eKeyCode::LBTN))
 		{

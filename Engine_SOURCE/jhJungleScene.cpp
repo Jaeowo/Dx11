@@ -22,6 +22,10 @@
 #include "jhBee.h"
 #include "jhTorch.h"
 #include "jhTorchOwl.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
+#include "jhGeddy.h"
+#include "jhGeddyScript.h"
 
 namespace jh
 {
@@ -148,11 +152,10 @@ namespace jh
 		wallTr1->SetPosition(Vector3(-0.55f, 0.0f, 1.7f));
 		wallTr1->SetScale(Vector3(0.01f, 0.8f, 1.0f));
 
-		BeeHive* beehiveObj = object::Instantiate<BeeHive>(eLayerType::Monster);
+		/*BeeHive* beehiveObj = object::Instantiate<BeeHive>(eLayerType::Monster);
 		beehiveObj->SetPosition(Vector3(0.02f, 0.2f, 1.7f));
+		PlayerManager::SetBeeHive(beehiveObj);*/
 
-		Bee* beeObj = object::Instantiate<Bee>(eLayerType::Monster);
-		beeObj->SetPosition(Vector3(-0.2f, 0.2f, 1.7f));
 
 		Torch* torchobj = object::Instantiate<Torch>(eLayerType::BackGround);
 		torchobj->SetPosition(Vector3(-0.0f, -0.2f, 1.7f));
@@ -160,8 +163,16 @@ namespace jh
 		TorchOwl* torchowlobj = object::Instantiate<TorchOwl>(eLayerType::BackGround);
 		torchowlobj->SetPosition(Vector3(-0.0f, -0.26f, 1.7f));
 
+		//Geddy
+		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
+		PlayerManager::SetGeddy(geddyObj);
+		geddyObj->SetCount(0);
+		geddyObj->AddComponent<GeddyScript>();
+		geddyObj->SetPlayerPos(Vector3(-2.23f, -0.27f, 1.7f));
+
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::Player, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::PlayerObject, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::PlayerObject, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::MonsterObject, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Monster, eLayerType::BackGround, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::BackGrouncObj, true);
@@ -171,6 +182,16 @@ namespace jh
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGrouncObj, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Friends, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Friends, eLayerType::BackGround, true);
+
+
+		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+			(L"Jungle", L"..\\Resources\\Audio\\45. The Floating Continent - Jungle.mp3");
+
+		maudioSource = cavescene2Obj->AddComponent<AudioSource>();
+		maudioSource->SetClip(audioClip);
+		maudioSource->SetLoop(true);
+
+		maudioSource->Play();
 	}
 
 	void JungleScene::OnExit()

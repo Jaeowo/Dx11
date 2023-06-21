@@ -277,12 +277,6 @@
     <ClInclude Include="jhGawk.h">
       <Filter>GameObject\Monster\Gawk</Filter>
     </ClInclude>
-    <ClInclude Include="jhBee.h">
-      <Filter>GameObject\Monster\Bee</Filter>
-    </ClInclude>
-    <ClInclude Include="jhBeeHive.h">
-      <Filter>GameObject\Monster\Bee</Filter>
-    </ClInclude>
     <ClInclude Include="jhThrower.h">
       <Filter>GameObject\Monster\Thrower</Filter>
     </ClInclude>
@@ -360,6 +354,18 @@
     </ClInclude>
     <ClInclude Include="jhTorchOwl.h">
       <Filter>GameObject\BackGround\Torch</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBeeScript.h">
+      <Filter>Component\Script\MonsterScript\Bee</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBeeHive.h">
+      <Filter>GameObject\Monster\Bee</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBee.h">
+      <Filter>GameObject\Monster\Bee</Filter>
+    </ClInclude>
+    <ClInclude Include="jhGeddyBulletEffect.h">
+      <Filter>GameObject\Geddy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -623,12 +629,6 @@
     <ClCompile Include="jhGawk.cpp">
       <Filter>GameObject\Monster\Gawk</Filter>
     </ClCompile>
-    <ClCompile Include="jhBee.cpp">
-      <Filter>GameObject\Monster\Bee</Filter>
-    </ClCompile>
-    <ClCompile Include="jhBeeHive.cpp">
-      <Filter>GameObject\Monster\Bee</Filter>
-    </ClCompile>
     <ClCompile Include="jhThrower.cpp">
       <Filter>GameObject\Monster\Thrower</Filter>
     </ClCompile>
@@ -706,6 +706,18 @@
     </ClCompile>
     <ClCompile Include="jhTorchOwl.cpp">
       <Filter>GameObject\BackGround\Torch</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBeeScript.cpp">
+      <Filter>Component\Script\MonsterScript\Bee</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBeeHive.cpp">
+      <Filter>GameObject\Monster\Bee</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBee.cpp">
+      <Filter>GameObject\Monster\Bee</Filter>
+    </ClCompile>
+    <ClCompile Include="jhGeddyBulletEffect.cpp">
+      <Filter>GameObject\Geddy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -936,6 +948,9 @@
     </Filter>
     <Filter Include="Resource\Audio">
       <UniqueIdentifier>{307a0b1d-0e35-441b-bbe8-5c2b36fcbf63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\MonsterScript\Bee">
+      <UniqueIdentifier>{58d86265-7828-4f00-b01f-952d0b5e9f5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

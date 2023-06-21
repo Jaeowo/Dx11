@@ -3,6 +3,8 @@
 
 namespace jh
 {
+	class AudioSource;
+
 	class TitleScene : public Scene
 	{
 	public:
@@ -18,6 +20,7 @@ namespace jh
 		virtual void OnExit() override;
 
 	private:
+		AudioSource* maudioSource;
 	};
 }
 

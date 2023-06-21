@@ -10,6 +10,9 @@
 #include "jhCoin.h"
 #include "jhCoinScript.h"
 #include "jhTortoiseMask.h"
+#include "jhGeddyBullet.h"
+#include "jhGeddyBulletEffect.h"
+#include "jhObject.h"
 
 namespace jh
 {
@@ -89,6 +92,15 @@ namespace jh
 		if(maskObj)
 		{
 			maskObj->SetGround(true);
+		}
+
+		GeddyBullet* geddybulletObj = dynamic_cast<GeddyBullet*>(collider->GetOwner());
+
+		if (geddybulletObj)
+		{
+			geddybulletObj->Death();
+			GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::BackGround);
+			geddybulleteffectobj->SetPosition(geddybulletObj->GetPosition());
 		}
 
 

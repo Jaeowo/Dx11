@@ -39,6 +39,9 @@
 #include "jhNumber.h"
 #include "jhNumberTens.h"
 #include "jhTortoise.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
+
 
 namespace jh
 {
@@ -137,7 +140,14 @@ namespace jh
 		geddyObj->SetName(L"Geddy");
 
 
+		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+			(L"Vellie", L"..\\Resources\\Audio\\08. Vellie (Owlboy Theme).mp3");
 
+		maudioSource = tilefloorObj->AddComponent<AudioSource>();
+		maudioSource->SetClip(audioClip);
+		maudioSource->SetLoop(true);
+
+		maudioSource->Play();
 
 
 #pragma region RING
@@ -349,7 +359,7 @@ namespace jh
 		toppropObj->AddComponent<CloudScript>();
 
 
-
+		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::PlayerObject, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::BackGrouncObj, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround2, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround, true);
@@ -361,6 +371,7 @@ namespace jh
 	void PlayScene::OnExit()
 	{
 		PlayerManager::SavePlayerState(mplayer);
+		maudioSource->Stop();
 	}
 
 }

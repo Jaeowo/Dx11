@@ -6,6 +6,7 @@ namespace jh
 	class Transform;
 	class Animator;
 	class Collider2D;
+	class AudioSource;
 
 	enum class DoorState
 	{
@@ -46,6 +47,7 @@ namespace jh
 		Transform* mTransform;
 		Animator* mAnimator;
 		Collider2D* mCollider;
+		AudioSource* mAudioSource;
 		DoorState mDoorState;
 
 		bool mOneCount;

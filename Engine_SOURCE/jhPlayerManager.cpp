@@ -5,6 +5,7 @@ namespace jh
 {
 	Player* PlayerManager::mPlayer = nullptr;
 	Geddy* PlayerManager::mGeddy = nullptr;
+    BeeHive* PlayerManager::mBeeHive = nullptr;
 
     void PlayerManager::SavePlayerState(Player* player)
     {

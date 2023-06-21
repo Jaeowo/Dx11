@@ -6,15 +6,20 @@
 #include "jhPlayer.h"
 #include "jhPlayerManager.h"
 #include "jhTime.h"
+#include "jhBeeScript.h"
+#include "jhPlayerManager.h"
+#include "jhBeeHive.h"
 
 namespace jh
 {
 	Bee::Bee()
-		: mPosition(Vector3(0.0f, 0.0f, 0.0f))
-		, mOneCount(false)
+		: mOneCount(false)
 		, mTotalTime(0.0f)
+		, mRotation(Vector3(0.0f, 0.0f, 0.0f))
+		, mPosition(Vector3(0.0f, 0.0f, 0.0f))
 		, mHp(5)
 		, mBeeState(eBeeState::Idle)
+
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -32,12 +37,14 @@ namespace jh
 		gawksr->SetMesh(gawkmesh);
 
 		std::shared_ptr<Texture> beetexture = Resources::Load<Texture>(L"Bee", L"Bee\\sprBee_62x59.png");
+
 		mAnimator->Create(L"BeeIdle", beetexture, Vector2(0.0f, 0.0f), Vector2(62.0f, 59.0f), Vector2::Zero, 8, 0.2f);
 		mAnimator->Create(L"BeeAttack", beetexture, Vector2(0.0f, 59.0f), Vector2(62.0f, 59.0f), Vector2::Zero, 5, 0.2f);
 		mAnimator->Create(L"HitWall", beetexture, Vector2(0.0f, 118.0f), Vector2(62.0f, 59.0f), Vector2::Zero, 4, 0.2f);
 		mAnimator->Create(L"BeeHit", beetexture, Vector2(0.0f, 177.0f), Vector2(62.0f, 59.0f), Vector2::Zero, 1, 0.2f);
 
 		mAnimator->Play(L"BeeIdle", true);
+
 
 	}
 	Bee::~Bee()
@@ -46,26 +53,34 @@ namespace jh
 	void Bee::Initalize()
 	{
 		GameObject::Initalize();
+		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
+		AddComponent<BeeScript>();
+		PlayerManager::GetBeeHive()->IncreasePhaseBee();
 	}
 	void Bee::Update()
 	{
 		GameObject::Update();
-
+		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
+		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
+		mTransform->SetRotation(mRotation);
 
 		mTotalTime += Time::DeltaTime();
 
 		if (mHp <= 0)
 		{
-			mBeeState = eBeeState::Death;
+			mBeeState = eBeeState::Die;
 			mOneCount = false;
 		}
 
 		switch (mBeeState)
 		{
-		case jh::eBeeState::Idle:
-			Idle();
+		case jh::eBeeState::LeftSpawn:
+			LeftSpawn();
+			break;
+		case jh::eBeeState::RightSpawn:
+			RightSpawn();
 			break;
 		case jh::eBeeState::Attack:
 			Attack();
@@ -79,13 +94,15 @@ namespace jh
 		case jh::eBeeState::Hit:
 			Hit();
 			break;
-		case jh::eBeeState::Death:
-			BeeDeath();
+		case jh::eBeeState::Die:
+			Die();
 			break;
 		default:
 			break;
 		}
+
 	}
+
 	void Bee::FixedUpdate()
 	{
 		GameObject::FixedUpdate();
@@ -97,8 +114,27 @@ namespace jh
 
 	void Bee::Idle()
 	{
+	}
+
+	void Bee::LeftSpawn()
+	{
 		if (mOneCount == false)
 		{
+			mPosition = (Vector3(-0.09f, 0.12f, 1.7f));
+			mAnimator->Play(L"BeeIdle", true);
+			mOneCount = true;
+		}
+
+		mPosition.y += sin(Time::DeltaTime()) * 0.01f;
+
+		mPosition.x -= 0.00001f;
+	}
+
+	void Bee::RightSpawn()
+	{
+		if (mOneCount == false)
+		{
+			mPosition = (Vector3(0.09f, 0.12f, 1.7f));
 			mAnimator->Play(L"BeeIdle", true);
 			mOneCount = true;
 		}
@@ -106,41 +142,21 @@ namespace jh
 
 	void Bee::Attack()
 	{
-		if (mOneCount == false)
-		{
-			mAnimator->Play(L"BeeAttack", false);
-			mOneCount = true;
-		}
 	}
 
 	void Bee::Follow()
 	{
-		if (mOneCount == false)
-		{
-			mAnimator->Play(L"BeeIdle", true);
-			mOneCount = true;
-		}
 	}
 
 	void Bee::HitWall()
 	{
-		if (mOneCount == false)
-		{
-			mAnimator->Play(L"HitWall", false);
-			mOneCount = true;
-		}
 	}
 
 	void Bee::Hit()
 	{
-		if (mOneCount == false)
-		{
-			mAnimator->Play(L"BeeHit", false);
-			mOneCount = true;
-		}
 	}
 
-	void Bee::BeeDeath()
+	void Bee::Die()
 	{
 		if (mOneCount == false)
 		{
@@ -150,8 +166,10 @@ namespace jh
 
 		if (mTotalTime >= 0.5f)
 		{
+			PlayerManager::GetBeeHive()->IncreaseDeadBee();
 			Death();
 		}
+		
 	}
 
 }

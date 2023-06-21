@@ -41,10 +41,11 @@ namespace jh
 		eThrowerState GetThrowerState() { return mThrowerState; }
 		void SetThrowerState(eThrowerState throwerstate) { mThrowerState = throwerstate; }
  
+		Vector3 GetPreviousPos() { return mPrevPosition; }
 	private:
 		Vector3 mPosition;
 		Vector3 mTargetPosition;
-
+		Vector3 mPrevPosition;
 		Transform* mTransform;
 		Animator* mAnimator;
 		Collider2D* mCollider;
@@ -55,5 +56,6 @@ namespace jh
 		int mHp;
 		bool mOneCount;
 		float mTotalTime;
+
 	};
 }

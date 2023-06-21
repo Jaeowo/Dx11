@@ -4,6 +4,7 @@
 namespace jh
 {
 	class Player;
+	class AudioSource;
 
 	class CaveScene2 : public Scene
 	{
@@ -20,6 +21,7 @@ namespace jh
 		virtual void OnExit() override;
 
 	private:
+		AudioSource* maudioSource;
 		Player* mplayer;
 	};
 }

@@ -9,11 +9,13 @@ namespace jh
 	enum class eBeeState
 	{
 		Idle,
+		LeftSpawn,
+		RightSpawn,
 		Attack,
 		Follow,
 		HitWall,
 		Hit,
-		Death,
+		Die
 	};
 
 	class Bee
@@ -30,29 +32,29 @@ namespace jh
 
 		//State
 		void Idle();
+		void LeftSpawn();
+		void RightSpawn();
 		void Attack();
 		void Follow();
 		void HitWall();
 		void Hit();
-		void BeeDeath();
+		void Die();
 
 		void SetPosition(Vector3 position) { mPosition = position; }
 		void SetCount(bool onecount) { mOneCount = onecount; }
 
+		void SetBeeState(eBeeState beestate) { mBeeState = beestate; }
+
 	private:
 		Vector3 mPosition;
+		Vector3 mTargetPosition;
 		Transform* mTransform;
 		Animator* mAnimator;
+		Vector3 mRotation;
 		eBeeState mBeeState;
 
+		int mHp;
 		bool mOneCount;
 		float mTotalTime;
-		int mHp;
-
-		Vector3 mMoveDirection;
-		float mMoveSpeed;
-		float mWobbleMagnitude;
-		float mWobbleSpeed;
-		Vector3 mPlayerPosition;
 	};
 }

@@ -1,4 +1,5 @@
 #include "jhBeeHive.h"
+#include "jhBeeHive.h"
 #include "jhSpriteRenderer.h"
 #include "jhResources.h"
 #include "jhObject.h"
@@ -15,10 +16,10 @@ namespace jh
 		, mOneCount(false)
 		, mTotalTime(0.0f)
 		, mSpawnTimer(0.0f)
-		, mSpawnedBees(0)
+		, mPhaseTimer(0.0f)
 		, mDeadBees(0)
-		, mSpawnCycle(0)
-		, mBeeHiveState(eBeeHiveState::SpawnBees)
+		, mBeeHiveState(eBeeHiveState::Idle)
+		, mPhaseMove (false)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -27,7 +28,7 @@ namespace jh
 		mCollider->SetType(eColliderType::Rect);
 		mCollider->SetSize(Vector2(0.1f, 0.1f));
 
-		mTransform->SetScale(Vector3(0.5f, 0.5f, 1.0f));
+		mTransform->SetScale(Vector3(0.6f, 0.6f, 1.0f));
 
 		SpriteRenderer* gawksr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> gawkmesh = Resources::Find<Mesh>(L"RectMesh");
@@ -62,13 +63,28 @@ namespace jh
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
 
+		mSpawnTimer += Time::DeltaTime();
+		mPhaseTimer += Time::DeltaTime();
+
 		switch (mBeeHiveState)
 		{
 		case jh::eBeeHiveState::Idle:
 			Idle();
 			break;
-		case jh::eBeeHiveState::SpawnBees:
-			SpawnBees();
+		case eBeeHiveState::Phase1:
+			Phase1();
+			break;
+		case eBeeHiveState::Phase2:
+			Phase2();
+			break;
+		case eBeeHiveState::Phase3:
+			Phase3();
+			break;
+		case eBeeHiveState::Phase4:
+			Phase4();
+			break;
+		case eBeeHiveState::Phase5:
+			Phase5();
 			break;
 		case jh::eBeeHiveState::Broken:
 			Broken();
@@ -76,8 +92,6 @@ namespace jh
 		default:
 			break;
 		}
-
-	
 	}
 	void BeeHive::FixedUpdate()
 	{
@@ -92,58 +106,193 @@ namespace jh
 	{
 		if (mOneCount == false)
 		{
-			mAnimator->Play(L"Buzzing", false);
-			mOneCount == true;
+			mAnimator->Play(L"Idle", false);
+			mOneCount = true;
 		}
-		if (mDeadBees >= 4) 
+
+		if (mPhaseTimer >= 3.0f)
 		{
-			mDeadBees = 0;
-			mBeeHiveState = eBeeHiveState::SpawnBees;
+			mBeeHiveState = eBeeHiveState::Phase1;
 			mOneCount = false;
 		}
 	}
 
-	void BeeHive::SpawnBees()
+
+	void BeeHive::Phase1()
 	{
 		if (mOneCount == false)
 		{
 			mAnimator->Play(L"Buzzing", true);
-			mOneCount == true;
-
+			mOneCount = true;
 		}
 
-		if (mSpawnCycle >= 4)  
-		{
-			mBeeHiveState = eBeeHiveState::Broken;
-			mOneCount = false;
-			return;
-		}
-
-		mSpawnTimer += Time::DeltaTime(); 
-
-		if (mSpawnTimer >= 1.0f)
+		if (mPhaseBeeCount < 2 && mSpawnTimer >= 2.0f)
 		{
 			mSpawnTimer = 0.0f;
-		/*	Bee* beeObj = object::Instantiate<Bee>(eLayerType::Monster);
-			beeObj->SetPosition(Vector3(-0.2f, 0.2f, 1.7f));*/
-			mSpawnedBees++;
+			SpawnBees(eBeeState::LeftSpawn);
 		}
 
-		if (mSpawnedBees >= 4) 
+		if (GetPhaseBee() == 0)
 		{
-			mSpawnedBees = 0;
-			mBeeHiveState = eBeeHiveState::Idle;
+			mPhaseTimer = 0.0f;
+			mPhaseMove = true;
+		}
+
+		if (mPhaseMove == true && mPhaseTimer >= 4.0f)
+		{
+			mPhaseMove = false;
 			mOneCount = false;
-			mSpawnCycle++;
+			mBeeHiveState = eBeeHiveState::Phase2;
+			mPhaseTimer = 0.0f;
 		}
 	}
+
+
+	void BeeHive::Phase2()
+	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"Buzzing", true);
+			mOneCount = true;
+		}
+
+		if (mPhaseBeeCount < 2 && mSpawnTimer >= 2.0f)
+		{
+			mSpawnTimer = 0.0f;
+			SpawnBees(eBeeState::RightSpawn);
+		}
+
+		if (mPhaseBeeCount == 0)
+		{
+			mPhaseTimer = 0.0f;
+			mPhaseMove = true;
+		}
+
+		if (mPhaseMove == true && mPhaseTimer >= 4.0f)
+		{
+			mPhaseMove = false;
+			mOneCount = false;
+			mBeeHiveState = eBeeHiveState::Phase2;
+			mPhaseTimer = 0.0f;
+		}
+	}
+
+	void BeeHive::Phase3()
+	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"Buzzing", true);
+			mOneCount = true;
+		}
+
+		if (mPhaseBeeCount < 4 && mSpawnTimer >= 2.0f)
+		{
+			mSpawnTimer = 0.0f;
+			SpawnBees(eBeeState::LeftSpawn);
+		}
+
+		if (mPhaseBeeCount == 0)
+		{
+			mPhaseTimer = 0.0f;
+			mPhaseMove = true;
+
+		}
+
+		if (mPhaseBeeCount == 0 && mPhaseTimer >= 4.0f)
+		{
+			mPhaseMove = false;
+			mOneCount = false;
+			mBeeHiveState = eBeeHiveState::Phase4;
+			mPhaseTimer = 0.0f;
+		}
+	}
+
+	void BeeHive::Phase4()
+	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"Buzzing", true);
+			mOneCount = true;
+		}
+
+		if (mPhaseBeeCount < 4 && mSpawnTimer >= 2.0f)
+		{
+			mSpawnTimer = 0.0f;
+			SpawnBees(eBeeState::RightSpawn);
+		}
+
+		if (mPhaseBeeCount == 0)
+		{
+			mPhaseTimer = 0.0f;
+			mPhaseMove = true;
+
+		}
+
+		if (mPhaseBeeCount == 0 && mPhaseTimer >= 4.0f)
+		{
+			mPhaseMove = false;
+			mOneCount = false;
+			mBeeHiveState = eBeeHiveState::Phase5;
+			mPhaseTimer = 0.0f;
+		}
+	}
+
+	void BeeHive::Phase5()
+	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"Buzzing", true);
+			mOneCount = true;
+		}
+
+		if (mPhaseBeeCount < 6 && mSpawnTimer >= 2.0f)
+		{
+			mSpawnTimer = 0.0f;
+			SpawnBees(eBeeState::LeftSpawn);
+		}
+
+		if (mPhaseBeeCount == 0)
+		{
+			mPhaseTimer = 0.0f;
+			mPhaseMove = true;
+
+		}
+
+		
+
+		if (mPhaseBeeCount == 0 && mPhaseTimer >= 4.0f)
+		{
+			mPhaseMove = false;
+			mOneCount = false;
+			mBeeHiveState = eBeeHiveState::Broken;
+			mPhaseTimer = 0.0f;
+		}
+	}
+
+	void BeeHive::SpawnBees(eBeeState beeState)
+	{
+		Bee* beeObj = object::Instantiate<Bee>(eLayerType::Monster);
+		beeObj->SetBeeState(beeState);
+
+
+	
+	}
+
 
 	void BeeHive::Broken()
 	{
 		if (mOneCount == false)
 		{
 			mAnimator->Play(L"Broken", false);
-			mOneCount == true;
+			mOneCount = true;
+		}
+
+		float speed = 0.2f;
+		mPosition.y -= speed * Time::DeltaTime();
+
+		if (mPhaseTimer >= 1.5f)
+		{
+			Death();
 		}
 	}
 

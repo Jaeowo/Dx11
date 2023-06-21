@@ -3,6 +3,10 @@
 #include "jhCoin.h"
 #include "jhTortoiseMask.h"
 #include "jhTortoise.h"
+#include "jhGeddyBullet.h"
+#include "jhGeddyBulletEffect.h"
+#include "jhObject.h"
+#include "jhThrower.h"
 
 namespace jh
 {
@@ -52,6 +56,26 @@ namespace jh
 				tortoiseObj->SetPlayerState(eTortoiseState::Turn);
 			}
 		}
+
+		GeddyBullet* geddybulletObj = dynamic_cast<GeddyBullet*>(collider->GetOwner());
+
+		if (geddybulletObj)
+		{
+			geddybulletObj->Death();
+			GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::BackGround);
+			geddybulleteffectobj->SetPosition(geddybulletObj->GetPosition());
+		}
+
+		Thrower* throwerObj = dynamic_cast<Thrower*>(collider->GetOwner());
+		if (throwerObj)
+		{
+			Vector3 previousPos = throwerObj->GetPreviousPos();
+			throwerObj->SetPosition(previousPos);
+			throwerObj->SetPosition(previousPos);
+
+		}
+
+
 	}
 
 	void WallScript::OnCollisionEnter(Collider2D* collider)

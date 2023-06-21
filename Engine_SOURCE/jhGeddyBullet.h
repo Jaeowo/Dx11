@@ -21,6 +21,8 @@ namespace jh
 		bool getIsAttack() { return mIsAttack; }
 		void SetIsAttack(bool IsAttack) { IsAttack = mIsAttack; }
 
+		Vector3 GetPosition() { return mPosition; }
+
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;
@@ -32,6 +34,8 @@ namespace jh
 
 		bool mIsDirectionSet;
 		Vector2 mDirection;
+
+		Vector3 mPosition;
 
 		float mDeadTime;
 

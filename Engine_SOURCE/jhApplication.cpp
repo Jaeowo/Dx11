@@ -5,7 +5,7 @@
 #include "jhSceneManager.h"
 #include "jhResources.h"
 #include "jhCollisionManager.h"
-//#include "jhFmod.h"
+#include "jhFmod.h"
 
 namespace jh
 {
@@ -22,7 +22,7 @@ namespace jh
 
 	void Application::Initalize()
 	{
-		//Fmod::Initialize();
+		Fmod::Initialize();
 		Time::Initialize();
 		Input::Initialize();
 		CollisionManager::Initialize();

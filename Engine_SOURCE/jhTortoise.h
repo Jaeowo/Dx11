@@ -7,6 +7,7 @@ namespace jh
 	class Transform;
 	class Collider2D;
 	class TortoiseMask;
+	class AudioSource;
 
 	enum class eTortoiseState
 	{
@@ -100,6 +101,7 @@ namespace jh
 		Collider2D* mCollider;
 		eTortoiseState mTortoiseState;
 		TortoiseMask* mtortoisemask;
+		AudioSource* maudioSource;
 
 		int mCount;
 

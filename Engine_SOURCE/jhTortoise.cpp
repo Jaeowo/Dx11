@@ -12,6 +12,8 @@
 #include "jhTortoiseScript.h"
 #include "jhTortoiseMask.h"
 #include "jhJungleDoor.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -29,6 +31,7 @@ namespace jh
 		, mIsFlying(false)
 		, mIgnoreCollisionTime(0.0f)
 		, mEventOn(false)
+
 	{
 
 		mAnimator = AddComponent<Animator>();
@@ -87,6 +90,8 @@ namespace jh
 		mAnimator->Create(L"TurnNomask", tortoisetexture18, Vector2(0.0f, 0.0f), Vector2(129.0f, 124.0f), Vector2::Zero, 5, 0.2f);
 
 		mAnimator->Play(L"IdleMask", true);
+
+	
 	}	
 	Tortoise::~Tortoise()
 	{
@@ -95,6 +100,7 @@ namespace jh
 	{	
 		GameObject::Initalize();
 		AddComponent<TortoiseScript>();
+
 	}
 	void Tortoise::Update()
 	{

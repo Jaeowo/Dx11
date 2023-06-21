@@ -4,6 +4,7 @@
 namespace jh
 {
 	class Player;
+	class AudioSource;
 
 	class PlayScene : public Scene
 	{
@@ -21,5 +22,6 @@ namespace jh
 
 	private:
 		Player* mplayer;
+		AudioSource* maudioSource;
 	};
 }
