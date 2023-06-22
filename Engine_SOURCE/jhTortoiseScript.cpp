@@ -23,6 +23,13 @@ namespace jh
 	void TortoiseScript::Initalize()
 	{
 		mtortoise = dynamic_cast<Tortoise*>(GetOwner());
+
+		std::shared_ptr<AudioClip> bulletimpact = std::make_shared<AudioClip>();
+		bulletimpact->Load(L"..\\Resources\\Audio\\bulletImpact1.wav");
+		Resources::Insert<AudioClip>(L"BulletImpact", bulletimpact);
+
+
+
 	}
 	void TortoiseScript::Update()
 	{
@@ -38,7 +45,7 @@ namespace jh
 
 		if (playerObj)
 		{
-			if (playerObj->GetIsInvincible())  
+			if (playerObj->GetIsInvincible())
 			{
 				return;
 			}
@@ -53,11 +60,15 @@ namespace jh
 			{
 				playerObj->SetCount(0);
 				playerObj->SetPlayerState(ePlayerState::FlyHurt);
+				std::shared_ptr<AudioClip> clip4 = Resources::Find<AudioClip>(L"Hit");
+				clip4->Play();
 			}
 			else
 			{
 				playerObj->SetCount(0);
 				playerObj->SetPlayerState(ePlayerState::Hurt);
+				std::shared_ptr<AudioClip> clip4 = Resources::Find<AudioClip>(L"Hit");
+				clip4->Play();
 			}
 		}
 
@@ -74,11 +85,15 @@ namespace jh
 				if (mtortoise->GetPlayerState() == eTortoiseState::MaskFly)
 				{
 					mtortoise->SetAniCheck(false);
+					std::shared_ptr<AudioClip> bulletimpact = Resources::Find<AudioClip>(L"BulletImpact");
+					bulletimpact->Play();
 					mtortoise->SetPlayerState(eTortoiseState::RemoveFlyMask);
 				}
 				else
 				{
 					mtortoise->SetAniCheck(false);
+					std::shared_ptr<AudioClip> bulletimpact = Resources::Find<AudioClip>(L"BulletImpact");
+					bulletimpact->Play();
 					mtortoise->SetPlayerState(eTortoiseState::RemoveMask);
 				}
 			}
@@ -104,11 +119,28 @@ namespace jh
 
 				mtortoise->SetAniCheck(false);
 				mtortoise->SetPlayerState(eTortoiseState::Hit);
+
+				std::shared_ptr<AudioClip> clip4 = Resources::Find<AudioClip>(L"Hit");
+				clip4->Play();
+
+				GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::BackGround);
+				geddybulleteffectobj->SetPosition(geddyBulletObj->GetPosition());
+				geddyBulletObj->Death();
 			
+			}
+			else if (mtortoise->GetPlayerState() == eTortoiseState::MaskMove ||
+					mtortoise->GetPlayerState() == eTortoiseState::MaskFly)
+			{
+				std::shared_ptr<AudioClip> bulletimpact = Resources::Find<AudioClip>(L"BulletImpact");
+				bulletimpact->Play();
+
+				GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::BackGround);
+				geddybulleteffectobj->SetPosition(geddyBulletObj->GetPosition());
+				geddyBulletObj->Death();
 			}
 			else
 			{
-				
+	
 				GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::BackGround);
 				geddybulleteffectobj->SetPosition(geddyBulletObj->GetPosition());
 				geddyBulletObj->Death();
@@ -121,6 +153,13 @@ namespace jh
 
 				mtortoise->SetAniCheck(false);
 				mtortoise->SetPlayerState(eTortoiseState::FlyHit);
+
+				std::shared_ptr<AudioClip> clip4 = Resources::Find<AudioClip>(L"Hit");
+				clip4->Play();
+
+				GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::BackGround);
+				geddybulleteffectobj->SetPosition(geddyBulletObj->GetPosition());
+				geddyBulletObj->Death();
 			}
 			
 		
@@ -143,10 +182,13 @@ namespace jh
 		
 		}
 	}
+
 	void TortoiseScript::OnCollisionStay(Collider2D* collider)
 	{
 	}
+
 	void TortoiseScript::OnCollisionExit(Collider2D* collider)
 	{
 	}
+
 }

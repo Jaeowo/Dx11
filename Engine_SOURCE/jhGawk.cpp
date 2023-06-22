@@ -8,6 +8,8 @@
 #include "jhGawkScript.h"
 #include "jhCollider2D.h"
 #include "jhSpriteRenderer.h"
+#include "jhSmallDustEffect.h"
+#include "jhObject.h"
 
 namespace jh
 {
@@ -17,6 +19,7 @@ namespace jh
 		, mCount(0)
 		, mTarget(false)
 		, mElapsedTime(0.0f)
+		, mRotation(Vector3(0.0f, 0.0f, 0.0f))
 	{
 		Animator* mAnimator = AddComponent<Animator>();
 
@@ -36,7 +39,7 @@ namespace jh
 	
 		mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
-		mCollider->SetSize(Vector2(4.5f, 4.5f));
+		mCollider->SetSize(Vector2(3.5f, 3.5f));
 		//mCollider->SetCenter(Vector2(0.5f,0.0f))
 
 	}
@@ -55,7 +58,8 @@ namespace jh
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
-		
+		mTransform->SetRotation(mRotation);
+
 		mMonsterPosition = mTransform->GetPosition();
 
 		mElapsedTime += Time::DeltaTime();
@@ -101,6 +105,15 @@ namespace jh
 		{
 			mAnimator->Play(L"GawkFlying", true);
 			mCount = 1;
+		}
+
+		if (mTargetPosition.x < mMonsterPosition.x)
+		{
+			mRotation.y = 180.0f;
+		}
+		else
+		{
+			mRotation.y = 0.0f;
 		}
 
 		float speed = 0.18f; // 기본 이동 속도
@@ -168,6 +181,12 @@ namespace jh
 			mCount = 0;
 			mGawkState = eGawkState::Flying;
 		}
+		if (mHp <= 0)
+		{
+			SmallDustEffect* smalldusteffect = object::Instantiate<SmallDustEffect>(eLayerType::Effect);
+			smalldusteffect->SetPosition(mMonsterPosition);
+		}
+
 	}
 	void Gawk::Sturn()
 	{

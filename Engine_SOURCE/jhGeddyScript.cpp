@@ -169,7 +169,7 @@ namespace jh
 			mVelocity = (Vector2(0.0f, 0.0f));
 			mMass = 150.0f;
 
-			mGravity = 0.00005f;
+			mGravity = 0.00015f;
 
 		}
 		if (Input::GetKeyDown(eKeyCode::G))
@@ -177,6 +177,10 @@ namespace jh
 			mGeddy->SetGeddyState(eGeddyState::Hanging);
 			mGeddyState = eGeddyState::Hanging;
 			mGeddy->SetCount(0);
+
+			Vector3 playerPos = PlayerManager::GetPlayer()->GetPlayerPos();
+			BurstEffect* burst = object::Instantiate<BurstEffect>(eLayerType::Effect);
+			burst->SetPosition(playerPos);
 
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::FlyGrab);
 			PlayerManager::GetPlayer()->SetCount(0);
@@ -186,8 +190,7 @@ namespace jh
 		{
 			Vector3 playerPos = PlayerManager::GetPlayer()->GetPlayerPos();
 			mGeddy->SetGeddyPos(playerPos);
-			BurstEffect* burst = object::Instantiate<BurstEffect>(eLayerType::Effect);
-			burst->SetPosition(playerPos);
+		
 		}
 	}
 	void GeddyScript::Hanging()

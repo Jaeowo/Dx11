@@ -5,7 +5,8 @@
 #include "jhAnimator.h"
 #include "jhTime.h"
 #include "jhScrewPuzzleScript.h"
-
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 namespace jh
 {
 	ScrewPuzzle::ScrewPuzzle()
@@ -59,6 +60,8 @@ namespace jh
 		mAnimator->Create(L"Puzzle15", screwpuzzletexture3, Vector2(276.0f, 0.0f), Vector2(69.0f, 38.0f), Vector2::Zero, 1, 0.2f);
 
 		mAnimator->Play(L"Puzzle1", false);
+
+
 
 	}
 	ScrewPuzzle::~ScrewPuzzle()
@@ -153,6 +156,7 @@ namespace jh
 	{
 		if (mOneCount == false)
 		{
+		
 			mAnimator->Play(L"Puzzle1", false);
 			mOneCount = true;
 		}

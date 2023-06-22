@@ -56,15 +56,12 @@ namespace jh
 		mCollider->SetType(eColliderType::Rect);
 		mCollider->SetSize(Vector2(0.1f, 0.1f));
 
-		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
-			(L"Shoot2", L"..\\Resources\\Audio\\shoot2.wav");
 
-		AudioSource* audioSource = AddComponent<AudioSource>();
-		audioSource->SetClip(audioClip);
-		audioSource->SetLoop(false);
-		
+		std::shared_ptr<AudioClip> geddybulletclip = std::make_shared<AudioClip>();
+		geddybulletclip->Load(L"..\\Resources\\Audio\\shoot2.wav");
+		Resources::Insert<AudioClip>(L"Geddybullet", geddybulletclip);
 
-		audioSource->Play();
+		geddybulletclip->Play();
 
 	}
 	GeddyBullet::~GeddyBullet()

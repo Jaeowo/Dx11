@@ -8,6 +8,7 @@
 #include "jhTime.h"
 #include "jhAegisScript.h"
 #include "jhAegisBullet.h"
+#include "jhSmallDustEffect.h"
 
 namespace jh
 {
@@ -19,14 +20,14 @@ namespace jh
 		, mHp(1)
 		, mMinY(0.35f)
 		, mMaxY(0.55f)
-		, mAegisState(eAegisState::WaitShoot)
+		, mAegisState(eAegisState::Idle)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 
-		Collider2D* mCollider = AddComponent<Collider2D>();
+		mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
-		mCollider->SetSize(Vector2(0.1f, 0.1f));
+		mCollider->SetSize(Vector2(3.0f, 3.0f));
 
 		mTransform->SetScale(Vector3(0.3f, 0.3f, 1.0f));
 
@@ -96,18 +97,27 @@ namespace jh
 
 	void Aegis::Idle()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"AegisIdle", false);
+			mOneCount = true;
+		}
 	}
 
 	void Aegis::WaitShoot()
 	{
 		if (mOneCount == false)
 		{
-			if (mTotalTime >= 1.0f)
-			{
-				mAegisState = eAegisState::Shoot;
-
-			}
+			mCollider->SetSize(Vector2(0.1f, 0.1f));
+			mTotalTime = 0.0f;
+			mAnimator->Play(L"AegisWaitShoot", false);
 			mOneCount = true;
+		}
+
+		if (mTotalTime >= 1.5f)
+		{
+			mAegisState = eAegisState::Shoot;
+			mOneCount = false;
 		}
 
 		float speed = 0.1f; 
@@ -134,15 +144,14 @@ namespace jh
 	{
 		if (mOneCount == false)
 		{
-		
+			mAnimator->Play(L"AegisShoot", false);
 			mOneCount = true;
 		}
-		static float time = 0.0f;
-		static int bulletCount = 0;
 
-		time += Time::DeltaTime();
+		mTotalTime += Time::DeltaTime();
 
-		if (mTargetPosition.y >= mMinY && mTargetPosition.y <= mMaxY && time >= 0.3f && bulletCount < 1)
+	
+		if (mTargetPosition.y >= mMinY && mTargetPosition.y <= mMaxY && mTotalTime >= 0.3f)
 		{
 			AegisBullet* aegisBullet = object::Instantiate<AegisBullet>(eLayerType::MonsterObject);
 			aegisBullet->SetPosition(mPosition);
@@ -150,11 +159,11 @@ namespace jh
 			Vector3 directionToPlayer(-1, 0, 0);
 			aegisBullet->SetDirection(directionToPlayer);
 
-			time = 0.0f;
-			bulletCount++;
-
+			// reset the timer
+			mTotalTime = 0.0f;
+			mAegisState = eAegisState::WaitShoot; 
+			mOneCount = false;
 		}
-
 	
 	}
 
@@ -163,6 +172,10 @@ namespace jh
 		if (mOneCount == false)
 		{
 			mAnimator->Play(L"AegisDie", false);
+
+			SmallDustEffect* smalldusteffect = object::Instantiate<SmallDustEffect>(eLayerType::Effect);
+			smalldusteffect->SetPosition(mPosition);
+
 			mOneCount = true;
 			mTotalTime = 0.0f;
 		}

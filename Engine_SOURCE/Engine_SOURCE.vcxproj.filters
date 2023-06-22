@@ -376,6 +376,12 @@
     <ClInclude Include="jhBurstEffect.h">
       <Filter>GameObject\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="jhAegisBulletScript.h">
+      <Filter>Component\Script\MonsterScript\AegisScript</Filter>
+    </ClInclude>
+    <ClInclude Include="jhThrowerStoneScript.h">
+      <Filter>Component\Script\MonsterScript\ThrowerScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -736,6 +742,12 @@
     </ClCompile>
     <ClCompile Include="jhBurstEffect.cpp">
       <Filter>GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="jhAegisBulletScript.cpp">
+      <Filter>Component\Script\MonsterScript\AegisScript</Filter>
+    </ClCompile>
+    <ClCompile Include="jhThrowerStoneScript.cpp">
+      <Filter>Component\Script\MonsterScript\ThrowerScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

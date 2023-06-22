@@ -2,6 +2,8 @@
 #include "jhPlayer.h"
 #include "jhGeddyBullet.h"
 #include "jhAegis.h"
+#include "jhGeddyBulletEffect.h"
+#include "jhObject.h"
 
 namespace jh
 {
@@ -35,30 +37,47 @@ namespace jh
 			{
 				return;
 			}
-			int hpCheck = (playerObj->GetHp() - 1);
-			playerObj->SetHp(hpCheck);
 
-			playerObj->SetInvincibleTimer(0.0f);
-			playerObj->SetIsInvincible(true);
-
-			if (playerObj->GetIsFly())
+			if (mAegis->GetAegisState() != eAegisState::Idle)
 			{
-				playerObj->SetCount(0);
-				playerObj->SetPlayerState(ePlayerState::FlyHurt);
+				int hpCheck = (playerObj->GetHp() - 1);
+				playerObj->SetHp(hpCheck);
+
+				playerObj->SetInvincibleTimer(0.0f);
+				playerObj->SetIsInvincible(true);
+
+				if (playerObj->GetIsFly())
+				{
+					playerObj->SetCount(0);
+					playerObj->SetPlayerState(ePlayerState::FlyHurt);
+				}
+				else
+				{
+					playerObj->SetCount(0);
+					playerObj->SetPlayerState(ePlayerState::Hurt);
+				}
 			}
 			else
 			{
-				playerObj->SetCount(0);
-				playerObj->SetPlayerState(ePlayerState::Hurt);
+				mAegis->SetAegisState(eAegisState::WaitShoot);
+				mAegis->SetCount(false);
 			}
+			
 			
 		}
 
 		GeddyBullet* geddyBulletObj = dynamic_cast<GeddyBullet*>(collider->GetOwner());
 		if (geddyBulletObj)
 		{
-			mAegis->SetAegisState(eAegisState::Die);
-			mAegis->SetCount(false);
+			if (mAegis->GetAegisState() != eAegisState::Idle)
+			{
+				mAegis->SetAegisState(eAegisState::Die);
+				mAegis->SetCount(false);
+				GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::Effect);
+				geddybulleteffectobj->SetPosition(geddyBulletObj->GetPosition());
+				geddyBulletObj->Death();
+			}
+		
 		}
 
 	}

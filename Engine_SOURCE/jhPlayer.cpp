@@ -92,6 +92,11 @@ namespace jh
 
 		}
 
+		if (mHp <= 2)
+		{
+			mHp = 5;
+		}
+
 		//if (mRotation.y == 180.0f)
 		//{
 		//	mCollider->SetCenter(Vector2(0.01f, -0.01f));

@@ -1,12 +1,18 @@
 #include "jhScrewPuzzleScript.h"
 #include "jhScrewPuzzle.h"
 #include "jhPlayerAttackCol.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
+#include "jhResources.h"
 
 namespace jh
 {
 	ScrewPuzzleScript::ScrewPuzzleScript()
 		:mCount(0)
 	{
+		std::shared_ptr<AudioClip> screwclip = std::make_shared<AudioClip>();
+		screwclip->Load(L"..\\Resources\\Audio\\chain1.wav");
+		Resources::Insert<AudioClip>(L"Screw", screwclip);
 	}
 	ScrewPuzzleScript::~ScrewPuzzleScript()
 	{
@@ -28,6 +34,9 @@ namespace jh
 		if (attackcol != nullptr) 
 		{
 			mScrewPuzzle->IncrementState();
+
+			std::shared_ptr<AudioClip> screwclip = Resources::Find<AudioClip>(L"Screw");
+			screwclip->Play();
 		}
 	}
 

@@ -1,31 +1,32 @@
-#include "jhtortoiseBulletScript.h"
-#include "jhTortoiseBullet.h"
+#include "jhAegisBulletScript.h"
 #include "jhPlayer.h"
+#include "jhAegisBullet.h"
 #include "jhAudioClip.h"
 #include "jhAudioSource.h"
 #include "jhResources.h"
+
 namespace jh
 {
-	tortoiseBulletScript::tortoiseBulletScript()
+	AegisBulletScript::AegisBulletScript()
 		:Script()
 	{
 
 	}
-	tortoiseBulletScript::~tortoiseBulletScript()
+	AegisBulletScript::~AegisBulletScript()
 	{
 	}
-	void tortoiseBulletScript::Initalize()
+	void AegisBulletScript::Initalize()
 	{
-		mtortoisebullet = dynamic_cast<TortoiseBullet*>(GetOwner());
+		mAegisBullet = dynamic_cast<AegisBullet*>(GetOwner());
 	}
-	void tortoiseBulletScript::Update()
+	void AegisBulletScript::Update()
 	{
 
 	}
-	void tortoiseBulletScript::Render()
+	void AegisBulletScript::Render()
 	{
 	}
-	void tortoiseBulletScript::OnCollisionEnter(Collider2D* collider)
+	void AegisBulletScript::OnCollisionEnter(Collider2D* collider)
 	{
 		Player* playerObj = dynamic_cast<Player*>(collider->GetOwner());
 
@@ -42,6 +43,7 @@ namespace jh
 			playerObj->SetInvincibleTimer(0.0f);
 			playerObj->SetIsInvincible(true);
 
+
 			if (playerObj->GetIsFly())
 			{
 				playerObj->SetCount(0);
@@ -57,13 +59,14 @@ namespace jh
 				clip4->Play();
 			}
 
+		
 		}
-	
+
 	}
-	void tortoiseBulletScript::OnCollisionStay(Collider2D* collider)
+	void AegisBulletScript::OnCollisionStay(Collider2D* collider)
 	{
 	}
-	void tortoiseBulletScript::OnCollisionExit(Collider2D* collider)
+	void AegisBulletScript::OnCollisionExit(Collider2D* collider)
 	{
 	}
 }

@@ -7,6 +7,10 @@
 #include "jhPlayerManager.h"
 #include "jhTime.h"
 #include "jhThrowerScript.h"
+#include "jhSmallDustEffect.h"
+#include "jhThrowerStone.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -53,6 +57,11 @@ namespace jh
 		GameObject::Initalize();
 		AddComponent<ThrowerScript>();
 		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
+
+		std::shared_ptr<AudioClip> throwerstoneclip = std::make_shared<AudioClip>();
+		throwerstoneclip->Load(L"..\\Resources\\Audio\\throw.wav");
+		Resources::Insert<AudioClip>(L"ThrowerStone", throwerstoneclip);
+
 	}
 	void Thrower::Update()
 	{
@@ -133,17 +142,28 @@ namespace jh
 		if (mOneCount == false)
 		{
 			mAnimator->Play(L"ThrowerFollow", true);
+			mTotalTime = 0.0f;
 			mOneCount = true;
 		}
-
+		if (mTotalTime >= 1.9f)
+		{
+			mThrowerState = eThrowerState::ThrowWait;
+			mOneCount = false;
+		}
 	}
 
 	void Thrower::ThrowWait()
 	{
 		if (mOneCount == false)
 		{
-			mAnimator->Play(L"Throw", false);
+			mAnimator->Play(L"ThrowWait", false);
+			mTotalTime = 0.0f;
 			mOneCount = true;
+		}
+		if (mTotalTime >= 0.7f)
+		{
+			mThrowerState = eThrowerState::Throw;
+			mOneCount = false;
 		}
 	}
 
@@ -152,8 +172,21 @@ namespace jh
 		if (mOneCount == false)
 		{
 			mAnimator->Play(L"Throw", false);
+			std::shared_ptr<AudioClip> throwerstoneclip = Resources::Find<AudioClip>(L"ThrowerStone");
+			throwerstoneclip->Play();
+
+			ThrowerStone* throwerstone = object::Instantiate<ThrowerStone>(eLayerType::MonsterObject);
+			throwerstone->SetPosition(mPosition);
+			mTotalTime = 0.0f;
 			mOneCount = true;
 		}
+
+		if (mTotalTime >= 0.7f)
+		{
+			mThrowerState = eThrowerState::Follow;
+			mOneCount = false;
+		}
+
 	}
 
 	void Thrower::Hurt()
@@ -161,6 +194,8 @@ namespace jh
 		if (mOneCount == false)
 		{
 			mAnimator->Play(L"Hurt", false);
+			std::shared_ptr<AudioClip> clip4 = Resources::Find<AudioClip>(L"Hit");
+			clip4->Play();
 			mOneCount = true;
 			mTotalTime = 0.0f;
 			mHp -= 1;
@@ -169,6 +204,8 @@ namespace jh
 		if (mHp <= 0 && 
 			mTotalTime >= 0.5f)
 		{
+			SmallDustEffect* smalldusteffect = object::Instantiate<SmallDustEffect>(eLayerType::Effect);
+			smalldusteffect->SetPosition(mPosition);
 			Death();
 		}
 		else if (mTotalTime >= 0.5f)

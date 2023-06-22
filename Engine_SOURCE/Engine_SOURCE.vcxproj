@@ -163,6 +163,7 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="jhAegis.h" />
     <ClInclude Include="jhAegisBullet.h" />
+    <ClInclude Include="jhAegisBulletScript.h" />
     <ClInclude Include="jhAegisScript.h" />
     <ClInclude Include="jhAnimation.h" />
     <ClInclude Include="jhAnimator.h" />
@@ -259,6 +260,7 @@
     <ClInclude Include="jhThrower.h" />
     <ClInclude Include="jhThrowerScript.h" />
     <ClInclude Include="jhThrowerStone.h" />
+    <ClInclude Include="jhThrowerStoneScript.h" />
     <ClInclude Include="jhTitleScene.h" />
     <ClInclude Include="jhTorch.h" />
     <ClInclude Include="jhTorchOwl.h" />
@@ -291,6 +293,7 @@
   <ItemGroup>
     <ClCompile Include="jhAegis.cpp" />
     <ClCompile Include="jhAegisBullet.cpp" />
+    <ClCompile Include="jhAegisBulletScript.cpp" />
     <ClCompile Include="jhAegisScript.cpp" />
     <ClCompile Include="jhAnimation.cpp" />
     <ClCompile Include="jhAnimator.cpp" />
@@ -383,6 +386,7 @@
     <ClCompile Include="jhThrower.cpp" />
     <ClCompile Include="jhThrowerScript.cpp" />
     <ClCompile Include="jhThrowerStone.cpp" />
+    <ClCompile Include="jhThrowerStoneScript.cpp" />
     <ClCompile Include="jhTitleScene.cpp" />
     <ClCompile Include="jhTorch.cpp" />
     <ClCompile Include="jhTorchOwl.cpp" />

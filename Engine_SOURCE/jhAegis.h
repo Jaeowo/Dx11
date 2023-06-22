@@ -36,6 +36,7 @@ namespace jh
 		void SetCount(bool onecount) { mOneCount = onecount; }
 
 		void SetAegisState(eAegisState aegisstate) { mAegisState = aegisstate; }
+		eAegisState GetAegisState() { return mAegisState; }
 
 	private:
 		Vector3 mPosition;
@@ -44,7 +45,8 @@ namespace jh
 		Animator* mAnimator;
 		Vector3 mRotation;
 		eAegisState mAegisState;
-		
+		Collider2D* mCollider;
+
 		float mMinY;
 		float mMaxY;
 

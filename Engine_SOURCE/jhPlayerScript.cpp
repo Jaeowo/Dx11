@@ -12,6 +12,9 @@
 #include "jhObject.h"
 #include "jhAudioClip.h"
 #include "jhAudioSource.h"
+#include "jhTortoiseBullet.h"
+#include "jhAegisBullet.h"
+#include "jhThrowerStone.h"
 
 namespace jh
 {
@@ -49,7 +52,22 @@ namespace jh
 		Animator* mAnimator = mPlayer->AddComponent<Animator>();
 
 
-		
+		std::shared_ptr<AudioClip> clip = std::make_shared<AudioClip>();
+		clip->Load(L"..\\Resources\\Audio\\Otus\\flap3.wav");
+		Resources::Insert<AudioClip>(L"Fly", clip);
+
+		std::shared_ptr<AudioClip> clip2 = std::make_shared<AudioClip>();
+		clip2->Load(L"..\\Resources\\Audio\\Otus\\flap2.wav");
+		Resources::Insert<AudioClip>(L"Attack", clip2);
+
+		std::shared_ptr<AudioClip> clip3 = std::make_shared<AudioClip>();
+		clip3->Load(L"..\\Resources\\Audio\\Otus\\flap4.wav");
+		Resources::Insert<AudioClip>(L"Roll", clip3);
+
+		std::shared_ptr<AudioClip> clip4 = std::make_shared<AudioClip>();
+		clip4->Load(L"..\\Resources\\Audio\\Hit.wav");
+		Resources::Insert<AudioClip>(L"Hit", clip4);
+
 
 		std::shared_ptr<Texture> herotexture = Resources::Load<Texture>(L"hero", L"Otus\\hero.png");
 		std::shared_ptr<Texture> hero2texture = Resources::Load<Texture>(L"hero2", L"Otus\\hero2.png");
@@ -251,6 +269,24 @@ namespace jh
 	}
 	void PlayerScript::OnCollisionEnter(Collider2D* collider)
 	{
+		TortoiseBullet* tortoisebulletobj = dynamic_cast<TortoiseBullet*>(collider->GetOwner());
+		if (tortoisebulletobj)
+		{
+			tortoisebulletobj->Death();
+		}
+
+		AegisBullet* aegisbulletobj = dynamic_cast<AegisBullet*>(collider->GetOwner());
+		if (aegisbulletobj)
+		{
+			aegisbulletobj->Death();
+		}
+
+		ThrowerStone* throwerstoneobj = dynamic_cast<ThrowerStone*>(collider->GetOwner());
+		if (throwerstoneobj)
+		{
+			throwerstoneobj->Death();
+		}
+
 	}
 	void PlayerScript::OnCollisionStay(Collider2D* collider)
 	{
@@ -420,6 +456,8 @@ namespace jh
 		if (Input::GetKey(eKeyCode::E))
 		{
 			mPlayer->SetPlayerState(ePlayerState::Fly);
+			std::shared_ptr<AudioClip> clip = Resources::Find<AudioClip>(L"Fly");
+			clip->Play();
 			mPlayer->SetCount(0);
 		}
 
@@ -464,8 +502,11 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"hurt", false);
+
+		
 			mVelocity.x = 0;
 			mCount = 1;
+
 
 		}
 
@@ -478,6 +519,8 @@ namespace jh
 		if (mCount == 0)
 		{
 			mTime = 0.0f;
+			std::shared_ptr<AudioClip> clip3 = Resources::Find<AudioClip>(L"Roll");
+			clip3->Play();
 			mAnimator->Play(L"GroundRoll", false);
 			
 			mPlayer->SetCount(1);
@@ -509,6 +552,8 @@ namespace jh
 		if (mCount == 0)
 		{
 			mTime = 0.0f;
+			std::shared_ptr<AudioClip> clip2 = Resources::Find<AudioClip>(L"Attack");
+			clip2->Play();
 			mAnimator->Play(L"EnterDoor", false);
 			mPlayer->SetCount(1);
 		}
@@ -523,6 +568,8 @@ namespace jh
 		if (mCount == 0)
 		{
 			mTime = 0.0f;
+			std::shared_ptr<AudioClip> clip2 = Resources::Find<AudioClip>(L"Attack");
+			clip2->Play();
 			mAnimator->Play(L"Attacking", false);
 
 			if (mAttackCol == nullptr)
@@ -557,6 +604,8 @@ namespace jh
 		if (mCount == 0)
 		{
 			mGravity = 0.0f;
+			
+
 			mAnimator->Play(L"Flying", true);
 
 
@@ -685,6 +734,8 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"Attacking", false);
+			std::shared_ptr<AudioClip> clip2 = Resources::Find<AudioClip>(L"Attack");
+			clip2->Play();
 
 			if (mAttackCol == nullptr)
 			{
@@ -713,6 +764,7 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"flyinghurt", false);
+
 			mVelocity.x = 0;
 			mCount = 1;
 
@@ -730,6 +782,8 @@ namespace jh
 		{
 			mTime = 0.0f;
 			mAnimator->Play(L"FlyRoll", false);
+			std::shared_ptr<AudioClip> clip3 = Resources::Find<AudioClip>(L"Roll");
+			clip3->Play();
 			mPlayer->SetCount(1);
 		}
 		if (mTime >= 0.5f)

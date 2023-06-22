@@ -55,6 +55,8 @@ namespace jh
 	private:
 		Vector3 mTargetPosition;
 		Vector3 mMonsterPosition;
+		Vector3 mRotation;
+
 		bool mTarget;
 		int mHp;
 		float mElapsedTime;

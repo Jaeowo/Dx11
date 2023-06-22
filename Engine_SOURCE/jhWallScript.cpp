@@ -7,6 +7,9 @@
 #include "jhGeddyBulletEffect.h"
 #include "jhObject.h"
 #include "jhThrower.h"
+#include "jhTortoiseBullet.h"
+#include "jhAegisBullet.h"
+#include "jhThrowerStone.h"
 
 namespace jh
 {
@@ -47,7 +50,8 @@ namespace jh
 		Tortoise* tortoiseObj = dynamic_cast<Tortoise*>(collider->GetOwner());
 		if (tortoiseObj && tortoiseObj->GetIgnoreCollisionTime() <= 0.0f) 
 		{
-			if (tortoiseObj->GetPlayerState() == eTortoiseState::MaskMove)
+			if (tortoiseObj->GetPlayerState() == eTortoiseState::MaskMove ||
+				tortoiseObj->GetPlayerState() == eTortoiseState::MaskShoot)
 			{
 				tortoiseObj->SetPlayerState(eTortoiseState::MaskTurn);
 			}
@@ -84,6 +88,24 @@ namespace jh
 	void WallScript::OnCollisionEnter(Collider2D* collider)
 	{
 		HandleWallCollision(collider);
+
+		TortoiseBullet* tortoisebulletobj = dynamic_cast<TortoiseBullet*>(collider->GetOwner());
+		if (tortoisebulletobj)
+		{
+			tortoisebulletobj->Death();
+		}
+
+		AegisBullet* aegisbulletobj = dynamic_cast<AegisBullet*>(collider->GetOwner());
+		if (aegisbulletobj)
+		{
+			aegisbulletobj->Death();
+		}
+
+		ThrowerStone* throwerstoneobj = dynamic_cast<ThrowerStone*>(collider->GetOwner());
+		if (throwerstoneobj)
+		{
+			throwerstoneobj->Death();
+		}
 	}
 
 	void WallScript::OnCollisionStay(Collider2D* collider)

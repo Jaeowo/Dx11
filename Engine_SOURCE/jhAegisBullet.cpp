@@ -7,6 +7,7 @@
 #include "jhPlayer.h"
 #include "jhAudioClip.h"
 #include "jhAudioSource.h"
+#include "jhAegisBulletScript.h"
 
 namespace jh
 {
@@ -61,6 +62,7 @@ namespace jh
 	void AegisBullet::Initalize()
 	{
 		GameObject::Initalize();
+		AddComponent<AegisBulletScript>();
 
 	}
 	void AegisBullet::Update()
@@ -73,7 +75,7 @@ namespace jh
 			mTransform->SetPosition(mTransform->GetPosition() + mDirection * mSpeed * Time::DeltaTime());
 		}
 
-		if (mDeadTime >= 3.0f)
+		if (mDeadTime >= 2.0f)
 		{
 			this->Death();
 		}

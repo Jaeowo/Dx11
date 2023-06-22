@@ -3,6 +3,7 @@
 #include "jhAegis.h"
 #include "jhObject.h"
 #include "jhStoneDoor.h"
+#include "jhGawk.h"
 
 namespace jh
 {
@@ -22,6 +23,14 @@ namespace jh
 		Aegis* aegisObj2 = object::Instantiate<Aegis>(eLayerType::Monster);
 		aegisObj2->SetPosition(Vector3(-0.33f, 0.45f, 1.7f));
 		mMonsters.push_back(aegisObj2);
+
+		//Gawk
+		Gawk* gawkObj = object::Instantiate<Gawk>(eLayerType::Monster);
+		Transform* gawkTr = gawkObj->GetComponent<Transform>();
+		gawkTr->SetPosition(Vector3(1.2f, 0.58f, 1.7f));
+		gawkTr->SetScale(Vector3(0.29f, 0.29f, 1.0f));
+		mMonsters.push_back(gawkObj);
+
 
 		mStoneDoor = object::Instantiate<StoneDoor>(eLayerType::BackGround);
 		mStoneDoor->SetPosition(Vector3(0.8f, 0.3f, 1.7f));

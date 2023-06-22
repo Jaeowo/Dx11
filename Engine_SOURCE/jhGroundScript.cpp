@@ -13,6 +13,9 @@
 #include "jhGeddyBullet.h"
 #include "jhGeddyBulletEffect.h"
 #include "jhObject.h"
+#include "jhTortoiseBullet.h"
+#include "jhAegisBullet.h"
+#include "jhThrowerStone.h"
 
 namespace jh
 {
@@ -103,10 +106,34 @@ namespace jh
 			geddybulleteffectobj->SetPosition(geddybulletObj->GetPosition());
 		}
 
+		TortoiseBullet* tortoisebulletobj = dynamic_cast<TortoiseBullet*>(collider->GetOwner());
+		if (tortoisebulletobj)
+		{
+			tortoisebulletobj->Death();
+		}
+
+		AegisBullet* aegisbulletobj = dynamic_cast<AegisBullet*>(collider->GetOwner());
+		if (aegisbulletobj)
+		{
+			aegisbulletobj->Death();
+		}
+
+		ThrowerStone* throwerstoneobj = dynamic_cast<ThrowerStone*>(collider->GetOwner());
+		if (throwerstoneobj)
+		{
+			throwerstoneobj->Death();
+		}
 
 	}
 	void GroundScript::OnCollisionStay(Collider2D* collider)
 	{
+		Geddy* geddyObj = dynamic_cast<Geddy*>(collider->GetOwner());
+
+		if (geddyObj && geddyObj->GetGeddyState() == eGeddyState::Falling)
+		{
+			geddyObj->SetGeddyState(eGeddyState::Idle);
+			geddyObj->SetCount(0);
+		}
 	}
 	void GroundScript::OnCollisionExit(Collider2D* collider)
 	{

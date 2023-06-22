@@ -14,6 +14,7 @@
 #include "jhJungleDoor.h"
 #include "jhAudioClip.h"
 #include "jhAudioSource.h"
+#include "jhBigDustEffect.h"
 
 namespace jh
 {
@@ -90,6 +91,12 @@ namespace jh
 		mAnimator->Create(L"TurnNomask", tortoisetexture18, Vector2(0.0f, 0.0f), Vector2(129.0f, 124.0f), Vector2::Zero, 5, 0.2f);
 
 		mAnimator->Play(L"IdleMask", true);
+
+		std::shared_ptr<AudioClip> flash = std::make_shared<AudioClip>();
+		flash->Load(L"..\\Resources\\Audio\\flash.wav");
+		Resources::Insert<AudioClip>(L"Flash", flash);
+
+		
 
 	
 	}	
@@ -231,6 +238,7 @@ namespace jh
 			mAnimator->Play(L"Move", true);
 			mEventOn = false;
 			mAniCheck = true;
+			mFunctionCheck = false;
 		}
 
 		if (mIgnoreCollisionTime > 0.0f)
@@ -463,13 +471,16 @@ namespace jh
 		{
 			mElapsedTime = 0.0f;
 			mAnimator->Play(L"FlyDeath", false);
+			BigDustEffect* bigdusteffect = object::Instantiate<BigDustEffect>(eLayerType::Effect);
+			bigdusteffect->SetPosition(mMonsterPosition);
+
 			JungleDoor* jungledoor = object::Instantiate<JungleDoor>(eLayerType::BackGround);
 			jungledoor->SetCavetoCave2(true);
 			jungledoor->SetPosition(Vector3(-1.53f, -2.55f, 1.7f));
 			mAniCheck = true;
 		}
 
-		float speed = 0.2f;  
+		float speed = 0.11f;  
 		mMonsterPosition.y -= speed * Time::DeltaTime();
 
 		if (mElapsedTime >= 1.5f)
@@ -545,6 +556,8 @@ namespace jh
 		if (mAniCheck == false)
 		{
 			mAnimator->Play(L"SpawnWings", false);
+			std::shared_ptr<AudioClip> flash = Resources::Find<AudioClip>(L"Flash");
+			flash->Play();
 			mAniCheck = true;
 
 			mElapsedTime = 0.0f;
