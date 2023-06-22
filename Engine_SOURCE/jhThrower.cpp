@@ -57,6 +57,7 @@ namespace jh
 	void Thrower::Update()
 	{
 		GameObject::Update();
+		
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
 		mTransform->SetPosition(mPosition);
@@ -65,7 +66,7 @@ namespace jh
 
 		mTotalTime += Time::DeltaTime();
 
-		mPrevPosition = mPosition;
+		//mPrevPosition = mPosition;
 
 		switch (mThrowerState)
 		{
@@ -115,6 +116,8 @@ namespace jh
 		Vector3 Dir = mTargetPosition - mPosition;
 		float speed = 0.2f;
 		Dir.Normalize();
+
+		mPrevPosition = mPosition;
 		mPosition.x += Dir.x * speed * Time::DeltaTime();
 
 		mCollider->SetSize(Vector2(0.15f, 0.15f));

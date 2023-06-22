@@ -41,9 +41,11 @@ namespace jh
 	}
 	void Scene::OnEnter()
 	{
+		Initalize();
 	}
 	void Scene::OnExit()
 	{
+		Destroy();
 	}
 	void Scene::Destroy()
 	{

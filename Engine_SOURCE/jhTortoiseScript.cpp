@@ -4,6 +4,11 @@
 #include "jhGeddyBullet.h"
 #include "jhPlayerAttackCol.h"
 #include "jhTortoiseMask.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
+#include "jhResources.h"
+#include "jhObject.h"
+#include "jhGeddyBulletEffect.h"
 
 namespace jh
 {
@@ -100,6 +105,14 @@ namespace jh
 				mtortoise->SetAniCheck(false);
 				mtortoise->SetPlayerState(eTortoiseState::Hit);
 			
+			}
+			else
+			{
+				
+				GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::BackGround);
+				geddybulleteffectobj->SetPosition(geddyBulletObj->GetPosition());
+				geddyBulletObj->Death();
+
 			}
 			if (mtortoise->GetPlayerState() == eTortoiseState::Fly)
 			{

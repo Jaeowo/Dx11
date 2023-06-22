@@ -14,6 +14,8 @@
 #include "jhCollider2D.h"
 #include "jhAudioClip.h"
 #include "jhAudioSource.h"
+#include "jhGeddyBulletEffect.h"
+#include "jhObject.h"
 
 extern jh::Application application;
 
@@ -80,6 +82,12 @@ namespace jh
 
 		mPosition = mTransform->GetPosition();
 
+
+		if (mIsAttack == true)
+		{
+			
+		}
+
 		if (!mIsDirectionSet && Input::GetKey(eKeyCode::LBTN))
 		{
 			mMousePos = Input::GetMousePosition();
@@ -110,10 +118,15 @@ namespace jh
 
 		mDeadTime += Time::DeltaTime();
 
-		if (mDeadTime >= 3.0f)
+		if (this != nullptr)
 		{
-			this->Death();
+			if (mDeadTime >= 3.0f)
+			{
+				Death();
+			}
 		}
+
+		
 
 	}
 	void GeddyBullet::FixedUpdate()
@@ -124,4 +137,5 @@ namespace jh
 	{
 		GameObject::Render();
 	}
+	
 }

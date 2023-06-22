@@ -130,7 +130,7 @@ namespace jh
 		//cameraComp->SetTarget(mplayer);
 		PlayerManager::LoadPlayerState(mplayer);
 		mplayer->SetPlayerPos(Vector3(0.0f, 0.0f, 1.7f));
-		//mplayer->SetJungleEventTrigger(true);
+		mplayer->SetJungleEventTrigger(true);
 
 		Ground* groundObj2 = object::Instantiate<Ground>(eLayerType::BackGround);
 		Transform* groundTr2 = groundObj2->GetComponent<Transform>();
@@ -152,9 +152,9 @@ namespace jh
 		wallTr1->SetPosition(Vector3(-0.55f, 0.0f, 1.7f));
 		wallTr1->SetScale(Vector3(0.01f, 0.8f, 1.0f));
 
-		/*BeeHive* beehiveObj = object::Instantiate<BeeHive>(eLayerType::Monster);
+		BeeHive* beehiveObj = object::Instantiate<BeeHive>(eLayerType::Monster);
 		beehiveObj->SetPosition(Vector3(0.02f, 0.2f, 1.7f));
-		PlayerManager::SetBeeHive(beehiveObj);*/
+		PlayerManager::SetBeeHive(beehiveObj);
 
 
 		Torch* torchobj = object::Instantiate<Torch>(eLayerType::BackGround);

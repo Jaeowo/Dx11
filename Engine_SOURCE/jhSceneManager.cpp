@@ -61,6 +61,7 @@ namespace jh
 	}
 	void SceneManager::Release()
 	{
+		mActiveScene = nullptr;
 		for (Scene* scene : mScenes)
 		{
 			delete scene;
@@ -69,9 +70,12 @@ namespace jh
 	}
 	void SceneManager::LoadScene(eSceneType type)
 	{
+
 		if (mActiveScene)
+		{
 			mActiveScene->OnExit();
-			//mActiveScene->Destroy();
+		}
+		
 
 		std::vector<GameObject*> gameObjs
 			= mActiveScene->GetDontDestroyGameObjects();
@@ -79,8 +83,8 @@ namespace jh
 
 		for (GameObject* obj : gameObjs)
 		{
-			eLayerType type = obj->GetLayerType();
-			mActiveScene->AddGameObject(obj, type);
+			eLayerType savedType = obj->GetLayerType();
+			mActiveScene->AddGameObject(obj, savedType);
 		}
 
 		mActiveScene->OnEnter();

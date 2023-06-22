@@ -6,6 +6,8 @@
 #include "jhTime.h"
 #include "jhStoneDoor.h"
 #include "jhObject.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -117,6 +119,16 @@ namespace jh
 		{
 			mAnimator->Play(L"Press", false);
 			mTotalTime = 0.0f;
+
+			std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+				(L"press", L"..\\Resources\\Audio\\buttonLightPress.wav");
+
+			AudioSource* audioSource = AddComponent<AudioSource>();
+			audioSource->SetClip(audioClip);
+			audioSource->SetLoop(false);
+
+
+			audioSource->Play();
 			mOneCount = true;
 
 		}

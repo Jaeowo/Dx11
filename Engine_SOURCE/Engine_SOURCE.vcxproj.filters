@@ -367,6 +367,15 @@
     <ClInclude Include="jhGeddyBulletEffect.h">
       <Filter>GameObject\Geddy</Filter>
     </ClInclude>
+    <ClInclude Include="jhBigDustEffect.h">
+      <Filter>GameObject\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="jhSmallDustEffect.h">
+      <Filter>GameObject\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="jhBurstEffect.h">
+      <Filter>GameObject\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yaMath.cpp">
@@ -719,6 +728,15 @@
     <ClCompile Include="jhGeddyBulletEffect.cpp">
       <Filter>GameObject\Geddy</Filter>
     </ClCompile>
+    <ClCompile Include="jhBigDustEffect.cpp">
+      <Filter>GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="jhSmallDustEffect.cpp">
+      <Filter>GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="jhBurstEffect.cpp">
+      <Filter>GameObject\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -951,6 +969,9 @@
     </Filter>
     <Filter Include="Component\Script\MonsterScript\Bee">
       <UniqueIdentifier>{58d86265-7828-4f00-b01f-952d0b5e9f5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Effect">
+      <UniqueIdentifier>{d85a05ff-2444-4100-acb1-520734e2312b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

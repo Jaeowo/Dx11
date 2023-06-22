@@ -137,7 +137,6 @@ namespace jh
 		Geddy* geddyObj = object::Instantiate<Geddy>(eLayerType::Friends);
 		PlayerManager::SetGeddy(geddyObj);
 		geddyObj->AddComponent<GeddyScript>();
-		geddyObj->SetName(L"Geddy");
 
 
 		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>

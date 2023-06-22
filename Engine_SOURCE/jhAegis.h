@@ -51,5 +51,7 @@ namespace jh
 		int mHp;
 		bool mOneCount;
 		float mTotalTime;
+
+	
 	};
 }

@@ -61,17 +61,20 @@ namespace jh
 
 		if (geddybulletObj)
 		{
-			geddybulletObj->Death();
 			GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::BackGround);
 			geddybulleteffectobj->SetPosition(geddybulletObj->GetPosition());
+			geddybulletObj->Death();
 		}
 
 		Thrower* throwerObj = dynamic_cast<Thrower*>(collider->GetOwner());
 		if (throwerObj)
 		{
-			Vector3 previousPos = throwerObj->GetPreviousPos();
-			throwerObj->SetPosition(previousPos);
-			throwerObj->SetPosition(previousPos);
+			if (throwerObj->GetThrowerState() == eThrowerState::Follow)
+			{
+				Vector3 previousPos = throwerObj->GetPreviousPos();
+				throwerObj->SetPosition(previousPos);
+			}
+			
 
 		}
 
@@ -94,6 +97,13 @@ namespace jh
 		if (playerObj)
 		{
 			playerObj->SetVelocityZero(false);
+		}
+		
+
+		Thrower* throwerObj = dynamic_cast<Thrower*>(collider->GetOwner());
+		if (throwerObj)
+		{
+			
 		}
 	}
 }

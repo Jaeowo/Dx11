@@ -2,6 +2,9 @@
 #include "jhCoin.h"
 #include "jhPlayer.h"
 #include "jhTime.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
+#include "jhResources.h"
 
 namespace jh
 {
@@ -41,8 +44,9 @@ namespace jh
 			{
 				int coinCheck = (playerObj->GetCoin() + 5);
 				playerObj->SetCoin(coinCheck);
+				mcoin->SetSoundOn(true);
 
-				mcoin->Death();
+				//mcoin->Death();
 			}
 		}
 	

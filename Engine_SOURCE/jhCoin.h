@@ -27,6 +27,8 @@ namespace jh
 
 		void SetGround(bool bground) { mbGround = bground; }
 
+		void SetSoundOn(bool soundon) { mSoundOn = soundon; }
+
 	private:
 		Vector3 mPosition;
 		Vector3 mVelocity;
@@ -37,6 +39,7 @@ namespace jh
 
 		bool mbGround;
 		bool mOneCount;
+		bool mSoundOn;
 		float mSpeed;  
 		float mGravity;  
 		

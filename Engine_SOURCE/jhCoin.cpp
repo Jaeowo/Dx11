@@ -4,6 +4,8 @@
 #include "jhAnimator.h"
 #include "jhTime.h"
 #include "jhCoinScript.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -13,6 +15,7 @@ namespace jh
 		,mGravity(0.5f)
 		,mPosition(Vector3(0.0f, 0.0f, 0.0f))
 		,mbGround(false)
+		,mSoundOn (false)
 	{
 		mAnimator = AddComponent<Animator>();
 		mTransform = GetComponent<Transform>();
@@ -52,6 +55,20 @@ namespace jh
 		GameObject::Update();
 
 
+		if (mSoundOn == true)
+		{
+			std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+				(L"get", L"..\\Resources\\Audio\\ring_get.wav");
+
+			AudioSource* audioSource = AddComponent<AudioSource>();
+			audioSource->SetClip(audioClip);
+			audioSource->SetLoop(false);
+
+
+			audioSource->Play();
+
+			Death();
+		}
 
 
 		if (mbGround == true)

@@ -6,6 +6,9 @@
 #include "jhTortoise.h"
 #include "jhPlayerManager.h"
 #include "jhPlayer.h"
+#include "jhtortoiseBulletScript.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -38,6 +41,16 @@ namespace jh
 
 		mAnimator->Play(L"TortoiseShoot", false);
 
+		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+			(L"Shoot3", L"..\\Resources\\Audio\\shoot3.wav");
+
+		AudioSource* audioSource = AddComponent<AudioSource>();
+		audioSource->SetClip(audioClip);
+		audioSource->SetLoop(false);
+
+
+		audioSource->Play();
+
 
 		Collider2D* mCollider = AddComponent<Collider2D>();
 		mCollider->SetType(eColliderType::Rect);
@@ -51,6 +64,7 @@ namespace jh
 	void TortoiseBullet::Initalize()
 	{
 		GameObject::Initalize();
+		AddComponent<tortoiseBulletScript>();
 
 	}
 	void TortoiseBullet::Update()

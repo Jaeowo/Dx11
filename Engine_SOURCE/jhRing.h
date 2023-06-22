@@ -5,6 +5,7 @@ namespace jh
 {
 	class Transform;
 	class Animator;
+	class AudioSource;
 
 	enum class eRingSet
 	{
@@ -48,5 +49,7 @@ namespace jh
 
 		bool mOneCount;
 		float mTotalTime;
+
+		AudioSource* maudioSource;
 	};
 }

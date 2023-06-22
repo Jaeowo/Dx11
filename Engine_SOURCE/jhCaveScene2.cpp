@@ -290,7 +290,7 @@ namespace jh
 		PlayerManager::SetGeddy(geddyObj);
 		geddyObj->SetCount(0);
 		geddyObj->AddComponent<GeddyScript>();
-		geddyObj->SetPlayerPos(Vector3(-2.23f, -0.27f, 1.7f));
+		geddyObj->SetGeddyPos(Vector3(-2.13f, -0.27f, 1.7f));
 
 		MonsterSpawn* monsterspawn = object::Instantiate<MonsterSpawn>(eLayerType::UI);
 

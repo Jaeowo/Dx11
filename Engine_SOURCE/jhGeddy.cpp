@@ -41,12 +41,14 @@ namespace jh
 	void Geddy::Initalize()
 	{
 		GameObject::Initalize();
+
+		//AddComponent<GeddyScript>();
 	}
 	void Geddy::Update()
 	{
 		GameObject::Update();
 		mTransform = GetComponent<Transform>();
-		mPos = mTransform->GetPosition();
+		//mPos = mTransform->GetPosition();
 	}
 	void Geddy::FixedUpdate()
 	{

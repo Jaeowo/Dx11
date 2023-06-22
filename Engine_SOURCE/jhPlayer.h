@@ -10,6 +10,7 @@ namespace jh
 	class Transform;
 	class Collider2D;
 	class PlayerScript;
+	class AudioSource;
 
 	class Player
 		: public GameObject
@@ -119,6 +120,8 @@ namespace jh
 		bool mIsInvincible;
 		float mInvincibleTimer;
 		float mHurtTimer;
+
+		AudioSource* AudioSource;
 	};
 
 }

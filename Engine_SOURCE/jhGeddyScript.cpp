@@ -16,6 +16,9 @@
 #include "jhInput.h"
 
 #include "jhSpriteRenderer.h"
+#include "jhBurstEffect.h"
+#include "jhSmallDustEffect.h"
+#include "jhBigDustEffect.h"
 
 namespace jh
 {
@@ -27,14 +30,7 @@ namespace jh
 		, mGeddyhands(nullptr)
 	{
 		
-		Animator* mAnimator = PlayerManager::GetGeddy()->AddComponent<Animator>();
-		//sprFlailLoop_strip8
-		std::shared_ptr<Texture> geddyfalltexture = Resources::Load<Texture>(L"geddyfall", L"Geddy\\sprFlailLoop_strip8.png");
-		std::shared_ptr<Texture> geddytexture = Resources::Load<Texture>(L"geddy", L"Geddy\\spr_mechanic_96x96.png");
-
-		mAnimator->Create(L"IdleG", geddytexture, Vector2(0.0f, 0.0f), Vector2(96.0f, 96.0f), Vector2::Zero, 11, 0.25f);
-		mAnimator->Create(L"HaingingG", geddytexture, Vector2(0.0f, 96.0f), Vector2(96.0f, 96.0f), Vector2::Zero, 5, 0.25f);
-		mAnimator->Create(L"fallG", geddyfalltexture, Vector2(0.0f, 96.0f), Vector2(96.0f, 96.0f), Vector2::Zero, 8, 0.25f);
+		
 
 		mVelocity = (Vector2(0.0f, 0.0f));
 		mMass = 150.0f;
@@ -44,7 +40,7 @@ namespace jh
 		//Geddyhands * mGeddyhands = object::Instantiate<Geddyhands>(eLayerType::PlayerObject);
 		//geddyhands->Death();
 
-		mPlayerTransform = PlayerManager::GetPlayer()->getTransform();
+	
 
 	}
 	GeddyScript::~GeddyScript()
@@ -52,16 +48,34 @@ namespace jh
 	}
 	void GeddyScript::Initalize()
 	{
+		mGeddy = dynamic_cast<Geddy*>(GetOwner());
+		if (mGeddy == nullptr)
+		{
+			return;
+		}
+
+		Animator* mAnimator = PlayerManager::GetGeddy()->AddComponent<Animator>();
+		//sprFlailLoop_strip8
+		std::shared_ptr<Texture> geddyfalltexture = Resources::Load<Texture>(L"geddyfall", L"Geddy\\sprFlailLoop_strip8.png");
+		std::shared_ptr<Texture> geddytexture = Resources::Load<Texture>(L"geddy", L"Geddy\\spr_mechanic_96x96.png");
+
+		mAnimator->Create(L"IdleG", geddytexture, Vector2(0.0f, 0.0f), Vector2(96.0f, 96.0f), Vector2::Zero, 11, 0.25f);
+		mAnimator->Create(L"HaingingG", geddytexture, Vector2(0.0f, 96.0f), Vector2(96.0f, 96.0f), Vector2::Zero, 5, 0.25f);
+		mAnimator->Create(L"fallG", geddyfalltexture, Vector2(0.0f, 96.0f), Vector2(96.0f, 96.0f), Vector2::Zero, 8, 0.25f);
+
+		mPlayerTransform = PlayerManager::GetPlayer()->getTransform();
 	}
 	void GeddyScript::Update()
 	{
 		mAnimator = GetOwner()->GetComponent<Animator>();
 		mTransform = GetOwner()->GetComponent<Transform>();
 
-		mGeddyState = PlayerManager::GetGeddy()->GetGeddyState();
+		mGeddyState = mGeddy->GetGeddyState();
 		mGeddyPosition = mTransform->GetPosition();
-		mCount = PlayerManager::GetGeddy()->GetCount();
-		PlayerManager::GetGeddy()->SetPlayerPos(mGeddyPosition);
+		//mGeddy->SetGeddyPos(mGeddyPosition);
+		mCount = mGeddy->GetCount();
+		//mGeddy->SetPlayerPos(mGeddyPosition);
+		mTransform->SetPosition(mGeddyPosition);
 
 		switch (mGeddyState)
 		{
@@ -93,8 +107,8 @@ namespace jh
 				{
 					if (mGeddyState != eGeddyState::Falling)
 					{
-						PlayerManager::GetGeddy()->SetCount(0);
-						PlayerManager::GetGeddy()->SetGeddyState(eGeddyState::Falling);
+						mGeddy->SetCount(0);
+						mGeddy->SetGeddyState(eGeddyState::Falling);
 					}
 
 					mFallingTime = 0.0f;
@@ -111,12 +125,12 @@ namespace jh
 
 #pragma endregion
 
-		if (PlayerManager::GetGeddy()->GetIsGround() == true)
+		if (mGeddy->GetIsGround() == true)
 		{
 			mGravity = 0.0f;
 			mVelocity.y = 0.0f;
 		}
-		else if (PlayerManager::GetGeddy()->GetIsGround() == false)
+		else if (mGeddy->GetIsGround() == false)
 		{
 			mGravity = 0.00005f;
 		}
@@ -151,7 +165,7 @@ namespace jh
 		{
 		
 			mAnimator->Play(L"IdleG", true);
-			PlayerManager::GetGeddy()->SetCount(1);
+			mGeddy->SetCount(1);
 			mVelocity = (Vector2(0.0f, 0.0f));
 			mMass = 150.0f;
 
@@ -160,12 +174,20 @@ namespace jh
 		}
 		if (Input::GetKeyDown(eKeyCode::G))
 		{
-			PlayerManager::GetGeddy()->SetGeddyState(eGeddyState::Hanging);
+			mGeddy->SetGeddyState(eGeddyState::Hanging);
 			mGeddyState = eGeddyState::Hanging;
-			PlayerManager::GetGeddy()->SetCount(0);
+			mGeddy->SetCount(0);
 
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::FlyGrab);
 			PlayerManager::GetPlayer()->SetCount(0);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Q))
+		{
+			Vector3 playerPos = PlayerManager::GetPlayer()->GetPlayerPos();
+			mGeddy->SetGeddyPos(playerPos);
+			BurstEffect* burst = object::Instantiate<BurstEffect>(eLayerType::Effect);
+			burst->SetPosition(playerPos);
 		}
 	}
 	void GeddyScript::Hanging()
@@ -183,7 +205,7 @@ namespace jh
 			mTransform->SetPosition(Vector3(-0.03f, -0.1f, 0.0f));
 			mTransform->SetScale(Vector3(0.95f, 0.95f, 1.0f));
 
-			PlayerManager::GetGeddy()->SetCount(1);
+			mGeddy->SetCount(1);
 
 		}
 		if (Input::GetKeyDown(eKeyCode::G))
@@ -194,13 +216,13 @@ namespace jh
 				mGeddyhands->Death();
 				//bool DeadCheck = mGeddyhands->IsDead();
 			}
-			PlayerManager::GetGeddy()->SetGeddyState(eGeddyState::Idle);
+			mGeddy->SetGeddyState(eGeddyState::Idle);
 
 			mTransform->SetParent(nullptr);
 			Vector3 PlayerPosition = mPlayerTransform->GetPosition();
 			mTransform->SetPosition(Vector3(PlayerPosition.x-0.018f, PlayerPosition.y-0.05f, PlayerPosition.z));
 			mTransform->SetScale(Vector3(0.33f, 0.33f, 1.0f));
-			PlayerManager::GetGeddy()->SetCount(0);
+			mGeddy->SetCount(0);
 
 			PlayerManager::GetPlayer()->SetPlayerState(ePlayerState::Fly);
 			PlayerManager::GetPlayer()->SetCount(0);
@@ -221,7 +243,7 @@ namespace jh
 		{
 			mAnimator->Play(L"fallG", false);
 
-			PlayerManager::GetGeddy()->SetCount(1);
+			mGeddy->SetCount(1);
 		}
 	}
 }

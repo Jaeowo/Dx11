@@ -7,6 +7,7 @@
 #include "jhPlayerManager.h"
 #include "jhTime.h"
 #include "jhAegisScript.h"
+#include "jhAegisBullet.h"
 
 namespace jh
 {
@@ -99,13 +100,25 @@ namespace jh
 
 	void Aegis::WaitShoot()
 	{
+		if (mOneCount == false)
+		{
+			if (mTotalTime >= 1.0f)
+			{
+				mAegisState = eAegisState::Shoot;
+
+			}
+			mOneCount = true;
+		}
+
 		float speed = 0.1f; 
-		Vector3 direction(0.0f, mTargetPosition.y - mPosition.y, 0.0f); 
+		Vector3 direction(0.0f, mTargetPosition.y - mPosition.y, 0.0f);
 
 		direction.Normalize();
 
+	
 		mPosition += direction * speed * Time::DeltaTime();
 
+	
 		if (mPosition.y < mMinY) {
 			mPosition.y = mMinY;
 		}
@@ -114,10 +127,35 @@ namespace jh
 		}
 
 		mTransform->SetPosition(mPosition);
+	
 	}
 
 	void Aegis::Shoot()
 	{
+		if (mOneCount == false)
+		{
+		
+			mOneCount = true;
+		}
+		static float time = 0.0f;
+		static int bulletCount = 0;
+
+		time += Time::DeltaTime();
+
+		if (mTargetPosition.y >= mMinY && mTargetPosition.y <= mMaxY && time >= 0.3f && bulletCount < 1)
+		{
+			AegisBullet* aegisBullet = object::Instantiate<AegisBullet>(eLayerType::MonsterObject);
+			aegisBullet->SetPosition(mPosition);
+
+			Vector3 directionToPlayer(-1, 0, 0);
+			aegisBullet->SetDirection(directionToPlayer);
+
+			time = 0.0f;
+			bulletCount++;
+
+		}
+
+	
 	}
 
 	void Aegis::Die()

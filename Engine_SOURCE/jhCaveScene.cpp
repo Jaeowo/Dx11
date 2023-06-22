@@ -275,6 +275,7 @@ namespace jh
 		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::BackGrouncObj, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::BackGround, eLayerType::MonsterObject, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround2, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::MonsterObject, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGround, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::BackGrouncObj, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Friends, true);

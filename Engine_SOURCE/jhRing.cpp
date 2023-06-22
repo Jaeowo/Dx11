@@ -8,6 +8,8 @@
 #include "jhRingScript.h"
 #include "jhObject.h"
 #include "jhTime.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -43,6 +45,13 @@ namespace jh
 		mCollider->SetType(eColliderType::Rect);
 		mCollider->SetSize(Vector2(0.1f, 0.1f));
 
+		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+			(L"get", L"..\\Resources\\Audio\\ring_get.wav");
+
+		maudioSource = AddComponent<AudioSource>();
+		maudioSource->SetClip(audioClip);
+		maudioSource->SetLoop(false);
+
 	}
 	Ring::~Ring()
 	{
@@ -68,19 +77,29 @@ namespace jh
 
 			Light* lightComp = pointLight->AddComponent<Light>();
 			lightComp->SetType(eLightType::Point);
-			lightComp->SetRadius(0.07f);
+			lightComp->SetRadius(0.08f);
 
 			lightComp->SetDiffuse(Vector4(0.0f, 1.0f, 0.0f, 1.0f));
 
-			lightComp->ChangeColorOverTime(2.0f, Vector4(0.0f, 1.0f, 0.0f, 1.0f), Vector4(1.0f, 0.0f, 1.0f, 1.0f));
+			lightComp->ChangeColorOverTime(0.8f, Vector4(0.0f, 1.0f, 0.0f, 1.0f), Vector4(1.0f, 0.0f, 1.0f, 1.0f));
+
+			
+
+
+			maudioSource->Play();
+
 
 			mOneCount = true;
 			mTotalTime = 0.0f;
+
+
 		}
 
 		if (mIsTouch == true)
 		{
-			if (mTotalTime >= 0.7f)
+
+
+			if (mTotalTime >= 1.0f)
 			{
 				if (pointLight)
 				{

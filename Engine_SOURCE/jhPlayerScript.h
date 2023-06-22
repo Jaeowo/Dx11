@@ -9,6 +9,7 @@ namespace jh
 	class Player;
 	class Collider2D;
 	class PlayerAttackCol;
+	class AudioSource;
 
 	class PlayerScript
 		: public Script
@@ -94,6 +95,8 @@ namespace jh
 
 		int mHp;
 		int mCoin;
+
+		AudioSource* maudioSource;
 	
 
 	};

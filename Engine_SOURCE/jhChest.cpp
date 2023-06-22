@@ -8,6 +8,8 @@
 #include "jhPlayer.h"
 #include "jhCoin.h"
 #include "jhObject.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -156,6 +158,16 @@ namespace jh
 			SpawnCoin(5);
 			mAnimator->Play(L"Open2", false);
 			mIsOpen2Played = true;
+
+			std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
+				(L"Open", L"..\\Resources\\Audio\\unlockTeleporter.wav");
+
+			AudioSource* audioSource = AddComponent<AudioSource>();
+			audioSource->SetClip(audioClip);
+			audioSource->SetLoop(false);
+
+
+			audioSource->Play();
 		}
 		else if (mElpasedTime >= 2.0f && !mIsOpenFinishPlayed) 
 		{

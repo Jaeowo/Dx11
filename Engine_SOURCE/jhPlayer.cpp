@@ -5,6 +5,9 @@
 #include "jhSpriteRenderer.h"
 #include "jhResources.h"
 #include "jhTime.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
+
 
 namespace jh
 {

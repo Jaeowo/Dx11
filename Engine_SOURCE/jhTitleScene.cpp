@@ -158,7 +158,7 @@ namespace jh
 	{
 		if (Input::GetKeyDown(eKeyCode::N))
 		{
-			SceneManager::LoadScene(eSceneType::Cave2);
+			SceneManager::LoadScene(eSceneType::Play);
 		}
 		Scene::Update(); 
 	}

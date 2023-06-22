@@ -10,6 +10,8 @@
 #include "jhGeddy.h"
 #include "jhPlayerAttackCol.h"
 #include "jhObject.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
 
 namespace jh
 {
@@ -30,7 +32,7 @@ namespace jh
 
 		mGravity = 0.00005f;
 	
-	
+
 
 		
 	}
@@ -46,6 +48,8 @@ namespace jh
 		}
 		Animator* mAnimator = mPlayer->AddComponent<Animator>();
 
+
+		
 
 		std::shared_ptr<Texture> herotexture = Resources::Load<Texture>(L"hero", L"Otus\\hero.png");
 		std::shared_ptr<Texture> hero2texture = Resources::Load<Texture>(L"hero2", L"Otus\\hero2.png");
@@ -554,6 +558,8 @@ namespace jh
 		{
 			mGravity = 0.0f;
 			mAnimator->Play(L"Flying", true);
+
+
 			mPlayer->SetCount(1);
 		}
 		

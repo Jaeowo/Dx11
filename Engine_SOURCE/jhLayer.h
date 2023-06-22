@@ -21,6 +21,8 @@ namespace jh
 
 	private:
 		std::vector<GameObject*> mGameObjects;
+
+
 	};
 
 	typedef const std::vector<GameObject*>& GameObjects;

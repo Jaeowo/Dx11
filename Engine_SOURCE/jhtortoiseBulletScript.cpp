@@ -50,7 +50,6 @@ namespace jh
 				playerObj->SetPlayerState(ePlayerState::Hurt);
 			}
 		}
-
 	
 	}
 	void tortoiseBulletScript::OnCollisionStay(Collider2D* collider)

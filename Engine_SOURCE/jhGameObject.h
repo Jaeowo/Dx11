@@ -123,6 +123,8 @@ namespace jh
 		std::vector<Script*> mScripts;
 		bool mbDontDestroy;
 		Vector3 mPos;
+
+
 	};
 }
 

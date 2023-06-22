@@ -4,6 +4,7 @@
 namespace jh
 {
 	class Coin;
+	class AudioSource;
 
 	class CoinScript
 		: public Script
@@ -25,6 +26,8 @@ namespace jh
 		Coin* mcoin;
 		float mTime;
 		int mCount;
+
+		AudioSource* maudioSource;
 	};
 }
 

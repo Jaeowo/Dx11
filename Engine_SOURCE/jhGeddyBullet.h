@@ -23,6 +23,8 @@ namespace jh
 
 		Vector3 GetPosition() { return mPosition; }
 
+		void Effect();
+
 	private:
 		Animator* mAnimator;
 		Transform* mTransform;

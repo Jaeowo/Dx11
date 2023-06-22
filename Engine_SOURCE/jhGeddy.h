@@ -27,7 +27,7 @@ namespace jh
 		void SetPlayerPos(Vector3 playerpos) { mPlayerPos = playerpos;  mTransform->SetPosition(mPlayerPos); }
 
 		Vector3 GetGeddyPos() { return mPos; }
-		void SetGeddyPos(Vector3 pos) { mPos = pos; }
+		void SetGeddyPos(Vector3 pos) { mPos = pos;  mTransform->SetPosition(mPos); }
 
 		bool GetIsGround() { return mbGround; }
 		void SetIsGround(bool bGround) { mbGround = bGround; }

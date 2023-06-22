@@ -36,13 +36,17 @@ namespace jh
 				mThrower->SetThrowerState(eThrowerState::Follow);
 			}
 
+			if (mThrower->GetThrowerState() != eThrowerState::Idle)
+			{
+				int hpCheck = (playerObj->GetHp() - 1);
+				playerObj->SetHp(hpCheck);
+			}
 
 			if (playerObj->GetIsInvincible())
 			{
 				return;
 			}
-			int hpCheck = (playerObj->GetHp() - 1);
-			playerObj->SetHp(hpCheck);
+			
 
 			playerObj->SetInvincibleTimer(0.0f);
 			playerObj->SetIsInvincible(true);

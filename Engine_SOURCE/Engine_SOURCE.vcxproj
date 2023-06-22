@@ -175,6 +175,8 @@
     <ClInclude Include="jhBee.h" />
     <ClInclude Include="jhBeeHive.h" />
     <ClInclude Include="jhBeeScript.h" />
+    <ClInclude Include="jhBigDustEffect.h" />
+    <ClInclude Include="jhBurstEffect.h" />
     <ClInclude Include="jhButton.h" />
     <ClInclude Include="jhButtonScript.h" />
     <ClInclude Include="jhCamera.h" />
@@ -248,6 +250,7 @@
     <ClInclude Include="jhScrewPuzzleScript.h" />
     <ClInclude Include="jhSlope.h" />
     <ClInclude Include="jhSlopeScript.h" />
+    <ClInclude Include="jhSmallDustEffect.h" />
     <ClInclude Include="jhSoil.h" />
     <ClInclude Include="jhSpriteRenderer.h" />
     <ClInclude Include="jhStoneDoor.h" />
@@ -300,6 +303,8 @@
     <ClCompile Include="jhBee.cpp" />
     <ClCompile Include="jhBeeHive.cpp" />
     <ClCompile Include="jhBeeScript.cpp" />
+    <ClCompile Include="jhBigDustEffect.cpp" />
+    <ClCompile Include="jhBurstEffect.cpp" />
     <ClCompile Include="jhButton.cpp" />
     <ClCompile Include="jhButtonScript.cpp" />
     <ClCompile Include="jhCamera.cpp" />
@@ -369,6 +374,7 @@
     <ClCompile Include="jhScrewPuzzleScript.cpp" />
     <ClCompile Include="jhSlope.cpp" />
     <ClCompile Include="jhSlopeScript.cpp" />
+    <ClCompile Include="jhSmallDustEffect.cpp" />
     <ClCompile Include="jhSoil.cpp" />
     <ClCompile Include="jhSpriteRenderer.cpp" />
     <ClCompile Include="jhStoneDoor.cpp" />
