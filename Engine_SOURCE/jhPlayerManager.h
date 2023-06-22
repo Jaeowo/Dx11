@@ -15,16 +15,12 @@ namespace jh
 		static void SetGeddy(Geddy* geddy) { mGeddy = geddy; }
 		static Geddy* GetGeddy() { return mGeddy; }
 
-		static void SetBeeHive(BeeHive* beehive) { mBeeHive = beehive; }
-		static BeeHive* GetBeeHive() { return mBeeHive; }
-
 		static void SavePlayerState(Player* player);
 		static void LoadPlayerState(Player* player);
 
 	private:
 		static Player* mPlayer;
 		static Geddy* mGeddy;
-		static BeeHive* mBeeHive;
 
 		static int mSavedHp;
 		static int mSavedCoins;

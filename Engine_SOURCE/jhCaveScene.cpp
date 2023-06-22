@@ -73,6 +73,7 @@ namespace jh
 
 				maudioSource->Stop();
 				maudioSource->SetClip(audioClip2);
+				maudioSource->SetLoop(true);
 	
 				maudioSource->Play();
 

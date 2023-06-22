@@ -41,7 +41,6 @@ namespace jh
 
 	void JungleScene::Initalize()
 	{
-		;
 
 		Scene::Initalize();
 	}
@@ -154,8 +153,6 @@ namespace jh
 
 		BeeHive* beehiveObj = object::Instantiate<BeeHive>(eLayerType::Monster);
 		beehiveObj->SetPosition(Vector3(0.02f, 0.2f, 1.7f));
-		PlayerManager::SetBeeHive(beehiveObj);
-
 
 		Torch* torchobj = object::Instantiate<Torch>(eLayerType::BackGround);
 		torchobj->SetPosition(Vector3(-0.0f, -0.2f, 1.7f));

@@ -6,7 +6,10 @@ namespace jh
 {
 	class Transform;
 	class Animator;
-	class Bee;
+	class Phase1;
+	class Phase2;
+	class Phase3;
+	class Phase4;
 
 	enum class eBeeHiveState
 	{
@@ -34,12 +37,11 @@ namespace jh
 		//State
 		void Idle();
 		void Broken();
-		void UpdateBeeCount();
 
-		void Phase1();
-		void Phase2();
-		void Phase3();
-		void Phase4();
+		void p1();
+		void p2();
+		void p3();
+		void p4();
 		void Phase5();
 
 		void SpawnBees(eBeeState beeState);
@@ -53,17 +55,11 @@ namespace jh
 		void SetPhaseBee(int phasebee) { mPhaseBeeCount = phasebee; }
 		int GetPhaseBee() { return mPhaseBeeCount; }
 
-		void IncreaseDeadBee() { ++mDeadBees; }
-		void DecreaseDeadBee() { --mDeadBees; }
-		void IncreasePhaseBee() { ++mPhaseBeeCount; }
-		void DecreasePhaseBee() { --mPhaseBeeCount; }
-
 	private:
 		Vector3 mPosition;
 		Transform* mTransform;
 		Animator* mAnimator;
 		eBeeHiveState mBeeHiveState;
-		Bee* mbee;
 
 		float mSpawnTimer;
 		float mPhaseTimer;
@@ -75,6 +71,12 @@ namespace jh
 		float mTotalTime;
 
 		int mPhaseBeeCount;
+
+		Phase1* mphase1;
+		Phase2* mphase2;
+		Phase3* mphase3;
+		Phase4* mphase4;
+
 
 	};
 }

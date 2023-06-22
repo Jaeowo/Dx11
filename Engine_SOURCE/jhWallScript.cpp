@@ -10,6 +10,7 @@
 #include "jhTortoiseBullet.h"
 #include "jhAegisBullet.h"
 #include "jhThrowerStone.h"
+#include "jhBee.h"
 
 namespace jh
 {
@@ -41,6 +42,8 @@ namespace jh
 			playerObj->SetVelocityZero(true);
 			
 		}
+
+	
 
 		TortoiseMask* tortoisemaskObj = dynamic_cast<TortoiseMask*>(collider->GetOwner());
 		if (tortoisemaskObj)
@@ -106,11 +109,22 @@ namespace jh
 		{
 			throwerstoneobj->Death();
 		}
+
+		Bee* beeObj = dynamic_cast<Bee*>(collider->GetOwner());
+		if (beeObj)
+		{
+			Vector3 previousPos = beeObj->GetPreviousPos();
+			beeObj->SetPosition(previousPos);
+			beeObj->SetBeeState(eBeeState::HitWall);
+			beeObj->SetCount(false);
+		}
 	}
 
 	void WallScript::OnCollisionStay(Collider2D* collider)
 	{
 		HandleWallCollision(collider);
+
+
 	}
 
 	void WallScript::OnCollisionExit(Collider2D* collider)

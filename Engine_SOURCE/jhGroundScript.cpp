@@ -16,6 +16,7 @@
 #include "jhTortoiseBullet.h"
 #include "jhAegisBullet.h"
 #include "jhThrowerStone.h"
+#include "jhBee.h"
 
 namespace jh
 {
@@ -122,6 +123,15 @@ namespace jh
 		if (throwerstoneobj)
 		{
 			throwerstoneobj->Death();
+		}
+
+		Bee* beeObj = dynamic_cast<Bee*>(collider->GetOwner());
+		if (beeObj)
+		{
+			Vector3 previousPos = beeObj->GetPreviousPos();
+			beeObj->SetPosition(previousPos);
+			beeObj->SetBeeState(eBeeState::HitWall);
+			beeObj->SetCount(false);
 		}
 
 	}

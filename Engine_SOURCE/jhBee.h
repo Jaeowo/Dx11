@@ -45,16 +45,25 @@ namespace jh
 
 		void SetBeeState(eBeeState beestate) { mBeeState = beestate; }
 
+		int GetHp() { return mHp; }
+		void SetHp(int hp) { mHp = hp; }
+
+		Vector3 GetPreviousPos() { return mPreviousePos; }
+
 	private:
 		Vector3 mPosition;
 		Vector3 mTargetPosition;
 		Transform* mTransform;
 		Animator* mAnimator;
 		Vector3 mRotation;
+		Vector3 mPreviousePos;
 		eBeeState mBeeState;
 
 		int mHp;
 		bool mOneCount;
 		float mTotalTime;
+		bool mIsDirectionSet;
+		Vector2 mDirection;
+		float mSpeed;
 	};
 }

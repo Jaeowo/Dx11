@@ -7,8 +7,10 @@
 #include "jhPlayerManager.h"
 #include "jhTime.h"
 #include "jhBeeScript.h"
-#include "jhPlayerManager.h"
-#include "jhBeeHive.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
+#include "jhSmallDustEffect.h"
+
 
 namespace jh
 {
@@ -19,6 +21,8 @@ namespace jh
 		, mPosition(Vector3(0.0f, 0.0f, 0.0f))
 		, mHp(5)
 		, mBeeState(eBeeState::Idle)
+		, mIsDirectionSet(false)
+		, mSpeed(0.8f)
 
 	{
 		mAnimator = AddComponent<Animator>();
@@ -45,7 +49,17 @@ namespace jh
 
 		mAnimator->Play(L"BeeIdle", true);
 
+		std::shared_ptr<AudioClip> beefollow = std::make_shared<AudioClip>();
+		beefollow->Load(L"..\\Resources\\Audio\\Bee\\BeeCharge.wav");
+		Resources::Insert<AudioClip>(L"BeeFollow", beefollow);
 
+		std::shared_ptr<AudioClip> beeattack = std::make_shared<AudioClip>();
+		beeattack->Load(L"..\\Resources\\Audio\\Bee\\beetleChirp.wav");
+		Resources::Insert<AudioClip>(L"BeeAttack", beeattack);
+
+		std::shared_ptr<AudioClip> beespawn = std::make_shared<AudioClip>();
+		beespawn->Load(L"..\\Resources\\Audio\\Bee\\BeeSpawn.wav");
+		Resources::Insert<AudioClip>(L"BeeSpawn", beespawn);
 	}
 	Bee::~Bee()
 	{
@@ -55,24 +69,26 @@ namespace jh
 		GameObject::Initalize();
 		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
 		AddComponent<BeeScript>();
-		PlayerManager::GetBeeHive()->IncreasePhaseBee();
+
+		std::shared_ptr<AudioClip> beespawn = Resources::Find<AudioClip>(L"BeeSpawn");
+		beespawn->Play();
+
+
+		
+
 	}
 	void Bee::Update()
 	{
 		GameObject::Update();
 		mAnimator = GetComponent<Animator>();
 		mTransform = GetComponent<Transform>();
+		mPreviousePos = mPosition;
 		mTransform->SetPosition(mPosition);
 		mTargetPosition = PlayerManager::GetPlayer()->GetPlayerPos();
 		mTransform->SetRotation(mRotation);
 
 		mTotalTime += Time::DeltaTime();
 
-		if (mHp <= 0)
-		{
-			mBeeState = eBeeState::Die;
-			mOneCount = false;
-		}
 
 		switch (mBeeState)
 		{
@@ -121,13 +137,25 @@ namespace jh
 		if (mOneCount == false)
 		{
 			mPosition = (Vector3(-0.09f, 0.12f, 1.7f));
+			mTotalTime = 0.0f;
 			mAnimator->Play(L"BeeIdle", true);
 			mOneCount = true;
 		}
 
-		mPosition.y += sin(Time::DeltaTime()) * 0.01f;
+		float speed = 0.000015f; // 왼쪽으로 이동하는 속도
+		float bounceHeight = 0.000025f; // 튀는 높이
+		float bounceSpeed = 2.5f; // 튀는 속도
 
-		mPosition.x -= 0.00001f;
+		float bounceY = bounceHeight * sin(bounceSpeed * mTotalTime);
+
+		mPosition.y += bounceY;
+		mPosition.x -= speed;
+
+		if (mTotalTime >= 2.0f)
+		{
+			mBeeState = eBeeState::Follow;
+			mOneCount = false;
+		}
 	}
 
 	void Bee::RightSpawn()
@@ -135,38 +163,159 @@ namespace jh
 		if (mOneCount == false)
 		{
 			mPosition = (Vector3(0.09f, 0.12f, 1.7f));
+			mRotation.y = 180.0f;
 			mAnimator->Play(L"BeeIdle", true);
 			mOneCount = true;
 		}
+
+		float speed = 0.000009f; // 왼쪽으로 이동하는 속도
+		float bounceHeight = 0.00002f; // 튀는 높이
+		float bounceSpeed = 2.0f; // 튀는 속도
+
+		float bounceY = bounceHeight * sin(bounceSpeed * mTotalTime);
+
+		mPosition.y += bounceY;
+		mPosition.x += speed;
 	}
 
 	void Bee::Attack()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"BeeAttack", false);
+
+			std::shared_ptr<AudioClip> beefollow = Resources::Find<AudioClip>(L"BeeFollow");
+			beefollow->Play();
+			mTotalTime = 0.0f;
+			mOneCount = true;
+		}
+
+		if (mTotalTime >= 0.2f)
+		{
+			if (!mIsDirectionSet)
+			{
+
+				mTargetPosition.y -= 0.06f;
+
+				Vector2 playerPos2D(mTargetPosition.x, mTargetPosition.y);
+				Vector2 Bee2D(mPosition.x, mPosition.y);
+
+				mDirection = playerPos2D - Bee2D;
+				mDirection.Normalize();
+
+				float angle = std::atan2(mDirection.y, mDirection.x) * 180.0f / XM_PI;
+
+				mTransform->SetRotation(Vector3(0.0f, 0.0f, angle));
+
+				mIsDirectionSet = true;
+			}
+
+			if (mIsDirectionSet)
+			{
+				Vector2 velocity = mDirection * mSpeed;
+				SetPosition(mTransform->GetPosition() + Vector3(velocity.x, velocity.y, 0.0f) * Time::DeltaTime());
+			}
+		}
+
+
+		if (mTotalTime >= 5.0f)
+		{
+			mBeeState = eBeeState::Follow;
+			mOneCount = false;
+		}
 	}
 
 	void Bee::Follow()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"BeeIdle", true);
+			
+			mTotalTime = 0.0f;
+			mOneCount = true;
+		}
+		float speed = 0.2f;
+
+		float yDistance = abs(mTargetPosition.y - mPosition.y);
+
+		Vector3 Dir = mTargetPosition - mPosition;
+		Dir.Normalize();
+		mPosition += Dir * speed * Time::DeltaTime();
+
+		if (mTargetPosition.x < mPosition.x)
+		{
+			mRotation.y = 0.0f;
+		}
+		else
+		{
+			mRotation.y = 180.0f;
+		}
+
+		if (mTotalTime >= 1.5f)
+		{
+			mBeeState = eBeeState::Attack;
+			mOneCount = false;
+		}
+		
 	}
 
 	void Bee::HitWall()
 	{
+		if (mOneCount == false)
+		{
+			mAnimator->Play(L"HitWall", false);
+			mTotalTime = 0.0f;
+			mIsDirectionSet = false;
+			mOneCount = true;
+		}
+
+		if (mTotalTime >= 1.0f)
+		{
+			mBeeState = eBeeState::Follow;
+			mOneCount = false;
+		}
+
 	}
 
 	void Bee::Hit()
 	{
+		if (mOneCount == false)
+		{
+			mHp -= 1;
+			mAnimator->Play(L"BeeHit", false);
+			mTotalTime = 0.0f;
+			mOneCount = true;
+		}
+
+		if (mTotalTime >= 0.4f)
+		{
+			if (mHp > 0)
+			{
+				mBeeState = eBeeState::Follow;
+				mOneCount = false;
+			}
+			else
+			{
+				mBeeState = eBeeState::Die;
+				mOneCount = false;
+			}
+		}
 	}
 
 	void Bee::Die()
 	{
 		if (mOneCount == false)
 		{
-			mTotalTime = 0.0f;
+
+			SmallDustEffect* smalldusteffect = object::Instantiate<SmallDustEffect>(eLayerType::Effect);
+			smalldusteffect->SetPosition(mPosition);
+
 			mOneCount = true;
+			mTotalTime = 0.0f;
 		}
 
-		if (mTotalTime >= 0.5f)
+		if (mTotalTime >= 0.3f)
 		{
-			PlayerManager::GetBeeHive()->IncreaseDeadBee();
 			Death();
 		}
 		

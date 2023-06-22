@@ -2,6 +2,11 @@
 #include "jhBee.h"
 #include "jhGeddyBullet.h"
 #include "jhPlayer.h"
+#include "jhGeddyBulletEffect.h"
+#include "jhObject.h"
+#include "jhAudioClip.h"
+#include "jhAudioSource.h"
+#include "jhResources.h"
 
 namespace jh
 {
@@ -44,11 +49,15 @@ namespace jh
 			{
 				playerObj->SetCount(0);
 				playerObj->SetPlayerState(ePlayerState::FlyHurt);
+				std::shared_ptr<AudioClip> clip4 = Resources::Find<AudioClip>(L"Hit");
+				clip4->Play();
 			}
 			else
 			{
 				playerObj->SetCount(0);
 				playerObj->SetPlayerState(ePlayerState::Hurt);
+				std::shared_ptr<AudioClip> clip4 = Resources::Find<AudioClip>(L"Hit");
+				clip4->Play();
 			}
 
 		}
@@ -56,11 +65,15 @@ namespace jh
 		GeddyBullet* geddyBulletObj = dynamic_cast<GeddyBullet*>(collider->GetOwner());
 		if (geddyBulletObj)
 		{
-
-			//mBee->SetBeeState(eBeeState::Hit);
-			/*int hpCheck = (mBee->GetHp() - 1);
-			mBee->SetHp(hpCheck);*/
+			mBee->SetBeeState(eBeeState::Hit);
 			mBee->SetCount(false);
+
+			std::shared_ptr<AudioClip> clip4 = Resources::Find<AudioClip>(L"Hit");
+			clip4->Play();
+
+			GeddyBulletEffect* geddybulleteffectobj = object::Instantiate<GeddyBulletEffect>(eLayerType::BackGround);
+			geddybulleteffectobj->SetPosition(geddyBulletObj->GetPosition());
+			geddyBulletObj->Death();
 		}
 
 	}

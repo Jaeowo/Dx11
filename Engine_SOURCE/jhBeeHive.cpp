@@ -8,6 +8,11 @@
 #include "jhPlayerManager.h"
 #include "jhTime.h"
 #include "jhBee.h"
+#include "jhPhase1.h"
+#include "jhPhase2.h"
+#include "jhPhase3.h"
+#include "jhPhase4.h"
+#include "jhBigDustEffect.h"
 
 namespace jh
 {
@@ -28,7 +33,7 @@ namespace jh
 		mCollider->SetType(eColliderType::Rect);
 		mCollider->SetSize(Vector2(0.1f, 0.1f));
 
-		mTransform->SetScale(Vector3(0.6f, 0.6f, 1.0f));
+		mTransform->SetScale(Vector3(0.5f, 0.5f, 1.0f));
 
 		SpriteRenderer* gawksr = AddComponent<SpriteRenderer>();
 		std::shared_ptr<Mesh> gawkmesh = Resources::Find<Mesh>(L"RectMesh");
@@ -72,19 +77,16 @@ namespace jh
 			Idle();
 			break;
 		case eBeeHiveState::Phase1:
-			Phase1();
+			p1();
 			break;
 		case eBeeHiveState::Phase2:
-			Phase2();
+			p2();
 			break;
 		case eBeeHiveState::Phase3:
-			Phase3();
+			p3();
 			break;
 		case eBeeHiveState::Phase4:
-			Phase4();
-			break;
-		case eBeeHiveState::Phase5:
-			Phase5();
+			p4();
 			break;
 		case jh::eBeeHiveState::Broken:
 			Broken();
@@ -118,165 +120,68 @@ namespace jh
 	}
 
 
-	void BeeHive::Phase1()
+	void BeeHive::p1()
 	{
 		if (mOneCount == false)
 		{
-			mAnimator->Play(L"Buzzing", true);
+			mAnimator->Play(L"Buzzing", false);
+			mphase1 = object::Instantiate<Phase1>(eLayerType::UI);
 			mOneCount = true;
 		}
-
-		if (mPhaseBeeCount < 2 && mSpawnTimer >= 2.0f)
+		if (mphase1->GetClear() == true)
 		{
-			mSpawnTimer = 0.0f;
-			SpawnBees(eBeeState::LeftSpawn);
-		}
-
-		if (GetPhaseBee() == 0)
-		{
-			mPhaseTimer = 0.0f;
-			mPhaseMove = true;
-		}
-
-		if (mPhaseMove == true && mPhaseTimer >= 4.0f)
-		{
-			mPhaseMove = false;
-			mOneCount = false;
 			mBeeHiveState = eBeeHiveState::Phase2;
-			mPhaseTimer = 0.0f;
+			mOneCount = false;
 		}
+
 	}
 
 
-	void BeeHive::Phase2()
+	void BeeHive::p2()
 	{
 		if (mOneCount == false)
 		{
-			mAnimator->Play(L"Buzzing", true);
+			mAnimator->Play(L"Buzzing", false);
+			mphase2 = object::Instantiate<Phase2>(eLayerType::UI);
 			mOneCount = true;
 		}
-
-		if (mPhaseBeeCount < 2 && mSpawnTimer >= 2.0f)
+		if (mphase2->GetClear() == true)
 		{
-			mSpawnTimer = 0.0f;
-			SpawnBees(eBeeState::RightSpawn);
-		}
-
-		if (mPhaseBeeCount == 0)
-		{
-			mPhaseTimer = 0.0f;
-			mPhaseMove = true;
-		}
-
-		if (mPhaseMove == true && mPhaseTimer >= 4.0f)
-		{
-			mPhaseMove = false;
+			mBeeHiveState = eBeeHiveState::Phase3;
 			mOneCount = false;
-			mBeeHiveState = eBeeHiveState::Phase2;
-			mPhaseTimer = 0.0f;
 		}
 	}
 
-	void BeeHive::Phase3()
+	void BeeHive::p3()
 	{
 		if (mOneCount == false)
 		{
-			mAnimator->Play(L"Buzzing", true);
+			mAnimator->Play(L"Buzzing", false);
+			mphase3 = object::Instantiate<Phase3>(eLayerType::UI);
 			mOneCount = true;
 		}
-
-		if (mPhaseBeeCount < 4 && mSpawnTimer >= 2.0f)
+		if (mphase3->GetClear() == true)
 		{
-			mSpawnTimer = 0.0f;
-			SpawnBees(eBeeState::LeftSpawn);
-		}
-
-		if (mPhaseBeeCount == 0)
-		{
-			mPhaseTimer = 0.0f;
-			mPhaseMove = true;
-
-		}
-
-		if (mPhaseBeeCount == 0 && mPhaseTimer >= 4.0f)
-		{
-			mPhaseMove = false;
-			mOneCount = false;
 			mBeeHiveState = eBeeHiveState::Phase4;
-			mPhaseTimer = 0.0f;
+			mOneCount = false;
 		}
 	}
 
-	void BeeHive::Phase4()
+	void BeeHive::p4()
 	{
 		if (mOneCount == false)
 		{
-			mAnimator->Play(L"Buzzing", true);
+			mAnimator->Play(L"Buzzing", false);
+			mphase4 = object::Instantiate<Phase4>(eLayerType::UI);
 			mOneCount = true;
 		}
-
-		if (mPhaseBeeCount < 4 && mSpawnTimer >= 2.0f)
+		if (mphase4->GetClear() == true)
 		{
-			mSpawnTimer = 0.0f;
-			SpawnBees(eBeeState::RightSpawn);
-		}
-
-		if (mPhaseBeeCount == 0)
-		{
-			mPhaseTimer = 0.0f;
-			mPhaseMove = true;
-
-		}
-
-		if (mPhaseBeeCount == 0 && mPhaseTimer >= 4.0f)
-		{
-			mPhaseMove = false;
-			mOneCount = false;
-			mBeeHiveState = eBeeHiveState::Phase5;
-			mPhaseTimer = 0.0f;
-		}
-	}
-
-	void BeeHive::Phase5()
-	{
-		if (mOneCount == false)
-		{
-			mAnimator->Play(L"Buzzing", true);
-			mOneCount = true;
-		}
-
-		if (mPhaseBeeCount < 6 && mSpawnTimer >= 2.0f)
-		{
-			mSpawnTimer = 0.0f;
-			SpawnBees(eBeeState::LeftSpawn);
-		}
-
-		if (mPhaseBeeCount == 0)
-		{
-			mPhaseTimer = 0.0f;
-			mPhaseMove = true;
-
-		}
-
-		
-
-		if (mPhaseBeeCount == 0 && mPhaseTimer >= 4.0f)
-		{
-			mPhaseMove = false;
-			mOneCount = false;
 			mBeeHiveState = eBeeHiveState::Broken;
-			mPhaseTimer = 0.0f;
+			mOneCount = false;
 		}
 	}
 
-	void BeeHive::SpawnBees(eBeeState beeState)
-	{
-		Bee* beeObj = object::Instantiate<Bee>(eLayerType::Monster);
-		beeObj->SetBeeState(beeState);
-
-
-	
-	}
 
 
 	void BeeHive::Broken()
@@ -285,15 +190,20 @@ namespace jh
 		{
 			mAnimator->Play(L"Broken", false);
 			mOneCount = true;
+			BigDustEffect* bigdusteffect = object::Instantiate<BigDustEffect>(eLayerType::Effect);
+			bigdusteffect->SetPosition(mPosition);
+
+			mPhaseTimer = 0.0f;
 		}
 
-		float speed = 0.2f;
+		float speed = 0.1f;
 		mPosition.y -= speed * Time::DeltaTime();
 
 		if (mPhaseTimer >= 1.5f)
 		{
 			Death();
 		}
+
 	}
 
 }

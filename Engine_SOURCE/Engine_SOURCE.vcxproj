@@ -237,6 +237,10 @@
     <ClInclude Include="jhPaintShader.h" />
     <ClInclude Include="jhParticleShader.h" />
     <ClInclude Include="jhParticleSystem.h" />
+    <ClInclude Include="jhPhase1.h" />
+    <ClInclude Include="jhPhase2.h" />
+    <ClInclude Include="jhPhase3.h" />
+    <ClInclude Include="jhPhase4.h" />
     <ClInclude Include="jhPlayer.h" />
     <ClInclude Include="jhPlayerAttackCol.h" />
     <ClInclude Include="jhPlayerManager.h" />
@@ -363,6 +367,10 @@
     <ClCompile Include="jhPaintShader.cpp" />
     <ClCompile Include="jhParticleShader.cpp" />
     <ClCompile Include="jhParticleSystem.cpp" />
+    <ClCompile Include="jhPhase1.cpp" />
+    <ClCompile Include="jhPhase2.cpp" />
+    <ClCompile Include="jhPhase3.cpp" />
+    <ClCompile Include="jhPhase4.cpp" />
     <ClCompile Include="jhPlayer.cpp" />
     <ClCompile Include="jhPlayerAttackCol.cpp" />
     <ClCompile Include="jhPlayerManager.cpp" />
