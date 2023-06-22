@@ -196,10 +196,7 @@ namespace jh
 			mPhaseTimer = 0.0f;
 		}
 
-		float speed = 0.1f;
-		mPosition.y -= speed * Time::DeltaTime();
-
-		if (mPhaseTimer >= 1.5f)
+		if (mPhaseTimer >= 0.5f)
 		{
 			Death();
 		}
