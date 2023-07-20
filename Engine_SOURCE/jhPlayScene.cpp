@@ -142,8 +142,10 @@ namespace jh
 		std::shared_ptr<AudioClip> audioClip = Resources::Load<AudioClip>
 			(L"Vellie", L"..\\Resources\\Audio\\08. Vellie (Owlboy Theme).mp3");
 
+
 		maudioSource = tilefloorObj->AddComponent<AudioSource>();
 		maudioSource->SetClip(audioClip);
+		//audioClip->Set3DAttributes(Vector3(0.0f, 0.0f, -100.0f), Vector3::Zero);
 		maudioSource->SetLoop(true);
 
 		maudioSource->Play();

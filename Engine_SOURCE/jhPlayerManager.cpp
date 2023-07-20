@@ -5,6 +5,8 @@ namespace jh
 {
 	Player* PlayerManager::mPlayer = nullptr;
 	Geddy* PlayerManager::mGeddy = nullptr;
+    int PlayerManager::mSavedHp = 0;
+    int PlayerManager::mSavedCoins = 0;
 
     void PlayerManager::SavePlayerState(Player* player)
     {

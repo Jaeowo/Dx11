@@ -3,6 +3,8 @@
 
 namespace jh
 {
+	class Tortoise;
+
 	class TortoiseScript
 		: public Script
 	{

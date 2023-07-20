@@ -56,7 +56,7 @@ namespace jh
 		Camera* cameraComp = cameraObj->AddComponent<Camera>();
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
 		cameraObj->AddComponent<CameraScript>();
-		AudioListener* listener = cameraObj->AddComponent<AudioListener>();
+		//AudioListener* listener = cameraObj->AddComponent<AudioListener>();
 		mainCamera = cameraComp;
 
 		// Ground2 Camera

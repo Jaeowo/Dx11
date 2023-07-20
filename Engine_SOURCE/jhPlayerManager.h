@@ -26,8 +26,7 @@ namespace jh
 		static int mSavedCoins;
 		
 	};
-	int PlayerManager::mSavedHp = 0;
-	int PlayerManager::mSavedCoins = 0;
+
 }
 
 

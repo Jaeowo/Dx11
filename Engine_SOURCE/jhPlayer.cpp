@@ -25,6 +25,10 @@ namespace jh
 		, mHurtTimer(0.0f)
 		, mMoveCheck(false)
 		, mJungleEventOn(false)
+		//, AudioSource(nullptr)
+		//, mAnotherCollider(nullptr)
+		//, mCollider(nullptr)
+		//, mColliderCheck(false)
 
 	{
 		mTransform = GetComponent<Transform>();

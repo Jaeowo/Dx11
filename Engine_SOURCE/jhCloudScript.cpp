@@ -4,7 +4,6 @@
 #include "jhInput.h"
 #include "jhTime.h"
 #include "jhPlayer.h"
-#include "jhPlayerManager.h"
 #include "jhTransform.h"
 
 namespace jh

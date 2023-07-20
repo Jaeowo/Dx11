@@ -44,7 +44,7 @@ namespace jh
 		void p4();
 		void Phase5();
 
-		void SpawnBees(eBeeState beeState);
+		//void SpawnBees(eBeeState beeState);
 
 		void SetPosition(Vector3 position) { mPosition = position; }
 		void SetCount(bool onecount) { mOneCount = onecount; }
